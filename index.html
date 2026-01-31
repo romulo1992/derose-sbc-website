@@ -1,0 +1,1129 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#297E8A" />
+  <title>DeRose SBC • Yoga para Alta Performance</title>
+  <meta name="description" content="DeRose SBC: treino de excelência para energia, foco e presença — Elite Calm + Marginal Gains." />
+  <meta property="og:title" content="DeRose SBC • Yoga para Alta Performance" />
+  <meta property="og:description" content="Mais resultado com menos desgaste. Ritual, precisão e consistência." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- "Spartan" on Google Fonts is commonly served as League Spartan -->
+  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #FFF9EF;
+      --surface: #FFECD1;
+      --accent: #FC883A;
+      --teal: #297E8A;
+      --ink: #393939;
+
+      --glass-bg: rgba(255,255,255,0.26);
+      --glass-br: rgba(41,126,138,0.22);
+      --shadow: 0 18px 60px rgba(57,57,57,0.12);
+      --shadow-soft: 0 10px 30px rgba(57,57,57,0.10);
+      --radius-xl: 28px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --radius-sm: 12px;
+
+      --max: 1120px;
+    }
+
+    *{ box-sizing: border-box; }
+    html{ scroll-behavior: smooth; }
+    body{
+      margin:0;
+      font-family: "League Spartan", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(1000px 700px at 20% 10%, rgba(252,136,58,0.12), transparent 60%),
+        radial-gradient(1100px 820px at 90% 15%, rgba(41,126,138,0.14), transparent 60%),
+        linear-gradient(180deg, var(--bg), #fff 28%, var(--bg) 100%);
+      overflow-x: hidden;
+    }
+
+    a{ color: inherit; text-decoration: none; }
+    .container{ width:min(var(--max), calc(100% - 40px)); margin: 0 auto; }
+
+    /* Glass */
+    .glass{
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-br);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    /* Header */
+    header{
+      position: sticky; top: 0; z-index: 40;
+      padding: 14px 0;
+      transition: transform .2s ease, background .2s ease, border-color .2s ease;
+    }
+    header .bar{
+      border-radius: 999px;
+      padding: 10px 14px;
+      display:flex; align-items:center; justify-content: space-between;
+      gap: 14px;
+    }
+    .brand{
+      display:flex; align-items:center; gap: 10px; min-width: 210px;
+      padding: 8px 10px; border-radius: 999px;
+    }
+    .brand-mark{
+      width: 36px; height: 36px; border-radius: 14px;
+      background: linear-gradient(135deg, rgba(41,126,138,0.9), rgba(252,136,58,0.85));
+      box-shadow: 0 10px 22px rgba(41,126,138,0.18);
+      position: relative;
+      overflow: hidden;
+    }
+    .brand-mark:after{
+      content:"";
+      position:absolute; inset:-30%;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.55), transparent 55%);
+      transform: rotate(18deg);
+    }
+    .brand-name{
+      line-height: 1;
+      display:flex; flex-direction: column;
+      gap: 2px;
+    }
+    .brand-name strong{ font-size: 15px; letter-spacing: .2px; }
+    .brand-name span{ font-size: 12px; opacity: .75; }
+
+    nav{
+      display:flex; align-items:center; gap: 10px;
+    }
+    nav a{
+      font-size: 14px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      opacity: .86;
+      transition: background .2s ease, opacity .2s ease, transform .2s ease;
+    }
+    nav a:hover{ background: rgba(255,255,255,0.35); opacity: 1; transform: translateY(-1px); }
+    nav a.active{ background: rgba(255,255,255,0.45); opacity: 1; border: 1px solid rgba(41,126,138,0.18); }
+
+    .actions{ display:flex; align-items:center; gap: 10px; }
+    .btn{
+      display:inline-flex; align-items:center; justify-content: center;
+      padding: 11px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(41,126,138,0.22);
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: .2px;
+      cursor: pointer;
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+      user-select: none;
+      white-space: nowrap;
+    }
+    .btn:hover{ transform: translateY(-1px); box-shadow: var(--shadow-soft); }
+    .btn.primary{
+      border: 1px solid rgba(252,136,58,0.35);
+      background: linear-gradient(135deg, rgba(252,136,58,0.95), rgba(252,136,58,0.65));
+      color: #1f1f1f;
+    }
+    .btn.ghost{
+      background: rgba(255,255,255,0.18);
+    }
+    .btn .dot{
+      width: 8px; height: 8px; border-radius: 999px;
+      margin-right: 10px;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(252,136,58,0.15);
+    }
+
+    .mobile-toggle{
+      display:none;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(41,126,138,0.22);
+      background: rgba(255,255,255,0.18);
+      cursor:pointer;
+    }
+    .mobile-toggle svg{ display:block; }
+
+    /* Hero */
+    .hero{
+      padding: 36px 0 18px;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 26px;
+      align-items: stretch;
+    }
+    .hero-copy{
+      padding: 26px 26px;
+      border-radius: var(--radius-xl);
+      position: relative;
+      overflow:hidden;
+    }
+    .hero-copy:before{
+      content:"";
+      position:absolute; inset:-40%;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(252,136,58,0.18), transparent 55%),
+        radial-gradient(circle at 80% 25%, rgba(41,126,138,0.18), transparent 58%),
+        radial-gradient(circle at 50% 80%, rgba(255,236,209,0.55), transparent 60%);
+      filter: blur(10px);
+      transform: rotate(10deg);
+      pointer-events:none;
+    }
+    .hero-copy > *{ position: relative; z-index: 1; }
+
+    .kicker{
+      display:inline-flex; align-items:center; gap: 10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(41,126,138,0.18);
+      background: rgba(255,255,255,0.22);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: .25px;
+    }
+    .kicker .pill{
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(41,126,138,0.14);
+      border: 1px solid rgba(41,126,138,0.18);
+      font-weight: 700;
+      color: rgba(41,126,138,1);
+    }
+
+    h1{
+      margin: 18px 0 10px;
+      font-size: 56px;
+      line-height: 0.95;
+      letter-spacing: -1px;
+    }
+    .sub{
+      margin: 12px 0 18px;
+      font-size: 18px;
+      line-height: 1.35;
+      opacity: 0.88;
+      max-width: 52ch;
+    }
+    .hero-points{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin: 18px 0 18px;
+    }
+    .point{
+      padding: 14px 14px;
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(41,126,138,0.18);
+      background: rgba(255,255,255,0.18);
+      min-height: 82px;
+    }
+    .point b{ display:block; font-size: 14px; margin-bottom: 6px; }
+    .point span{ font-size: 13px; opacity: .8; line-height: 1.25; }
+
+    .hero-cta{ display:flex; gap: 10px; align-items:center; flex-wrap: wrap; margin-top: 10px; }
+    .micro{
+      font-size: 13px;
+      opacity: .75;
+      margin-top: 10px;
+    }
+
+    .hero-art{
+      border-radius: var(--radius-xl);
+      overflow:hidden;
+      position: relative;
+      padding: 18px;
+    }
+    .hero-art img{
+      width: 100%;
+      height: 100%;
+      display:block;
+      object-fit: cover;
+      border-radius: calc(var(--radius-xl) - 8px);
+      border: 1px solid rgba(41,126,138,0.18);
+      background: rgba(255,255,255,0.12);
+    }
+    .art-badges{
+      position: absolute;
+      left: 22px; bottom: 22px;
+      display:flex; flex-wrap: wrap;
+      gap: 10px;
+      max-width: calc(100% - 44px);
+    }
+    .badge{
+      padding: 10px 12px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      border: 1px solid rgba(255,255,255,0.42);
+      background: rgba(255,255,255,0.18);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: var(--shadow-soft);
+    }
+    .badge .mini-dot{
+      width: 8px; height: 8px; border-radius: 999px; display:inline-block;
+      margin-right: 8px;
+      background: var(--teal);
+      box-shadow: 0 0 0 4px rgba(41,126,138,0.16);
+      transform: translateY(-1px);
+    }
+    .badge.alt .mini-dot{ background: var(--accent); box-shadow: 0 0 0 4px rgba(252,136,58,0.16); }
+
+    /* Section base */
+    section{ padding: 54px 0; }
+    .section-head{
+      display:flex; align-items:flex-end; justify-content: space-between; gap: 14px;
+      margin-bottom: 18px;
+    }
+    h2{
+      margin: 0;
+      font-size: 34px;
+      letter-spacing: -0.6px;
+    }
+    .lead{
+      margin: 0;
+      font-size: 16px;
+      opacity: .82;
+      max-width: 60ch;
+      line-height: 1.4;
+    }
+
+    /* Cards */
+    .grid-3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .card{
+      border-radius: var(--radius-lg);
+      padding: 18px 18px;
+      position: relative;
+      overflow:hidden;
+      min-height: 164px;
+    }
+    .card:before{
+      content:"";
+      position:absolute; inset:-60%;
+      background:
+        radial-gradient(circle at 30% 25%, rgba(252,136,58,0.16), transparent 55%),
+        radial-gradient(circle at 70% 40%, rgba(41,126,138,0.18), transparent 60%);
+      filter: blur(10px);
+      transform: rotate(12deg);
+      pointer-events:none;
+    }
+    .card > *{ position: relative; z-index: 1; }
+    .icon{
+      width: 44px; height: 44px;
+      border-radius: 16px;
+      display:grid; place-items:center;
+      border: 1px solid rgba(41,126,138,0.2);
+      background: rgba(255,255,255,0.22);
+      margin-bottom: 12px;
+    }
+    .icon svg{ width: 22px; height: 22px; }
+    .card h3{ margin: 0 0 6px; font-size: 18px; }
+    .card p{ margin: 0; font-size: 14px; opacity: .82; line-height: 1.35; }
+    .card a.inline{
+      display:inline-flex; align-items:center; gap: 8px;
+      margin-top: 14px;
+      font-size: 14px; font-weight: 700;
+      color: rgba(41,126,138,1);
+    }
+    .card a.inline:hover{ text-decoration: underline; }
+
+    /* Programs */
+    .programs{
+      display:grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 14px;
+      align-items: stretch;
+    }
+    .programs .big{
+      padding: 22px;
+      min-height: 320px;
+    }
+    .programs .big h3{ font-size: 22px; margin-top: 0; }
+    .programs .big .row{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .mini{
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(41,126,138,0.18);
+      background: rgba(255,255,255,0.18);
+      padding: 14px;
+      min-height: 116px;
+    }
+    .mini b{ display:block; font-size: 15px; margin-bottom: 6px; }
+    .mini span{ display:block; font-size: 13px; opacity: .82; line-height: 1.3; }
+    .mini .tag{
+      display:inline-flex; align-items:center;
+      margin-top: 10px;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(252,136,58,0.25);
+      background: rgba(252,136,58,0.12);
+    }
+
+    .programs .side{
+      padding: 22px;
+      min-height: 320px;
+      display:flex; flex-direction: column; justify-content: space-between;
+    }
+    .checklist{
+      display:grid; gap: 10px;
+      margin-top: 10px;
+    }
+    .check{
+      display:flex; gap: 10px; align-items:flex-start;
+      padding: 12px 12px;
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(41,126,138,0.18);
+      background: rgba(255,255,255,0.18);
+    }
+    .check .tick{
+      width: 22px; height: 22px;
+      border-radius: 8px;
+      background: rgba(41,126,138,0.14);
+      border: 1px solid rgba(41,126,138,0.22);
+      display:grid; place-items:center;
+      flex: 0 0 auto;
+      margin-top: 1px;
+    }
+    .check .tick svg{ width: 14px; height: 14px; }
+    .check b{ display:block; font-size: 14px; margin-bottom: 2px; }
+    .check span{ font-size: 13px; opacity: .82; line-height: 1.25; }
+
+    /* Testimonials */
+    .testi{
+      padding: 18px;
+      border-radius: var(--radius-lg);
+      min-height: 210px;
+    }
+    .avatar{
+      width: 44px; height: 44px; border-radius: 999px;
+      border: 1px solid rgba(41,126,138,0.18);
+      background: rgba(255,255,255,0.20);
+      display:grid; place-items:center;
+      margin-bottom: 12px;
+    }
+    .stars{
+      display:flex; gap: 4px;
+      margin-top: 12px;
+      opacity: .85;
+    }
+    .stars svg{ width: 16px; height: 16px; fill: rgba(41,126,138,1); }
+
+    /* CTA band */
+    .band{
+      padding: 26px;
+      border-radius: var(--radius-xl);
+      text-align: center;
+      position: relative;
+      overflow:hidden;
+    }
+    .band:before{
+      content:"";
+      position:absolute; inset:-30%;
+      background:
+        radial-gradient(circle at 25% 30%, rgba(41,126,138,0.18), transparent 55%),
+        radial-gradient(circle at 70% 25%, rgba(252,136,58,0.18), transparent 58%),
+        radial-gradient(circle at 50% 85%, rgba(255,236,209,0.55), transparent 60%);
+      filter: blur(10px);
+      transform: rotate(-8deg);
+      pointer-events:none;
+    }
+    .band > *{ position: relative; z-index: 1; }
+    .band h2{ margin-bottom: 8px; }
+    .band p{ margin: 0 auto 16px; max-width: 72ch; opacity: .85; line-height: 1.35; }
+
+    /* Contact */
+    .contact{
+      display:grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 14px;
+      align-items: stretch;
+    }
+    .contact .panel{
+      padding: 22px;
+      border-radius: var(--radius-xl);
+      min-height: 320px;
+    }
+    .kv{ display:grid; gap: 10px; margin-top: 14px; }
+    .kv .item{
+      display:flex; justify-content: space-between; gap: 12px;
+      padding: 12px 12px;
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(41,126,138,0.18);
+      background: rgba(255,255,255,0.18);
+    }
+    .kv .item b{ font-size: 13px; opacity: .75; font-weight: 700; }
+    .kv .item span{ font-size: 14px; font-weight: 600; text-align: right; }
+    .map{
+      padding: 18px;
+      border-radius: var(--radius-xl);
+      min-height: 320px;
+      position: relative;
+      overflow:hidden;
+    }
+    .map iframe{
+      width:100%; height:100%;
+      border: 0;
+      border-radius: calc(var(--radius-xl) - 8px);
+      filter: saturate(1.05) contrast(1.02);
+    }
+    .map .overlay{
+      position:absolute;
+      left: 18px; top: 18px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      display:inline-flex; align-items:center; gap: 10px;
+      border: 1px solid rgba(255,255,255,0.42);
+      background: rgba(255,255,255,0.18);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: var(--shadow-soft);
+      font-size: 13px; font-weight: 700;
+    }
+
+    footer{
+      padding: 36px 0 46px;
+      opacity: .85;
+    }
+    footer .foot{
+      display:flex; justify-content: space-between; align-items:center; gap: 12px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(41,126,138,0.14);
+      flex-wrap: wrap;
+    }
+    .tiny{ font-size: 13px; opacity: .8; }
+    .pill-link{
+      display:inline-flex; align-items:center; gap: 10px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(41,126,138,0.18);
+      background: rgba(255,255,255,0.18);
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    /* Reveal */
+    .reveal{
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .reveal.in{
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .hero-grid{ grid-template-columns: 1fr; }
+      .hero-art{ min-height: 340px; }
+      h1{ font-size: 46px; }
+      .hero-points{ grid-template-columns: 1fr; }
+      .grid-3{ grid-template-columns: 1fr; }
+      .programs, .contact{ grid-template-columns: 1fr; }
+      nav{ display:none; }
+      .mobile-toggle{ display:inline-flex; }
+      header .bar{ border-radius: 22px; }
+    }
+    @media (max-width: 520px){
+      h1{ font-size: 40px; }
+      .container{ width: min(var(--max), calc(100% - 28px)); }
+      .brand{ min-width: unset; }
+      .actions{ gap: 8px; }
+      .btn{ padding: 11px 12px; }
+    }
+
+    /* Mobile menu drawer */
+    .drawer{
+      position: fixed;
+      inset: 0;
+      background: rgba(57,57,57,0.28);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      display:none;
+      z-index: 60;
+    }
+    .drawer.open{ display:block; }
+    .drawer .panel{
+      width: min(520px, calc(100% - 26px));
+      margin: 86px auto 0;
+      border-radius: var(--radius-xl);
+      padding: 14px;
+    }
+    .drawer a{
+      display:flex;
+      justify-content: space-between;
+      align-items:center;
+      padding: 14px 12px;
+      border-radius: 16px;
+      font-weight: 700;
+      border: 1px solid rgba(41,126,138,0.14);
+      background: rgba(255,255,255,0.14);
+      margin: 10px 0;
+    }
+    .drawer a span{ font-size: 12px; opacity: .75; font-weight: 600; }
+  </style>
+</head>
+
+<body>
+  <!-- Mobile drawer -->
+  <div class="drawer" id="drawer" aria-hidden="true">
+    <div class="container">
+      <div class="panel glass">
+        <a href="#aulas" data-close> Aulas <span>presencial + online</span></a>
+        <a href="#cursos" data-close> Cursos <span>precisão & consistência</span></a>
+        <a href="#formacao" data-close> Formação <span>aprofundamento</span></a>
+        <a href="#bistro" data-close> Bistrô <span>ritual & pausa</span></a>
+        <a href="#blog" data-close> Blog <span>clareza sem misticismo</span></a>
+        <a href="#contato" data-close> Contato <span>rota rápida</span></a>
+        <div style="display:flex; gap:10px; justify-content:flex-end; margin-top: 10px;">
+          <button class="btn ghost glass" id="drawerClose" type="button">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <header>
+    <div class="container">
+      <div class="bar glass">
+        <a class="brand" href="#top" aria-label="Ir para o topo">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span class="brand-name">
+            <strong>DeRose SBC</strong>
+            <span>Elite Calm • Marginal Gains</span>
+          </span>
+        </a>
+
+        <nav aria-label="Navegação principal">
+          <a href="#aulas">AULAS</a>
+          <a href="#cursos">CURSOS</a>
+          <a href="#formacao">FORMAÇÃO</a>
+          <a href="#bistro">BISTRÔ</a>
+          <a href="#blog">BLOG</a>
+        </nav>
+
+        <div class="actions">
+          <button class="mobile-toggle" id="mobileToggle" aria-label="Abrir menu">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M4 7H20" stroke="#393939" stroke-width="2.4" stroke-linecap="round"/>
+              <path d="M4 12H20" stroke="#393939" stroke-width="2.4" stroke-linecap="round" opacity="0.9"/>
+              <path d="M4 17H20" stroke="#393939" stroke-width="2.4" stroke-linecap="round" opacity="0.8"/>
+            </svg>
+          </button>
+
+          <a class="btn ghost glass" href="#blog" title="Conteúdo e contexto">Conteúdo</a>
+          <a class="btn primary" href="#contato" title="Agendar uma aula">
+            <span class="dot" aria-hidden="true"></span>
+            Agendar aula
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-copy glass reveal">
+            <div class="kicker">
+              <span class="pill">Treino de Excelência</span>
+              <span>mais resultado com menos desgaste</span>
+            </div>
+
+            <h1>Alta performance, sem ruído.</h1>
+            <p class="sub">
+              Para quem já está bem — e quer o próximo nível: energia estável, foco profundo, presença e consistência.
+              Sem ansiedade. Sem “aula genérica”. Com ritual e precisão.
+            </p>
+
+            <div class="hero-points">
+              <div class="point">
+                <b>Elite Calm</b>
+                <span>calma operacional sob pressão (reuniões, decisões, liderança).</span>
+              </div>
+              <div class="point">
+                <b>Marginal Gains</b>
+                <span>pequenos ajustes que somam: sono, respiração, corpo funcional premium.</span>
+              </div>
+              <div class="point">
+                <b>Reset & retorno melhor</b>
+                <span>recupera rápido, volta centrado — e performa com coerência.</span>
+              </div>
+            </div>
+
+            <div class="hero-cta">
+              <a class="btn primary" href="#contato">
+                <span class="dot" aria-hidden="true"></span>
+                Aula experimental
+              </a>
+              <a class="btn ghost glass" href="#aulas">Ver opções</a>
+              <a class="btn ghost glass" href="#cursos">Conhecer método</a>
+            </div>
+
+            <div class="micro">Aulas presenciais em São Bernardo do Campo + opção online.</div>
+          </div>
+
+          <div class="hero-art glass reveal" aria-label="Imagem abstrata, minimalista e moderna">
+            <img src="./assets/hero.svg" alt="Ilustração moderna abstrata com sensação de calma e foco" />
+            <div class="art-badges" aria-hidden="true">
+              <div class="badge"><span class="mini-dot"></span>Foco profundo</div>
+              <div class="badge alt"><span class="mini-dot"></span>Energia estável</div>
+              <div class="badge"><span class="mini-dot"></span>Presença</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VALUE CARDS -->
+    <section id="aulas">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <h2>Aulas</h2>
+            <p class="lead">Um treino para fazer você render mais — sem se quebrar. Rotina curta, replicável e mensurável.</p>
+          </div>
+          <a class="pill-link glass" href="#contato">Agendar agora →</a>
+        </div>
+
+        <div class="grid-3">
+          <div class="card glass reveal">
+            <div class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M4 14c3.5-8 12.5-8 16 0" stroke="#297E8A" stroke-width="2.2" stroke-linecap="round"/>
+                <path d="M6 15c2.5 5 9.5 5 12 0" stroke="#FC883A" stroke-width="2.2" stroke-linecap="round" opacity="0.9"/>
+                <path d="M12 4v5" stroke="#393939" stroke-width="2.2" stroke-linecap="round" opacity="0.9"/>
+              </svg>
+            </div>
+            <h3>Presencial</h3>
+            <p>Ambiente bonito, ritmo certo e correção técnica. Perfeito para “reset” e refinamento de postura.</p>
+            <a class="inline" href="#contato">Ver horários →</a>
+          </div>
+
+          <div class="card glass reveal">
+            <div class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M6 7h12a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2Z" stroke="#297E8A" stroke-width="2.2"/>
+                <path d="M9 20h6" stroke="#393939" stroke-width="2.2" stroke-linecap="round"/>
+                <path d="M9.2 11.2l2.2 2.2 3.6-4" stroke="#FC883A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3>Online</h3>
+            <p>Para manter consistência. Rotinas de manhã/noite e protocolo “voltar ao centro rápido”.</p>
+            <a class="inline" href="#contato">Começar online →</a>
+          </div>
+
+          <div class="card glass reveal">
+            <div class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 3v18" stroke="#297E8A" stroke-width="2.2" stroke-linecap="round" opacity="0.9"/>
+                <path d="M5 12h14" stroke="#FC883A" stroke-width="2.2" stroke-linecap="round" opacity="0.9"/>
+                <path d="M7 7l10 10" stroke="#393939" stroke-width="2.2" stroke-linecap="round" opacity="0.65"/>
+              </svg>
+            </div>
+            <h3>1:1 (sob medida)</h3>
+            <p>Para liderança e agenda lotada: eficiência máxima, diagnóstico rápido, ajustes mínimos que somam.</p>
+            <a class="inline" href="#contato">Perguntar sobre 1:1 →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROGRAMS + METHOD -->
+    <section id="cursos">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <h2>Cursos & método</h2>
+            <p class="lead">Mindfulness sem vibe mística: atenção aplicada a decisões, conversas difíceis e presença em público.</p>
+          </div>
+        </div>
+
+        <div class="programs">
+          <div class="big glass reveal">
+            <h3>Curadoria premium, sem complicar</h3>
+            <p class="lead" style="margin-top:10px;">
+              Você já faz muita coisa certa. Aqui a gente busca o “faltava isso”: sistema nervoso regulado + corpo funcional premium + ritual replicável.
+            </p>
+
+            <div class="row" style="margin-top:16px;">
+              <div class="mini">
+                <b>Respiração para performance</b>
+                <span>estabiliza energia, reduz ruído mental e melhora presença.</span>
+                <span class="tag">regulação</span>
+              </div>
+              <div class="mini">
+                <b>Mobilidade & força útil</b>
+                <span>postura, estabilidade e eficiência — sem estética maromba.</span>
+                <span class="tag">treino inteligente</span>
+              </div>
+              <div class="mini">
+                <b>Relaxamento profundo</b>
+                <span>reset real: sono como alavanca e recuperação como tecnologia pessoal.</span>
+                <span class="tag">longevidade</span>
+              </div>
+              <div class="mini">
+                <b>Rituais curtos</b>
+                <span>manhã/noite, consistência como estratégia (sem virar paranoia).</span>
+                <span class="tag">marginal gains</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="side glass reveal">
+            <div>
+              <h3 style="margin-top:0;">Marginal Gains (na prática)</h3>
+              <p class="lead" style="margin-top:10px;">Pequenos ajustes que devolvem 10–20% de performance sem “mais esforço”.</p>
+
+              <div class="checklist">
+                <div class="check">
+                  <div class="tick" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none">
+                      <path d="M6 12.5l3.2 3.2L18 6.9" stroke="#297E8A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <b>Clareza em decisões difíceis</b>
+                    <span>menos oscilação, mais firmeza e calma operacional.</span>
+                  </div>
+                </div>
+
+                <div class="check">
+                  <div class="tick" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none">
+                      <path d="M6 12.5l3.2 3.2L18 6.9" stroke="#297E8A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <b>Rendimento sem desgaste</b>
+                    <span>agenda cheia, alto nível de responsabilidade, sem se drenar.</span>
+                  </div>
+                </div>
+
+                <div class="check">
+                  <div class="tick" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none">
+                      <path d="M6 12.5l3.2 3.2L18 6.9" stroke="#297E8A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <b>Performance em público</b>
+                    <span>reuniões, apresentações, negociação — com presença e suavidade.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top: 14px;">
+              <a class="btn primary" href="#contato"><span class="dot" aria-hidden="true"></span>Falar com a escola</a>
+              <a class="btn ghost glass" href="#blog">Ler o blog</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FORMAÇÃO + BISTRÔ + BLOG (mini) -->
+    <section id="formacao">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <h2>Formação</h2>
+            <p class="lead">Para quem gosta de profundidade: tradição, contexto e coerência — como lastro para o estilo de vida.</p>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <div class="card glass reveal">
+            <div class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M5 6h14v14H5z" stroke="#297E8A" stroke-width="2.2" />
+                <path d="M8 10h8" stroke="#393939" stroke-width="2.2" stroke-linecap="round" opacity="0.75"/>
+                <path d="M8 14h5" stroke="#FC883A" stroke-width="2.2" stroke-linecap="round" opacity="0.85"/>
+              </svg>
+            </div>
+            <h3>Estrutura</h3>
+            <p>Progressão e método. Sem excesso de teoria. O que importa para praticar melhor e viver melhor.</p>
+          </div>
+
+          <div class="card glass reveal">
+            <div class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 4l8 4-8 4-8-4 8-4Z" stroke="#297E8A" stroke-width="2.2" stroke-linejoin="round"/>
+                <path d="M4 12l8 4 8-4" stroke="#393939" stroke-width="2.2" stroke-linecap="round" opacity="0.8"/>
+                <path d="M4 12v6l8 4 8-4v-6" stroke="#FC883A" stroke-width="2.2" stroke-linecap="round" opacity="0.85"/>
+              </svg>
+            </div>
+            <h3>Comunidade</h3>
+            <p>Gente do mesmo nível: respeito, discrição e suporte. Pertencimento sem barulho.</p>
+          </div>
+
+          <div class="card glass reveal" id="bistro">
+            <div class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M7 8h10v6a5 5 0 0 1-10 0V8Z" stroke="#297E8A" stroke-width="2.2"/>
+                <path d="M17 10h2a2 2 0 0 1 0 4h-2" stroke="#FC883A" stroke-width="2.2" stroke-linecap="round"/>
+                <path d="M9 4h6" stroke="#393939" stroke-width="2.2" stroke-linecap="round" opacity="0.75"/>
+              </svg>
+            </div>
+            <h3>Bistrô</h3>
+            <p>Uma pausa bem desenhada: ritual, conversa boa e foco em recuperar (e voltar melhor).</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA BAND -->
+    <section>
+      <div class="container">
+        <div class="band glass reveal">
+          <h2>Seu platô tem solução simples.</h2>
+          <p>Se você sente que está rendendo 70–80% do potencial, geralmente não falta “mais esforço”. Falta precisão: recuperar melhor, estabilizar energia e treinar presença.</p>
+          <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+            <a class="btn primary" href="#contato"><span class="dot" aria-hidden="true"></span>Agendar aula</a>
+            <a class="btn ghost glass" href="#aulas">Ver formatos</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section>
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <h2>Depoimentos</h2>
+            <p class="lead">Menos “motivação”. Mais consistência. Mais presença. Mais performance com calma.</p>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <div class="testi glass reveal">
+            <div class="avatar" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z" fill="#393939" opacity="0.8"/>
+                <path d="M4 20a8 8 0 0 1 16 0" stroke="#297E8A" stroke-width="2.2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <p style="margin:0; font-size:14px; opacity:.85; line-height:1.35;">
+              “A diferença foi a calma em situações difíceis. Eu voltei a apresentar e negociar sem aquele ruído interno.”
+            </p>
+            <div class="stars" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.7 4.1L18.5 22 12 17.9 5.5 22l2.2-8.9L2 9h7l3-7z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.7 4.1L18.5 22 12 17.9 5.5 22l2.2-8.9L2 9h7l3-7z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.7 4.1L18.5 22 12 17.9 5.5 22l2.2-8.9L2 9h7l3-7z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.7 4.1L18.5 22 12 17.9 5.5 22l2.2-8.9L2 9h7l3-7z"/></svg>
+              <svg viewBox="0 0 24 24" style="opacity:.35;"><path d="M12 2l3 7h7l-5.7 4.1L18.5 22 12 17.9 5.5 22l2.2-8.9L2 9h7l3-7z"/></svg>
+            </div>
+            <div class="tiny" style="margin-top:10px;">— Profissional de liderança</div>
+          </div>
+
+          <div class="testi glass reveal">
+            <div class="avatar" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z" fill="#393939" opacity="0.8"/>
+                <path d="M4 20a8 8 0 0 1 16 0" stroke="#297E8A" stroke-width="2.2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <p style="margin:0; font-size:14px; opacity:.85; line-height:1.35;">
+              “Eu já treinava e trabalhava bem. Aqui eu achei um método para recuperar e voltar melhor — sem me drenar.”
+            </p>
+            <div class="stars" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.7 4.1L18.5 22 12 17.9 5.5 22l2.2-8.9L2 9h7l3-7z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.7 4.1L18.5 22 12 17.9 5.5 22l2.2-8.9L2 9h7l3-7z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.7 4.1L18.5 22 12 17.9 5.5 22l2.2-8.9L2 9h7l3-7z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.7 4.1L18.5 22 12 17.9 5.5 22l2.2-8.9L2 9h7l3-7z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.7 4.1L18.5 22 12 17.9 5.5 22l2.2-8.9L2 9h7l3-7z"/></svg>
+            </div>
+            <div class="tiny" style="margin-top:10px;">— Empreendedora</div>
+          </div>
+
+          <div class="testi glass reveal">
+            <div class="avatar" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z" fill="#393939" opacity="0.8"/>
+                <path d="M4 20a8 8 0 0 1 16 0" stroke="#297E8A" stroke-width="2.2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <p style="margin:0; font-size:14px; opacity:.85; line-height:1.35;">
+              “Não é só relaxar. É treinar estabilidade emocional sob carga. Eu parei de oscilar quando as coisas apertam.”
+            </p>
+            <div class="stars" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.7 4.1L18.5 22 12 17.9 5.5 22l2.2-8.9L2 9h7l3-7z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.7 4.1L18.5 22 12 17.9 5.5 22l2.2-8.9L2 9h7l3-7z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.7 4.1L18.5 22 12 17.9 5.5 22l2.2-8.9L2 9h7l3-7z"/></svg>
+              <svg viewBox="0 0 24 24" style="opacity:.55;"><path d="M12 2l3 7h7l-5.7 4.1L18.5 22 12 17.9 5.5 22l2.2-8.9L2 9h7l3-7z"/></svg>
+              <svg viewBox="0 0 24 24" style="opacity:.35;"><path d="M12 2l3 7h7l-5.7 4.1L18.5 22 12 17.9 5.5 22l2.2-8.9L2 9h7l3-7z"/></svg>
+            </div>
+            <div class="tiny" style="margin-top:10px;">— Profissional de estratégia</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BLOG -->
+    <section id="blog">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <h2>Blog</h2>
+            <p class="lead">Conteúdo curto, direto e aplicável. Sem misticismo. Com contexto e precisão.</p>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <div class="card glass reveal">
+            <h3 style="margin-top:0;">Respiração: energia estável</h3>
+            <p>Como estabilizar carga e voltar ao centro rápido (pra não oscilar quando aperta).</p>
+            <a class="inline" href="#contato">Quero um protocolo →</a>
+          </div>
+          <div class="card glass reveal">
+            <h3 style="margin-top:0;">Sono como alavanca</h3>
+            <p>Recuperação como tecnologia pessoal: o que mexe mais com seu dia, sem paranoia.</p>
+            <a class="inline" href="#contato">Montar rotina →</a>
+          </div>
+          <div class="card glass reveal">
+            <h3 style="margin-top:0;">Presença em público</h3>
+            <p>Como treinar “soft power”: foco, escuta ativa e comunicação serena.</p>
+            <a class="inline" href="#contato">Treinar presença →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contato">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <h2>Contato</h2>
+            <p class="lead">Rota rápida para começar: escolha presencial, online ou 1:1. A gente te direciona.</p>
+          </div>
+        </div>
+
+        <div class="contact">
+          <div class="panel glass reveal">
+            <h3 style="margin-top:0; font-size:22px;">DeRose SBC</h3>
+            <p class="lead" style="margin-top:10px;">São Bernardo do Campo • SP</p>
+
+            <div class="kv" role="list">
+              <div class="item" role="listitem">
+                <b>Endereço</b>
+                <span>Av. Wallace Simonsen, 311 • Nova Petrópolis</span>
+              </div>
+              <div class="item" role="listitem">
+                <b>WhatsApp</b>
+                <span>(11) 9XXXX-XXXX</span>
+              </div>
+              <div class="item" role="listitem">
+                <b>Horários</b>
+                <span>Seg–Sex • 07:00–21:00</span>
+              </div>
+              <div class="item" role="listitem">
+                <b>E-mail</b>
+                <span>contato@derosesbc.com</span>
+              </div>
+            </div>
+
+            <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top: 16px;">
+              <a class="btn primary" href="https://wa.me/5511999999999" target="_blank" rel="noreferrer">
+                <span class="dot" aria-hidden="true"></span>Chamar no WhatsApp
+              </a>
+              <a class="btn ghost glass" href="mailto:contato@derosesbc.com?subject=DeRose%20SBC%20-%20Aula%20experimental">Enviar e-mail</a>
+            </div>
+
+            <div class="micro">Edite o telefone/e-mail acima no <b>index.html</b> antes de publicar.</div>
+          </div>
+
+          <div class="map glass reveal" aria-label="Mapa da região">
+            <div class="overlay">📍 Abrir no mapa</div>
+            <!-- OpenStreetMap embed (free). If you prefer Google Maps, replace this iframe. -->
+            <iframe
+              title="Mapa - Av. Wallace Simonsen, 311 - São Bernardo do Campo"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              src="https://www.openstreetmap.org/export/embed.html?bbox=-46.5659%2C-23.7076%2C-46.5559%2C-23.6996&amp;layer=mapnik&amp;marker=-23.7036%2C-46.5609">
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <div class="foot">
+          <div>
+            <div style="font-weight:800;">DeRose SBC</div>
+            <div class="tiny">Elite Calm • Marginal Gains • Yoga para Alta Performance</div>
+          </div>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <a class="pill-link glass" href="#top">Topo ↑</a>
+            <a class="pill-link glass" href="#aulas">Aulas</a>
+            <a class="pill-link glass" href="#contato">Contato</a>
+          </div>
+        </div>
+        <div class="tiny" style="margin-top:12px;">
+          © <span id="year"></span> DeRose SBC. Feito em HTML estático (GitHub + Vercel).
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Mobile drawer
+    const drawer = document.getElementById('drawer');
+    const toggle = document.getElementById('mobileToggle');
+    const closeBtn = document.getElementById('drawerClose');
+
+    function openDrawer(){
+      drawer.classList.add('open');
+      drawer.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeDrawer(){
+      drawer.classList.remove('open');
+      drawer.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+    toggle?.addEventListener('click', openDrawer);
+    closeBtn?.addEventListener('click', closeDrawer);
+    drawer?.addEventListener('click', (e) => {
+      if(e.target === drawer) closeDrawer();
+    });
+    drawer?.querySelectorAll('[data-close]')?.forEach(a => a.addEventListener('click', closeDrawer));
+
+    // Reveal on scroll
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  </script>
+</body>
+</html>
