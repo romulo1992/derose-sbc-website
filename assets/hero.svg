@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1400" height="1000" viewBox="0 0 1400 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFF9EF"/>
+      <stop offset="55%" stop-color="#FFECD1"/>
+      <stop offset="100%" stop-color="#FFF9EF"/>
+    </linearGradient>
+    <linearGradient id="aqua" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#297E8A" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#297E8A" stop-opacity="0.25"/>
+    </linearGradient>
+    <linearGradient id="amber" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FC883A" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#FC883A" stop-opacity="0.20"/>
+    </linearGradient>
+    <filter id="blurGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="18" result="blur"/>
+      <feColorMatrix in="blur" type="matrix"
+        values="1 0 0 0 0
+                0 1 0 0 0
+                0 0 1 0 0
+                0 0 0 0.9 0" result="glow"/>
+      <feMerge>
+        <feMergeNode in="glow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="glass" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="BackgroundImage" stdDeviation="16" result="b"/>
+      <feComposite in="b" in2="SourceAlpha" operator="in" result="masked"/>
+      <feColorMatrix in="masked" type="matrix"
+        values="1 0 0 0 0
+                0 1 0 0 0
+                0 0 1 0 0
+                0 0 0 0.85 0" result="m2"/>
+      <feMerge>
+        <feMergeNode in="m2"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Soft background -->
+  <rect width="1400" height="1000" fill="url(#bg)"/>
+
+  <!-- Organic blobs -->
+  <path d="M1182 220C1275 303 1267 443 1206 537C1145 631 1029 680 905 659C781 638 649 547 643 423C637 299 757 142 901 123C1045 104 1089 137 1182 220Z"
+        fill="url(#aqua)" opacity="0.40" filter="url(#blurGlow)"/>
+  <path d="M509 174C612 225 650 327 630 413C610 499 533 568 430 587C327 606 199 569 153 478C107 387 143 270 235 209C327 148 406 123 509 174Z"
+        fill="url(#amber)" opacity="0.35" filter="url(#blurGlow)"/>
+
+  <!-- Subtle grid lines -->
+  <g opacity="0.22" stroke="#297E8A" stroke-width="2">
+    <path d="M70 760C320 640 520 640 760 760C980 870 1140 880 1330 760" />
+    <path d="M100 660C330 560 540 560 770 660C980 760 1140 770 1300 660" />
+    <path d="M120 560C340 490 560 490 780 560C990 640 1130 650 1280 560" />
+  </g>
+
+  <!-- Glass card -->
+  <g filter="url(#glass)">
+    <rect x="790" y="250" width="510" height="520" rx="42"
+          fill="rgba(255,255,255,0.28)" stroke="rgba(41,126,138,0.25)" stroke-width="2"/>
+    <path d="M820 320C930 290 1010 295 1120 330C1210 359 1270 350 1280 330"
+          stroke="rgba(41,126,138,0.35)" stroke-width="3" stroke-linecap="round"/>
+    <path d="M820 710C920 742 1012 748 1120 720C1220 692 1270 704 1280 725"
+          stroke="rgba(252,136,58,0.35)" stroke-width="3" stroke-linecap="round"/>
+  </g>
+
+  <!-- Minimal yoga silhouette (abstract) -->
+  <g transform="translate(920 330)">
+    <!-- head -->
+    <circle cx="160" cy="84" r="28" fill="#393939" opacity="0.92"/>
+    <!-- torso -->
+    <path d="M160 122C146 156 128 182 96 216C79 234 64 260 54 292"
+          stroke="#393939" stroke-width="18" stroke-linecap="round" opacity="0.92"/>
+    <!-- arm up -->
+    <path d="M154 132C176 154 212 184 248 198"
+          stroke="#393939" stroke-width="16" stroke-linecap="round" opacity="0.92"/>
+    <!-- arm down -->
+    <path d="M142 160C126 176 104 192 80 206"
+          stroke="#393939" stroke-width="14" stroke-linecap="round" opacity="0.85"/>
+    <!-- legs (lotus-ish) -->
+    <path d="M50 300C92 324 130 340 162 336C194 332 226 312 260 284"
+          stroke="#393939" stroke-width="18" stroke-linecap="round" opacity="0.92"/>
+    <path d="M64 316C98 356 140 380 180 374C220 368 256 338 286 298"
+          stroke="#393939" stroke-width="18" stroke-linecap="round" opacity="0.80"/>
+    <!-- mat line -->
+    <path d="M0 402H340" stroke="rgba(41,126,138,0.55)" stroke-width="8" stroke-linecap="round"/>
+    <path d="M12 402H328" stroke="rgba(255,255,255,0.55)" stroke-width="2" stroke-linecap="round"/>
+  </g>
+
+  <!-- Highlight dot -->
+  <circle cx="1120" cy="310" r="10" fill="#FC883A" opacity="0.95"/>
+  <circle cx="1120" cy="310" r="26" fill="#FC883A" opacity="0.18"/>
+
+  <!-- Corner sparkle -->
+  <g opacity="0.55">
+    <path d="M1200 120L1224 164L1270 190L1224 214L1200 258L1176 214L1130 190L1176 164L1200 120Z"
+          fill="rgba(255,255,255,0.5)" stroke="rgba(41,126,138,0.35)" stroke-width="2"/>
+  </g>
+</svg>
