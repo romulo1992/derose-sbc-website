@@ -321,10 +321,14 @@
     }
     .art-badges{
       position: absolute;
-      left: 22px; bottom: 22px;
-      display:flex; flex-wrap: wrap;
+      left: 0;
+      right: 0;
+      bottom: 34px;            /* sobe um pouco (antes era 22px) */
+      display: flex;
+      justify-content: center; /* centraliza horizontalmente */
+      flex-wrap: wrap;
       gap: 10px;
-      max-width: calc(100% - 44px);
+      padding: 0 22px;         /* mantém respiro nas laterais */
     }
     .badge{
       padding: 10px 12px;
