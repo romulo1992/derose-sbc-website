@@ -44,11 +44,11 @@
 
       --max: 1120px;
 
-      /* Base scale (keeps overall feel) */
+      /* Base scale (keeps the overall page as-is) */
       --type-scale: 0.77;
 
-      /* Slightly larger scale for the requested "descriptive" blocks (Lugar A–F + section descriptive lines) */
-      --type-scale-desc: 0.84;
+      /* Slightly bigger (v2) for the specific copy blocks you listed (Lugar A–F + section descriptive lines) */
+      --type-scale-desc: 0.87;
 
       /* Themeable page background */
       --page-bg:
@@ -263,6 +263,7 @@
       opacity: 0.88;
       max-width: 52ch;
     }
+
     .hero-points{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
@@ -274,7 +275,7 @@
       border-radius: var(--radius-md);
       border: 1px solid rgba(41,126,138,0.18);
       background: rgba(255,255,255,0.18);
-      min-height: 86px; /* small cushion for slightly larger type */
+      min-height: 88px; /* cushion for the slightly larger text */
     }
     .point b{ display:block; font-size: 14px; margin-bottom: 6px; }
     .point span{ font-size: 13px; opacity: .8; line-height: 1.25; }
@@ -353,7 +354,8 @@
       font-size: calc(34px * var(--type-scale));
       letter-spacing: -0.6px;
     }
-    /* Requested: bigger "texto descritivo da sessão" */
+
+    /* Requested: bigger "textos descritivos das sessões" */
     .section-head .lead{
       margin: 0;
       font-size: calc(16px * var(--type-scale-desc));
@@ -384,7 +386,7 @@
       padding: 18px 18px;
       position: relative;
       overflow:hidden;
-      min-height: 168px; /* small cushion for slightly larger type */
+      min-height: 172px; /* cushion for larger copy */
     }
     .card:before{
       content:"";
@@ -406,6 +408,7 @@
       margin-bottom: 12px;
     }
     .icon svg{ width: 22px; height: 22px; }
+
     .card h3{ margin: 0 0 6px; font-size: 18px; }
     .card p{ margin: 0; font-size: 14px; opacity: .82; line-height: 1.35; }
     .card a.inline{
@@ -439,7 +442,7 @@
       border: 1px solid rgba(41,126,138,0.18);
       background: rgba(255,255,255,0.18);
       padding: 14px;
-      min-height: 118px; /* small cushion */
+      min-height: 122px; /* cushion */
     }
     .mini b{ display:block; font-size: 15px; margin-bottom: 6px; }
     .mini span{ display:block; font-size: 13px; opacity: .82; line-height: 1.3; }
@@ -487,7 +490,7 @@
     .testi{
       padding: 18px;
       border-radius: var(--radius-lg);
-      min-height: 210px;
+      min-height: 216px; /* cushion */
     }
     .avatar{
       width: 44px; height: 44px; border-radius: 999px;
@@ -695,7 +698,7 @@
 
     .badge{ font-size: calc(13px * var(--type-scale)); }
 
-    h2{ font-size: calc(34px * var(--type-scale)); }
+    /* Default lead (kept) */
     .lead{ font-size: calc(16px * var(--type-scale)); }
 
     .programs .big h3{ font-size: calc(22px * var(--type-scale)); }
@@ -710,12 +713,11 @@
     .drawer a{ font-size: calc(16px * var(--type-scale)); }
     .drawer a span{ font-size: calc(12px * var(--type-scale)); }
 
-    .band p{ font-size: calc(16px * var(--type-scale)); }
-
     /* Prevent UI height changes due to font metrics */
     .btn, nav a, .pill-link, .kicker, .badge{ line-height: 1; }
 
-    /* ========= Requested bigger copy blocks (Lugar A–F) ========= */
+    /* ========= Bigger copy blocks (your Lugar A–F + session descriptive texts) ========= */
+
     /* Lugar A (hero points) */
     .point b{ font-size: calc(14px * var(--type-scale-desc)); }
     .point span{ font-size: calc(13px * var(--type-scale-desc)); }
@@ -738,8 +740,11 @@
     .testi p{ font-size: calc(14px * var(--type-scale-desc)) !important; }
     .testi .tiny{ font-size: calc(13px * var(--type-scale-desc)) !important; }
 
-    /* Lugar F (Formação cards) -> already covered by .card h3/.card p above */
-    /* ========= /Requested bigger copy blocks ========= */
+    /* Textos descritivos das sessões (além do section-head .lead) */
+    .programs .big p.lead{ font-size: calc(16px * var(--type-scale-desc)); }
+    .programs .side p.lead{ font-size: calc(16px * var(--type-scale-desc)); }
+    .band p{ font-size: calc(16px * var(--type-scale-desc)); }
+    .contact .panel p.lead{ font-size: calc(16px * var(--type-scale-desc)); }
 
     /* Override inline styles that would ignore the scale (needs !important) */
     .contact .panel h3{ font-size: calc(22px * var(--type-scale)) !important; }
