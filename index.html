@@ -12,20 +12,10 @@
   <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
 
   <style>
-    /* ============================================================
-       LOCAL FONT: Spartan (TTF)
-       Put your files here:
-       /assets/fonts/Spartan-Black.ttf
-       /assets/fonts/Spartan-Bold.ttf
-       /assets/fonts/Spartan-ExtraBold.ttf
-       /assets/fonts/Spartan-ExtraLight.ttf
-       /assets/fonts/Spartan-Light.ttf
-       /assets/fonts/Spartan-Medium.ttf
-       /assets/fonts/Spartan-Regular.ttf
-       /assets/fonts/Spartan-SemiBold.ttf
-       /assets/fonts/Spartan-Thin.ttf
-       ============================================================ */
-
+    /* =========================
+       Self-hosted Spartan (TTF)
+       Put files in: /assets/fonts/
+       ========================= */
     @font-face{
       font-family: "Spartan";
       src: url("./assets/fonts/Spartan-Thin.ttf") format("truetype");
@@ -107,22 +97,19 @@
       --radius-sm: 12px;
 
       --max: 1120px;
+
+      /* Spartan tends to render larger than League Spartan */
+      --type-scale: 0.94; /* tweak 0.92–0.98 */
     }
 
     *{ box-sizing: border-box; }
     html{ scroll-behavior: smooth; }
 
-    /* Spartan tends to render optically larger than League Spartan.
-       We reduce core typography sizes across the UI accordingly. */
     body{
       margin:0;
       font-family: "Spartan", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      line-height: 1.25;
       color: var(--ink);
-
-      /* subtle global “feel” tweaks */
-      line-height: 1.45;
-      letter-spacing: -0.01em;
-
       background:
         radial-gradient(1000px 700px at 20% 10%, rgba(252,136,58,0.12), transparent 60%),
         radial-gradient(1100px 820px at 90% 15%, rgba(41,126,138,0.14), transparent 60%),
@@ -176,21 +163,18 @@
       display:flex; flex-direction: column;
       gap: 2px;
     }
-    /* smaller than before */
-    .brand-name strong{ font-size: 14px; letter-spacing: .15px; font-weight: 800; }
-    .brand-name span{ font-size: 11px; opacity: .75; font-weight: 600; }
+    .brand-name strong{ font-size: 15px; letter-spacing: .2px; }
+    .brand-name span{ font-size: 12px; opacity: .75; }
 
     nav{
       display:flex; align-items:center; gap: 10px;
     }
     nav a{
-      font-size: 13px; /* was 14 */
+      font-size: 14px;
       padding: 10px 12px;
       border-radius: 999px;
       opacity: .86;
       transition: background .2s ease, opacity .2s ease, transform .2s ease;
-      font-weight: 700;
-      letter-spacing: .12px;
     }
     nav a:hover{ background: rgba(255,255,255,0.35); opacity: 1; transform: translateY(-1px); }
     nav a.active{ background: rgba(255,255,255,0.45); opacity: 1; border: 1px solid rgba(41,126,138,0.18); }
@@ -201,9 +185,9 @@
       padding: 11px 14px;
       border-radius: 999px;
       border: 1px solid rgba(41,126,138,0.22);
-      font-weight: 700;             /* Spartan: keep crisp */
-      font-size: 13px;              /* was 14 */
-      letter-spacing: .15px;
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: .2px;
       cursor: pointer;
       transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
       user-select: none;
@@ -215,7 +199,9 @@
       background: linear-gradient(135deg, rgba(252,136,58,0.95), rgba(252,136,58,0.65));
       color: #1f1f1f;
     }
-    .btn.ghost{ background: rgba(255,255,255,0.18); }
+    .btn.ghost{
+      background: rgba(255,255,255,0.18);
+    }
     .btn .dot{
       width: 8px; height: 8px; border-radius: 999px;
       margin-right: 10px;
@@ -234,7 +220,9 @@
     .mobile-toggle svg{ display:block; }
 
     /* Hero */
-    .hero{ padding: 36px 0 18px; }
+    .hero{
+      padding: 36px 0 18px;
+    }
     .hero-grid{
       display:grid;
       grid-template-columns: 1.05fr 0.95fr;
@@ -266,35 +254,32 @@
       border-radius: 999px;
       border: 1px solid rgba(41,126,138,0.18);
       background: rgba(255,255,255,0.22);
-      font-size: 12px;    /* was 13 */
-      font-weight: 700;
-      letter-spacing: .22px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: .25px;
     }
     .kicker .pill{
       padding: 6px 10px;
       border-radius: 999px;
       background: rgba(41,126,138,0.14);
       border: 1px solid rgba(41,126,138,0.18);
-      font-weight: 800;
+      font-weight: 700;
       color: rgba(41,126,138,1);
     }
 
     h1{
       margin: 18px 0 10px;
-      font-size: 52px;     /* was 56 */
+      font-size: 56px;
       line-height: 0.95;
-      letter-spacing: -1.05px;
-      font-weight: 900;
+      letter-spacing: -1px;
     }
     .sub{
       margin: 12px 0 18px;
-      font-size: 17px;     /* was 18 */
+      font-size: 18px;
       line-height: 1.35;
       opacity: 0.88;
       max-width: 52ch;
-      font-weight: 500;
     }
-
     .hero-points{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
@@ -308,15 +293,14 @@
       background: rgba(255,255,255,0.18);
       min-height: 82px;
     }
-    .point b{ display:block; font-size: 13px; margin-bottom: 6px; font-weight: 800; }
-    .point span{ font-size: 12px; opacity: .8; line-height: 1.25; }
+    .point b{ display:block; font-size: 14px; margin-bottom: 6px; }
+    .point span{ font-size: 13px; opacity: .8; line-height: 1.25; }
 
     .hero-cta{ display:flex; gap: 10px; align-items:center; flex-wrap: wrap; margin-top: 10px; }
     .micro{
-      font-size: 12px; /* was 13 */
+      font-size: 13px;
       opacity: .75;
       margin-top: 10px;
-      font-weight: 500;
     }
 
     .hero-art{
@@ -344,8 +328,8 @@
     .badge{
       padding: 10px 12px;
       border-radius: 999px;
-      font-size: 12px; /* was 13 */
-      font-weight: 800;
+      font-size: 13px;
+      font-weight: 600;
       border: 1px solid rgba(255,255,255,0.42);
       background: rgba(255,255,255,0.18);
       backdrop-filter: blur(16px);
@@ -369,17 +353,15 @@
     }
     h2{
       margin: 0;
-      font-size: 32px; /* was 34 */
+      font-size: 34px;
       letter-spacing: -0.6px;
-      font-weight: 900;
     }
     .lead{
       margin: 0;
-      font-size: 15px; /* was 16 */
+      font-size: 16px;
       opacity: .82;
       max-width: 60ch;
       line-height: 1.4;
-      font-weight: 500;
     }
 
     /* Cards */
@@ -415,12 +397,12 @@
       margin-bottom: 12px;
     }
     .icon svg{ width: 22px; height: 22px; }
-    .card h3{ margin: 0 0 6px; font-size: 17px; font-weight: 900; } /* was 18 */
-    .card p{ margin: 0; font-size: 13px; opacity: .82; line-height: 1.35; font-weight: 500; } /* was 14 */
+    .card h3{ margin: 0 0 6px; font-size: 18px; }
+    .card p{ margin: 0; font-size: 14px; opacity: .82; line-height: 1.35; }
     .card a.inline{
       display:inline-flex; align-items:center; gap: 8px;
       margin-top: 14px;
-      font-size: 13px; font-weight: 900; /* was 14 */
+      font-size: 14px; font-weight: 700;
       color: rgba(41,126,138,1);
     }
     .card a.inline:hover{ text-decoration: underline; }
@@ -436,7 +418,7 @@
       padding: 22px;
       min-height: 320px;
     }
-    .programs .big h3{ font-size: 20px; margin-top: 0; font-weight: 900; } /* was 22 */
+    .programs .big h3{ font-size: 22px; margin-top: 0; }
     .programs .big .row{
       display:grid;
       grid-template-columns: 1fr 1fr;
@@ -450,13 +432,13 @@
       padding: 14px;
       min-height: 116px;
     }
-    .mini b{ display:block; font-size: 14px; margin-bottom: 6px; font-weight: 900; } /* was 15 */
-    .mini span{ display:block; font-size: 12px; opacity: .82; line-height: 1.3; font-weight: 500; } /* was 13 */
+    .mini b{ display:block; font-size: 15px; margin-bottom: 6px; }
+    .mini span{ display:block; font-size: 13px; opacity: .82; line-height: 1.3; }
     .mini .tag{
       display:inline-flex; align-items:center;
       margin-top: 10px;
-      font-size: 11px; /* was 12 */
-      font-weight: 900;
+      font-size: 12px;
+      font-weight: 700;
       padding: 6px 10px;
       border-radius: 999px;
       border: 1px solid rgba(252,136,58,0.25);
@@ -489,8 +471,8 @@
       margin-top: 1px;
     }
     .check .tick svg{ width: 14px; height: 14px; }
-    .check b{ display:block; font-size: 13px; margin-bottom: 2px; font-weight: 900; } /* was 14 */
-    .check span{ font-size: 12px; opacity: .82; line-height: 1.25; font-weight: 500; } /* was 13 */
+    .check b{ display:block; font-size: 14px; margin-bottom: 2px; }
+    .check span{ font-size: 13px; opacity: .82; line-height: 1.25; }
 
     /* Testimonials */
     .testi{
@@ -533,7 +515,7 @@
     }
     .band > *{ position: relative; z-index: 1; }
     .band h2{ margin-bottom: 8px; }
-    .band p{ margin: 0 auto 16px; max-width: 72ch; opacity: .85; line-height: 1.35; font-size: 14px; font-weight: 500; }
+    .band p{ margin: 0 auto 16px; max-width: 72ch; opacity: .85; line-height: 1.35; }
 
     /* Contact */
     .contact{
@@ -555,8 +537,8 @@
       border: 1px solid rgba(41,126,138,0.18);
       background: rgba(255,255,255,0.18);
     }
-    .kv .item b{ font-size: 12px; opacity: .75; font-weight: 900; } /* was 13 */
-    .kv .item span{ font-size: 13px; font-weight: 700; text-align: right; } /* was 14 */
+    .kv .item b{ font-size: 13px; opacity: .75; font-weight: 700; }
+    .kv .item span{ font-size: 14px; font-weight: 600; text-align: right; }
     .map{
       padding: 18px;
       border-radius: var(--radius-xl);
@@ -581,7 +563,7 @@
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       box-shadow: var(--shadow-soft);
-      font-size: 12px; font-weight: 900; /* was 13 */
+      font-size: 13px; font-weight: 700;
     }
 
     footer{
@@ -594,15 +576,15 @@
       border-top: 1px solid rgba(41,126,138,0.14);
       flex-wrap: wrap;
     }
-    .tiny{ font-size: 12px; opacity: .8; font-weight: 500; } /* was 13 */
+    .tiny{ font-size: 13px; opacity: .8; }
     .pill-link{
       display:inline-flex; align-items:center; gap: 10px;
       padding: 10px 12px;
       border-radius: 999px;
       border: 1px solid rgba(41,126,138,0.18);
       background: rgba(255,255,255,0.18);
-      font-weight: 900;
-      font-size: 12px; /* was 13 */
+      font-weight: 700;
+      font-size: 13px;
     }
 
     /* Reveal */
@@ -620,7 +602,7 @@
     @media (max-width: 980px){
       .hero-grid{ grid-template-columns: 1fr; }
       .hero-art{ min-height: 340px; }
-      h1{ font-size: 42px; } /* was 46 */
+      h1{ font-size: 46px; }
       .hero-points{ grid-template-columns: 1fr; }
       .grid-3{ grid-template-columns: 1fr; }
       .programs, .contact{ grid-template-columns: 1fr; }
@@ -629,7 +611,7 @@
       header .bar{ border-radius: 22px; }
     }
     @media (max-width: 520px){
-      h1{ font-size: 36px; } /* was 40 */
+      h1{ font-size: 40px; }
       .container{ width: min(var(--max), calc(100% - 28px)); }
       .brand{ min-width: unset; }
       .actions{ gap: 8px; }
@@ -659,13 +641,78 @@
       align-items:center;
       padding: 14px 12px;
       border-radius: 16px;
-      font-weight: 900;
-      font-size: 13px; /* keep consistent with nav/buttons */
+      font-weight: 700;
       border: 1px solid rgba(41,126,138,0.14);
       background: rgba(255,255,255,0.14);
       margin: 10px 0;
     }
-    .drawer a span{ font-size: 11px; opacity: .75; font-weight: 700; }
+    .drawer a span{ font-size: 12px; opacity: .75; font-weight: 600; }
+
+    /* =========================
+       Type scale + metric stabilizers
+       ========================= */
+    .brand-name strong{ font-size: calc(15px * var(--type-scale)); }
+    .brand-name span{ font-size: calc(12px * var(--type-scale)); }
+
+    nav a{ font-size: calc(14px * var(--type-scale)); }
+    .btn{ font-size: calc(14px * var(--type-scale)); }
+
+    .kicker{ font-size: calc(13px * var(--type-scale)); }
+
+    h1{ font-size: calc(56px * var(--type-scale)); }
+    .sub{ font-size: calc(18px * var(--type-scale)); }
+
+    .point b{ font-size: calc(14px * var(--type-scale)); }
+    .point span{ font-size: calc(13px * var(--type-scale)); }
+    .micro{ font-size: calc(13px * var(--type-scale)); }
+
+    .badge{ font-size: calc(13px * var(--type-scale)); }
+
+    h2{ font-size: calc(34px * var(--type-scale)); }
+    .lead{ font-size: calc(16px * var(--type-scale)); }
+
+    .card h3{ font-size: calc(18px * var(--type-scale)); }
+    .card p{ font-size: calc(14px * var(--type-scale)); }
+    .card a.inline{ font-size: calc(14px * var(--type-scale)); }
+
+    .programs .big h3{ font-size: calc(22px * var(--type-scale)); }
+
+    .mini b{ font-size: calc(15px * var(--type-scale)); }
+    .mini span{ font-size: calc(13px * var(--type-scale)); }
+    .mini .tag{ font-size: calc(12px * var(--type-scale)); }
+
+    .check b{ font-size: calc(14px * var(--type-scale)); }
+    .check span{ font-size: calc(13px * var(--type-scale)); }
+
+    .kv .item b{ font-size: calc(13px * var(--type-scale)); }
+    .kv .item span{ font-size: calc(14px * var(--type-scale)); }
+
+    .map .overlay{ font-size: calc(13px * var(--type-scale)); }
+    .pill-link{ font-size: calc(13px * var(--type-scale)); }
+    .tiny{ font-size: calc(13px * var(--type-scale)); }
+
+    .drawer a span{ font-size: calc(12px * var(--type-scale)); }
+
+    /* Prevent UI height changes due to font metrics */
+    .btn, nav a, .pill-link, .kicker, .badge{
+      line-height: 1;
+    }
+
+    /* Override inline styles that would ignore the scale (needs !important) */
+    .testi p{
+      font-size: calc(14px * var(--type-scale)) !important;
+    }
+    .contact .panel h3{
+      font-size: calc(22px * var(--type-scale)) !important;
+    }
+
+    /* Scale responsive H1 too */
+    @media (max-width: 980px){
+      h1{ font-size: calc(46px * var(--type-scale)); }
+    }
+    @media (max-width: 520px){
+      h1{ font-size: calc(40px * var(--type-scale)); }
+    }
   </style>
 </head>
 
@@ -1011,7 +1058,7 @@
                 <path d="M4 20a8 8 0 0 1 16 0" stroke="#297E8A" stroke-width="2.2" stroke-linecap="round"/>
               </svg>
             </div>
-            <p style="margin:0; font-size:13px; opacity:.85; line-height:1.35; font-weight:500;">
+            <p style="margin:0; font-size:14px; opacity:.85; line-height:1.35;">
               “A diferença foi a calma em situações difíceis. Eu voltei a apresentar e negociar sem aquele ruído interno.”
             </p>
             <div class="stars" aria-hidden="true">
@@ -1031,7 +1078,7 @@
                 <path d="M4 20a8 8 0 0 1 16 0" stroke="#297E8A" stroke-width="2.2" stroke-linecap="round"/>
               </svg>
             </div>
-            <p style="margin:0; font-size:13px; opacity:.85; line-height:1.35; font-weight:500;">
+            <p style="margin:0; font-size:14px; opacity:.85; line-height:1.35;">
               “Eu já treinava e trabalhava bem. Aqui eu achei um método para recuperar e voltar melhor — sem me drenar.”
             </p>
             <div class="stars" aria-hidden="true">
@@ -1051,7 +1098,7 @@
                 <path d="M4 20a8 8 0 0 1 16 0" stroke="#297E8A" stroke-width="2.2" stroke-linecap="round"/>
               </svg>
             </div>
-            <p style="margin:0; font-size:13px; opacity:.85; line-height:1.35; font-weight:500;">
+            <p style="margin:0; font-size:14px; opacity:.85; line-height:1.35;">
               “Não é só relaxar. É treinar estabilidade emocional sob carga. Eu parei de oscilar quando as coisas apertam.”
             </p>
             <div class="stars" aria-hidden="true">
@@ -1109,7 +1156,7 @@
 
         <div class="contact">
           <div class="panel glass reveal">
-            <h3 style="margin-top:0; font-size:20px; font-weight:900;">DeRose SBC</h3>
+            <h3 style="margin-top:0; font-size:22px;">DeRose SBC</h3>
             <p class="lead" style="margin-top:10px;">São Bernardo do Campo • SP</p>
 
             <div class="kv" role="list">
@@ -1159,7 +1206,7 @@
       <div class="container">
         <div class="foot">
           <div>
-            <div style="font-weight:900;">DeRose SBC</div>
+            <div style="font-weight:800;">DeRose SBC</div>
             <div class="tiny">Elite Calm • Marginal Gains • Yoga para Alta Performance</div>
           </div>
           <div style="display:flex; gap:10px; flex-wrap:wrap;">
@@ -1215,5 +1262,3 @@
   </script>
 </body>
 </html>
-
-
