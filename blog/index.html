@@ -10,7 +10,6 @@
   <meta property="og:description" content="Clareza sem misticismo. Conteúdo prático para evolução pessoal." />
   <meta property="og:type" content="website" />
   <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
-
   <style>
     /* =========================
        Self-hosted Spartan (TTF)
@@ -25,45 +24,35 @@
     @font-face{ font-family:"Spartan"; src:url("./assets/fonts/Spartan-Bold.ttf") format("truetype"); font-weight:700; font-style:normal; font-display:swap; }
     @font-face{ font-family:"Spartan"; src:url("./assets/fonts/Spartan-ExtraBold.ttf") format("truetype"); font-weight:800; font-style:normal; font-display:swap; }
     @font-face{ font-family:"Spartan"; src:url("./assets/fonts/Spartan-Black.ttf") format("truetype"); font-weight:900; font-style:normal; font-display:swap; }
-
     :root{
       --bg: #FFF9EF;
       --surface: #FFECD1;
       --accent: #FC883A;
       --teal: #297E8A;
       --ink: #393939;
-
       --glass-bg: rgba(255,255,255,0.26);
       --glass-br: rgba(41,126,138,0.22);
       --shadow: 0 18px 60px rgba(57,57,57,0.12);
       --shadow-soft: 0 10px 30px rgba(57,57,57,0.10);
-
       --radius-xl: 28px;
       --radius-lg: 22px;
       --radius-md: 16px;
       --radius-sm: 12px;
-
       --max: 1120px;
-
       /* baseline */
       --type-scale: 0.77;
-
       /* blog reading comfort */
       --type-scale-blog: 0.88;
-
       /* CONTROLS: single source of truth */
       --control-h: 56px;
       --control-pad-x: 18px;
-
       --page-bg:
         radial-gradient(1000px 700px at 20% 10%, rgba(252,136,58,0.12), transparent 60%),
         radial-gradient(1100px 820px at 90% 15%, rgba(41,126,138,0.14), transparent 60%),
         linear-gradient(180deg, var(--bg), #fff 28%, var(--bg) 100%);
     }
-
     *{ box-sizing: border-box; }
     html{ scroll-behavior: smooth; }
-
     body{
       margin:0;
       font-family: "Spartan", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
@@ -72,10 +61,8 @@
       background: var(--page-bg);
       overflow-x: hidden;
     }
-
     a{ color: inherit; text-decoration: none; }
     .container{ width:min(var(--max), calc(100% - 40px)); margin: 0 auto; }
-
     /* Glass */
     .glass{
       background: var(--glass-bg);
@@ -84,7 +71,6 @@
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
     }
-
     /* Header */
     header{
       position: sticky; top: 0; z-index: 40;
@@ -121,7 +107,6 @@
     }
     .brand-name strong{ font-size: calc(15px * var(--type-scale)); letter-spacing: .2px; }
     .brand-name span{ font-size: calc(12px * var(--type-scale)); opacity: .75; }
-
     nav{
       display:flex; align-items:center; gap: 10px;
     }
@@ -135,7 +120,6 @@
     }
     nav a:hover{ background: rgba(255,255,255,0.35); opacity: 1; transform: translateY(-1px); }
     nav a.active{ background: rgba(255,255,255,0.45); opacity: 1; border: 1px solid rgba(41,126,138,0.18); }
-
     nav a.is-disabled{
       opacity: .62;
       cursor: not-allowed;
@@ -145,9 +129,7 @@
       transform: none;
       opacity: .62;
     }
-
     .actions{ display:flex; align-items:center; gap: 10px; }
-
     .btn{
       display:inline-flex; align-items:center; justify-content: center;
       padding: 11px 14px;
@@ -181,7 +163,6 @@
       background: var(--teal);
       box-shadow: 0 0 0 4px rgba(41,126,138,0.16);
     }
-
     .mobile-toggle{
       display:none;
       padding: 10px 12px;
@@ -191,7 +172,6 @@
       cursor:pointer;
     }
     .mobile-toggle svg{ display:block; }
-
     /* Theme toggle */
     .theme-toggle{
       display:inline-flex;
@@ -212,12 +192,9 @@
     .theme-toggle .sun{ display:none; }
     html[data-theme="dark"] .theme-toggle .sun{ display:block; }
     html[data-theme="dark"] .theme-toggle .moon{ display:none; }
-
     svg [stroke="#393939"]{ stroke: var(--ink) !important; }
-
     /* Sections */
     section{ padding: 54px 0; }
-
     .section-head{
       display:flex;
       align-items:flex-end;
@@ -229,7 +206,6 @@
     }
     .section-head > div{ flex: 1 1 auto; min-width: 0; }
     .section-head > a{ flex: 0 0 auto; }
-
     .section-head h2{
       margin: 0 0 10px 0;
       font-size: calc(34px * var(--type-scale));
@@ -242,7 +218,6 @@
       line-height: 1.45;
       max-width: 70ch;
     }
-
     /* Blog hero */
     .hero{ padding: 36px 0 18px; }
     .hero-card{
@@ -263,7 +238,6 @@
       pointer-events:none;
     }
     .hero-card > *{ position: relative; z-index: 1; }
-
     .kicker{
       display:inline-flex; align-items:center; gap: 10px;
       padding: 8px 12px;
@@ -283,7 +257,6 @@
       font-weight: 900;
       color: rgba(41,126,138,1);
     }
-
     h1{
       margin: 16px 0 10px;
       font-size: calc(56px * var(--type-scale));
@@ -297,13 +270,12 @@
       opacity: 0.9;
       max-width: 70ch;
     }
-
     /* ===== Controls (FIXED HEIGHT, CONSISTENT SELECT) ===== */
     .controls{
       display:grid;
       grid-template-columns: 1.25fr 0.5fr 0.5fr;
       gap: 12px;
-      align-items: start; /* IMPORTANT: stop weird vertical offsets */
+      align-items: start;
       margin-top: 18px;
     }
     .field{
@@ -318,7 +290,6 @@
       letter-spacing: .2px;
       line-height: 1;
     }
-
     /* Unified control base */
     .control{
       width: 100%;
@@ -335,12 +306,10 @@
       transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease, background .2s ease;
       box-shadow: none;
     }
-
     .control:focus{
       border-color: rgba(41,126,138,0.32);
       box-shadow: 0 0 0 5px rgba(41,126,138,0.10);
     }
-
     /* Search input normalization */
     input[type="search"].control{
       -webkit-appearance: none;
@@ -348,33 +317,37 @@
     }
     input[type="search"].control::-webkit-search-decoration,
     input[type="search"].control::-webkit-search-cancel-button,
-    input[type="search"].control::-webkit-search-results-button{
-      -webkit-appearance: none;
+    input[type="search"].control::-webkit-search-results-button,
+    input[type="search"].control::-webkit-search-results-decoration {
+      display: none;
     }
-
-    /* Select normalization: kill native styling and draw our own arrow */
-    select.control{
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      appearance: none;
-
-      padding-right: calc(var(--control-pad-x) + 34px);
-
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M7 10l5 5 5-5' stroke='%23393939' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-size: 16px 16px;
-      background-position: right var(--control-pad-x) center;
+    /* Select: kill ALL native arrows and use custom one */
+    select.control {
+      -webkit-appearance: none !important;
+      -moz-appearance: none !important;
+      appearance: none !important;
+      padding-right: calc(var(--control-pad-x) + 34px) !important;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M7 10l5 5 5-5' stroke='%23393939' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") !important;
+      background-repeat: no-repeat !important;
+      background-size: 16px 16px !important;
+      background-position: right var(--control-pad-x) center !important;
     }
-    select.control::-ms-expand{ display: none; }
-
+    select.control::-ms-expand {
+      display: none !important;
+    }
+    /* Extra safety: hide any residual pseudo-elements arrows */
+    select.control::-webkit-inner-spin-button,
+    select.control::-webkit-outer-spin-button {
+      -webkit-appearance: none !important;
+      margin: 0 !important;
+    }
     .helper{
       font-size: calc(13px * var(--type-scale));
       opacity: .72;
       line-height: 1.35;
-      min-height: 18px; /* keeps rows consistent */
+      min-height: 18px;
     }
     .helper.spacer{ opacity: 0; }
-
     /* Tags chips */
     .tagbar{
       display:flex;
@@ -411,7 +384,6 @@
       box-shadow: 0 0 0 4px rgba(41,126,138,0.14);
     }
     .chip.alt .dot{ background: var(--accent); box-shadow: 0 0 0 4px rgba(252,136,58,0.14); }
-
     /* Featured */
     .featured{
       display:grid;
@@ -501,7 +473,6 @@
       flex-wrap: wrap;
       align-items:center;
     }
-
     /* Sidebar */
     .side{
       border-radius: var(--radius-xl);
@@ -527,7 +498,6 @@
     .side > *{ position: relative; z-index: 1; }
     .side h3{ margin: 0; font-size: calc(20px * var(--type-scale)); letter-spacing: -0.4px; }
     .side p{ margin: 0; font-size: calc(14px * var(--type-scale-blog)); opacity: .84; line-height: 1.45; }
-
     .quick{
       display:grid;
       gap: 10px;
@@ -552,7 +522,6 @@
       opacity: .75;
       font-weight: 700;
     }
-
     /* Post grid */
     .grid{
       display:grid;
@@ -577,7 +546,6 @@
       pointer-events:none;
     }
     .post > *{ position: relative; z-index: 1; }
-
     .post-media{
       height: 160px;
       overflow:hidden;
@@ -592,7 +560,6 @@
       filter: saturate(1.02) contrast(1.02);
       transform: scale(1.02);
     }
-
     .post-body{
       padding: 16px;
       display:grid;
@@ -670,7 +637,6 @@
       line-height: 1;
     }
     .read:hover{ text-decoration: underline; }
-
     /* Empty */
     .empty{
       border-radius: var(--radius-xl);
@@ -680,7 +646,6 @@
     }
     .empty h3{ margin: 0 0 8px; font-size: calc(20px * var(--type-scale)); }
     .empty p{ margin: 0; font-size: calc(14px * var(--type-scale-blog)); opacity: .84; line-height: 1.45; }
-
     /* CTA band */
     .band{
       padding: 26px;
@@ -704,7 +669,6 @@
     .band > *{ position: relative; z-index: 1; }
     .band h2{ margin: 0 0 8px; font-size: calc(28px * var(--type-scale)); letter-spacing: -0.6px; }
     .band p{ margin: 0 auto 16px; max-width: 80ch; opacity: .85; line-height: 1.45; font-size: calc(16px * var(--type-scale-blog)); }
-
     /* Footer */
     footer{
       padding: 36px 0 46px;
@@ -733,7 +697,6 @@
       font-size: calc(13px * var(--type-scale));
       line-height: 1;
     }
-
     /* Reveal */
     .reveal{
       opacity: 0;
@@ -744,13 +707,11 @@
       opacity: 1;
       transform: translateY(0);
     }
-
     /* Responsive */
     @media (max-width: 980px){
       nav{ display:none; }
       .mobile-toggle{ display:inline-flex; }
       header .bar{ border-radius: 22px; }
-
       h1{ font-size: calc(46px * var(--type-scale)); }
       .controls{ grid-template-columns: 1fr; }
       .featured{ grid-template-columns: 1fr; }
@@ -768,7 +729,6 @@
       .post-media{ height: 148px; }
       :root{ --control-h: 54px; }
     }
-
     /* Mobile drawer */
     .drawer{
       position: fixed;
@@ -799,39 +759,31 @@
       line-height: 1;
     }
     .drawer a span{ font-size: calc(12px * var(--type-scale)); opacity: .75; font-weight: 700; }
-
     .drawer a.is-disabled{
       opacity: .62;
       cursor: not-allowed;
     }
-
     /* ========= Dark theme ========= */
     html[data-theme="dark"]{
       color-scheme: dark;
-
       --bg: #0b1012;
       --surface: #0f171a;
       --ink: rgba(245,246,247,0.92);
-
       --glass-bg: rgba(18,26,28,0.62);
       --glass-br: rgba(255,255,255,0.10);
-
       --shadow: 0 18px 60px rgba(0,0,0,0.55);
       --shadow-soft: 0 10px 30px rgba(0,0,0,0.45);
-
       --page-bg:
         radial-gradient(1000px 700px at 20% 10%, rgba(252,136,58,0.10), transparent 60%),
         radial-gradient(1100px 820px at 90% 15%, rgba(41,126,138,0.18), transparent 60%),
         linear-gradient(180deg, #06090b, var(--bg) 28%, #06090b 100%);
     }
-
     html[data-theme="dark"] nav a:hover{ background: rgba(255,255,255,0.06); }
     html[data-theme="dark"] nav a.active{
       background: rgba(255,255,255,0.08);
       border-color: rgba(255,255,255,0.14);
     }
     html[data-theme="dark"] .btn.ghost{ background: rgba(255,255,255,0.06); }
-
     html[data-theme="dark"] .kicker,
     html[data-theme="dark"] .hero-card,
     html[data-theme="dark"] .post,
@@ -845,16 +797,13 @@
       background: rgba(255,255,255,0.06);
       border-color: rgba(255,255,255,0.12);
     }
-
     /* make select arrow follow dark ink */
     html[data-theme="dark"] select.control{
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M7 10l5 5 5-5' stroke='%23f5f6f7' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M7 10l5 5 5-5' stroke='%23f5f6f7' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") !important;
     }
-
     html[data-theme="dark"] .drawer{ background: rgba(0,0,0,0.62); }
   </style>
 </head>
-
 <body>
   <!-- Mobile drawer -->
   <div class="drawer" id="drawer" aria-hidden="true">
@@ -863,20 +812,16 @@
         <a href="./index.html#aulas" data-close> Aulas <span>presencial + online</span></a>
         <a href="./index.html#cursos" data-close> Cursos <span>precisão & consistência</span></a>
         <a href="./index.html#formacao" data-close> Formação <span>aprofundamento</span></a>
-
         <a href="#" class="is-disabled" aria-disabled="true" data-close>Eventos</a>
         <a href="#" class="is-disabled" aria-disabled="true" data-close>Bistrô</a>
-
         <a href="./blog.html" data-close> Blog <span>clareza sem misticismo</span></a>
         <a href="./index.html#contato" data-close> Contato <span>rota rápida</span></a>
-
         <div style="display:flex; gap:10px; justify-content:flex-end; margin-top: 10px;">
           <button class="btn ghost glass" id="drawerClose" type="button">Fechar</button>
         </div>
       </div>
     </div>
   </div>
-
   <header>
     <div class="container">
       <div class="bar glass">
@@ -887,18 +832,14 @@
             <span>Yôga de Alto Rendimento</span>
           </span>
         </a>
-
         <nav aria-label="Navegação principal">
           <a href="./index.html#aulas">AULAS</a>
           <a href="./index.html#cursos">CURSOS</a>
           <a href="./index.html#formacao">FORMAÇÃO</a>
-
           <a href="#" class="is-disabled" aria-disabled="true">EVENTOS</a>
           <a href="#" class="is-disabled" aria-disabled="true">BISTRÔ</a>
-
           <a href="./blog.html" class="active" aria-current="page">BLOG</a>
         </nav>
-
         <div class="actions">
           <button class="mobile-toggle" id="mobileToggle" aria-label="Abrir menu">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -907,7 +848,6 @@
               <path d="M4 17H20" stroke="#393939" stroke-width="2.4" stroke-linecap="round" opacity="0.8"/>
             </svg>
           </button>
-
           <button class="theme-toggle" id="themeToggle" type="button" aria-label="Ativar modo escuro" aria-pressed="false">
             <svg class="moon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M21 14.5A8.5 8.5 0 1 1 9.5 3a7 7 0 0 0 11.5 11.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -917,7 +857,6 @@
               <path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5l-1.5-1.5M20.5 20.5 19 19M5 19l-1.5 1.5M20.5 3.5 19 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
             </svg>
           </button>
-
           <a class="btn primary" href="./index.html#contato" title="Agendar uma aula">
             <span class="dot" aria-hidden="true"></span>
             Entre em Contato
@@ -926,7 +865,6 @@
       </div>
     </div>
   </header>
-
   <main id="top">
     <!-- HERO -->
     <section class="hero">
@@ -936,20 +874,17 @@
             <span class="pill">Blog</span>
             <span>Clareza sem misticismo.</span>
           </div>
-
           <h1>Ideias que viram prática.</h1>
           <p class="sub">
             Alto rendimento biológico, foco, respiração, mobilidade, recuperação e estilo de vida. Conteúdo objetivo para
             você evoluir com consistência — e com menos desgaste.
           </p>
-
           <div class="controls" aria-label="Filtros do blog">
             <div class="field">
               <div class="label">Buscar</div>
               <input class="control glass" id="search" type="search" placeholder="Procure por tema, técnica, objetivo..." autocomplete="off" />
               <div class="helper">Dica: tente “respiração”, “foco”, “mobilidade”, “rotina”.</div>
             </div>
-
             <div class="field">
               <div class="label">Categoria</div>
               <select class="control glass" id="category">
@@ -957,7 +892,6 @@
               </select>
               <div class="helper spacer" aria-hidden="true">&nbsp;</div>
             </div>
-
             <div class="field">
               <div class="label">Ordenar</div>
               <select class="control glass" id="sort">
@@ -968,14 +902,12 @@
               <div class="helper spacer" aria-hidden="true">&nbsp;</div>
             </div>
           </div>
-
           <div class="tagbar" id="tagbar" aria-label="Tags populares">
             <!-- chips injected by JS -->
           </div>
         </div>
       </div>
     </section>
-
     <!-- FEATURED + SIDE -->
     <section>
       <div class="container">
@@ -986,7 +918,6 @@
           </div>
           <a class="pill-link glass" href="./index.html#contato">Agende Sua Aula →</a>
         </div>
-
         <div class="featured">
           <article class="feature-card glass reveal" id="featuredCard" aria-label="Post em destaque">
             <a href="#" id="featuredLink" aria-label="Abrir post em destaque">
@@ -1008,7 +939,6 @@
               </div>
             </a>
           </article>
-
           <aside class="side glass reveal" aria-label="Sobre o blog">
             <div>
               <h3>Para quem é este blog</h3>
@@ -1016,7 +946,6 @@
                 Para quem quer melhorar energia, foco e presença com técnica — sem exagero e sem ruído.
                 Leituras curtas, com ação simples e consistente.
               </p>
-
               <div class="quick" aria-label="Acessos rápidos">
                 <a href="./index.html#aulas">Aulas <span>presencial + online</span></a>
                 <a href="./index.html#cursos">Conteúdo <span>trilhas + método</span></a>
@@ -1024,7 +953,6 @@
                 <a href="./index.html#contato">Contato <span>rota rápida</span></a>
               </div>
             </div>
-
             <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-start;">
               <a class="btn primary" href="./index.html#contato"><span class="dot" aria-hidden="true"></span>Entre em Contato</a>
               <a class="btn ghost glass" href="#posts">Ver Posts</a>
@@ -1033,7 +961,6 @@
         </div>
       </div>
     </section>
-
     <!-- POSTS -->
     <section id="posts">
       <div class="container">
@@ -1043,16 +970,13 @@
             <p class="lead">Escolha um tema. Leia em poucos minutos. Aplique ainda hoje.</p>
           </div>
         </div>
-
         <div class="grid" id="grid" aria-label="Lista de posts">
           <!-- cards injected by JS -->
         </div>
-
         <div class="empty glass reveal" id="empty">
           <h3>Nenhum post encontrado</h3>
           <p>Tente remover filtros, limpar a busca, ou escolher outra categoria/tag.</p>
         </div>
-
         <div class="band glass reveal">
           <h2>Consistência é o multiplicador.</h2>
           <p>
@@ -1065,7 +989,6 @@
         </div>
       </div>
     </section>
-
     <footer>
       <div class="container">
         <div class="foot">
@@ -1085,40 +1008,32 @@
       </div>
     </footer>
   </main>
-
   <script>
     // Year
     document.getElementById('year').textContent = new Date().getFullYear();
-
     // Theme (light/dark) with persistence + system default
     const root = document.documentElement;
     const themeBtn = document.getElementById('themeToggle');
     const metaTheme = document.querySelector('meta[name="theme-color"]');
     const THEME_KEY = 'theme';
-
     function systemPrefersDark(){
       return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
     }
-
     function setTheme(theme, {persist = true} = {}){
       if(theme === 'dark') root.dataset.theme = 'dark';
       else delete root.dataset.theme;
-
       if(persist){
         localStorage.setItem(THEME_KEY, theme);
       }
-
       if(themeBtn){
         const isDark = theme === 'dark';
         themeBtn.setAttribute('aria-pressed', String(isDark));
         themeBtn.setAttribute('aria-label', isDark ? 'Desativar modo escuro' : 'Ativar modo escuro');
       }
-
       if(metaTheme){
         metaTheme.setAttribute('content', theme === 'dark' ? '#0b1012' : '#297E8A');
       }
     }
-
     function initTheme(){
       const saved = localStorage.getItem(THEME_KEY);
       if(saved === 'light' || saved === 'dark'){
@@ -1127,14 +1042,11 @@
         setTheme(systemPrefersDark() ? 'dark' : 'light', {persist:false});
       }
     }
-
     initTheme();
-
     themeBtn?.addEventListener('click', () => {
       const current = root.dataset.theme === 'dark' ? 'dark' : 'light';
       setTheme(current === 'dark' ? 'light' : 'dark');
     });
-
     const mq = window.matchMedia?.('(prefers-color-scheme: dark)');
     mq?.addEventListener?.('change', (e) => {
       const saved = localStorage.getItem(THEME_KEY);
@@ -1142,17 +1054,14 @@
         setTheme(e.matches ? 'dark' : 'light', {persist:false});
       }
     });
-
     // Prevent placeholder links from navigating
     document.querySelectorAll('a[aria-disabled="true"]').forEach(a => {
       a.addEventListener('click', (e) => e.preventDefault());
     });
-
     // Mobile drawer
     const drawer = document.getElementById('drawer');
     const toggle = document.getElementById('mobileToggle');
     const closeBtn = document.getElementById('drawerClose');
-
     function openDrawer(){
       drawer.classList.add('open');
       drawer.setAttribute('aria-hidden', 'false');
@@ -1169,7 +1078,6 @@
       if(e.target === drawer) closeDrawer();
     });
     drawer?.querySelectorAll('[data-close]')?.forEach(a => a.addEventListener('click', closeDrawer));
-
     // Reveal on scroll
     const io = new IntersectionObserver((entries)=>{
       entries.forEach(entry=>{
@@ -1179,9 +1087,7 @@
         }
       });
     }, { threshold: 0.12 });
-
     document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-
     /* =========================
        BLOG DATA + RENDER
        ========================= */
@@ -1259,16 +1165,13 @@
         href: "./posts/consistencia-ritual.html"
       }
     ];
-
     const grid = document.getElementById('grid');
     const empty = document.getElementById('empty');
     const search = document.getElementById('search');
     const category = document.getElementById('category');
     const sort = document.getElementById('sort');
     const tagbar = document.getElementById('tagbar');
-
     let state = { q: '', category: 'all', tag: 'all', sort: 'new' };
-
     function formatDateISO(iso){
       try{
         const [y,m,d] = iso.split('-').map(Number);
@@ -1278,7 +1181,6 @@
         return iso;
       }
     }
-
     function escapeHtml(str){
       return String(str)
         .replaceAll('&','&amp;')
@@ -1287,39 +1189,31 @@
         .replaceAll('"','&quot;')
         .replaceAll("'","&#039;");
     }
-
     function unique(arr){ return Array.from(new Set(arr)); }
-
     function buildTaxonomy(){
       const cats = unique(POSTS.map(p => p.category)).sort((a,b)=>a.localeCompare(b,'pt-BR'));
       const tags = unique(POSTS.flatMap(p => p.tags)).sort((a,b)=>a.localeCompare(b,'pt-BR'));
-
       category.innerHTML = `
         <option value="all">Todas</option>
         ${cats.map(c => `<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`).join('')}
       `;
-
       const chip = (label, {active=false, alt=false}={}) => `
         <div class="chip ${active ? 'active' : ''} ${alt ? 'alt' : ''}" role="button" tabindex="0" data-tag="${escapeHtml(label)}" aria-pressed="${String(active)}">
           <span class="dot" aria-hidden="true"></span>
           ${escapeHtml(label)}
         </div>
       `;
-
       tagbar.innerHTML = [
         chip('Todas', {active:true}),
         ...tags.map(t => chip(t, {alt: t.toLowerCase().includes('flex') || t.toLowerCase().includes('medit') }))
       ].join('');
     }
-
     function pickFeatured(){
       const featured = POSTS
         .slice()
         .sort((a,b)=> b.date.localeCompare(a.date))
         .find(p => p.featured) || POSTS.slice().sort((a,b)=> b.date.localeCompare(a.date))[0];
-
       if(!featured) return;
-
       const link = document.getElementById('featuredLink');
       const img = document.getElementById('featuredImg');
       const cat = document.getElementById('featuredCat');
@@ -1327,7 +1221,6 @@
       const title = document.getElementById('featuredTitle');
       const excerpt = document.getElementById('featuredExcerpt');
       const tagPill = document.getElementById('featuredTagPill');
-
       link.href = featured.href;
       img.src = featured.image || "./assets/blog/featured.webp";
       img.alt = featured.title;
@@ -1337,7 +1230,6 @@
       excerpt.textContent = featured.excerpt;
       tagPill.textContent = featured.tags?.[0] ? featured.tags[0] : 'Leitura';
     }
-
     function matches(post){
       const q = state.q.trim().toLowerCase();
       const inText = !q
@@ -1345,13 +1237,10 @@
         || post.excerpt.toLowerCase().includes(q)
         || post.tags.some(t => t.toLowerCase().includes(q))
         || post.category.toLowerCase().includes(q);
-
       const inCat = (state.category === 'all') || (post.category === state.category);
       const inTag = (state.tag === 'all') || (post.tags.includes(state.tag));
-
       return inText && inCat && inTag;
     }
-
     function sortPosts(list){
       const out = list.slice();
       if(state.sort === 'new') out.sort((a,b)=> b.date.localeCompare(a.date));
@@ -1359,10 +1248,8 @@
       else if(state.sort === 'read') out.sort((a,b)=> (a.readMin ?? 99) - (b.readMin ?? 99));
       return out;
     }
-
     function renderPosts(){
       const filtered = sortPosts(POSTS.filter(matches));
-
       if(filtered.length === 0){
         grid.innerHTML = '';
         empty.style.display = 'block';
@@ -1371,7 +1258,6 @@
       }else{
         empty.style.display = 'none';
       }
-
       grid.innerHTML = filtered.map(p => {
         const tagLine = (p.tags || []).slice(0,2).join(' • ');
         return `
@@ -1385,10 +1271,8 @@
                   <div class="post-cat"><span class="dot" aria-hidden="true"></span>${escapeHtml(p.category)}</div>
                   <div class="post-date">${escapeHtml(formatDateISO(p.date))}</div>
                 </div>
-
                 <h3>${escapeHtml(p.title)}</h3>
                 <p>${escapeHtml(p.excerpt)}</p>
-
                 <div class="post-bottom">
                   <div class="post-meta">
                     <span>${escapeHtml(p.readMin)} min</span>
@@ -1402,13 +1286,10 @@
           </article>
         `;
       }).join('');
-
       grid.querySelectorAll('.reveal').forEach(el => io.observe(el));
     }
-
     function setTag(tag){
       state.tag = tag === 'Todas' ? 'all' : tag;
-
       tagbar.querySelectorAll('.chip').forEach(ch => {
         const t = ch.getAttribute('data-tag');
         const isAll = t === 'Todas';
@@ -1416,26 +1297,21 @@
         ch.classList.toggle('active', isActive);
         ch.setAttribute('aria-pressed', String(isActive));
       });
-
       renderPosts();
     }
-
     // Wire controls
     search.addEventListener('input', (e) => {
       state.q = e.target.value || '';
       renderPosts();
     });
-
     category.addEventListener('change', (e) => {
       state.category = e.target.value || 'all';
       renderPosts();
     });
-
     sort.addEventListener('change', (e) => {
       state.sort = e.target.value || 'new';
       renderPosts();
     });
-
     tagbar.addEventListener('click', (e) => {
       const el = e.target.closest?.('.chip');
       if(!el) return;
@@ -1443,7 +1319,6 @@
       if(!t) return;
       setTag(t);
     });
-
     tagbar.addEventListener('keydown', (e) => {
       if(e.key !== 'Enter' && e.key !== ' ') return;
       const el = e.target.closest?.('.chip');
@@ -1453,7 +1328,6 @@
       if(!t) return;
       setTag(t);
     });
-
     // Init
     buildTaxonomy();
     pickFeatured();
