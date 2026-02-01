@@ -1,0 +1,1079 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#297E8A" />
+  <title>Blog • DeRose SBC</title>
+  <meta name="description" content="Clareza sem misticismo. Alto rendimento biológico, foco, respiração, mobilidade e recuperação." />
+  <meta property="og:title" content="Blog • DeRose SBC" />
+  <meta property="og:description" content="Ideias que viram prática. Conteúdo objetivo para evoluir com consistência — e com menos desgaste." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
+
+  <style>
+    /* =========================
+       Self-hosted Spartan (TTF)
+       Put files in: /assets/fonts/
+       ========================= */
+    @font-face{ font-family:"Spartan"; src:url("./assets/fonts/Spartan-Thin.ttf") format("truetype"); font-weight:100; font-style:normal; font-display:swap; }
+    @font-face{ font-family:"Spartan"; src:url("./assets/fonts/Spartan-ExtraLight.ttf") format("truetype"); font-weight:200; font-style:normal; font-display:swap; }
+    @font-face{ font-family:"Spartan"; src:url("./assets/fonts/Spartan-Light.ttf") format("truetype"); font-weight:300; font-style:normal; font-display:swap; }
+    @font-face{ font-family:"Spartan"; src:url("./assets/fonts/Spartan-Regular.ttf") format("truetype"); font-weight:400; font-style:normal; font-display:swap; }
+    @font-face{ font-family:"Spartan"; src:url("./assets/fonts/Spartan-Medium.ttf") format("truetype"); font-weight:500; font-style:normal; font-display:swap; }
+    @font-face{ font-family:"Spartan"; src:url("./assets/fonts/Spartan-SemiBold.ttf") format("truetype"); font-weight:600; font-style:normal; font-display:swap; }
+    @font-face{ font-family:"Spartan"; src:url("./assets/fonts/Spartan-Bold.ttf") format("truetype"); font-weight:700; font-style:normal; font-display:swap; }
+    @font-face{ font-family:"Spartan"; src:url("./assets/fonts/Spartan-ExtraBold.ttf") format("truetype"); font-weight:800; font-style:normal; font-display:swap; }
+    @font-face{ font-family:"Spartan"; src:url("./assets/fonts/Spartan-Black.ttf") format("truetype"); font-weight:900; font-style:normal; font-display:swap; }
+
+    :root{
+      --bg: #FFF9EF;
+      --surface: #FFECD1;
+      --accent: #FC883A;
+      --teal: #297E8A;
+      --ink: #393939;
+
+      --glass-bg: rgba(255,255,255,0.26);
+      --glass-br: rgba(41,126,138,0.22);
+      --shadow: 0 18px 60px rgba(57,57,57,0.12);
+      --shadow-soft: 0 10px 30px rgba(57,57,57,0.10);
+
+      --radius-xl: 28px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --radius-sm: 12px;
+
+      --max: 1120px;
+
+      /* Blog: um tiquinho maior que o baseline anterior */
+      --type-scale: 0.93;
+
+      --page-bg:
+        radial-gradient(1000px 700px at 20% 10%, rgba(252,136,58,0.12), transparent 60%),
+        radial-gradient(1100px 820px at 90% 15%, rgba(41,126,138,0.14), transparent 60%),
+        linear-gradient(180deg, var(--bg), #fff 28%, var(--bg) 100%);
+
+      /* Controls */
+      --control-h: 56px;
+      --control-pad-x: 18px;
+    }
+
+    *{ box-sizing: border-box; }
+    html{ scroll-behavior: smooth; }
+    body{
+      margin:0;
+      font-family: "Spartan", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      line-height: 1.25;
+      color: var(--ink);
+      background: var(--page-bg);
+      overflow-x: hidden;
+    }
+    a{ color: inherit; text-decoration: none; }
+    .container{ width:min(var(--max), calc(100% - 40px)); margin: 0 auto; }
+
+    /* Glass */
+    .glass{
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-br);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    /* Header */
+    header{
+      position: sticky; top: 0; z-index: 40;
+      padding: 14px 0;
+    }
+    header .bar{
+      border-radius: 999px;
+      padding: 10px 14px;
+      display:flex; align-items:center; justify-content: space-between;
+      gap: 14px;
+    }
+    .brand{
+      display:flex; align-items:center; gap: 10px; min-width: 210px;
+      padding: 8px 10px; border-radius: 999px;
+    }
+    .brand-mark{
+      width: 36px; height: 36px; border-radius: 14px;
+      background: linear-gradient(135deg, rgba(41,126,138,0.9), rgba(252,136,58,0.85));
+      box-shadow: 0 10px 22px rgba(41,126,138,0.18);
+      position: relative;
+      overflow: hidden;
+    }
+    .brand-mark:after{
+      content:"";
+      position:absolute; inset:-30%;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.55), transparent 55%);
+      transform: rotate(18deg);
+    }
+    .brand-name{
+      line-height: 1;
+      display:flex; flex-direction: column;
+      gap: 4px;
+    }
+    .brand-name strong{ font-size: calc(15px * var(--type-scale)); letter-spacing: .2px; }
+    .brand-name span{ font-size: calc(12px * var(--type-scale)); opacity: .75; }
+
+    nav{
+      display:flex; align-items:center; gap: 10px;
+    }
+    nav a{
+      font-size: calc(14px * var(--type-scale));
+      padding: 10px 12px;
+      border-radius: 999px;
+      opacity: .86;
+      transition: background .2s ease, opacity .2s ease, transform .2s ease;
+      border: 1px solid transparent;
+    }
+    nav a:hover{ background: rgba(255,255,255,0.35); opacity: 1; transform: translateY(-1px); }
+    nav a.active{ background: rgba(255,255,255,0.45); opacity: 1; border-color: rgba(41,126,138,0.18); }
+
+    .actions{ display:flex; align-items:center; gap: 10px; }
+
+    .btn{
+      display:inline-flex; align-items:center; justify-content: center;
+      padding: 11px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(41,126,138,0.22);
+      font-weight: 600;
+      font-size: calc(14px * var(--type-scale));
+      letter-spacing: .2px;
+      cursor: pointer;
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+      user-select: none;
+      white-space: nowrap;
+      background: rgba(255,255,255,0.18);
+    }
+    .btn:hover{ transform: translateY(-1px); box-shadow: var(--shadow-soft); }
+    .btn.primary{
+      border: 1px solid rgba(252,136,58,0.35);
+      background: linear-gradient(135deg, rgba(252,136,58,0.95), rgba(252,136,58,0.65));
+      color: #1f1f1f;
+    }
+    .btn .dot{
+      width: 8px; height: 8px; border-radius: 999px;
+      margin-right: 10px;
+      background: var(--teal);
+      box-shadow: 0 0 0 4px rgba(41,126,138,0.16);
+    }
+
+    .mobile-toggle{
+      display:none;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(41,126,138,0.22);
+      background: rgba(255,255,255,0.18);
+      cursor:pointer;
+    }
+    .mobile-toggle svg{ display:block; }
+
+    /* Theme toggle */
+    .theme-toggle{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      border: 1px solid rgba(41,126,138,0.22);
+      background: rgba(255,255,255,0.18);
+      cursor:pointer;
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+      color: var(--ink);
+    }
+    .theme-toggle:hover{ transform: translateY(-1px); box-shadow: var(--shadow-soft); }
+    .theme-toggle svg{ width: 18px; height: 18px; display:block; }
+    .theme-toggle .sun{ display:none; }
+    html[data-theme="dark"] .theme-toggle .sun{ display:block; }
+    html[data-theme="dark"] .theme-toggle .moon{ display:none; }
+
+    /* Make hardcoded dark strokes follow current theme ink */
+    svg [stroke="#393939"]{ stroke: var(--ink) !important; }
+
+    /* Page shell */
+    main{ padding: 24px 0 60px; }
+
+    .hero{
+      padding: 18px 0 20px;
+    }
+    .hero-card{
+      border-radius: var(--radius-xl);
+      padding: 22px 24px 18px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-card:before{
+      content:"";
+      position:absolute; inset:-40%;
+      background:
+        radial-gradient(circle at 18% 30%, rgba(252,136,58,0.18), transparent 60%),
+        radial-gradient(circle at 84% 20%, rgba(41,126,138,0.18), transparent 62%),
+        radial-gradient(circle at 50% 90%, rgba(255,236,209,0.55), transparent 60%);
+      filter: blur(10px);
+      transform: rotate(10deg);
+      pointer-events:none;
+    }
+    .hero-card > *{ position: relative; z-index: 1; }
+
+    .kicker{
+      display:inline-flex; align-items:center; gap: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(41,126,138,0.18);
+      background: rgba(255,255,255,0.22);
+      font-size: calc(13px * var(--type-scale));
+      font-weight: 700;
+      letter-spacing: .25px;
+      width: fit-content;
+    }
+    .kicker .pill{
+      padding: 7px 11px;
+      border-radius: 999px;
+      background: rgba(41,126,138,0.14);
+      border: 1px solid rgba(41,126,138,0.18);
+      font-weight: 800;
+      color: rgba(41,126,138,1);
+    }
+
+    h1{
+      margin: 18px 0 10px;
+      font-size: calc(58px * var(--type-scale));
+      line-height: 0.95;
+      letter-spacing: -1px;
+    }
+    .sub{
+      margin: 12px 0 18px;
+      font-size: calc(18px * var(--type-scale));
+      line-height: 1.38;
+      opacity: 0.88;
+      max-width: 70ch;
+    }
+
+    /* Filters */
+    .filters{
+      margin-top: 18px;
+      display:grid;
+      grid-template-columns: 2.2fr 1fr 1fr;
+      gap: 14px;
+      align-items: end;
+    }
+    .field .label{
+      font-size: calc(14px * var(--type-scale));
+      font-weight: 800;
+      opacity: .85;
+      margin: 0 0 10px 2px;
+    }
+    .helper{
+      font-size: calc(13px * var(--type-scale));
+      opacity: .75;
+      margin: 10px 0 0 2px;
+      line-height: 1.25;
+    }
+    .helper.spacer{ visibility: hidden; }
+
+    .control{
+      width: 100%;
+      min-height: var(--control-h);
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.28);
+      background: rgba(255,255,255,0.18);
+      padding: 0 var(--control-pad-x);
+      font-size: calc(16px * var(--type-scale));
+      font-weight: 600;
+      outline: none;
+      color: var(--ink);
+      line-height: 1;
+      box-shadow: var(--shadow-soft);
+      -webkit-backdrop-filter: blur(18px);
+      backdrop-filter: blur(18px);
+    }
+    .control::placeholder{
+      color: rgba(57,57,57,0.55);
+      font-weight: 600;
+    }
+    .control:focus{
+      border-color: rgba(252,136,58,0.40);
+      box-shadow: 0 0 0 6px rgba(252,136,58,0.10), var(--shadow-soft);
+    }
+
+    input.control{
+      padding-top: 2px; /* pequenas compensações de baseline */
+    }
+
+    /* ==== Select arrow robust (não usa background-image) ==== */
+    .select-wrap{
+      position: relative;
+      width: 100%;
+    }
+    .select-wrap > select.control{
+      background-image: none !important;
+      padding-right: calc(var(--control-pad-x) + 44px);
+      cursor: pointer;
+    }
+    .select-arrow{
+      position: absolute;
+      right: var(--control-pad-x);
+      top: 50%;
+      transform: translateY(-50%);
+      width: 18px;
+      height: 18px;
+      pointer-events: none;
+      color: var(--ink);
+      opacity: .85;
+    }
+    select.control{
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+    }
+    select.control::-ms-expand{ display:none; }
+
+    /* Chips */
+    .chips{
+      margin-top: 16px;
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items:center;
+    }
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap: 10px;
+      padding: 12px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.26);
+      background: rgba(255,255,255,0.18);
+      font-size: calc(14px * var(--type-scale));
+      font-weight: 800;
+      opacity: .92;
+      cursor: pointer;
+      user-select: none;
+      transition: transform .15s ease, background .2s ease, border-color .2s ease, opacity .2s ease;
+    }
+    .chip:hover{ transform: translateY(-1px); opacity: 1; }
+    .chip .dot{
+      width: 10px; height: 10px; border-radius: 999px;
+      background: rgba(41,126,138,1);
+      box-shadow: 0 0 0 5px rgba(41,126,138,0.14);
+    }
+    .chip.alt .dot{ background: rgba(252,136,58,1); box-shadow: 0 0 0 5px rgba(252,136,58,0.12); }
+    .chip.active{
+      background: rgba(255,255,255,0.32);
+      border-color: rgba(41,126,138,0.26);
+      opacity: 1;
+    }
+
+    /* Posts */
+    .section-head{
+      display:flex;
+      justify-content: space-between;
+      align-items:flex-end;
+      gap: 14px;
+      margin: 22px 0 14px;
+      flex-wrap: wrap;
+    }
+    .section-head h2{
+      margin: 0 0 8px;
+      font-size: calc(28px * var(--type-scale));
+      letter-spacing: -0.6px;
+    }
+    .section-head p{
+      margin: 0;
+      font-size: calc(15px * var(--type-scale));
+      opacity: .82;
+      line-height: 1.4;
+      max-width: 72ch;
+    }
+
+    .posts{
+      margin-top: 14px;
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .post{
+      border-radius: var(--radius-lg);
+      overflow:hidden;
+      position: relative;
+      padding: 18px 18px;
+      min-height: 220px;
+      display:flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    }
+    .post:before{
+      content:"";
+      position:absolute; inset:-60%;
+      background:
+        radial-gradient(circle at 30% 25%, rgba(252,136,58,0.14), transparent 55%),
+        radial-gradient(circle at 70% 40%, rgba(41,126,138,0.16), transparent 60%);
+      filter: blur(10px);
+      transform: rotate(12deg);
+      pointer-events:none;
+    }
+    .post > *{ position: relative; z-index: 1; }
+    .post:hover{
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+      border-color: rgba(41,126,138,0.30);
+    }
+    .post:focus-within{
+      box-shadow: 0 0 0 6px rgba(252,136,58,0.10), var(--shadow);
+      border-color: rgba(252,136,58,0.42);
+    }
+
+    .post .meta{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items:center;
+      opacity: .85;
+      font-size: calc(12px * var(--type-scale));
+      font-weight: 800;
+      letter-spacing: .2px;
+    }
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.26);
+      background: rgba(255,255,255,0.14);
+      font-size: calc(12px * var(--type-scale));
+      font-weight: 900;
+      width: fit-content;
+    }
+    .tag .mini-dot{
+      width: 8px; height: 8px; border-radius: 999px;
+      background: var(--teal);
+      box-shadow: 0 0 0 4px rgba(41,126,138,0.14);
+    }
+    .tag.alt .mini-dot{ background: var(--accent); box-shadow: 0 0 0 4px rgba(252,136,58,0.12); }
+
+    .post h3{
+      margin: 12px 0 10px;
+      font-size: calc(18px * var(--type-scale));
+      letter-spacing: -0.3px;
+      line-height: 1.15;
+    }
+    .post .excerpt{
+      margin: 0 0 14px;
+      font-size: calc(14px * var(--type-scale));
+      opacity: .86;
+      line-height: 1.45;
+    }
+
+    .post .cta{
+      display:flex;
+      justify-content: space-between;
+      align-items:center;
+      gap: 12px;
+      margin-top: 8px;
+    }
+    .post .read{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      font-weight: 900;
+      font-size: calc(13px * var(--type-scale));
+      color: rgba(41,126,138,1);
+    }
+    .post .read:hover{ text-decoration: underline; }
+
+    .empty{
+      margin-top: 14px;
+      border-radius: var(--radius-lg);
+      padding: 18px;
+      text-align: center;
+      opacity: .86;
+    }
+    .empty b{ display:block; font-size: calc(15px * var(--type-scale)); margin-bottom: 6px; }
+    .empty span{ font-size: calc(14px * var(--type-scale)); opacity: .85; }
+
+    footer{
+      padding: 28px 0 46px;
+      opacity: .85;
+    }
+    footer .foot{
+      display:flex; justify-content: space-between; align-items:center; gap: 12px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(41,126,138,0.14);
+      flex-wrap: wrap;
+    }
+    .tiny{ font-size: calc(13px * var(--type-scale)); opacity: .8; }
+    .pill-link{
+      display:inline-flex; align-items:center; gap: 10px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(41,126,138,0.18);
+      background: rgba(255,255,255,0.18);
+      font-weight: 800;
+      font-size: calc(13px * var(--type-scale));
+    }
+    .pill-link:hover{ box-shadow: var(--shadow-soft); transform: translateY(-1px); }
+
+    /* Mobile menu drawer */
+    .drawer{
+      position: fixed;
+      inset: 0;
+      background: rgba(57,57,57,0.28);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      display:none;
+      z-index: 60;
+    }
+    .drawer.open{ display:block; }
+    .drawer .panel{
+      width: min(520px, calc(100% - 26px));
+      margin: 86px auto 0;
+      border-radius: var(--radius-xl);
+      padding: 14px;
+    }
+    .drawer a{
+      display:flex;
+      justify-content: space-between;
+      align-items:center;
+      padding: 14px 12px;
+      border-radius: 16px;
+      font-weight: 900;
+      border: 1px solid rgba(41,126,138,0.14);
+      background: rgba(255,255,255,0.14);
+      margin: 10px 0;
+      font-size: calc(16px * var(--type-scale));
+    }
+    .drawer a span{ font-size: calc(12px * var(--type-scale)); opacity: .75; font-weight: 700; }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      nav{ display:none; }
+      .mobile-toggle{ display:inline-flex; }
+      header .bar{ border-radius: 22px; }
+
+      .filters{ grid-template-columns: 1fr; }
+      .posts{ grid-template-columns: 1fr; }
+      h1{ font-size: calc(48px * var(--type-scale)); }
+    }
+    @media (min-width: 981px) and (max-width: 1180px){
+      .posts{ grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 520px){
+      .container{ width: min(var(--max), calc(100% - 28px)); }
+      h1{ font-size: calc(42px * var(--type-scale)); }
+      .theme-toggle{ width: 42px; height: 42px; }
+      .btn{ padding: 11px 12px; }
+    }
+
+    /* ========= Dark theme ========= */
+    html[data-theme="dark"]{
+      color-scheme: dark;
+
+      --bg: #0b1012;
+      --surface: #0f171a;
+      --ink: rgba(245,246,247,0.92);
+
+      --glass-bg: rgba(18,26,28,0.62);
+      --glass-br: rgba(255,255,255,0.10);
+
+      --shadow: 0 18px 60px rgba(0,0,0,0.55);
+      --shadow-soft: 0 10px 30px rgba(0,0,0,0.45);
+
+      --page-bg:
+        radial-gradient(1000px 700px at 20% 10%, rgba(252,136,58,0.10), transparent 60%),
+        radial-gradient(1100px 820px at 90% 15%, rgba(41,126,138,0.18), transparent 60%),
+        linear-gradient(180deg, #06090b, var(--bg) 28%, #06090b 100%);
+    }
+
+    html[data-theme="dark"] nav a:hover{ background: rgba(255,255,255,0.06); }
+    html[data-theme="dark"] nav a.active{
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.14);
+    }
+
+    html[data-theme="dark"] .kicker,
+    html[data-theme="dark"] .hero-card,
+    html[data-theme="dark"] .chip,
+    html[data-theme="dark"] .control,
+    html[data-theme="dark"] .tag,
+    html[data-theme="dark"] .post,
+    html[data-theme="dark"] .pill-link,
+    html[data-theme="dark"] .drawer a{
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.12);
+    }
+
+    html[data-theme="dark"] .control::placeholder{
+      color: rgba(245,246,247,0.48);
+    }
+
+    html[data-theme="dark"] .drawer{ background: rgba(0,0,0,0.62); }
+  </style>
+</head>
+
+<body>
+  <!-- Mobile drawer -->
+  <div class="drawer" id="drawer" aria-hidden="true">
+    <div class="container">
+      <div class="panel glass">
+        <a href="./index.html" data-close>Início <span>voltar para o site</span></a>
+        <a href="./index.html#aulas" data-close>Aulas <span>presencial + online</span></a>
+        <a href="./index.html#formacao" data-close>Formação <span>aprofundamento</span></a>
+        <a href="./blog.html" data-close>Blog <span>clareza sem misticismo</span></a>
+        <a href="./index.html#contato" data-close>Contato <span>rota rápida</span></a>
+
+        <div style="display:flex; gap:10px; justify-content:flex-end; margin-top: 10px;">
+          <button class="btn glass" id="drawerClose" type="button">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <header>
+    <div class="container">
+      <div class="bar glass">
+        <a class="brand" href="./index.html" aria-label="Voltar para o site">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span class="brand-name">
+            <strong>DeRose SBC</strong>
+            <span>Yôga de Alto Rendimento</span>
+          </span>
+        </a>
+
+        <nav aria-label="Navegação principal">
+          <a href="./index.html">INÍCIO</a>
+          <a href="./blog.html" class="active">BLOG</a>
+          <a href="./index.html#contato">CONTATO</a>
+        </nav>
+
+        <div class="actions">
+          <button class="mobile-toggle" id="mobileToggle" aria-label="Abrir menu">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M4 7H20" stroke="#393939" stroke-width="2.4" stroke-linecap="round"/>
+              <path d="M4 12H20" stroke="#393939" stroke-width="2.4" stroke-linecap="round" opacity="0.9"/>
+              <path d="M4 17H20" stroke="#393939" stroke-width="2.4" stroke-linecap="round" opacity="0.8"/>
+            </svg>
+          </button>
+
+          <button class="theme-toggle" id="themeToggle" type="button" aria-label="Ativar modo escuro" aria-pressed="false">
+            <svg class="moon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M21 14.5A8.5 8.5 0 1 1 9.5 3a7 7 0 0 0 11.5 11.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <svg class="sun" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12Z" stroke="currentColor" stroke-width="2"/>
+              <path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5l-1.5-1.5M20.5 20.5 19 19M5 19l-1.5 1.5M20.5 3.5 19 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+
+          <a class="btn primary" href="./index.html#contato" title="Falar com o estúdio">
+            <span class="dot" aria-hidden="true"></span>
+            Entre em Contato
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container">
+        <div class="hero-card glass">
+          <div class="kicker">
+            <span class="pill">Blog</span>
+            <span>Clareza sem misticismo.</span>
+          </div>
+
+          <h1>Ideias que viram prática.</h1>
+          <p class="sub">
+            Alto rendimento biológico, foco, respiração, mobilidade, recuperação e estilo de vida.
+            Conteúdo objetivo para você evoluir com consistência — e com menos desgaste.
+          </p>
+
+          <div class="filters" aria-label="Filtros do blog">
+            <div class="field">
+              <div class="label">Buscar</div>
+              <input id="q" class="control glass" type="search" placeholder="Procure por tema, técnica, objetivo…" autocomplete="off" />
+              <div class="helper">Dica: tente “respiração”, “foco”, “mobilidade”, “rotina”.</div>
+            </div>
+
+            <div class="field">
+              <div class="label">Categoria</div>
+              <div class="select-wrap">
+                <select id="category" class="control glass" aria-label="Filtrar por categoria">
+                  <option value="all">Todas</option>
+                </select>
+                <svg class="select-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M7 10l5 5 5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="helper spacer" aria-hidden="true">&nbsp;</div>
+            </div>
+
+            <div class="field">
+              <div class="label">Ordenar</div>
+              <div class="select-wrap">
+                <select id="sort" class="control glass" aria-label="Ordenar resultados">
+                  <option value="new">Mais recentes</option>
+                  <option value="old">Mais antigos</option>
+                  <option value="read">Menor leitura</option>
+                </select>
+                <svg class="select-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M7 10l5 5 5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="helper spacer" aria-hidden="true">&nbsp;</div>
+            </div>
+          </div>
+
+          <div class="chips" id="chips" aria-label="Atalhos de categorias"></div>
+        </div>
+
+        <div class="section-head">
+          <div>
+            <h2>Posts</h2>
+            <p>Um acervo pequeno, direto e prático. Atualize hábitos, refine técnica e mantenha consistência.</p>
+          </div>
+          <a class="pill-link glass" href="./index.html#contato">Começar com orientação →</a>
+        </div>
+
+        <div class="posts" id="posts" aria-live="polite"></div>
+        <div class="empty glass" id="empty" style="display:none;">
+          <b>Nenhum post com esse filtro.</b>
+          <span>Teste outra palavra, mude a categoria, ou limpe a busca.</span>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <div class="foot">
+          <div style="display:flex; flex-direction:column; gap:4px; line-height:1;">
+            <div style="font-weight:900;">DeRose SBC</div>
+            <div class="tiny">Blog • Clareza sem misticismo</div>
+          </div>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <a class="pill-link glass" href="./index.html">Site</a>
+            <a class="pill-link glass" href="#top">Topo ↑</a>
+            <a class="pill-link glass" href="./index.html#contato">Contato</a>
+          </div>
+        </div>
+        <div class="tiny" style="margin-top:12px;">
+          © <span id="year"></span> DeRose SBC.
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Theme (light/dark) with persistence + system default
+    const root = document.documentElement;
+    const themeBtn = document.getElementById('themeToggle');
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const THEME_KEY = 'theme';
+
+    function systemPrefersDark(){
+      return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
+
+    function setTheme(theme, {persist = true} = {}){
+      if(theme === 'dark') root.dataset.theme = 'dark';
+      else delete root.dataset.theme;
+
+      if(persist){
+        localStorage.setItem(THEME_KEY, theme);
+      }
+
+      if(themeBtn){
+        const isDark = theme === 'dark';
+        themeBtn.setAttribute('aria-pressed', String(isDark));
+        themeBtn.setAttribute('aria-label', isDark ? 'Desativar modo escuro' : 'Ativar modo escuro');
+      }
+
+      if(metaTheme){
+        metaTheme.setAttribute('content', theme === 'dark' ? '#0b1012' : '#297E8A');
+      }
+    }
+
+    function initTheme(){
+      const saved = localStorage.getItem(THEME_KEY);
+      if(saved === 'light' || saved === 'dark'){
+        setTheme(saved, {persist:false});
+      } else {
+        setTheme(systemPrefersDark() ? 'dark' : 'light', {persist:false});
+      }
+    }
+
+    initTheme();
+
+    themeBtn?.addEventListener('click', () => {
+      const current = root.dataset.theme === 'dark' ? 'dark' : 'light';
+      setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+
+    const mq = window.matchMedia?.('(prefers-color-scheme: dark)');
+    mq?.addEventListener?.('change', (e) => {
+      const saved = localStorage.getItem(THEME_KEY);
+      if(saved !== 'light' && saved !== 'dark'){
+        setTheme(e.matches ? 'dark' : 'light', {persist:false});
+      }
+    });
+
+    // Mobile drawer
+    const drawer = document.getElementById('drawer');
+    const toggle = document.getElementById('mobileToggle');
+    const closeBtn = document.getElementById('drawerClose');
+
+    function openDrawer(){
+      drawer.classList.add('open');
+      drawer.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeDrawer(){
+      drawer.classList.remove('open');
+      drawer.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+    toggle?.addEventListener('click', openDrawer);
+    closeBtn?.addEventListener('click', closeDrawer);
+    drawer?.addEventListener('click', (e) => {
+      if(e.target === drawer) closeDrawer();
+    });
+    drawer?.querySelectorAll('[data-close]')?.forEach(a => a.addEventListener('click', closeDrawer));
+
+    // ---- Blog data (stub) ----
+    const posts = [
+      {
+        slug: "respiracao-transformadora-ruido-mental",
+        title: "Respiração transformadora: menos ruído mental, mais disponibilidade",
+        excerpt: "Uma sequência simples para estabilizar energia, reduzir excesso de estímulo e voltar ao centro — sem drama e sem promessas mágicas.",
+        category: "Respiratórios",
+        minutes: 6,
+        date: "2026-01-22",
+      },
+      {
+        slug: "mobilidade-forca-util-postura",
+        title: "Mobilidade & força útil: postura, estabilidade e eficiência no dia a dia",
+        excerpt: "Como pensar mobilidade como ferramenta prática: menos compensação, mais controle, melhor estética funcional.",
+        category: "Força & Flexibilidade",
+        minutes: 8,
+        date: "2026-01-14",
+      },
+      {
+        slug: "recuperacao-profunda-ritmo",
+        title: "Recuperação profunda: a técnica que mantém seu ritmo sem quebrar",
+        excerpt: "Recuperar não é parar: é assimilar. Entenda um protocolo simples para baixar a carga e voltar com qualidade.",
+        category: "Descontração",
+        minutes: 5,
+        date: "2025-12-28",
+      },
+      {
+        slug: "foco-concentracao-ancora",
+        title: "Foco & concentração: uma âncora prática para dias turbulentos",
+        excerpt: "Se a mente está espalhada, você não precisa “forçar”. Você precisa de um mecanismo de retorno. Aqui vai um.",
+        category: "Foco",
+        minutes: 7,
+        date: "2025-12-10",
+      },
+      {
+        slug: "discernimento-decisao-consistencia",
+        title: "Discernimento: clareza para decidir com consistência",
+        excerpt: "Quando tudo parece urgente, a tendência é oscilar. Use um critério curto para enxergar melhor e escolher melhor.",
+        category: "Discernimento",
+        minutes: 6,
+        date: "2025-11-30",
+      },
+      {
+        slug: "rotina-energia-sob-pressao",
+        title: "Rotina sob pressão: como sustentar energia sem depender de motivação",
+        excerpt: "Três ajustes pequenos que reduzem atrito e aumentam consistência — especialmente quando a agenda fica pesada.",
+        category: "Rotina",
+        minutes: 9,
+        date: "2025-11-12",
+      },
+      {
+        slug: "mindfulness-sem-misticismo",
+        title: "Mindfulness sem misticismo: presença como habilidade treinável",
+        excerpt: "Presença não é “dom”. É prática objetiva. Um jeito simples de treinar sem transformar isso numa religião.",
+        category: "Mindfulness & Meditação",
+        minutes: 7,
+        date: "2025-10-20",
+      },
+      {
+        slug: "estabilidade-menor-oscilacao",
+        title: "Estabilidade: menos oscilação emocional, melhores escolhas",
+        excerpt: "Estabilidade não é ficar “zen”. É reduzir amplitude de oscilação e preservar capacidade de ação.",
+        category: "Estabilidade",
+        minutes: 6,
+        date: "2025-10-02",
+      },
+      {
+        slug: "postura-base-sem-dor",
+        title: "Postura como base: um caminho simples para mais conforto",
+        excerpt: "Postura não é “parecer ereto”. É organizar forças. Um mapa mental e um treino curto para começar.",
+        category: "Postura",
+        minutes: 8,
+        date: "2025-09-18",
+      },
+    ];
+
+    const CATS = [
+      "Todas",
+      "Descontração",
+      "Discernimento",
+      "Estabilidade",
+      "Foco",
+      "Força & Flexibilidade",
+      "Mindfulness & Meditação",
+      "Postura",
+      "Respiratórios",
+      "Rotina",
+    ];
+
+    const qEl = document.getElementById('q');
+    const catEl = document.getElementById('category');
+    const sortEl = document.getElementById('sort');
+    const postsEl = document.getElementById('posts');
+    const emptyEl = document.getElementById('empty');
+    const chipsEl = document.getElementById('chips');
+
+    // populate category select
+    (function initCategories(){
+      CATS.forEach((c) => {
+        if(c === "Todas") return;
+        const opt = document.createElement('option');
+        opt.value = c;
+        opt.textContent = c;
+        catEl.appendChild(opt);
+      });
+    })();
+
+    // chips
+    function chipTone(cat){
+      return (cat === "Força & Flexibilidade" || cat === "Mindfulness & Meditação") ? 'alt' : '';
+    }
+    function renderChips(active){
+      chipsEl.innerHTML = '';
+      const all = ["Todas", ...CATS.filter(c => c !== "Todas")];
+
+      all.forEach((c) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = `chip glass ${chipTone(c)} ${active === c ? 'active' : ''}`;
+        btn.setAttribute('data-cat', c);
+        btn.innerHTML = `<span class="dot"></span>${c}`;
+        btn.addEventListener('click', () => {
+          const next = c === "Todas" ? "all" : c;
+          catEl.value = next;
+          renderChips(c);
+          render();
+        });
+        chipsEl.appendChild(btn);
+      });
+    }
+
+    function normalize(s){
+      return (s || '')
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/\p{Diacritic}/gu, '');
+    }
+
+    function formatDate(iso){
+      const [y,m,d] = iso.split('-').map(Number);
+      const dt = new Date(y, m-1, d);
+      return dt.toLocaleDateString('pt-BR', { day:'2-digit', month:'short', year:'numeric' });
+    }
+
+    function buildPostCard(p){
+      const a = document.createElement('a');
+      a.href = `./post.html?slug=${encodeURIComponent(p.slug)}`;
+      a.className = 'post glass';
+      a.setAttribute('aria-label', `Abrir post: ${p.title}`);
+
+      const isAlt = (p.category === "Força & Flexibilidade" || p.category === "Mindfulness & Meditação");
+      const tagClass = isAlt ? 'tag alt' : 'tag';
+
+      a.innerHTML = `
+        <div>
+          <div class="meta">
+            <span>${formatDate(p.date)}</span>
+            <span>•</span>
+            <span>${p.minutes} min</span>
+          </div>
+
+          <div class="${tagClass}" style="margin-top:12px;">
+            <span class="mini-dot"></span>
+            <span>${p.category}</span>
+          </div>
+
+          <h3>${p.title}</h3>
+          <p class="excerpt">${p.excerpt}</p>
+        </div>
+
+        <div class="cta">
+          <span class="read">Ler agora →</span>
+          <span class="meta" style="opacity:.75;">${p.minutes} min</span>
+        </div>
+      `;
+      return a;
+    }
+
+    function render(){
+      const q = normalize(qEl.value.trim());
+      const cat = catEl.value;
+      const sort = sortEl.value;
+
+      let list = posts.slice();
+
+      // filter category
+      if(cat && cat !== 'all'){
+        list = list.filter(p => p.category === cat);
+      }
+
+      // filter query
+      if(q){
+        list = list.filter(p => {
+          const hay = normalize([p.title, p.excerpt, p.category].join(' '));
+          return hay.includes(q);
+        });
+      }
+
+      // sort
+      if(sort === 'new'){
+        list.sort((a,b) => b.date.localeCompare(a.date));
+      } else if(sort === 'old'){
+        list.sort((a,b) => a.date.localeCompare(b.date));
+      } else if(sort === 'read'){
+        list.sort((a,b) => a.minutes - b.minutes);
+      }
+
+      postsEl.innerHTML = '';
+      list.forEach(p => postsEl.appendChild(buildPostCard(p)));
+
+      const hasAny = list.length > 0;
+      emptyEl.style.display = hasAny ? 'none' : 'block';
+    }
+
+    // init
+    renderChips("Todas");
+    render();
+
+    // events
+    qEl.addEventListener('input', render);
+
+    catEl.addEventListener('change', () => {
+      const label = catEl.value === 'all' ? "Todas" : catEl.value;
+      renderChips(label);
+      render();
+    });
+
+    sortEl.addEventListener('change', render);
+  </script>
+</body>
+</html>
