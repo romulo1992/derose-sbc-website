@@ -384,23 +384,20 @@
       box-shadow: 0 0 0 4px rgba(41,126,138,0.14);
     }
     .chip.alt .dot{ background: var(--accent); box-shadow: 0 0 0 4px rgba(252,136,58,0.14); }
-    /* Featured */
+    /* Featured - agora full width */
     .featured{
-      display:grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 14px;
-      align-items: stretch;
       margin-top: 18px;
     }
     .feature-card{
       border-radius: var(--radius-xl);
       overflow:hidden;
       position: relative;
-      min-height: 360px;
+      min-height: 400px; /* um pouco mais alto para preencher bem */
+      width: 100%;
     }
     .feature-media{
       height: 100%;
-      min-height: 360px;
+      min-height: 400px;
       position: relative;
       overflow:hidden;
       border-radius: calc(var(--radius-xl) - 2px);
@@ -422,20 +419,20 @@
     }
     .feature-content{
       position:absolute;
-      left: 18px;
-      right: 18px;
-      bottom: 18px;
+      left: 32px;
+      right: 32px;
+      bottom: 32px;
       display:grid;
-      gap: 10px;
+      gap: 12px;
       color: rgba(255,255,255,0.94);
       text-shadow: 0 18px 30px rgba(0,0,0,0.35);
     }
     .meta-row{
       display:flex;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 12px;
       align-items: center;
-      font-size: calc(13px * var(--type-scale));
+      font-size: calc(14px * var(--type-scale));
       opacity: .92;
       line-height: 1;
     }
@@ -443,7 +440,7 @@
       display:inline-flex;
       align-items:center;
       gap: 8px;
-      padding: 8px 10px;
+      padding: 8px 12px;
       border-radius: 999px;
       background: rgba(255,255,255,0.12);
       border: 1px solid rgba(255,255,255,0.22);
@@ -455,21 +452,21 @@
     .pill2 .dot{ width: 8px; height: 8px; border-radius: 999px; background: var(--accent); box-shadow: 0 0 0 4px rgba(252,136,58,0.16); }
     .feature-title{
       margin: 0;
-      font-size: calc(28px * var(--type-scale-blog));
+      font-size: calc(36px * var(--type-scale-blog));
       line-height: 1.05;
-      letter-spacing: -0.6px;
+      letter-spacing: -1px;
       font-weight: 900;
     }
     .feature-excerpt{
       margin: 0;
-      max-width: 62ch;
-      font-size: calc(15px * var(--type-scale-blog));
+      max-width: 80ch;
+      font-size: calc(17px * var(--type-scale-blog));
       line-height: 1.45;
       opacity: .92;
     }
     .feature-actions{
       display:flex;
-      gap: 10px;
+      gap: 12px;
       flex-wrap: wrap;
       align-items:center;
     }
@@ -604,7 +601,7 @@
       text-align: center;
       position: relative;
       overflow:hidden;
-      margin-top: 54px; /* Aumento do espaçamento solicitado */
+      margin-top: 54px;
     }
     .band:before{
       content:"";
@@ -665,9 +662,8 @@
       header .bar{ border-radius: 22px; }
       h1{ font-size: calc(46px * var(--type-scale)); }
       .controls{ grid-template-columns: 1fr; }
-      .featured{ grid-template-columns: 1fr; }
+      .feature-card{ min-height: 360px; }
       .grid{ grid-template-columns: 1fr; }
-      .feature-media{ min-height: 320px; }
     }
     @media (max-width: 520px){
       h1{ font-size: calc(40px * var(--type-scale)); }
@@ -678,6 +674,8 @@
       .theme-toggle{ width: 42px; height: 42px; }
       .post-media{ height: 148px; }
       :root{ --control-h: 54px; }
+      .feature-content{ left: 24px; right: 24px; bottom: 24px; }
+      .feature-title{ font-size: calc(28px * var(--type-scale-blog)); }
     }
     /* Mobile drawer */
     .drawer{
@@ -856,7 +854,7 @@
         </div>
       </div>
     </section>
-    <!-- FEATURED -->
+    <!-- FEATURED - full width -->
     <section>
       <div class="container">
         <div class="section-head reveal">
@@ -866,28 +864,26 @@
           </div>
           <a class="pill-link glass" href="./index.html#contato">Agende Sua Aula →</a>
         </div>
-        <div class="featured">
-          <article class="feature-card glass reveal" id="featuredCard" aria-label="Post em destaque">
-            <a href="#" id="featuredLink" aria-label="Abrir post em destaque">
-              <div class="feature-media">
-                <img id="featuredImg" src="./assets/blog/featured.webp" alt="Imagem do post em destaque" loading="lazy" />
-                <div class="feature-overlay" aria-hidden="true"></div>
-                <div class="feature-content">
-                  <div class="meta-row">
-                    <span class="pill2"><span class="dot"></span><span id="featuredCat">—</span></span>
-                    <span id="featuredMeta">—</span>
-                  </div>
-                  <h3 class="feature-title" id="featuredTitle">—</h3>
-                  <p class="feature-excerpt" id="featuredExcerpt">—</p>
-                  <div class="feature-actions">
-                    <span class="btn light"><span class="dot" aria-hidden="true"></span>Ler agora</span>
-                    <span class="btn ghost light" id="featuredTagPill" aria-hidden="true">—</span>
-                  </div>
+        <article class="feature-card glass reveal" id="featuredCard" aria-label="Post em destaque">
+          <a href="#" id="featuredLink" aria-label="Abrir post em destaque">
+            <div class="feature-media">
+              <img id="featuredImg" src="./assets/blog/featured.webp" alt="Imagem do post em destaque" loading="lazy" />
+              <div class="feature-overlay" aria-hidden="true"></div>
+              <div class="feature-content">
+                <div class="meta-row">
+                  <span class="pill2"><span class="dot"></span><span id="featuredCat">—</span></span>
+                  <span id="featuredMeta">—</span>
+                </div>
+                <h3 class="feature-title" id="featuredTitle">—</h3>
+                <p class="feature-excerpt" id="featuredExcerpt">—</p>
+                <div class="feature-actions">
+                  <span class="btn light"><span class="dot" aria-hidden="true"></span>Ler agora</span>
+                  <span class="btn ghost light" id="featuredTagPill" aria-hidden="true">—</span>
                 </div>
               </div>
-            </a>
-          </article>
-        </div>
+            </div>
+          </a>
+        </article>
       </div>
     </section>
     <!-- POSTS -->
