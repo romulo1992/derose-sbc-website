@@ -45,11 +45,15 @@
 
       --max: 1120px;
 
-      /* Baseline scale */
+      /* baseline */
       --type-scale: 0.77;
 
-      /* Slightly bigger for blog reading comfort */
+      /* blog reading comfort */
       --type-scale-blog: 0.88;
+
+      /* CONTROLS: single source of truth */
+      --control-h: 56px;
+      --control-pad-x: 18px;
 
       --page-bg:
         radial-gradient(1000px 700px at 20% 10%, rgba(252,136,58,0.12), transparent 60%),
@@ -113,20 +117,21 @@
     .brand-name{
       line-height: 1;
       display:flex; flex-direction: column;
-      gap: 4px; /* required: 4px */
+      gap: 4px;
     }
-    .brand-name strong{ font-size: 15px; letter-spacing: .2px; }
-    .brand-name span{ font-size: 12px; opacity: .75; }
+    .brand-name strong{ font-size: calc(15px * var(--type-scale)); letter-spacing: .2px; }
+    .brand-name span{ font-size: calc(12px * var(--type-scale)); opacity: .75; }
 
     nav{
       display:flex; align-items:center; gap: 10px;
     }
     nav a{
-      font-size: 14px;
+      font-size: calc(14px * var(--type-scale));
       padding: 10px 12px;
       border-radius: 999px;
       opacity: .86;
       transition: background .2s ease, opacity .2s ease, transform .2s ease;
+      line-height: 1;
     }
     nav a:hover{ background: rgba(255,255,255,0.35); opacity: 1; transform: translateY(-1px); }
     nav a.active{ background: rgba(255,255,255,0.45); opacity: 1; border: 1px solid rgba(41,126,138,0.18); }
@@ -149,20 +154,27 @@
       border-radius: 999px;
       border: 1px solid rgba(41,126,138,0.22);
       font-weight: 600;
-      font-size: 14px;
+      font-size: calc(14px * var(--type-scale));
       letter-spacing: .2px;
       cursor: pointer;
       transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
       user-select: none;
       white-space: nowrap;
+      line-height: 1;
     }
     .btn:hover{ transform: translateY(-1px); box-shadow: var(--shadow-soft); }
     .btn.primary{
       border: 1px solid rgba(252,136,58,0.35);
       background: linear-gradient(135deg, rgba(252,136,58,0.95), rgba(252,136,58,0.65));
       color: #1f1f1f;
+      font-weight: 800;
     }
     .btn.ghost{ background: rgba(255,255,255,0.18); }
+    .btn.light{
+      border: 1px solid rgba(255,255,255,0.25);
+      background: rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.94);
+    }
     .btn .dot{
       width: 8px; height: 8px; border-radius: 999px;
       margin-right: 10px;
@@ -193,6 +205,7 @@
       cursor:pointer;
       transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
       color: var(--ink);
+      line-height: 1;
     }
     .theme-toggle:hover{ transform: translateY(-1px); box-shadow: var(--shadow-soft); }
     .theme-toggle svg{ width: 18px; height: 18px; display:block; }
@@ -200,7 +213,6 @@
     html[data-theme="dark"] .theme-toggle .sun{ display:block; }
     html[data-theme="dark"] .theme-toggle .moon{ display:none; }
 
-    /* Make hardcoded dark strokes follow current theme ink */
     svg [stroke="#393939"]{ stroke: var(--ink) !important; }
 
     /* Sections */
@@ -259,15 +271,16 @@
       border: 1px solid rgba(41,126,138,0.18);
       background: rgba(255,255,255,0.22);
       font-size: calc(13px * var(--type-scale));
-      font-weight: 600;
+      font-weight: 700;
       letter-spacing: .25px;
+      line-height: 1;
     }
     .kicker .pill{
       padding: 6px 10px;
       border-radius: 999px;
       background: rgba(41,126,138,0.14);
       border: 1px solid rgba(41,126,138,0.18);
-      font-weight: 700;
+      font-weight: 900;
       color: rgba(41,126,138,1);
     }
 
@@ -285,79 +298,84 @@
       max-width: 70ch;
     }
 
-    /* Controls / filters */
+    /* ===== Controls (FIXED HEIGHT, CONSISTENT SELECT) ===== */
     .controls{
       display:grid;
-      grid-template-columns: 1.2fr 0.45fr 0.45fr;
+      grid-template-columns: 1.25fr 0.5fr 0.5fr;
       gap: 12px;
-    
-      /* antes: align-items: end; */
-      align-items: stretch;
+      align-items: start; /* IMPORTANT: stop weird vertical offsets */
+      margin-top: 18px;
     }
     .field{
       display:grid;
       gap: 8px;
+      min-width: 0;
     }
     .label{
       font-size: calc(13px * var(--type-scale));
       opacity: .78;
-      font-weight: 700;
+      font-weight: 900;
       letter-spacing: .2px;
+      line-height: 1;
     }
-    .input, .select{
+
+    /* Unified control base */
+    .control{
       width: 100%;
       height: var(--control-h);
       min-height: var(--control-h);
-    
-      /* padding “flat” para padronizar input vs select */
-      padding: 0 16px;
-    
-      border-radius: 16px;
+      border-radius: 18px;
       border: 1px solid rgba(41,126,138,0.18);
       background: rgba(255,255,255,0.18);
       outline: none;
-    
       font-family: inherit;
       font-size: calc(14px * var(--type-scale-blog));
       color: var(--ink);
-    
-      /* ajuda muito na consistência visual */
-      line-height: var(--control-h);
-    
-      box-shadow: none;
+      padding: 0 var(--control-pad-x);
       transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease, background .2s ease;
+      box-shadow: none;
     }
-    
-    .input:focus, .select:focus{
+
+    .control:focus{
       border-color: rgba(41,126,138,0.32);
       box-shadow: 0 0 0 5px rgba(41,126,138,0.10);
     }
-    
-        /* Normaliza o <input type="search"> (Safari/Chrome) */
-    input[type="search"].input{
+
+    /* Search input normalization */
+    input[type="search"].control{
       -webkit-appearance: none;
       appearance: none;
     }
-    
-    /* Garante que o texto do <select> fique centrado e não “encolha” */
-    select.select{
-      line-height: normal;          /* evita alguns bugs do line-height fixo */
-      padding-right: 46px;          /* espaço pro ícone/seta nativa */
-    }
-    
-    /* Remove detalhes nativos que às vezes alteram altura (WebKit) */
-    input[type="search"]::-webkit-search-decoration,
-    input[type="search"]::-webkit-search-cancel-button,
-    input[type="search"]::-webkit-search-results-button{
+    input[type="search"].control::-webkit-search-decoration,
+    input[type="search"].control::-webkit-search-cancel-button,
+    input[type="search"].control::-webkit-search-results-button{
       -webkit-appearance: none;
     }
-    
+
+    /* Select normalization: kill native styling and draw our own arrow */
+    select.control{
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+
+      padding-right: calc(var(--control-pad-x) + 34px);
+
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M7 10l5 5 5-5' stroke='%23393939' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-size: 16px 16px;
+      background-position: right var(--control-pad-x) center;
+    }
+    select.control::-ms-expand{ display: none; }
+
     .helper{
       font-size: calc(13px * var(--type-scale));
       opacity: .72;
       line-height: 1.35;
+      min-height: 18px; /* keeps rows consistent */
     }
+    .helper.spacer{ opacity: 0; }
 
+    /* Tags chips */
     .tagbar{
       display:flex;
       flex-wrap: wrap;
@@ -372,13 +390,14 @@
       border-radius: 999px;
       border: 1px solid rgba(41,126,138,0.18);
       background: rgba(255,255,255,0.18);
-      font-weight: 800;
+      font-weight: 900;
       font-size: calc(13px * var(--type-scale));
       opacity: .92;
       cursor: pointer;
       user-select: none;
       transition: transform .2s ease, box-shadow .2s ease, background .2s ease, opacity .2s ease, border-color .2s ease;
       white-space: nowrap;
+      line-height: 1;
     }
     .chip:hover{ transform: translateY(-1px); box-shadow: var(--shadow-soft); opacity: 1; }
     .chip.active{
@@ -446,8 +465,9 @@
       align-items: center;
       font-size: calc(13px * var(--type-scale));
       opacity: .92;
+      line-height: 1;
     }
-    .pill{
+    .pill2{
       display:inline-flex;
       align-items:center;
       gap: 8px;
@@ -457,9 +477,10 @@
       border: 1px solid rgba(255,255,255,0.22);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
-      font-weight: 800;
+      font-weight: 900;
+      line-height: 1;
     }
-    .pill .dot{ width: 8px; height: 8px; border-radius: 999px; background: var(--accent); box-shadow: 0 0 0 4px rgba(252,136,58,0.16); }
+    .pill2 .dot{ width: 8px; height: 8px; border-radius: 999px; background: var(--accent); box-shadow: 0 0 0 4px rgba(252,136,58,0.16); }
     .feature-title{
       margin: 0;
       font-size: calc(28px * var(--type-scale-blog));
@@ -480,14 +501,8 @@
       flex-wrap: wrap;
       align-items:center;
     }
-    .btn.light{
-      border: 1px solid rgba(255,255,255,0.25);
-      background: rgba(255,255,255,0.12);
-      color: rgba(255,255,255,0.94);
-    }
-    .btn.light:hover{ box-shadow: 0 18px 40px rgba(0,0,0,0.22); }
 
-    /* Sidebar: quick links / about */
+    /* Sidebar */
     .side{
       border-radius: var(--radius-xl);
       padding: 18px;
@@ -512,10 +527,11 @@
     .side > *{ position: relative; z-index: 1; }
     .side h3{ margin: 0; font-size: calc(20px * var(--type-scale)); letter-spacing: -0.4px; }
     .side p{ margin: 0; font-size: calc(14px * var(--type-scale-blog)); opacity: .84; line-height: 1.45; }
+
     .quick{
       display:grid;
       gap: 10px;
-      margin-top: 8px;
+      margin-top: 12px;
     }
     .quick a{
       display:flex;
@@ -528,6 +544,7 @@
       font-weight: 900;
       font-size: calc(14px * var(--type-scale));
       transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+      line-height: 1;
     }
     .quick a:hover{ transform: translateY(-1px); box-shadow: var(--shadow-soft); }
     .quick a span{
@@ -543,7 +560,6 @@
       gap: 14px;
       margin-top: 18px;
     }
-
     .post{
       border-radius: var(--radius-lg);
       overflow:hidden;
@@ -601,6 +617,7 @@
       font-size: calc(12px * var(--type-scale));
       opacity: .9;
       white-space: nowrap;
+      line-height: 1;
     }
     .post-cat .dot{
       width: 8px; height: 8px; border-radius: 999px;
@@ -610,8 +627,9 @@
     .post-date{
       font-size: calc(12px * var(--type-scale));
       opacity: .72;
-      font-weight: 700;
+      font-weight: 800;
       white-space: nowrap;
+      line-height: 1;
     }
     .post h3{
       margin: 0;
@@ -635,11 +653,12 @@
     .post-meta{
       font-size: calc(12px * var(--type-scale));
       opacity: .72;
-      font-weight: 800;
+      font-weight: 900;
       display:flex;
       gap: 10px;
       flex-wrap: wrap;
       align-items:center;
+      line-height: 1;
     }
     .read{
       display:inline-flex;
@@ -648,10 +667,11 @@
       font-weight: 900;
       font-size: calc(14px * var(--type-scale));
       color: rgba(41,126,138,1);
+      line-height: 1;
     }
     .read:hover{ text-decoration: underline; }
 
-    /* Empty state */
+    /* Empty */
     .empty{
       border-radius: var(--radius-xl);
       padding: 22px;
@@ -699,7 +719,7 @@
     .foot-brand{
       display:flex;
       flex-direction: column;
-      gap: 4px; /* required: 4px */
+      gap: 4px;
       line-height: 1;
     }
     .tiny{ font-size: calc(13px * var(--type-scale)); opacity: .8; }
@@ -711,6 +731,7 @@
       background: rgba(255,255,255,0.18);
       font-weight: 900;
       font-size: calc(13px * var(--type-scale));
+      line-height: 1;
     }
 
     /* Reveal */
@@ -745,9 +766,10 @@
       .btn{ padding: 11px 12px; }
       .theme-toggle{ width: 42px; height: 42px; }
       .post-media{ height: 148px; }
+      :root{ --control-h: 54px; }
     }
 
-    /* Mobile menu drawer */
+    /* Mobile drawer */
     .drawer{
       position: fixed;
       inset: 0;
@@ -774,6 +796,7 @@
       border: 1px solid rgba(41,126,138,0.14);
       background: rgba(255,255,255,0.14);
       margin: 10px 0;
+      line-height: 1;
     }
     .drawer a span{ font-size: calc(12px * var(--type-scale)); opacity: .75; font-weight: 700; }
 
@@ -781,15 +804,6 @@
       opacity: .62;
       cursor: not-allowed;
     }
-
-    /* Type stabilizers */
-    .btn, nav a, .pill-link, .kicker, .pill, .post-cat{ line-height: 1; }
-
-    /* Scale navigation + brand */
-    .brand-name strong{ font-size: calc(15px * var(--type-scale)); }
-    .brand-name span{ font-size: calc(12px * var(--type-scale)); }
-    nav a{ font-size: calc(14px * var(--type-scale)); }
-    .btn{ font-size: calc(14px * var(--type-scale)); }
 
     /* ========= Dark theme ========= */
     html[data-theme="dark"]{
@@ -822,8 +836,7 @@
     html[data-theme="dark"] .hero-card,
     html[data-theme="dark"] .post,
     html[data-theme="dark"] .chip,
-    html[data-theme="dark"] .input,
-    html[data-theme="dark"] .select,
+    html[data-theme="dark"] .control,
     html[data-theme="dark"] .quick a,
     html[data-theme="dark"] .pill-link,
     html[data-theme="dark"] .drawer a,
@@ -833,7 +846,11 @@
       border-color: rgba(255,255,255,0.12);
     }
 
-    html[data-theme="dark"] .input::placeholder{ color: rgba(245,246,247,0.62); }
+    /* make select arrow follow dark ink */
+    html[data-theme="dark"] select.control{
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M7 10l5 5 5-5' stroke='%23f5f6f7' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    }
+
     html[data-theme="dark"] .drawer{ background: rgba(0,0,0,0.62); }
   </style>
 </head>
@@ -847,7 +864,6 @@
         <a href="./index.html#cursos" data-close> Cursos <span>precisão & consistência</span></a>
         <a href="./index.html#formacao" data-close> Formação <span>aprofundamento</span></a>
 
-        <!-- placeholders (no link) -->
         <a href="#" class="is-disabled" aria-disabled="true" data-close>Eventos</a>
         <a href="#" class="is-disabled" aria-disabled="true" data-close>Bistrô</a>
 
@@ -877,7 +893,6 @@
           <a href="./index.html#cursos">CURSOS</a>
           <a href="./index.html#formacao">FORMAÇÃO</a>
 
-          <!-- placeholders (no link) -->
           <a href="#" class="is-disabled" aria-disabled="true">EVENTOS</a>
           <a href="#" class="is-disabled" aria-disabled="true">BISTRÔ</a>
 
@@ -924,30 +939,33 @@
 
           <h1>Ideias que viram prática.</h1>
           <p class="sub">
-            Alto rendimento biológico, foco, respiração, mobilidade, recuperação e estilo de vida. Conteúdo objetivo para você evoluir com consistência — e com menos desgaste.
+            Alto rendimento biológico, foco, respiração, mobilidade, recuperação e estilo de vida. Conteúdo objetivo para
+            você evoluir com consistência — e com menos desgaste.
           </p>
 
           <div class="controls" aria-label="Filtros do blog">
             <div class="field">
               <div class="label">Buscar</div>
-              <input class="input glass" id="search" type="search" placeholder="Procure por tema, técnica, objetivo..." autocomplete="off" />
+              <input class="control glass" id="search" type="search" placeholder="Procure por tema, técnica, objetivo..." autocomplete="off" />
               <div class="helper">Dica: tente “respiração”, “foco”, “mobilidade”, “rotina”.</div>
             </div>
 
             <div class="field">
               <div class="label">Categoria</div>
-              <select class="select glass" id="category">
+              <select class="control glass" id="category">
                 <option value="all">Todas</option>
               </select>
+              <div class="helper spacer" aria-hidden="true">&nbsp;</div>
             </div>
 
             <div class="field">
               <div class="label">Ordenar</div>
-              <select class="select glass" id="sort">
+              <select class="control glass" id="sort">
                 <option value="new">Mais recentes</option>
                 <option value="old">Mais antigos</option>
                 <option value="read">Menor leitura</option>
               </select>
+              <div class="helper spacer" aria-hidden="true">&nbsp;</div>
             </div>
           </div>
 
@@ -970,7 +988,6 @@
         </div>
 
         <div class="featured">
-          <!-- FEATURED CARD (auto-filled by JS using the latest post marked as featured) -->
           <article class="feature-card glass reveal" id="featuredCard" aria-label="Post em destaque">
             <a href="#" id="featuredLink" aria-label="Abrir post em destaque">
               <div class="feature-media">
@@ -978,7 +995,7 @@
                 <div class="feature-overlay" aria-hidden="true"></div>
                 <div class="feature-content">
                   <div class="meta-row">
-                    <span class="pill"><span class="dot"></span><span id="featuredCat">Respiração</span></span>
+                    <span class="pill2"><span class="dot"></span><span id="featuredCat">—</span></span>
                     <span id="featuredMeta">—</span>
                   </div>
                   <h3 class="feature-title" id="featuredTitle">—</h3>
@@ -992,7 +1009,6 @@
             </a>
           </article>
 
-          <!-- SIDE PANEL -->
           <aside class="side glass reveal" aria-label="Sobre o blog">
             <div>
               <h3>Para quem é este blog</h3>
@@ -1001,23 +1017,11 @@
                 Leituras curtas, com ação simples e consistente.
               </p>
 
-              <div class="quick" aria-label="Acessos rápidos" style="margin-top:14px;">
-                <a href="./index.html#aulas">
-                  Aulas
-                  <span>presencial + online</span>
-                </a>
-                <a href="./index.html#cursos">
-                  Conteúdo
-                  <span>trilhas + método</span>
-                </a>
-                <a href="./index.html#formacao">
-                  Formação
-                  <span>aprofundamento</span>
-                </a>
-                <a href="./index.html#contato">
-                  Contato
-                  <span>rota rápida</span>
-                </a>
+              <div class="quick" aria-label="Acessos rápidos">
+                <a href="./index.html#aulas">Aulas <span>presencial + online</span></a>
+                <a href="./index.html#cursos">Conteúdo <span>trilhas + método</span></a>
+                <a href="./index.html#formacao">Formação <span>aprofundamento</span></a>
+                <a href="./index.html#contato">Contato <span>rota rápida</span></a>
               </div>
             </div>
 
@@ -1263,12 +1267,7 @@
     const sort = document.getElementById('sort');
     const tagbar = document.getElementById('tagbar');
 
-    let state = {
-      q: '',
-      category: 'all',
-      tag: 'all',
-      sort: 'new'
-    };
+    let state = { q: '', category: 'all', tag: 'all', sort: 'new' };
 
     function formatDateISO(iso){
       try{
@@ -1289,21 +1288,17 @@
         .replaceAll("'","&#039;");
     }
 
-    function unique(arr){
-      return Array.from(new Set(arr));
-    }
+    function unique(arr){ return Array.from(new Set(arr)); }
 
     function buildTaxonomy(){
       const cats = unique(POSTS.map(p => p.category)).sort((a,b)=>a.localeCompare(b,'pt-BR'));
       const tags = unique(POSTS.flatMap(p => p.tags)).sort((a,b)=>a.localeCompare(b,'pt-BR'));
 
-      // Categories
       category.innerHTML = `
         <option value="all">Todas</option>
         ${cats.map(c => `<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`).join('')}
       `;
 
-      // Tags chips
       const chip = (label, {active=false, alt=false}={}) => `
         <div class="chip ${active ? 'active' : ''} ${alt ? 'alt' : ''}" role="button" tabindex="0" data-tag="${escapeHtml(label)}" aria-pressed="${String(active)}">
           <span class="dot" aria-hidden="true"></span>
@@ -1359,13 +1354,9 @@
 
     function sortPosts(list){
       const out = list.slice();
-      if(state.sort === 'new'){
-        out.sort((a,b)=> b.date.localeCompare(a.date));
-      }else if(state.sort === 'old'){
-        out.sort((a,b)=> a.date.localeCompare(b.date));
-      }else if(state.sort === 'read'){
-        out.sort((a,b)=> (a.readMin ?? 99) - (b.readMin ?? 99));
-      }
+      if(state.sort === 'new') out.sort((a,b)=> b.date.localeCompare(a.date));
+      else if(state.sort === 'old') out.sort((a,b)=> a.date.localeCompare(b.date));
+      else if(state.sort === 'read') out.sort((a,b)=> (a.readMin ?? 99) - (b.readMin ?? 99));
       return out;
     }
 
@@ -1412,14 +1403,12 @@
         `;
       }).join('');
 
-      // reveal newly rendered
       grid.querySelectorAll('.reveal').forEach(el => io.observe(el));
     }
 
     function setTag(tag){
       state.tag = tag === 'Todas' ? 'all' : tag;
 
-      // update chips
       tagbar.querySelectorAll('.chip').forEach(ch => {
         const t = ch.getAttribute('data-tag');
         const isAll = t === 'Todas';
@@ -1472,3 +1461,4 @@
   </script>
 </body>
 </html>
+
