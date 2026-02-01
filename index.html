@@ -98,9 +98,8 @@
 
       --max: 1120px;
 
-      /* Spartan tends to render larger than League Spartan.
-         Previous was 0.94. This makes it ~15% smaller than that: 0.94 * 0.85 ≈ 0.80 */
-      --type-scale: 0.80;
+      /* 15% smaller than your previous 0.80 => 0.80 * 0.85 = 0.68 */
+      --type-scale: 0.77;
     }
 
     *{ box-sizing: border-box; }
@@ -356,18 +355,18 @@
       display:flex; align-items:flex-end; justify-content: space-between; gap: 14px;
       margin-bottom: 18px;
     }
-    
+
     /* título */
     .section-head h2{
-      margin: 0 0 10px 0; /* <- “pula uma linha” (ajuste aqui) */
-      font-size: 34px;
+      margin: 0 0 10px 0; /* <- “pula uma linha” */
+      font-size: calc(34px * var(--type-scale)); /* <- agora respeita o scale */
       letter-spacing: -0.6px;
     }
-    
+
     /* texto abaixo do título */
     .section-head .lead{
       margin: 0;
-      font-size: 16px;
+      font-size: calc(16px * var(--type-scale)); /* <- agora respeita o scale */
       opacity: .82;
       max-width: 60ch;
       line-height: 1.4;
@@ -701,10 +700,10 @@
     .pill-link{ font-size: calc(13px * var(--type-scale)); }
     .tiny{ font-size: calc(13px * var(--type-scale)); }
 
-    .drawer a{ font-size: calc(16px * var(--type-scale)); } /* <- added so drawer label also scales */
+    .drawer a{ font-size: calc(16px * var(--type-scale)); }
     .drawer a span{ font-size: calc(12px * var(--type-scale)); }
 
-    .band p{ font-size: calc(16px * var(--type-scale)); } /* <- added so CTA paragraph scales */
+    .band p{ font-size: calc(16px * var(--type-scale)); }
 
     /* Prevent UI height changes due to font metrics */
     .btn, nav a, .pill-link, .kicker, .badge{
@@ -1198,7 +1197,6 @@
               <a class="btn ghost glass" href="mailto:contato@derosesbc.com?subject=DeRose%20SBC%20-%20Aula%20experimental">Enviar E-mail</a>
             </div>
 
-
           </div>
 
           <div class="map glass reveal" aria-label="Mapa da região">
@@ -1275,4 +1273,3 @@
   </script>
 </body>
 </html>
-
