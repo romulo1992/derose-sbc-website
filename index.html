@@ -372,7 +372,6 @@
       line-height: 1.4;
     }
 
-
     /* Cards */
     .grid-3{
       display:grid;
@@ -737,7 +736,10 @@
         <a href="#cursos" data-close> Cursos <span>precisão & consistência</span></a>
         <a href="#formacao" data-close> Formação <span>aprofundamento</span></a>
         <a href="#bistro" data-close> Bistrô <span>ritual & pausa</span></a>
-        <a href="#blog" data-close> Blog <span>clareza sem misticismo</span></a>
+
+        <!-- mantém no menu, mas agora aponta para outra página -->
+        <a href="./blog.html" data-close> Blog <span>clareza sem misticismo</span></a>
+
         <a href="#contato" data-close> Contato <span>rota rápida</span></a>
         <div style="display:flex; gap:10px; justify-content:flex-end; margin-top: 10px;">
           <button class="btn ghost glass" id="drawerClose" type="button">Fechar</button>
@@ -762,7 +764,9 @@
           <a href="#cursos">CURSOS</a>
           <a href="#formacao">FORMAÇÃO</a>
           <a href="#bistro">BISTRÔ</a>
-          <a href="#blog">BLOG</a>
+
+          <!-- mantém no menu, mas agora aponta para outra página -->
+          <a href="./blog.html">BLOG</a>
         </nav>
 
         <div class="actions">
@@ -800,7 +804,7 @@
               Corpo saudável, energia estável, presença mental. O próximo nível da sua evolução através de uma metodologia clara.<br>
             </p>
 
-           <div class="hero-points">
+            <div class="hero-points">
               <div class="point">
                 <b>Alinhamento</b>
                 <span>Corpo e mente fortes, flexíveis, saudáveis, altamente funcionais.</span>
@@ -816,6 +820,7 @@
                 <span>Clareza e visão para tomar boas decisões com consistência.</span>
               </div>
             </div>
+
             <div class="hero-cta">
               <a class="btn primary" href="#contato">
                 <span class="dot" aria-hidden="true"></span>
@@ -981,58 +986,10 @@
 
             <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top: 14px;">
               <a class="btn primary" href="#contato"><span class="dot" aria-hidden="true"></span>Falar Com a Escola</a>
-              <a class="btn ghost glass" href="#blog">Ler o Blog</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
 
-    <!-- FORMAÇÃO + BISTRÔ + BLOG (mini) -->
-    <section id="formacao">
-      <div class="container">
-        <div class="section-head reveal">
-          <div>
-            <h2>Formação</h2>
-            <p class="lead">Para quem gosta de profundidade: tradição, contexto e coerência — como lastro para o estilo de vida.</p>
-          </div>
-        </div>
-
-        <div class="grid-3">
-          <div class="card glass reveal">
-            <div class="icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M5 6h14v14H5z" stroke="#297E8A" stroke-width="2.2" />
-                <path d="M8 10h8" stroke="#393939" stroke-width="2.2" stroke-linecap="round" opacity="0.75"/>
-                <path d="M8 14h5" stroke="#FC883A" stroke-width="2.2" stroke-linecap="round" opacity="0.85"/>
-              </svg>
+              <!-- mantém, mas agora aponta para outra página -->
+              <a class="btn ghost glass" href="./blog.html">Ler o Blog</a>
             </div>
-            <h3>Estrutura</h3>
-            <p>Progressão e método. Sem excesso de teoria. O que importa para praticar melhor e viver melhor.</p>
-          </div>
-
-          <div class="card glass reveal">
-            <div class="icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M12 4l8 4-8 4-8-4 8-4Z" stroke="#297E8A" stroke-width="2.2" stroke-linejoin="round"/>
-                <path d="M4 12l8 4 8-4" stroke="#393939" stroke-width="2.2" stroke-linecap="round" opacity="0.8"/>
-                <path d="M4 12v6l8 4 8-4v-6" stroke="#FC883A" stroke-width="2.2" stroke-linecap="round" opacity="0.85"/>
-              </svg>
-            </div>
-            <h3>Comunidade</h3>
-            <p>Gente do mesmo nível: respeito, discrição e suporte. Pertencimento sem barulho.</p>
-          </div>
-
-          <div class="card glass reveal" id="bistro">
-            <div class="icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M7 8h10v6a5 5 0 0 1-10 0V8Z" stroke="#297E8A" stroke-width="2.2"/>
-                <path d="M17 10h2a2 2 0 0 1 0 4h-2" stroke="#FC883A" stroke-width="2.2" stroke-linecap="round"/>
-                <path d="M9 4h6" stroke="#393939" stroke-width="2.2" stroke-linecap="round" opacity="0.75"/>
-              </svg>
-            </div>
-            <h3>Bistrô</h3>
-            <p>Uma pausa bem desenhada: ritual, conversa boa e foco em recuperar (e voltar melhor).</p>
           </div>
         </div>
       </div>
@@ -1126,31 +1083,51 @@
       </div>
     </section>
 
-    <!-- BLOG -->
-    <section id="blog">
+    <!-- FORMAÇÃO + BISTRÔ (movido para ficar logo acima de Contato) -->
+    <section id="formacao">
       <div class="container">
         <div class="section-head reveal">
           <div>
-            <h2>Blog</h2>
-            <p class="lead">Conteúdo curto, direto e aplicável. Sem misticismo. Com contexto e precisão.</p>
+            <h2>Formação</h2>
+            <p class="lead">Para quem gosta de profundidade: tradição, contexto e coerência — como lastro para o estilo de vida.</p>
           </div>
         </div>
 
         <div class="grid-3">
           <div class="card glass reveal">
-            <h3 style="margin-top:0;">Respiração: energia estável</h3>
-            <p>Como estabilizar carga e voltar ao centro rápido (pra não oscilar quando aperta).</p>
-            <a class="inline" href="#contato">Quero um protocolo →</a>
+            <div class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M5 6h14v14H5z" stroke="#297E8A" stroke-width="2.2" />
+                <path d="M8 10h8" stroke="#393939" stroke-width="2.2" stroke-linecap="round" opacity="0.75"/>
+                <path d="M8 14h5" stroke="#FC883A" stroke-width="2.2" stroke-linecap="round" opacity="0.85"/>
+              </svg>
+            </div>
+            <h3>Estrutura</h3>
+            <p>Progressão e método. Sem excesso de teoria. O que importa para praticar melhor e viver melhor.</p>
           </div>
+
           <div class="card glass reveal">
-            <h3 style="margin-top:0;">Sono como alavanca</h3>
-            <p>Recuperação como tecnologia pessoal: o que mexe mais com seu dia, sem paranoia.</p>
-            <a class="inline" href="#contato">Montar rotina →</a>
+            <div class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 4l8 4-8 4-8-4 8-4Z" stroke="#297E8A" stroke-width="2.2" stroke-linejoin="round"/>
+                <path d="M4 12l8 4 8-4" stroke="#393939" stroke-width="2.2" stroke-linecap="round" opacity="0.8"/>
+                <path d="M4 12v6l8 4 8-4v-6" stroke="#FC883A" stroke-width="2.2" stroke-linecap="round" opacity="0.85"/>
+              </svg>
+            </div>
+            <h3>Comunidade</h3>
+            <p>Gente do mesmo nível: respeito, discrição e suporte. Pertencimento sem barulho.</p>
           </div>
-          <div class="card glass reveal">
-            <h3 style="margin-top:0;">Presença em público</h3>
-            <p>Como treinar “soft power”: foco, escuta ativa e comunicação serena.</p>
-            <a class="inline" href="#contato">Treinar presença →</a>
+
+          <div class="card glass reveal" id="bistro">
+            <div class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M7 8h10v6a5 5 0 0 1-10 0V8Z" stroke="#297E8A" stroke-width="2.2"/>
+                <path d="M17 10h2a2 2 0 0 1 0 4h-2" stroke="#FC883A" stroke-width="2.2" stroke-linecap="round"/>
+                <path d="M9 4h6" stroke="#393939" stroke-width="2.2" stroke-linecap="round" opacity="0.75"/>
+              </svg>
+            </div>
+            <h3>Bistrô</h3>
+            <p>Uma pausa bem desenhada: ritual, conversa boa e foco em recuperar (e voltar melhor).</p>
           </div>
         </div>
       </div>
@@ -1200,7 +1177,6 @@
 
           <div class="map glass reveal" aria-label="Mapa da região">
             <div class="overlay">📍 Abrir no mapa</div>
-            <!-- OpenStreetMap embed (free). If you prefer Google Maps, replace this iframe. -->
             <iframe
               title="Mapa - Av. Wallace Simonsen, 311 - São Bernardo do Campo"
               loading="lazy"
@@ -1272,3 +1248,4 @@
   </script>
 </body>
 </html>
+
