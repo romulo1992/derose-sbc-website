@@ -107,7 +107,7 @@
     .brand-name{
       line-height: 1;
       display:flex; flex-direction: column;
-      gap: 4px;
+      gap: 4px; /* required: 4px */
     }
     .brand-name strong{ font-size: 15px; letter-spacing: .2px; }
     .brand-name span{ font-size: 12px; opacity: .75; }
@@ -124,6 +124,17 @@
     }
     nav a:hover{ background: rgba(255,255,255,0.35); opacity: 1; transform: translateY(-1px); }
     nav a.active{ background: rgba(255,255,255,0.45); opacity: 1; border: 1px solid rgba(41,126,138,0.18); }
+
+    /* Placeholder nav items (Eventos / Bistrô) */
+    nav a.is-disabled{
+      opacity: .62;
+      cursor: not-allowed;
+    }
+    nav a.is-disabled:hover{
+      background: transparent;
+      transform: none;
+      opacity: .62;
+    }
 
     .actions{ display:flex; align-items:center; gap: 10px; }
     .btn{
@@ -289,30 +300,22 @@
     /* Section base */
     section{ padding: 54px 0; }
 
-    /* ========= FIX GLOBAL: header das sections (título + lead) =========
-       - Para de quebrar linha "à toa" por causa do max-width 60ch
-       - 1 linha quando tiver espaço / quebra normal quando não tiver
-       - Funciona pra TODAS as sections que usam .section-head
-    */
+    /* ========= FIX GLOBAL: header das sections (título + lead) ========= */
     .section-head{
       display:flex;
       align-items:flex-end;
       justify-content: space-between;
       gap: 14px;
       margin-bottom: 18px;
-
-      /* melhora em telas menores quando tem botão à direita */
       flex-wrap: wrap;
-
-      /* container query baseado na largura do bloco */
       container-type: inline-size;
     }
     .section-head > div{
-      flex: 1 1 auto;  /* ocupa o espaço disponível */
-      min-width: 0;    /* permite calcular largura corretamente (evita wrap “falso”) */
+      flex: 1 1 auto;
+      min-width: 0;
     }
     .section-head > a{
-      flex: 0 0 auto;  /* botão/atalho não encolhe */
+      flex: 0 0 auto;
     }
 
     .section-head h2{
@@ -325,17 +328,13 @@
       font-size: calc(16px * var(--type-scale));
       opacity: .82;
       line-height: 1.4;
-
-      /* padrão: leitura boa, pode quebrar */
       max-width: 60ch;
     }
 
-    /* quando houver espaço no bloco, remove o limitador => fica 1 linha se couber */
     @container (min-width: 720px){
       .section-head .lead{ max-width: none; }
     }
 
-    /* fallback (se container query não existir) */
     @supports not (container-type: inline-size){
       @media (min-width: 980px){
         .section-head .lead{ max-width: none; }
@@ -562,6 +561,15 @@
       border-top: 1px solid rgba(41,126,138,0.14);
       flex-wrap: wrap;
     }
+
+    /* Footer brand stack (required gap: 4px) */
+    .foot-brand{
+      display:flex;
+      flex-direction: column;
+      gap: 4px;
+      line-height: 1;
+    }
+
     .tiny{ font-size: 13px; opacity: .8; }
     .pill-link{
       display:inline-flex; align-items:center; gap: 10px;
@@ -634,6 +642,11 @@
     }
     .drawer a span{ font-size: 12px; opacity: .75; font-weight: 600; }
 
+    .drawer a.is-disabled{
+      opacity: .62;
+      cursor: not-allowed;
+    }
+
     /* =========================
        Type scale + metric stabilizers
        ========================= */
@@ -703,9 +716,14 @@
         <a href="#aulas" data-close> Aulas <span>presencial + online</span></a>
         <a href="#cursos" data-close> Cursos <span>precisão & consistência</span></a>
         <a href="#formacao" data-close> Formação <span>aprofundamento</span></a>
-        <a href="#carreira" data-close> Carreira <span>especialização</span></a>
+
+        <!-- placeholders (no link) -->
+        <a href="#" class="is-disabled" aria-disabled="true" data-close>Eventos</a>
+        <a href="#" class="is-disabled" aria-disabled="true" data-close>Bistrô</a>
+
         <a href="./blog.html" data-close> Blog <span>clareza sem misticismo</span></a>
         <a href="#contato" data-close> Contato <span>rota rápida</span></a>
+
         <div style="display:flex; gap:10px; justify-content:flex-end; margin-top: 10px;">
           <button class="btn ghost glass" id="drawerClose" type="button">Fechar</button>
         </div>
@@ -728,7 +746,11 @@
           <a href="#aulas">AULAS</a>
           <a href="#cursos">CURSOS</a>
           <a href="#formacao">FORMAÇÃO</a>
-          <a href="#carreira">CARREIRA</a>
+
+          <!-- placeholders (no link) -->
+          <a href="#" class="is-disabled" aria-disabled="true">EVENTOS</a>
+          <a href="#" class="is-disabled" aria-disabled="true">BISTRÔ</a>
+
           <a href="./blog.html">BLOG</a>
         </nav>
 
@@ -1146,7 +1168,7 @@
     <footer>
       <div class="container">
         <div class="foot">
-          <div>
+          <div class="foot-brand">
             <div style="font-weight:800;">DeRose SBC</div>
             <div class="tiny">Yoga para Alta Performance</div>
           </div>
@@ -1166,6 +1188,11 @@
   <script>
     // Year
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Prevent placeholder links from navigating
+    document.querySelectorAll('a[aria-disabled="true"]').forEach(a => {
+      a.addEventListener('click', (e) => e.preventDefault());
+    });
 
     // Mobile drawer
     const drawer = document.getElementById('drawer');
@@ -1203,6 +1230,7 @@
   </script>
 </body>
 </html>
+
 
 
 
