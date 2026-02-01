@@ -10,12 +10,76 @@
   <meta property="og:description" content="Mais resultado com menos desgaste. Ritual, precisão e consistência." />
   <meta property="og:type" content="website" />
   <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- "Spartan" on Google Fonts is commonly served as League Spartan -->
-  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
+    /* =========================
+       Self-hosted Spartan (TTF)
+       Put files in: /assets/fonts/
+       ========================= */
+    @font-face{
+      font-family: "Spartan";
+      src: url("./assets/fonts/Spartan-Thin.ttf") format("truetype");
+      font-weight: 100;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face{
+      font-family: "Spartan";
+      src: url("./assets/fonts/Spartan-ExtraLight.ttf") format("truetype");
+      font-weight: 200;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face{
+      font-family: "Spartan";
+      src: url("./assets/fonts/Spartan-Light.ttf") format("truetype");
+      font-weight: 300;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face{
+      font-family: "Spartan";
+      src: url("./assets/fonts/Spartan-Regular.ttf") format("truetype");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face{
+      font-family: "Spartan";
+      src: url("./assets/fonts/Spartan-Medium.ttf") format("truetype");
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face{
+      font-family: "Spartan";
+      src: url("./assets/fonts/Spartan-SemiBold.ttf") format("truetype");
+      font-weight: 600;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face{
+      font-family: "Spartan";
+      src: url("./assets/fonts/Spartan-Bold.ttf") format("truetype");
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face{
+      font-family: "Spartan";
+      src: url("./assets/fonts/Spartan-ExtraBold.ttf") format("truetype");
+      font-weight: 800;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face{
+      font-family: "Spartan";
+      src: url("./assets/fonts/Spartan-Black.ttf") format("truetype");
+      font-weight: 900;
+      font-style: normal;
+      font-display: swap;
+    }
+
     :root{
       --bg: #FFF9EF;
       --surface: #FFECD1;
@@ -33,13 +97,19 @@
       --radius-sm: 12px;
 
       --max: 1120px;
+
+      /* Spartan tends to render larger than League Spartan.
+         Previous was 0.94. This makes it ~15% smaller than that: 0.94 * 0.85 ≈ 0.80 */
+      --type-scale: 0.80;
     }
 
     *{ box-sizing: border-box; }
     html{ scroll-behavior: smooth; }
+
     body{
       margin:0;
-      font-family: "League Spartan", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      font-family: "Spartan", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      line-height: 1.25;
       color: var(--ink);
       background:
         radial-gradient(1000px 700px at 20% 10%, rgba(252,136,58,0.12), transparent 60%),
@@ -578,6 +648,75 @@
       margin: 10px 0;
     }
     .drawer a span{ font-size: 12px; opacity: .75; font-weight: 600; }
+
+    /* =========================
+       Type scale + metric stabilizers
+       ========================= */
+    .brand-name strong{ font-size: calc(15px * var(--type-scale)); }
+    .brand-name span{ font-size: calc(12px * var(--type-scale)); }
+
+    nav a{ font-size: calc(14px * var(--type-scale)); }
+    .btn{ font-size: calc(14px * var(--type-scale)); }
+
+    .kicker{ font-size: calc(13px * var(--type-scale)); }
+
+    h1{ font-size: calc(56px * var(--type-scale)); }
+    .sub{ font-size: calc(18px * var(--type-scale)); }
+
+    .point b{ font-size: calc(14px * var(--type-scale)); }
+    .point span{ font-size: calc(13px * var(--type-scale)); }
+    .micro{ font-size: calc(13px * var(--type-scale)); }
+
+    .badge{ font-size: calc(13px * var(--type-scale)); }
+
+    h2{ font-size: calc(34px * var(--type-scale)); }
+    .lead{ font-size: calc(16px * var(--type-scale)); }
+
+    .card h3{ font-size: calc(18px * var(--type-scale)); }
+    .card p{ font-size: calc(14px * var(--type-scale)); }
+    .card a.inline{ font-size: calc(14px * var(--type-scale)); }
+
+    .programs .big h3{ font-size: calc(22px * var(--type-scale)); }
+
+    .mini b{ font-size: calc(15px * var(--type-scale)); }
+    .mini span{ font-size: calc(13px * var(--type-scale)); }
+    .mini .tag{ font-size: calc(12px * var(--type-scale)); }
+
+    .check b{ font-size: calc(14px * var(--type-scale)); }
+    .check span{ font-size: calc(13px * var(--type-scale)); }
+
+    .kv .item b{ font-size: calc(13px * var(--type-scale)); }
+    .kv .item span{ font-size: calc(14px * var(--type-scale)); }
+
+    .map .overlay{ font-size: calc(13px * var(--type-scale)); }
+    .pill-link{ font-size: calc(13px * var(--type-scale)); }
+    .tiny{ font-size: calc(13px * var(--type-scale)); }
+
+    .drawer a{ font-size: calc(16px * var(--type-scale)); } /* <- added so drawer label also scales */
+    .drawer a span{ font-size: calc(12px * var(--type-scale)); }
+
+    .band p{ font-size: calc(16px * var(--type-scale)); } /* <- added so CTA paragraph scales */
+
+    /* Prevent UI height changes due to font metrics */
+    .btn, nav a, .pill-link, .kicker, .badge{
+      line-height: 1;
+    }
+
+    /* Override inline styles that would ignore the scale (needs !important) */
+    .testi p{
+      font-size: calc(14px * var(--type-scale)) !important;
+    }
+    .contact .panel h3{
+      font-size: calc(22px * var(--type-scale)) !important;
+    }
+
+    /* Scale responsive H1 too */
+    @media (max-width: 980px){
+      h1{ font-size: calc(46px * var(--type-scale)); }
+    }
+    @media (max-width: 520px){
+      h1{ font-size: calc(40px * var(--type-scale)); }
+    }
   </style>
 </head>
 
@@ -1127,3 +1266,4 @@
   </script>
 </body>
 </html>
+
