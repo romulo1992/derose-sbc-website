@@ -10,12 +10,83 @@
   <meta property="og:description" content="Mais resultado com menos desgaste. Ritual, precisão e consistência." />
   <meta property="og:type" content="website" />
   <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- "Spartan" on Google Fonts is commonly served as League Spartan -->
-  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
+
+    /* Self-hosted Spartan (TTF) */
+    
+    @font-face{
+      font-family: "Spartan";
+      src: url("./assets/fonts/Spartan-Thin.ttf") format("truetype");
+      font-weight: 100;
+      font-style: normal;
+      font-display: swap;
+    }
+    
+    @font-face{
+      font-family: "Spartan";
+      src: url("./assets/fonts/Spartan-ExtraLight.ttf") format("truetype");
+      font-weight: 200;
+      font-style: normal;
+      font-display: swap;
+    }
+    
+    @font-face{
+      font-family: "Spartan";
+      src: url("./assets/fonts/Spartan-Light.ttf") format("truetype");
+      font-weight: 300;
+      font-style: normal;
+      font-display: swap;
+    }
+    
+    @font-face{
+      font-family: "Spartan";
+      src: url("./assets/fonts/Spartan-Regular.ttf") format("truetype");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    
+    @font-face{
+      font-family: "Spartan";
+      src: url("./assets/fonts/Spartan-Medium.ttf") format("truetype");
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+    
+    @font-face{
+      font-family: "Spartan";
+      src: url("./assets/fonts/Spartan-SemiBold.ttf") format("truetype");
+      font-weight: 600;
+      font-style: normal;
+      font-display: swap;
+    }
+    
+    @font-face{
+      font-family: "Spartan";
+      src: url("./assets/fonts/Spartan-Bold.ttf") format("truetype");
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+    
+    @font-face{
+      font-family: "Spartan";
+      src: url("./assets/fonts/Spartan-ExtraBold.ttf") format("truetype");
+      font-weight: 800;
+      font-style: normal;
+      font-display: swap;
+    }
+    
+    @font-face{
+      font-family: "Spartan";
+      src: url("./assets/fonts/Spartan-Black.ttf") format("truetype");
+      font-weight: 900;
+      font-style: normal;
+      font-display: swap;
+    }
+
     :root{
       --bg: #FFF9EF;
       --surface: #FFECD1;
@@ -39,7 +110,7 @@
     html{ scroll-behavior: smooth; }
     body{
       margin:0;
-      font-family: "League Spartan", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      font-family: "Spartan", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       color: var(--ink);
       background:
         radial-gradient(1000px 700px at 20% 10%, rgba(252,136,58,0.12), transparent 60%),
