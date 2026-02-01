@@ -98,9 +98,8 @@
 
       --max: 1120px;
 
-      /* Spartan tends to render larger than League Spartan.
-         Previous was 0.94. This makes it ~15% smaller than that: 0.94 * 0.85 ≈ 0.80 */
-      --type-scale: 0.80;
+      /* 15% smaller than your previous 0.80 => 0.80 * 0.85 = 0.68 */
+      --type-scale: 0.68;
     }
 
     *{ box-sizing: border-box; }
@@ -321,10 +320,14 @@
     }
     .art-badges{
       position: absolute;
-      left: 22px; bottom: 22px;
-      display:flex; flex-wrap: wrap;
+      left: 0;
+      right: 0;
+      bottom: 34px;            /* sobe um pouco (antes era 22px) */
+      display: flex;
+      justify-content: center; /* centraliza horizontalmente */
+      flex-wrap: wrap;
       gap: 10px;
-      max-width: calc(100% - 44px);
+      padding: 0 22px;         /* mantém respiro nas laterais */
     }
     .badge{
       padding: 10px 12px;
@@ -352,14 +355,18 @@
       display:flex; align-items:flex-end; justify-content: space-between; gap: 14px;
       margin-bottom: 18px;
     }
-    h2{
-      margin: 0;
-      font-size: 34px;
+
+    /* título */
+    .section-head h2{
+      margin: 0 0 10px 0; /* <- “pula uma linha” */
+      font-size: calc(34px * var(--type-scale)); /* <- agora respeita o scale */
       letter-spacing: -0.6px;
     }
-    .lead{
+
+    /* texto abaixo do título */
+    .section-head .lead{
       margin: 0;
-      font-size: 16px;
+      font-size: calc(16px * var(--type-scale)); /* <- agora respeita o scale */
       opacity: .82;
       max-width: 60ch;
       line-height: 1.4;
@@ -692,10 +699,10 @@
     .pill-link{ font-size: calc(13px * var(--type-scale)); }
     .tiny{ font-size: calc(13px * var(--type-scale)); }
 
-    .drawer a{ font-size: calc(16px * var(--type-scale)); } /* <- added so drawer label also scales */
+    .drawer a{ font-size: calc(16px * var(--type-scale)); }
     .drawer a span{ font-size: calc(12px * var(--type-scale)); }
 
-    .band p{ font-size: calc(16px * var(--type-scale)); } /* <- added so CTA paragraph scales */
+    .band p{ font-size: calc(16px * var(--type-scale)); }
 
     /* Prevent UI height changes due to font metrics */
     .btn, nav a, .pill-link, .kicker, .badge{
@@ -745,7 +752,7 @@
           <span class="brand-mark" aria-hidden="true"></span>
           <span class="brand-name">
             <strong>DeRose SBC</strong>
-            <span>Elite Calm • Marginal Gains</span>
+            <span>Yoga Para Alta Performance</span>
           </span>
         </a>
 
@@ -769,7 +776,7 @@
           <a class="btn ghost glass" href="#blog" title="Conteúdo e contexto">Conteúdo</a>
           <a class="btn primary" href="#contato" title="Agendar uma aula">
             <span class="dot" aria-hidden="true"></span>
-            Agendar aula
+            Agendar Aula
           </a>
         </div>
       </div>
@@ -783,48 +790,48 @@
         <div class="hero-grid">
           <div class="hero-copy glass reveal">
             <div class="kicker">
-              <span class="pill">Treino de Excelência</span>
-              <span>mais resultado com menos desgaste</span>
+              <span class="pill">Excelência</span>
+              <span>Mais resultado, menos desgaste.</span>
             </div>
 
-            <h1>Alta performance, sem ruído.</h1>
+            <h1>Alta performance, 
+            de verdade.</h1>
             <p class="sub">
-              Para quem já está bem — e quer o próximo nível: energia estável, foco profundo, presença e consistência.
-              Sem ansiedade. Sem “aula genérica”. Com ritual e precisão.
+              Para quem quer o próximo nível: energia estável, foco profundo, presença. Metodologia prática, precisa.
             </p>
 
             <div class="hero-points">
               <div class="point">
-                <b>Elite Calm</b>
-                <span>calma operacional sob pressão (reuniões, decisões, liderança).</span>
+                <b>Decisão</b>
+                <span>Clareza e visão para tomar boas decisões sob pressão.</span>
               </div>
               <div class="point">
-                <b>Marginal Gains</b>
-                <span>pequenos ajustes que somam: sono, respiração, corpo funcional premium.</span>
+                <b>Alinhamento</b>
+                <span>Pequenos ajustes, grandes resultados: respiração, circulação, corpo funcional.</span>
               </div>
               <div class="point">
-                <b>Reset & retorno melhor</b>
-                <span>recupera rápido, volta centrado — e performa com coerência.</span>
+                <b>Recuperação</b>
+                <span>Recupere-se rápido, mantenha-se sempre na sua melhor versão sem esforço.</span>
               </div>
             </div>
 
             <div class="hero-cta">
               <a class="btn primary" href="#contato">
                 <span class="dot" aria-hidden="true"></span>
-                Aula experimental
+                Aula Experimental
               </a>
-              <a class="btn ghost glass" href="#aulas">Ver opções</a>
-              <a class="btn ghost glass" href="#cursos">Conhecer método</a>
+              <a class="btn ghost glass" href="#aulas">Ver Opções</a>
+              <a class="btn ghost glass" href="#cursos">Conhecer Método</a>
             </div>
 
-            <div class="micro">Aulas presenciais em São Bernardo do Campo + opção online.</div>
+            <div class="micro">Aulas presenciais em São Bernardo do Campo e opção online.</div>
           </div>
 
           <div class="hero-art glass reveal" aria-label="Imagem abstrata, minimalista e moderna">
             <img src="./assets/hero.png" alt="Ilustração moderna abstrata com sensação de calma e foco" />
             <div class="art-badges" aria-hidden="true">
-              <div class="badge"><span class="mini-dot"></span>Foco profundo</div>
-              <div class="badge alt"><span class="mini-dot"></span>Energia estável</div>
+              <div class="badge"><span class="mini-dot"></span>Foco Profundo</div>
+              <div class="badge alt"><span class="mini-dot"></span>Energia Estável</div>
               <div class="badge"><span class="mini-dot"></span>Presença</div>
             </div>
           </div>
@@ -972,8 +979,8 @@
             </div>
 
             <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top: 14px;">
-              <a class="btn primary" href="#contato"><span class="dot" aria-hidden="true"></span>Falar com a escola</a>
-              <a class="btn ghost glass" href="#blog">Ler o blog</a>
+              <a class="btn primary" href="#contato"><span class="dot" aria-hidden="true"></span>Falar Com a Escola</a>
+              <a class="btn ghost glass" href="#blog">Ler o Blog</a>
             </div>
           </div>
         </div>
@@ -1037,8 +1044,8 @@
           <h2>Seu platô tem solução simples.</h2>
           <p>Se você sente que está rendendo 70–80% do potencial, geralmente não falta “mais esforço”. Falta precisão: recuperar melhor, estabilizar energia e treinar presença.</p>
           <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
-            <a class="btn primary" href="#contato"><span class="dot" aria-hidden="true"></span>Agendar aula</a>
-            <a class="btn ghost glass" href="#aulas">Ver formatos</a>
+            <a class="btn primary" href="#contato"><span class="dot" aria-hidden="true"></span>Agendar Aula</a>
+            <a class="btn ghost glass" href="#aulas">Ver Formatos</a>
           </div>
         </div>
       </div>
@@ -1170,7 +1177,7 @@
               </div>
               <div class="item" role="listitem">
                 <b>WhatsApp</b>
-                <span>(11) 9XXXX-XXXX</span>
+                <span>+55 (11) 97512-3336</span>
               </div>
               <div class="item" role="listitem">
                 <b>Horários</b>
@@ -1183,13 +1190,11 @@
             </div>
 
             <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top: 16px;">
-              <a class="btn primary" href="https://wa.me/5511999999999" target="_blank" rel="noreferrer">
+              <a class="btn primary" href="https://wa.me/5511975123336" target="_blank" rel="noreferrer">
                 <span class="dot" aria-hidden="true"></span>Chamar no WhatsApp
               </a>
-              <a class="btn ghost glass" href="mailto:contato@derosesbc.com?subject=DeRose%20SBC%20-%20Aula%20experimental">Enviar e-mail</a>
+              <a class="btn ghost glass" href="mailto:contato@derosesbc.com?subject=DeRose%20SBC%20-%20Aula%20experimental">Enviar E-mail</a>
             </div>
-
-            <div class="micro">Edite o telefone/e-mail acima no <b>index.html</b> antes de publicar.</div>
           </div>
 
           <div class="map glass reveal" aria-label="Mapa da região">
@@ -1199,7 +1204,7 @@
               title="Mapa - Av. Wallace Simonsen, 311 - São Bernardo do Campo"
               loading="lazy"
               referrerpolicy="no-referrer-when-downgrade"
-              src="https://www.openstreetmap.org/export/embed.html?bbox=-46.5659%2C-23.7076%2C-46.5559%2C-23.6996&amp;layer=mapnik&amp;marker=-23.7036%2C-46.5609">
+              src="https://www.openstreetmap.org/export/embed.html?bbox=-46.5509332%2C-23.7061273%2C-46.5409332%2C-23.6981273&amp;layer=mapnik&amp;marker=-23.7021273%2C-46.5459332">
             </iframe>
           </div>
         </div>
@@ -1211,7 +1216,7 @@
         <div class="foot">
           <div>
             <div style="font-weight:800;">DeRose SBC</div>
-            <div class="tiny">Elite Calm • Marginal Gains • Yoga para Alta Performance</div>
+            <div class="tiny">Yoga para Alta Performance</div>
           </div>
           <div style="display:flex; gap:10px; flex-wrap:wrap;">
             <a class="pill-link glass" href="#top">Topo ↑</a>
@@ -1220,7 +1225,7 @@
           </div>
         </div>
         <div class="tiny" style="margin-top:12px;">
-          © <span id="year"></span> DeRose SBC. Feito em HTML estático (GitHub + Vercel).
+          © <span id="year"></span> DeRose SBC.
         </div>
       </div>
     </footer>
@@ -1266,4 +1271,3 @@
   </script>
 </body>
 </html>
-
