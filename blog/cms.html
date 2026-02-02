@@ -501,11 +501,12 @@
         <div class="hero-card glass">
           <div class="kicker">
             <span class="pill">CMS</span>
-            <span>Local • simples • com conteúdo do post</span>
+            <span>Local • simples • gera post no template oficial</span>
           </div>
           <h1>Gerenciar posts do Blog.</h1>
           <p class="sub">
-            Preencha o post (inclusive <strong>Conteúdo do Post (HTML)</strong>), salve e gere o HTML do post.
+            Preencha o post (inclusive <strong>Conteúdo do Post (HTML)</strong>), salve e gere o HTML do post
+            <strong>no mesmo layout do post exemplo</strong>.
           </p>
 
           <div class="controls" aria-label="Filtros do CMS">
@@ -558,7 +559,7 @@
             <div class="head">
               <div>
                 <h2 id="editorTitle">Editor</h2>
-                <p>Essenciais: <strong>Título</strong>, <strong>Slug</strong>, <strong>Data</strong>, <strong>Categoria</strong>, <strong>Conteúdo</strong>.</p>
+                <p>Essenciais: <strong>Título</strong>, <strong>Slug</strong>, <strong>Data</strong>, <strong>Categoria</strong>, <strong>Excerpt</strong>, <strong>Conteúdo</strong>.</p>
               </div>
               <div style="display:flex; gap:10px; flex-wrap:wrap;">
                 <button class="btn small" id="btnDownloadPost" type="button">Baixar Post HTML</button>
@@ -591,7 +592,7 @@
 
                 <div class="row2">
                   <div class="field">
-                    <div class="label">Categoria</div>
+                    <div class="label">Categoria (pill 1)</div>
                     <input class="control glass" id="category" type="text" placeholder="Ex.: Respiração" list="catList" />
                     <datalist id="catList"></datalist>
                   </div>
@@ -602,7 +603,7 @@
                 </div>
 
                 <div class="field">
-                  <div class="label">Tags (vírgula)</div>
+                  <div class="label">Tags (vírgula) (pill 2 = primeira tag)</div>
                   <input class="control glass" id="tags" type="text" placeholder="Ex.: Foco, Rotina, Respiratórios" />
                 </div>
 
@@ -613,12 +614,14 @@
 
                 <div class="row2">
                   <div class="field">
-                    <div class="label">Imagem (path)</div>
+                    <div class="label">Imagem (path no site)</div>
                     <input class="control glass" id="image" type="text" placeholder="./assets/blog/seu-post.webp" />
+                    <div class="help">No post gerado (dentro de /posts/), isso vira automaticamente <strong>../assets/...</strong>.</div>
                   </div>
                   <div class="field">
-                    <div class="label">Link (href)</div>
+                    <div class="label">Link (href usado no blog.html)</div>
                     <input class="control glass" id="href" type="text" placeholder="./posts/seu-post.html" />
+                    <div class="help">Padrão: <strong>./posts/slug.html</strong></div>
                   </div>
                 </div>
 
@@ -651,12 +654,12 @@
                 </div>
               </form>
 
-              <div class="label" style="margin-top:12px;">Preview (post gerado)</div>
+              <div class="label" style="margin-top:12px;">Preview (post gerado no template oficial)</div>
               <div class="preview glass">
                 <iframe id="previewFrame" sandbox="allow-same-origin"></iframe>
               </div>
               <div class="help" style="margin-top:8px;">
-                Preview é via srcdoc. Imagens podem não carregar no iframe, mas o HTML/tema ficam fiéis.
+                Preview é via srcdoc. O HTML baixado é o arquivo final (para colocar em <strong>/posts/</strong> no GitHub).
               </div>
             </div>
           </div>
@@ -679,6 +682,9 @@
   </main>
 
   <script>
+    /* =========================================================
+       Helpers
+       ========================================================= */
     const $ = (sel, root=document) => root.querySelector(sel);
     const unique = (arr) => Array.from(new Set(arr));
 
@@ -707,6 +713,21 @@
         .map(s => s.trim())
         .filter(Boolean));
     }
+
+    function monthPtShort(m){
+      const months = ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+      return months[Math.max(0, Math.min(11, m))];
+    }
+    function formatPostDateLabel(iso){
+      try{
+        if(!iso) return '—';
+        const [y,m,d] = iso.split('-').map(Number);
+        if(!y || !m || !d) return iso;
+        return `${String(d).padStart(2,'0')} ${monthPtShort(m-1)} ${y}`;
+      }catch(e){
+        return iso || '—';
+      }
+    }
     function formatDateISO(iso){
       try{
         if(!iso) return '—';
@@ -717,6 +738,7 @@
         return iso || '—';
       }
     }
+
     function plainTextToHtml(text){
       const t = String(text || '').trim();
       if(!t) return '';
@@ -724,6 +746,12 @@
       const blocks = escaped.split(/\n\s*\n/g).map(b => b.trim()).filter(Boolean);
       return blocks.map(b => `<p>${b.replace(/\n/g,'<br/>')}</p>`).join('\n');
     }
+
+    function stripScripts(html){
+      // evita quebrar o post gerado caso alguém cole <script> no conteúdo.
+      return String(html || '').replace(/<script\b[\s\S]*?>[\s\S]*?<\/script>/gi, '');
+    }
+
     function normalizePost(p){
       const id = clean(p?.id);
       return {
@@ -741,7 +769,9 @@
       };
     }
 
-    // Theme
+    /* =========================================================
+       Theme (mesma lógica do resto do site)
+       ========================================================= */
     const root = document.documentElement;
     const themeBtn = $('#themeToggle');
     const metaTheme = document.querySelector('meta[name="theme-color"]');
@@ -777,7 +807,9 @@
       if(saved !== 'light' && saved !== 'dark') setTheme(e.matches ? 'dark' : 'light', {persist:false});
     });
 
-    // Data
+    /* =========================================================
+       Data
+       ========================================================= */
     const STORAGE_KEY = 'derose_blog_posts_cms_v3';
     const LEGACY_KEYS = [
       'derose_blog_posts_v2_with_content',
@@ -865,7 +897,9 @@
       persist();
     }
 
-    // UI refs
+    /* =========================================================
+       UI refs
+       ========================================================= */
     const elList = $('#list');
     const elEmpty = $('#empty');
     const elListHint = $('#listHint');
@@ -916,6 +950,9 @@
       elStatus.textContent = msg;
     }
 
+    /* =========================================================
+       List / filtering
+       ========================================================= */
     function matches(p){
       const q = view.q.trim().toLowerCase();
       const inText = !q
@@ -984,7 +1021,18 @@
       }).join('');
     }
 
-    function resetForm(){
+    /* =========================================================
+       Editor
+       ========================================================= */
+    function makeDefaultsForId(id){
+      const safeId = clean(id) || 'novo-post';
+      const image = `./assets/blog/${safeId}.webp`;
+      const href = `./posts/${safeId}.html`;
+      return { image, href };
+    }
+
+    function resetForm({keepId=false} = {}){
+      const prevId = fId.value;
       editingId = null;
       editorTitle.textContent = 'Editor (Novo Post)';
       btnDelete.disabled = true;
@@ -995,224 +1043,333 @@
       const yyyy = String(today.getFullYear());
       const mm = String(today.getMonth()+1).padStart(2,'0');
       const dd = String(today.getDate()).padStart(2,'0');
+
       fDate.value = `${yyyy}-${mm}-${dd}`;
       fReadMin.value = 5;
       fFeatured.checked = false;
-      fContent.value = '';
 
-      setStatus('Novo post pronto para preencher.', 'ok');
-      render();
+      if(keepId){
+        fId.value = prevId;
+      }
+
+      // defaults baseados no id
+      const d = makeDefaultsForId(fId.value);
+      if(!fImage.value) fImage.value = d.image;
+      if(!fHref.value) fHref.value = d.href;
+
       schedulePreview();
+      setStatus('Pronto.', 'ok');
     }
 
     function fillForm(p){
-      editingId = p.id;
-      editorTitle.textContent = `Editor (Editando: ${p.id})`;
+      const post = normalizePost(p);
+      editingId = post.id;
+
+      editorTitle.textContent = `Editor (Editando: ${post.id})`;
       btnDelete.disabled = false;
 
-      fTitle.value = p.title || '';
-      fId.value = p.id || '';
-      fDate.value = p.date || '';
-      fCategory.value = p.category || '';
-      fReadMin.value = Number.isFinite(Number(p.readMin)) ? Number(p.readMin) : 5;
-      fTags.value = (p.tags || []).join(', ');
-      fExcerpt.value = p.excerpt || '';
-      fImage.value = p.image || '';
-      fHref.value = p.href || '';
-      fFeatured.checked = Boolean(p.featured);
-      fContent.value = p.contentHtml || '';
+      fTitle.value = post.title || '';
+      fId.value = post.id || '';
+      fDate.value = post.date || '';
+      fCategory.value = post.category || '';
+      fReadMin.value = post.readMin ?? 5;
+      fTags.value = (post.tags || []).join(', ');
+      fExcerpt.value = post.excerpt || '';
+      fImage.value = post.image || '';
+      fHref.value = post.href || '';
+      fFeatured.checked = !!post.featured;
+      fContent.value = post.contentHtml || '';
 
-      setStatus('Editando post existente. Salve para aplicar alterações.', 'ok');
-      render();
       schedulePreview();
+      setStatus('Editando.', 'ok');
     }
 
-    function draftFromForm(){
-      const id = clean(fId.value);
-      return normalizePost({
-        id,
+    function currentFormPost(){
+      const p = normalizePost({
+        id: clean(fId.value),
         title: clean(fTitle.value),
-        excerpt: clean(fExcerpt.value),
-        category: clean(fCategory.value),
-        tags: parseTags(fTags.value),
         date: clean(fDate.value),
-        readMin: Number(fReadMin.value),
-        featured: Boolean(fFeatured.checked),
-        image: clean(fImage.value) || `./assets/blog/${id || 'placeholder'}.webp`,
-        href: clean(fHref.value) || `./posts/${id || 'novo-post'}.html`,
+        category: clean(fCategory.value),
+        readMin: Number(fReadMin.value || 5),
+        tags: parseTags(fTags.value),
+        excerpt: clean(fExcerpt.value),
+        image: clean(fImage.value),
+        href: clean(fHref.value),
+        featured: !!fFeatured.checked,
         contentHtml: clean(fContent.value)
       });
-    }
 
-    function validateDraft(d){
-      const sid = slugify(d.id);
-      if(!sid) return { ok:false, msg:'Slug (id) é obrigatório.', type:'err' };
-      if(sid !== d.id) return { ok:false, msg:'Slug inválido. Use apenas letras/números e hífen (sem acentos).', type:'err' };
-      if(!clean(d.title)) return { ok:false, msg:'Título é obrigatório.', type:'err' };
-      if(!clean(d.category)) return { ok:false, msg:'Categoria é obrigatória.', type:'err' };
-      if(!clean(d.date) || !/^\d{4}-\d{2}-\d{2}$/.test(d.date)) return { ok:false, msg:'Data inválida.', type:'err' };
-      if(!Number.isFinite(Number(d.readMin)) || Number(d.readMin) <= 0) return { ok:false, msg:'Tempo de leitura deve ser > 0.', type:'err' };
-      if(!clean(d.image)) return { ok:false, msg:'Imagem (path) é obrigatória.', type:'err' };
-      if(!clean(d.href)) return { ok:false, msg:'Link (href) é obrigatório.', type:'err' };
-      if(!clean(d.contentHtml)) return { ok:false, msg:'Conteúdo do post (HTML) é obrigatório.', type:'err' };
-      return { ok:true, msg:'OK', type:'ok' };
-    }
+      // força defaults caso usuário não tenha preenchido
+      const d = makeDefaultsForId(p.id);
+      if(!p.image) p.image = d.image;
+      if(!p.href) p.href = d.href;
 
-    function saveDraft(){
-      const draft = draftFromForm();
-      const v = validateDraft(draft);
-      if(!v.ok) return setStatus(v.msg, v.type);
-
-      const exists = posts.find(p => p.id === draft.id);
-      if(editingId && editingId !== draft.id && exists) return setStatus('Esse slug (id) já existe. Escolha outro.', 'err');
-      if(!editingId && exists) return setStatus('Esse slug (id) já existe. Clique em "Editar" no item.', 'err');
-
-      if(draft.featured){
-        posts = posts.map(p => ({...p, featured: p.id === draft.id}));
-      } else {
-        posts = posts.map(p => (p.id === draft.id ? {...p, featured:false} : p));
+      // normaliza href para ./posts/{id}.html se estiver vazio/errado
+      if(p.id && (!p.href || !/\.html$/i.test(p.href))){
+        p.href = `./posts/${p.id}.html`;
       }
 
-      if(editingId){
-        posts = posts.map(p => p.id === editingId ? draft : p);
-        editingId = draft.id;
-        setStatus('Alterações salvas.', 'ok');
-      } else {
-        posts.push(draft);
-        editingId = draft.id;
-        setStatus('Post criado e salvo.', 'ok');
+      return p;
+    }
+
+    function validatePost(p){
+      const errs = [];
+      if(!p.title) errs.push('Título');
+      if(!p.id) errs.push('Slug (id)');
+      if(!p.date) errs.push('Data');
+      if(!p.category) errs.push('Categoria');
+      if(!p.excerpt) errs.push('Excerpt');
+      if(!p.contentHtml) errs.push('Conteúdo (HTML)');
+
+      const badSlug = p.id && !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(p.id);
+      if(badSlug) errs.push('Slug inválido (use apenas a-z 0-9 e hífen)');
+
+      return errs;
+    }
+
+    function savePost(){
+      const p = currentFormPost();
+      const errs = validatePost(p);
+
+      if(errs.length){
+        setStatus(`Faltando/errado: ${errs.join(', ')}.`, 'err');
+        return;
+      }
+
+      if(p.featured){
+        posts = posts.map(x => ({...x, featured: x.id === p.id}));
+      }
+
+      const idx = posts.findIndex(x => x.id === p.id);
+      if(idx >= 0){
+        posts[idx] = p;
+      }else{
+        posts.unshift(p);
       }
 
       ensureSingleFeatured();
       persist();
-      refreshTaxonomy();
       render();
-      fillForm(draft);
+      fillForm(p);
+      setStatus('Salvo. Preview atualizado.', 'ok');
     }
 
-    function deleteCurrent(){
-      if(!editingId) return setStatus('Nada para excluir.', 'warn');
+    function deletePost(){
+      if(!editingId) return;
       const p = posts.find(x => x.id === editingId);
-      if(!p) return setStatus('Post não encontrado.', 'err');
-      if(!confirm(`Excluir o post "${p.title}"? (Remove do CMS/localStorage.)`)) return;
+      if(!p) return;
+
+      const ok = confirm(`Excluir o post "${p.title}" (${p.id})?`);
+      if(!ok) return;
 
       posts = posts.filter(x => x.id !== editingId);
+      editingId = null;
+
       ensureSingleFeatured();
       persist();
-      refreshTaxonomy();
+      render();
       resetForm();
-      setStatus('Post excluído.', 'ok');
+      setStatus('Post excluído.', 'warn');
     }
 
-    function exportJson(){
-      const data = JSON.stringify(posts.map(normalizePost), null, 2);
-      const blob = new Blob([data], {type:'application/json'});
+    /* =========================================================
+       Import / Export
+       ========================================================= */
+    function downloadText(filename, text, mime='text/plain;charset=utf-8'){
+      const blob = new Blob([text], { type: mime });
+      const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = 'posts.json';
+      a.href = url;
+      a.download = filename;
       document.body.appendChild(a);
       a.click();
-      a.remove();
-      URL.revokeObjectURL(a.href);
-      setStatus('Exportado: posts.json', 'ok');
+      document.body.removeChild(a);
+      setTimeout(()=> URL.revokeObjectURL(url), 500);
     }
 
-    function copyConst(){
-      const data = JSON.stringify(posts.map(normalizePost), null, 2);
-      const snippet = `const POSTS = ${data};`;
-      navigator.clipboard?.writeText(snippet).then(() => {
-        setStatus('Copiado: const POSTS = [...]', 'ok');
-      }).catch(() => {
+    async function copyToClipboard(text){
+      try{
+        await navigator.clipboard.writeText(text);
+        return true;
+      }catch(e){
         const ta = document.createElement('textarea');
-        ta.value = snippet;
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.left = '-9999px';
         document.body.appendChild(ta);
         ta.select();
         document.execCommand('copy');
-        ta.remove();
-        setStatus('Copiado (fallback).', 'ok');
-      });
+        document.body.removeChild(ta);
+        return true;
+      }
     }
 
-    function importJsonText(text){
-      let parsed;
-      try{ parsed = JSON.parse(text); }
-      catch(e){ return setStatus('JSON inválido.', 'err'); }
-      if(!Array.isArray(parsed)) return setStatus('O JSON precisa ser um array de posts.', 'err');
+    function exportJson(){
+      const json = JSON.stringify(posts, null, 2);
+      downloadText('posts.json', json, 'application/json;charset=utf-8');
+      setStatus('Exportado: posts.json', 'ok');
+    }
 
-      const incoming = parsed.map(normalizePost);
-      const ids = incoming.map(p => p.id);
-      if(new Set(ids).size !== ids.length) return setStatus('Import falhou: slugs duplicados no JSON.', 'err');
+    async function copyConst(){
+      const json = JSON.stringify(posts, null, 2);
+      const text = `const POSTS = ${json};\n`;
+      await copyToClipboard(text);
+      setStatus('Copiado: const POSTS = [...].', 'ok');
+    }
 
-      if(!confirm(`Importar ${incoming.length} post(s) e substituir os atuais (${posts.length})?`)) return;
-
-      posts = incoming;
+    function resetAll(){
+      const ok = confirm('Resetar dados locais do CMS? (apaga localStorage e recarrega seed)');
+      if(!ok) return;
+      localStorage.removeItem(STORAGE_KEY);
+      posts = SEED_POSTS.slice();
       ensureSingleFeatured();
       persist();
-      refreshTaxonomy();
-      resetForm();
       render();
-      setStatus('Import concluído.', 'ok');
+      resetForm();
+      setStatus('Reset local concluído.', 'warn');
     }
 
-    function currentTheme(){
-      return root.dataset.theme === 'dark' ? 'dark' : 'light';
+    function importJsonFile(file){
+      const reader = new FileReader();
+      reader.onload = () => {
+        try{
+          const parsed = JSON.parse(String(reader.result || ''));
+          if(!Array.isArray(parsed)) throw new Error('JSON precisa ser um array de posts.');
+          const imported = parsed.map(normalizePost).filter(p => p.id);
+          if(!imported.length) throw new Error('Nenhum post válido no JSON.');
+
+          // merge (preferir importado)
+          const map = new Map(posts.map(p => [p.id, p]));
+          for(const p of imported) map.set(p.id, p);
+          posts = Array.from(map.values());
+
+          ensureSingleFeatured();
+          persist();
+          render();
+          setStatus(`Importado: ${imported.length} post(s).`, 'ok');
+        }catch(e){
+          setStatus(`Erro ao importar: ${e.message || e}`, 'err');
+        }
+      };
+      reader.readAsText(file);
     }
 
-    // Build post HTML: IMPORTANT -> não colocar a sequência de fechamento de script literal aqui.
-    function buildPostHtml(post, theme){
-      const safeTitle = escapeHtml(post.title);
-      const safeDesc  = escapeHtml(post.excerpt || '');
-      const safeCat   = escapeHtml(post.category || 'Post');
-      const safeDate  = escapeHtml(formatDateISO(post.date));
-      const safeRead  = escapeHtml(String(post.readMin ?? '—'));
+    /* =========================================================
+       Post Generator (GARANTIA: gera no mesmo HTML do post exemplo)
+       ========================================================= */
+    function toPostsRelativePath(pathFromRoot){
+      // Entrada típica: "./assets/blog/x.webp" ou "/assets/blog/x.webp"
+      // Saída (dentro de /posts/): "../assets/blog/x.webp"
+      const p = clean(pathFromRoot);
+      if(!p) return '../assets/blog/placeholder.webp';
 
-      const safeTags = (post.tags || []).length
-        ? (post.tags || []).map(t => `<span class="chip"><span class="dot"></span>${escapeHtml(t)}</span>`).join('')
-        : `<span class="chip"><span class="dot"></span>Leitura objetiva</span>`;
+      // já está no formato de post (../)
+      if(p.startsWith('../')) return p;
 
-      const img = (post.image || './assets/blog/placeholder.webp').replace('./assets','../assets');
-      const isDark = theme === 'dark';
-      const htmlAttr = isDark ? ` data-theme="dark"` : ``;
+      // caminho absoluto do site
+      if(p.startsWith('/')){
+        return '..' + p; // "/assets/.." => "../assets/.."
+      }
 
-      // "Quebra" o fechamento do script para não virar texto no CMS.
-      const closeScript = '<' + '/scr' + 'ipt>';
+      // "./assets/..." => "../assets/..."
+      if(p.startsWith('./')) return '../' + p.slice(2);
 
-      return `<!doctype html>
-<html lang="pt-BR"${htmlAttr}>
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="${isDark ? '#0b1012' : '#297E8A'}" />
-  <title>${safeTitle} • Blog • DeRose SBC</title>
-  <meta name="description" content="${safeDesc}" />
-  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+      // "assets/..." => "../assets/..."
+      if(p.startsWith('assets/')) return '../' + p;
 
-  <style>
+      // fallback: assume que é relativo ao root
+      return '../' + p.replace(/^\.?\//,'');
+    }
+
+    function sanitizeMetaText(s){
+      // meta tags (description) não podem quebrar atributos
+      return clean(s).replace(/\s+/g,' ').slice(0, 240);
+    }
+
+    function buildRelatedForPost(currentId){
+      const sorted = posts.slice().sort((a,b)=> (b.date||'').localeCompare(a.date||''));
+      const rel = sorted.filter(p => p.id !== currentId).slice(0, 2);
+      return rel.map(p => ({
+        title: p.title,
+        excerpt: p.excerpt,
+        category: p.category,
+        date: p.date,
+        readMin: p.readMin ?? 5,
+        image: toPostsRelativePath(p.image),
+        href: `./${p.id}.html`
+      }));
+    }
+
+    function generatePostHtml(post){
+      const p = normalizePost(post);
+
+      const title = p.title || 'Post';
+      const desc = sanitizeMetaText(p.excerpt || '');
+      const cover = toPostsRelativePath(p.image);
+      const category = p.category || '—';
+      const tag = (p.tags && p.tags.length ? p.tags[0] : '—');
+      const dateLabel = formatPostDateLabel(p.date);
+      const readMin = Number.isFinite(Number(p.readMin)) ? Number(p.readMin) : 5;
+      const bodyHtml = stripScripts(p.contentHtml || '<p></p>');
+
+      const related = buildRelatedForPost(p.id);
+
+      // ========= CSS DO POST (igual ao exemplo)
+      const POST_CSS = `/* =========================
+       Self-hosted Spartan (TTF)
+       Put files in: /assets/fonts/
+       ========================= */
+    @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-Thin.ttf") format("truetype"); font-weight:100; font-style:normal; font-display:swap; }
+    @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-ExtraLight.ttf") format("truetype"); font-weight:200; font-style:normal; font-display:swap; }
+    @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-Light.ttf") format("truetype"); font-weight:300; font-style:normal; font-display:swap; }
     @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-Regular.ttf") format("truetype"); font-weight:400; font-style:normal; font-display:swap; }
+    @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-Medium.ttf") format("truetype"); font-weight:500; font-style:normal; font-display:swap; }
+    @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-SemiBold.ttf") format("truetype"); font-weight:600; font-style:normal; font-display:swap; }
     @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-Bold.ttf") format("truetype"); font-weight:700; font-style:normal; font-display:swap; }
+    @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-ExtraBold.ttf") format("truetype"); font-weight:800; font-style:normal; font-display:swap; }
     @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-Black.ttf") format("truetype"); font-weight:900; font-style:normal; font-display:swap; }
 
     :root{
       --bg: #FFF9EF;
+      --surface: #FFECD1;
       --accent: #FC883A;
       --teal: #297E8A;
       --ink: #393939;
       --glass-bg: rgba(255,255,255,0.26);
       --glass-br: rgba(41,126,138,0.22);
+      --shadow: 0 18px 60px rgba(57,57,57,0.12);
       --shadow-soft: 0 10px 30px rgba(57,57,57,0.10);
       --radius-xl: 28px;
-      --max: 980px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --radius-sm: 12px;
+      --max: 1120px;
+
+      /* baseline */
       --type-scale: 0.77;
+      /* blog reading comfort */
       --type-scale-blog: 0.92;
+
       --page-bg:
         radial-gradient(1000px 700px at 20% 10%, rgba(252,136,58,0.12), transparent 60%),
         radial-gradient(1100px 820px at 90% 15%, rgba(41,126,138,0.14), transparent 60%),
         linear-gradient(180deg, var(--bg), #fff 28%, var(--bg) 100%);
     }
+
     *{ box-sizing: border-box; }
-    body{ margin:0; font-family:"Spartan", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: var(--ink); background: var(--page-bg); }
+    html{ scroll-behavior: smooth; }
+    body{
+      margin:0;
+      font-family: "Spartan", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      line-height: 1.25;
+      color: var(--ink);
+      background: var(--page-bg);
+      overflow-x: hidden;
+    }
     a{ color: inherit; text-decoration: none; }
     .container{ width:min(var(--max), calc(100% - 40px)); margin: 0 auto; }
+
+    /* Glass */
     .glass{
       background: var(--glass-bg);
       border: 1px solid var(--glass-br);
@@ -1220,73 +1377,835 @@
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
     }
-    header{ position: sticky; top:0; z-index: 10; padding:14px 0; }
-    .bar{ border-radius:999px; padding:10px 14px; display:flex; justify-content:space-between; align-items:center; gap:12px; }
-    .btn{ display:inline-flex; align-items:center; justify-content:center; padding:11px 14px; border-radius:999px; border:1px solid rgba(41,126,138,0.22); font-weight:900; font-size: calc(14px * var(--type-scale)); background: rgba(255,255,255,0.12); cursor:pointer; }
-    .theme{ width:44px; height:44px; border-radius:999px; border:1px solid rgba(41,126,138,0.22); background: rgba(255,255,255,0.18); cursor:pointer; display:inline-flex; align-items:center; justify-content:center; }
-    .theme svg{ width:18px; height:18px; display:block; }
-    .theme .sun{ display:none; }
-    html[data-theme="dark"] .theme .sun{ display:block; }
-    html[data-theme="dark"] .theme .moon{ display:none; }
 
-    section{ padding: 30px 0; }
-    .hero{ border-radius: var(--radius-xl); padding: 22px; overflow:hidden; }
-    .kicker{ display:inline-flex; gap:10px; flex-wrap:wrap; font-weight:900; font-size: calc(13px * var(--type-scale)); }
-    h1{ margin: 12px 0 10px; font-size: calc(48px * var(--type-scale)); line-height: 0.98; letter-spacing:-1px; }
-    .sub{ margin: 0; font-size: calc(16px * var(--type-scale-blog)); line-height: 1.55; opacity: .92; }
-    .meta{ margin-top: 12px; display:flex; gap:10px; flex-wrap:wrap; }
-    .chip{ display:inline-flex; align-items:center; gap:8px; padding:10px 12px; border-radius:999px; border:1px solid rgba(41,126,138,0.18); background: rgba(255,255,255,0.18); font-weight:900; font-size: calc(13px * var(--type-scale)); }
-    .dot{ width:8px; height:8px; border-radius:999px; background: var(--teal); box-shadow: 0 0 0 4px rgba(41,126,138,0.14); }
-
-    .cover{ margin-top: 16px; border-radius: var(--radius-xl); overflow:hidden; border: 1px solid rgba(41,126,138,0.14); }
-    .cover img{ width:100%; height: 360px; object-fit: cover; display:block; }
-
-    .prose{ margin-top: 18px; border-radius: var(--radius-xl); padding: 22px; }
-    .prose p{ margin: 0 0 14px; font-size: calc(16px * var(--type-scale-blog)); line-height: 1.7; opacity: .94; }
-    .prose h2{ margin: 22px 0 10px; font-size: calc(26px * var(--type-scale)); letter-spacing: -0.6px; line-height: 1.12; }
-    .prose h3{ margin: 18px 0 10px; font-size: calc(20px * var(--type-scale)); letter-spacing: -0.4px; line-height: 1.18; }
-    .prose ul,.prose ol{ margin: 0 0 14px; padding-left: 22px; font-size: calc(16px * var(--type-scale-blog)); line-height: 1.7; opacity: .94; }
-    .prose blockquote{ margin: 16px 0; padding: 14px 16px; border-left: 4px solid rgba(41,126,138,0.45); background: rgba(255,255,255,0.16); border-radius: 16px; font-style: italic; opacity: .92; }
-    .prose a{ text-decoration: underline; text-underline-offset: 3px; color: rgba(41,126,138,1); font-weight: 900; }
-
-    footer{ padding: 26px 0 42px; opacity: .85; }
-    .foot{ padding-top: 14px; border-top: 1px solid rgba(41,126,138,0.14); display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap; }
-    .tiny{ font-size: calc(13px * var(--type-scale)); opacity: .82; }
-
-    @media (max-width: 740px){
-      h1{ font-size: calc(40px * var(--type-scale)); }
-      .cover img{ height: 260px; }
+    /* Progress bar */
+    .progress{
+      position: fixed;
+      top: 0; left: 0;
+      height: 3px;
+      width: 0%;
+      background: linear-gradient(90deg, rgba(41,126,138,0.95), rgba(252,136,58,0.95));
+      z-index: 80;
+      transform-origin: left center;
     }
 
+    /* Header */
+    header{
+      position: sticky; top: 0; z-index: 40;
+      padding: 14px 0;
+      transition: transform .2s ease, background .2s ease, border-color .2s ease;
+    }
+    header .bar{
+      border-radius: 999px;
+      padding: 10px 14px;
+      display:flex; align-items:center; justify-content: space-between;
+      gap: 14px;
+    }
+    .brand{
+      display:flex; align-items:center; gap: 10px; min-width: 210px;
+      padding: 8px 10px; border-radius: 999px;
+    }
+    .brand-mark{
+      width: 36px; height: 36px; border-radius: 14px;
+      background: linear-gradient(135deg, rgba(41,126,138,0.9), rgba(252,136,58,0.85));
+      box-shadow: 0 10px 22px rgba(41,126,138,0.18);
+      position: relative;
+      overflow: hidden;
+    }
+    .brand-mark:after{
+      content:"";
+      position:absolute; inset:-30%;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.55), transparent 55%);
+      transform: rotate(18deg);
+    }
+    .brand-name{
+      line-height: 1;
+      display:flex; flex-direction: column;
+      gap: 4px;
+    }
+    .brand-name strong{ font-size: calc(15px * var(--type-scale)); letter-spacing: .2px; }
+    .brand-name span{ font-size: calc(12px * var(--type-scale)); opacity: .75; }
+
+    nav{ display:flex; align-items:center; gap: 10px; }
+    nav a{
+      font-size: calc(14px * var(--type-scale));
+      padding: 10px 12px;
+      border-radius: 999px;
+      opacity: .86;
+      transition: background .2s ease, opacity .2s ease, transform .2s ease;
+      line-height: 1;
+    }
+    nav a:hover{ background: rgba(255,255,255,0.35); opacity: 1; transform: translateY(-1px); }
+    nav a.active{ background: rgba(255,255,255,0.45); opacity: 1; border: 1px solid rgba(41,126,138,0.18); }
+    nav a.is-disabled{ opacity: .62; cursor: not-allowed; }
+    nav a.is-disabled:hover{ background: transparent; transform: none; opacity: .62; }
+
+    .actions{ display:flex; align-items:center; gap: 10px; }
+    .btn{
+      display:inline-flex; align-items:center; justify-content: center;
+      padding: 11px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(41,126,138,0.22);
+      font-weight: 600;
+      font-size: calc(14px * var(--type-scale));
+      letter-spacing: .2px;
+      cursor: pointer;
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+      user-select: none;
+      white-space: nowrap;
+      line-height: 1;
+    }
+    .btn:hover{ transform: translateY(-1px); box-shadow: var(--shadow-soft); }
+    .btn.primary{
+      border: 1px solid rgba(252,136,58,0.35);
+      background: linear-gradient(135deg, rgba(252,136,58,0.95), rgba(252,136,58,0.65));
+      color: #1f1f1f;
+      font-weight: 800;
+    }
+    .btn.ghost{ background: rgba(255,255,255,0.18); }
+    .btn .dot{
+      width: 8px; height: 8px; border-radius: 999px;
+      margin-right: 10px;
+      background: var(--teal);
+      box-shadow: 0 0 0 4px rgba(41,126,138,0.16);
+    }
+
+    .mobile-toggle{
+      display:none;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(41,126,138,0.22);
+      background: rgba(255,255,255,0.18);
+      cursor:pointer;
+    }
+    .mobile-toggle svg{ display:block; }
+
+    /* Theme toggle */
+    .theme-toggle{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      border: 1px solid rgba(41,126,138,0.22);
+      background: rgba(255,255,255,0.18);
+      cursor:pointer;
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+      color: var(--ink);
+      line-height: 1;
+    }
+    .theme-toggle:hover{ transform: translateY(-1px); box-shadow: var(--shadow-soft); }
+    .theme-toggle svg{ width: 18px; height: 18px; display:block; }
+    .theme-toggle .sun{ display:none; }
+    html[data-theme="dark"] .theme-toggle .sun{ display:block; }
+    html[data-theme="dark"] .theme-toggle .moon{ display:none; }
+    svg [stroke="#393939"]{ stroke: var(--ink) !important; }
+
+    /* Sections */
+    section{ padding: 54px 0; }
+    .hero{ padding: 34px 0 18px; }
+
+    .hero-card{
+      padding: 26px;
+      border-radius: var(--radius-xl);
+      position: relative;
+      overflow:hidden;
+    }
+    .hero-card:before{
+      content:"";
+      position:absolute; inset:-40%;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(252,136,58,0.18), transparent 55%),
+        radial-gradient(circle at 80% 25%, rgba(41,126,138,0.18), transparent 58%),
+        radial-gradient(circle at 50% 80%, rgba(255,236,209,0.55), transparent 60%);
+      filter: blur(10px);
+      transform: rotate(10deg);
+      pointer-events:none;
+    }
+    .hero-card > *{ position: relative; z-index: 1; }
+
+    .kicker{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items:center;
+    }
+    .pill{
+      display:inline-flex; align-items:center; gap: 10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(41,126,138,0.18);
+      background: rgba(255,255,255,0.22);
+      font-size: calc(13px * var(--type-scale));
+      font-weight: 900;
+      letter-spacing: .25px;
+      line-height: 1;
+    }
+    .pill .dot{
+      width: 8px; height: 8px; border-radius: 999px;
+      background: var(--teal);
+      box-shadow: 0 0 0 4px rgba(41,126,138,0.14);
+    }
+    .pill.alt .dot{
+      background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(252,136,58,0.14);
+    }
+    .crumb{
+      display:inline-flex; align-items:center; gap: 10px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(41,126,138,0.18);
+      background: rgba(255,255,255,0.18);
+      font-weight: 900;
+      font-size: calc(13px * var(--type-scale));
+      line-height: 1;
+      opacity: .92;
+      transition: transform .2s ease, box-shadow .2s ease, opacity .2s ease;
+    }
+    .crumb:hover{ transform: translateY(-1px); box-shadow: var(--shadow-soft); opacity: 1; }
+
+    h1{
+      margin: 16px 0 10px;
+      font-size: calc(50px * var(--type-scale));
+      line-height: 0.98;
+      letter-spacing: -1px;
+    }
+    .sub{
+      margin: 12px 0 0;
+      font-size: calc(18px * var(--type-scale-blog));
+      line-height: 1.55;
+      opacity: 0.9;
+      max-width: 75ch;
+    }
+
+    .meta-row{
+      margin-top: 14px;
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items:center;
+      font-size: calc(14px * var(--type-scale));
+      opacity: .88;
+      line-height: 1;
+    }
+    .meta-row span.sep{ opacity: .5; }
+
+    /* Cover */
+    .cover{
+      margin-top: 18px;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      position: relative;
+    }
+    .cover img{
+      width: 100%;
+      height: min(520px, 56vh);
+      object-fit: cover;
+      display:block;
+      filter: saturate(1.02) contrast(1.02);
+      transform: scale(1.01);
+    }
+    .cover:after{
+      content:"";
+      position:absolute; inset: 0;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,0.00), rgba(0,0,0,0.20) 75%, rgba(0,0,0,0.28));
+      pointer-events:none;
+      opacity: .45;
+    }
+
+    /* Article (single clean card, not nested inside hero) */
+    .article-card{
+      border-radius: var(--radius-xl);
+      padding: 22px;
+    }
+
+    /* Prose (plain reading, no callout boxes) */
+    .prose{
+      font-size: calc(16px * var(--type-scale-blog));
+      line-height: 1.75;
+      max-width: 78ch;
+    }
+    .prose p{ margin: 0 0 14px 0; opacity: .92; }
+    .prose h2{
+      margin: 22px 0 10px;
+      font-size: calc(22px * var(--type-scale-blog));
+      letter-spacing: -0.4px;
+      line-height: 1.2;
+    }
+    .prose h3{
+      margin: 18px 0 8px;
+      font-size: calc(18px * var(--type-scale-blog));
+      letter-spacing: -0.2px;
+      line-height: 1.25;
+    }
+    .prose ul, .prose ol{
+      margin: 0 0 14px 18px;
+      padding: 0;
+    }
+    .prose li{ margin: 8px 0; }
+    .prose strong{ font-weight: 900; }
+    .prose a{
+      color: rgba(41,126,138,1);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-thickness: 2px;
+    }
+
+    .divider{
+      height: 1px;
+      background: rgba(41,126,138,0.14);
+      margin: 18px 0;
+    }
+
+    /* Post actions (below text) */
+    .post-actions{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      margin-top: 18px;
+    }
+
+    /* Related */
+    .section-head{
+      display:flex;
+      align-items:flex-end;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+      container-type: inline-size;
+    }
+    .section-head > div{ flex: 1 1 auto; min-width: 0; }
+    .section-head h2{
+      margin: 0 0 10px 0;
+      font-size: calc(30px * var(--type-scale));
+      letter-spacing: -0.6px;
+    }
+    .lead{
+      margin: 0;
+      font-size: calc(16px * var(--type-scale-blog));
+      opacity: .84;
+      line-height: 1.45;
+      max-width: 70ch;
+    }
+    .pill-link{
+      display:inline-flex; align-items:center; gap: 10px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(41,126,138,0.18);
+      background: rgba(255,255,255,0.18);
+      font-weight: 900;
+      font-size: calc(13px * var(--type-scale));
+      line-height: 1;
+    }
+
+    .related-grid{
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-top: 18px;
+    }
+    .post{
+      border-radius: var(--radius-lg);
+      overflow:hidden;
+      position: relative;
+      min-height: 300px;
+    }
+    .post:before{
+      content:"";
+      position:absolute; inset:-60%;
+      background:
+        radial-gradient(circle at 30% 25%, rgba(252,136,58,0.14), transparent 55%),
+        radial-gradient(circle at 70% 40%, rgba(41,126,138,0.16), transparent 60%);
+      filter: blur(10px);
+      transform: rotate(12deg);
+      pointer-events:none;
+    }
+    .post > *{ position: relative; z-index: 1; }
+    .post-media{
+      height: 150px;
+      overflow:hidden;
+      border-bottom: 1px solid rgba(41,126,138,0.14);
+      background: rgba(255,255,255,0.10);
+    }
+    .post-media img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display:block;
+      filter: saturate(1.02) contrast(1.02);
+      transform: scale(1.02);
+    }
+    .post-body{
+      padding: 16px;
+      display:grid;
+      gap: 10px;
+    }
+    .post-top{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .post-cat{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(41,126,138,0.18);
+      background: rgba(255,255,255,0.18);
+      font-weight: 900;
+      font-size: calc(12px * var(--type-scale));
+      opacity: .9;
+      white-space: nowrap;
+      line-height: 1;
+    }
+    .post-cat .dot{
+      width: 8px; height: 8px; border-radius: 999px;
+      background: var(--teal);
+      box-shadow: 0 0 0 4px rgba(41,126,138,0.14);
+    }
+    .post-date{
+      font-size: calc(12px * var(--type-scale));
+      opacity: .72;
+      font-weight: 800;
+      white-space: nowrap;
+      line-height: 1;
+    }
+    .post h3{
+      margin: 0;
+      font-size: calc(18px * var(--type-scale-blog));
+      letter-spacing: -0.3px;
+      line-height: 1.15;
+    }
+    .post p{
+      margin: 0;
+      font-size: calc(14px * var(--type-scale-blog));
+      opacity: .84;
+      line-height: 1.45;
+    }
+    .post-bottom{
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 2px;
+    }
+    .post-meta{
+      font-size: calc(12px * var(--type-scale));
+      opacity: .72;
+      font-weight: 900;
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items:center;
+      line-height: 1;
+    }
+    .read{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      font-weight: 900;
+      font-size: calc(14px * var(--type-scale));
+      color: rgba(41,126,138,1);
+      line-height: 1;
+    }
+    .read:hover{ text-decoration: underline; }
+
+    /* CTA band */
+    .band{
+      padding: 26px;
+      border-radius: var(--radius-xl);
+      text-align: center;
+      position: relative;
+      overflow:hidden;
+      margin-top: 38px;
+    }
+    .band:before{
+      content:"";
+      position:absolute; inset:-30%;
+      background:
+        radial-gradient(circle at 25% 30%, rgba(41,126,138,0.18), transparent 55%),
+        radial-gradient(circle at 70% 25%, rgba(252,136,58,0.18), transparent 58%),
+        radial-gradient(circle at 50% 85%, rgba(255,236,209,0.55), transparent 60%);
+      filter: blur(10px);
+      transform: rotate(-8deg);
+      pointer-events:none;
+    }
+    .band > *{ position: relative; z-index: 1; }
+    .band h2{ margin: 0 0 8px; font-size: calc(28px * var(--type-scale)); letter-spacing: -0.6px; }
+    .band p{ margin: 0 auto 16px; max-width: 80ch; opacity: .85; line-height: 1.45; font-size: calc(16px * var(--type-scale-blog)); }
+
+    /* Footer */
+    footer{ padding: 36px 0 46px; opacity: .85; }
+    footer .foot{
+      display:flex; justify-content: space-between; align-items:center; gap: 12px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(41,126,138,0.14);
+      flex-wrap: wrap;
+    }
+    .foot-brand{ display:flex; flex-direction: column; gap: 4px; line-height: 1; }
+    .tiny{ font-size: calc(13px * var(--type-scale)); opacity: .8; }
+
+    /* Reveal */
+    .reveal{
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .reveal.in{ opacity: 1; transform: translateY(0); }
+
+    /* Mobile drawer */
+    .drawer{
+      position: fixed;
+      inset: 0;
+      background: rgba(57,57,57,0.28);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      display:none;
+      z-index: 60;
+    }
+    .drawer.open{ display:block; }
+    .drawer .panel{
+      width: min(520px, calc(100% - 26px));
+      margin: 86px auto 0;
+      border-radius: var(--radius-xl);
+      padding: 14px;
+    }
+    .drawer a{
+      display:flex;
+      justify-content: space-between;
+      align-items:center;
+      padding: 14px 12px;
+      border-radius: 16px;
+      font-weight: 900;
+      border: 1px solid rgba(41,126,138,0.14);
+      background: rgba(255,255,255,0.14);
+      margin: 10px 0;
+      line-height: 1;
+    }
+    .drawer a span{ font-size: calc(12px * var(--type-scale)); opacity: .75; font-weight: 700; }
+    .drawer a.is-disabled{ opacity: .62; cursor: not-allowed; }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      nav{ display:none; }
+      .mobile-toggle{ display:inline-flex; }
+      header .bar{ border-radius: 22px; }
+      h1{ font-size: calc(44px * var(--type-scale)); }
+      .related-grid{ grid-template-columns: 1fr; }
+    }
+    @media (max-width: 520px){
+      h1{ font-size: calc(38px * var(--type-scale)); }
+      .container{ width: min(var(--max), calc(100% - 28px)); }
+      .brand{ min-width: unset; }
+      .actions{ gap: 8px; }
+      .btn{ padding: 11px 12px; }
+      .theme-toggle{ width: 42px; height: 42px; }
+      .cover img{ height: min(420px, 52vh); }
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      html{ scroll-behavior: auto; }
+      .reveal{ opacity: 1 !important; transform: none !important; transition: none !important; }
+      .btn, nav a, .crumb{ transition: none !important; }
+    }
+
+    /* ========= Dark theme ========= */
     html[data-theme="dark"]{
       color-scheme: dark;
       --bg: #0b1012;
+      --surface: #0f171a;
       --ink: rgba(245,246,247,0.92);
       --glass-bg: rgba(18,26,28,0.62);
       --glass-br: rgba(255,255,255,0.10);
+      --shadow: 0 18px 60px rgba(0,0,0,0.55);
       --shadow-soft: 0 10px 30px rgba(0,0,0,0.45);
       --page-bg:
         radial-gradient(1000px 700px at 20% 10%, rgba(252,136,58,0.10), transparent 60%),
         radial-gradient(1100px 820px at 90% 15%, rgba(41,126,138,0.18), transparent 60%),
         linear-gradient(180deg, #06090b, var(--bg) 28%, #06090b 100%);
     }
-    html[data-theme="dark"] .chip,
-    html[data-theme="dark"] .hero,
-    html[data-theme="dark"] .prose,
-    html[data-theme="dark"] .cover{
+    html[data-theme="dark"] nav a:hover{ background: rgba(255,255,255,0.06); }
+    html[data-theme="dark"] nav a.active{
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.14);
+    }
+    html[data-theme="dark"] .btn.ghost{ background: rgba(255,255,255,0.06); }
+    html[data-theme="dark"] .hero-card,
+    html[data-theme="dark"] .pill,
+    html[data-theme="dark"] .crumb,
+    html[data-theme="dark"] .article-card,
+    html[data-theme="dark"] .post,
+    html[data-theme="dark"] .post-cat,
+    html[data-theme="dark"] .drawer a{
       background: rgba(255,255,255,0.06);
       border-color: rgba(255,255,255,0.12);
     }
+    html[data-theme="dark"] .drawer{ background: rgba(0,0,0,0.62); }`;
+
+      // ========= JS DO POST (igual ao exemplo, só injeta RELATED dinâmico)
+      const POST_JS = `
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Theme (light/dark) with persistence + system default
+    const root = document.documentElement;
+    const themeBtn = document.getElementById('themeToggle');
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const THEME_KEY = 'theme';
+
+    function systemPrefersDark(){
+      return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
+    function setTheme(theme, {persist = true} = {}){
+      if(theme === 'dark') root.dataset.theme = 'dark';
+      else delete root.dataset.theme;
+
+      if(persist) localStorage.setItem(THEME_KEY, theme);
+
+      if(themeBtn){
+        const isDark = theme === 'dark';
+        themeBtn.setAttribute('aria-pressed', String(isDark));
+        themeBtn.setAttribute('aria-label', isDark ? 'Desativar modo escuro' : 'Ativar modo escuro');
+      }
+      if(metaTheme){
+        metaTheme.setAttribute('content', theme === 'dark' ? '#0b1012' : '#297E8A');
+      }
+    }
+    (function initTheme(){
+      const saved = localStorage.getItem(THEME_KEY);
+      if(saved === 'light' || saved === 'dark') setTheme(saved, {persist:false});
+      else setTheme(systemPrefersDark() ? 'dark' : 'light', {persist:false});
+    })();
+
+    themeBtn?.addEventListener('click', () => {
+      const current = root.dataset.theme === 'dark' ? 'dark' : 'light';
+      setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+
+    const mq = window.matchMedia?.('(prefers-color-scheme: dark)');
+    mq?.addEventListener?.('change', (e) => {
+      const saved = localStorage.getItem(THEME_KEY);
+      if(saved !== 'light' && saved !== 'dark'){
+        setTheme(e.matches ? 'dark' : 'light', {persist:false});
+      }
+    });
+
+    // Prevent placeholder links from navigating
+    document.querySelectorAll('a[aria-disabled="true"]').forEach(a => {
+      a.addEventListener('click', (e) => e.preventDefault());
+    });
+
+    // Mobile drawer
+    const drawer = document.getElementById('drawer');
+    const toggle = document.getElementById('mobileToggle');
+    const closeBtn = document.getElementById('drawerClose');
+    function openDrawer(){
+      drawer.classList.add('open');
+      drawer.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeDrawer(){
+      drawer.classList.remove('open');
+      drawer.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+    toggle?.addEventListener('click', openDrawer);
+    closeBtn?.addEventListener('click', closeDrawer);
+    drawer?.addEventListener('click', (e) => { if(e.target === drawer) closeDrawer(); });
+    drawer?.querySelectorAll('[data-close]')?.forEach(a => a.addEventListener('click', closeDrawer));
+
+    // Reveal on scroll (safe fallback)
+    (function(){
+      const els = document.querySelectorAll('.reveal');
+      if(!('IntersectionObserver' in window)){
+        els.forEach(el => el.classList.add('in'));
+        return;
+      }
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(entry=>{
+          if(entry.isIntersecting){
+            entry.target.classList.add('in');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      els.forEach(el => io.observe(el));
+      window.__revealIO = io;
+    })();
+
+    // Progress bar
+    const progress = document.getElementById('progress');
+    function updateProgress(){
+      const doc = document.documentElement;
+      const scrollTop = doc.scrollTop || document.body.scrollTop;
+      const scrollHeight = (doc.scrollHeight || document.body.scrollHeight) - doc.clientHeight;
+      const pct = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+      progress.style.width = Math.min(100, Math.max(0, pct)) + '%';
+    }
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress();
+
+    // Copy link button
+    const copyBtn = document.getElementById('copyLink');
+    copyBtn?.addEventListener('click', async () => {
+      try{
+        await navigator.clipboard.writeText(window.location.href);
+        copyBtn.textContent = 'Link copiado ✓';
+        setTimeout(()=> (copyBtn.textContent = 'Copiar link'), 1400);
+      }catch(e){
+        const tmp = document.createElement('input');
+        tmp.value = window.location.href;
+        document.body.appendChild(tmp);
+        tmp.select();
+        document.execCommand('copy');
+        document.body.removeChild(tmp);
+        copyBtn.textContent = 'Link copiado ✓';
+        setTimeout(()=> (copyBtn.textContent = 'Copiar link'), 1400);
+      }
+    });
+
+    /* =========================
+       Related posts (gerado pelo CMS)
+       ========================= */
+    const RELATED = ${JSON.stringify(related, null, 2)};
+
+    function formatDateISO(iso){
+      try{
+        const [y,m,d] = iso.split('-').map(Number);
+        const dt = new Date(y, m-1, d);
+        return dt.toLocaleDateString('pt-BR', { day:'2-digit', month:'short', year:'numeric' });
+      }catch(e){
+        return iso;
+      }
+    }
+    function escapeHtml(str){
+      return String(str)
+        .replaceAll('&','&amp;')
+        .replaceAll('<','&lt;')
+        .replaceAll('>','&gt;')
+        .replaceAll('"','&quot;')
+        .replaceAll("'","&#039;");
+    }
+
+    const related = document.getElementById('related');
+    related.innerHTML = RELATED.map(p => \`
+      <article class="post glass reveal">
+        <a href="\${escapeHtml(p.href)}" aria-label="Abrir post: \${escapeHtml(p.title)}">
+          <div class="post-media" aria-hidden="true">
+            <img src="\${escapeHtml(p.image)}" alt="\${escapeHtml(p.title)}" loading="lazy" />
+          </div>
+          <div class="post-body">
+            <div class="post-top">
+              <div class="post-cat"><span class="dot" aria-hidden="true"></span>\${escapeHtml(p.category)}</div>
+              <div class="post-date">\${escapeHtml(formatDateISO(p.date))}</div>
+            </div>
+            <h3>\${escapeHtml(p.title)}</h3>
+            <p>\${escapeHtml(p.excerpt)}</p>
+            <div class="post-bottom">
+              <div class="post-meta">
+                <span>\${escapeHtml(p.readMin)} min</span>
+                <span>•</span>
+                <span>Leitura objetiva</span>
+              </div>
+              <span class="read">Ler →</span>
+            </div>
+          </div>
+        </a>
+      </article>
+    \`).join('');
+
+    // observe newly injected cards
+    const io = window.__revealIO;
+    if(io){
+      related.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    }else{
+      related.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+    }
+      `.trim();
+
+      // HTML final do post (igual ao exemplo)
+      return `<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#297E8A" />
+
+  <!-- =========
+    POST META (GERADO PELO CMS)
+    ========= -->
+  <title>${escapeHtml(title)} • DeRose SBC</title>
+  <meta name="description" content="${escapeHtml(desc)}" />
+  <meta property="og:title" content="${escapeHtml(title)} • DeRose SBC" />
+  <meta property="og:description" content="${escapeHtml(desc)}" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="${escapeHtml(cover)}" />
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+
+  <style>
+${POST_CSS}
   </style>
 </head>
 
 <body>
+  <div class="progress" id="progress" aria-hidden="true"></div>
+
+  <!-- Mobile drawer -->
+  <div class="drawer" id="drawer" aria-hidden="true">
+    <div class="container">
+      <div class="panel glass">
+        <a href="../index.html#aulas" data-close> Aulas <span>presencial + online</span></a>
+        <a href="../index.html#cursos" data-close> Cursos <span>precisão & consistência</span></a>
+        <a href="../index.html#formacao" data-close> Formação <span>aprofundamento</span></a>
+        <a href="#" class="is-disabled" aria-disabled="true" data-close>Eventos</a>
+        <a href="#" class="is-disabled" aria-disabled="true" data-close>Bistrô</a>
+        <a href="../blog.html" data-close> Blog <span>clareza sem misticismo</span></a>
+        <a href="../index.html#contato" data-close> Contato <span>rota rápida</span></a>
+        <div style="display:flex; gap:10px; justify-content:flex-end; margin-top: 10px;">
+          <button class="btn ghost glass" id="drawerClose" type="button">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <header>
     <div class="container">
       <div class="bar glass">
-        <a class="btn" href="../blog.html">Voltar ao Blog</a>
-        <div style="display:flex; gap:10px; align-items:center;">
-          <button class="theme" id="t" type="button" aria-label="Tema">
+        <a class="brand" href="../index.html#top" aria-label="Ir para a home">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span class="brand-name">
+            <strong>DeRose SBC</strong>
+            <span>Yôga de Alto Rendimento</span>
+          </span>
+        </a>
+
+        <nav aria-label="Navegação principal">
+          <a href="../index.html#aulas">AULAS</a>
+          <a href="../index.html#cursos">CURSOS</a>
+          <a href="../index.html#formacao">FORMAÇÃO</a>
+          <a href="#" class="is-disabled" aria-disabled="true">EVENTOS</a>
+          <a href="#" class="is-disabled" aria-disabled="true">BISTRÔ</a>
+          <a href="../blog.html" class="active" aria-current="page">BLOG</a>
+        </nav>
+
+        <div class="actions">
+          <button class="mobile-toggle" id="mobileToggle" aria-label="Abrir menu">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M4 7H20" stroke="#393939" stroke-width="2.4" stroke-linecap="round"/>
+              <path d="M4 12H20" stroke="#393939" stroke-width="2.4" stroke-linecap="round" opacity="0.9"/>
+              <path d="M4 17H20" stroke="#393939" stroke-width="2.4" stroke-linecap="round" opacity="0.8"/>
+            </svg>
+          </button>
+
+          <button class="theme-toggle" id="themeToggle" type="button" aria-label="Ativar modo escuro" aria-pressed="false">
             <svg class="moon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M21 14.5A8.5 8.5 0 1 1 9.5 3a7 7 0 0 0 11.5 11.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
@@ -1295,239 +2214,299 @@
               <path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5l-1.5-1.5M20.5 20.5 19 19M5 19l-1.5 1.5M20.5 3.5 19 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
             </svg>
           </button>
-          <a class="btn" href="../index.html#contato">Contato</a>
+
+          <a class="btn primary" href="../index.html#contato" title="Agendar uma aula">
+            <span class="dot" aria-hidden="true"></span>
+            Entre em Contato
+          </a>
         </div>
       </div>
     </div>
   </header>
 
   <main id="top">
-    <section>
+    <!-- POST HERO -->
+    <section class="hero">
       <div class="container">
-        <div class="hero glass">
-          <div class="kicker">
-            <span style="padding:6px 10px; border-radius:999px; background: rgba(41,126,138,0.14); border: 1px solid rgba(41,126,138,0.18);">${safeCat}</span>
-            <span>${safeDate} • ${safeRead} min</span>
-          </div>
-          <h1>${safeTitle}</h1>
-          <p class="sub">${safeDesc}</p>
-          <div class="meta">${safeTags}</div>
-          <div class="cover glass"><img src="${img}" alt="${safeTitle}" loading="lazy"></div>
-        </div>
+        <div class="hero-card glass reveal">
+          <div style="display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap;">
+            <a class="crumb" href="../blog.html">← Voltar ao Blog</a>
 
-        <article class="prose glass">
-          ${post.contentHtml || '<p>Conteúdo não informado.</p>'}
-        </article>
-
-        <footer>
-          <div class="foot">
-            <div class="tiny">© <span id="y"></span> DeRose SBC • Blog</div>
-            <div style="display:flex; gap:10px; flex-wrap:wrap;">
-              <a class="btn" href="#top">Topo ↑</a>
-              <a class="btn" href="../blog.html">Mais posts</a>
+            <div class="kicker" aria-label="Metadados do post">
+              <span class="pill"><span class="dot" aria-hidden="true"></span><span id="postCategory">${escapeHtml(category)}</span></span>
+              <span class="pill alt"><span class="dot" aria-hidden="true"></span><span id="postTag">${escapeHtml(tag)}</span></span>
             </div>
           </div>
-        </footer>
+
+          <h1 id="postTitle">${escapeHtml(title)}</h1>
+
+          <p class="sub" id="postExcerpt">${escapeHtml(p.excerpt || '')}</p>
+
+          <div class="meta-row">
+            <span id="postDateLabel">${escapeHtml(dateLabel)}</span>
+            <span class="sep">•</span>
+            <span><strong id="postRead">${escapeHtml(String(readMin))}</strong> min de leitura</span>
+            <span class="sep">•</span>
+            <span>Por <strong id="postAuthor">DeRose SBC</strong></span>
+          </div>
+
+          <div class="cover reveal" style="margin-top:18px;">
+            <img id="postCover" src="${escapeHtml(cover)}" alt="${escapeHtml(title)}" loading="eager" />
+          </div>
+        </div>
       </div>
     </section>
 
-    <script>
-      document.getElementById('y').textContent = new Date().getFullYear();
-      const THEME_KEY = 'theme';
-      const root = document.documentElement;
-      const btn = document.getElementById('t');
-      const meta = document.querySelector('meta[name="theme-color"]');
+    <!-- POST CONTENT (separate card; no nested glass) -->
+    <section style="padding-top: 18px;">
+      <div class="container">
+        <article class="article-card glass reveal">
+          <div class="prose" id="postBody">
+${bodyHtml}
+          </div>
 
-      function systemPrefersDark(){ return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches; }
-      function setTheme(t, persist){
-        if(t === 'dark') root.dataset.theme = 'dark'; else delete root.dataset.theme;
-        if(persist) localStorage.setItem(THEME_KEY, t);
-        meta && meta.setAttribute('content', t === 'dark' ? '#0b1012' : '#297E8A');
-      }
-      const saved = localStorage.getItem(THEME_KEY);
-      if(saved === 'dark' || saved === 'light') setTheme(saved, false);
-      else setTheme(systemPrefersDark() ? 'dark' : 'light', false);
+          <div class="post-actions">
+            <button class="btn ghost glass" id="copyLink" type="button">Copiar link</button>
+            <a class="btn ghost glass" href="../blog.html#posts">Ver mais posts</a>
+            <a class="btn primary" href="../index.html#contato"><span class="dot" aria-hidden="true"></span>Agendar aula</a>
+          </div>
+        </article>
+      </div>
+    </section>
 
-      btn && btn.addEventListener('click', () => {
-        const cur = root.dataset.theme === 'dark' ? 'dark' : 'light';
-        setTheme(cur === 'dark' ? 'light' : 'dark', true);
-      });
-    ${closeScript}
+    <!-- RELATED -->
+    <section>
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <h2>Leituras relacionadas</h2>
+            <p class="lead">Mais alguns atalhos práticos na mesma linha: foco, rotina, recuperação.</p>
+          </div>
+          <a class="pill-link glass" href="../blog.html">Ir para o Blog →</a>
+        </div>
+
+        <div class="related-grid" id="related"></div>
+
+        <div class="band glass reveal">
+          <h2>Consistência é o multiplicador.</h2>
+          <p>
+            Se você quer acelerar progresso com orientação, ajuste fino e método progressivo, agende uma aula e alinhe seu plano com clareza.
+          </p>
+          <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+            <a class="btn primary" href="../index.html#contato"><span class="dot" aria-hidden="true"></span>Agendar</a>
+            <a class="btn ghost glass" href="../index.html#aulas">Ver Aulas</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <div class="foot">
+          <div class="foot-brand">
+            <div style="font-weight:800;">DeRose SBC</div>
+            <div class="tiny">Blog • Yôga de Alto Rendimento</div>
+          </div>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <a class="pill-link glass" href="#top">Topo ↑</a>
+            <a class="pill-link glass" href="../blog.html">Blog</a>
+            <a class="pill-link glass" href="../index.html#contato">Contato</a>
+          </div>
+        </div>
+        <div class="tiny" style="margin-top:12px;">
+          © <span id="year"></span> DeRose SBC.
+        </div>
+      </div>
+    </footer>
   </main>
+
+  <script>
+${POST_JS}
+  </script>
 </body>
 </html>`;
     }
 
-    function downloadPostHtml(){
-      const draft = draftFromForm();
-      const v = validateDraft(draft);
-      if(!v.ok) return setStatus(`Não dá pra gerar o HTML: ${v.msg}`, v.type);
-
-      const html = buildPostHtml(draft, currentTheme());
-      const blob = new Blob([html], {type:'text/html'});
-      const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = `${draft.id}.html`;
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      URL.revokeObjectURL(a.href);
-
-      setStatus(`Baixado: ${draft.id}.html (coloque em /posts/).`, 'ok');
-    }
-
+    /* =========================================================
+       Preview (debounced)
+       ========================================================= */
     let previewTimer = null;
     function schedulePreview(){
       clearTimeout(previewTimer);
       previewTimer = setTimeout(updatePreview, 120);
     }
+
     function updatePreview(){
-      const d = draftFromForm();
-      const safe = {
-        ...d,
-        title: d.title || 'Título do Post',
-        excerpt: d.excerpt || 'Resumo (excerpt) do post.',
-        category: d.category || 'Categoria',
-        date: d.date || '2026-01-01',
-        readMin: Number.isFinite(Number(d.readMin)) ? d.readMin : 5,
-        tags: (d.tags && d.tags.length) ? d.tags : ['Leitura objetiva'],
-        image: d.image || './assets/blog/placeholder.webp',
-        contentHtml: d.contentHtml || '<p>Escreva o conteúdo no campo “Conteúdo do Post (HTML)”.</p>'
-      };
-      previewFrame.srcdoc = buildPostHtml(safe, currentTheme());
-    }
-    function openPreviewInNewTab(){
-      const d = draftFromForm();
-      const safe = {
-        ...d,
-        title: d.title || 'Título do Post',
-        excerpt: d.excerpt || 'Resumo (excerpt) do post.',
-        category: d.category || 'Categoria',
-        date: d.date || '2026-01-01',
-        readMin: Number.isFinite(Number(d.readMin)) ? d.readMin : 5,
-        tags: (d.tags && d.tags.length) ? d.tags : ['Leitura objetiva'],
-        image: d.image || './assets/blog/placeholder.webp',
-        contentHtml: d.contentHtml || '<p>Escreva o conteúdo no campo “Conteúdo do Post (HTML)”.</p>'
-      };
-      const html = buildPostHtml(safe, currentTheme());
-      const blob = new Blob([html], {type:'text/html'});
-      const url = URL.createObjectURL(blob);
-      window.open(url, '_blank', 'noopener');
-      setTimeout(()=> URL.revokeObjectURL(url), 30000);
+      const p = currentFormPost();
+      // preview mesmo com erros (para ver layout), mas avisando
+      const errs = validatePost(p);
+      if(errs.length){
+        setStatus(`Preview ok, mas faltando/errado: ${errs.join(', ')}.`, 'warn');
+      }
+      const html = generatePostHtml(p);
+      previewFrame.srcdoc = html;
     }
 
-    // Wire events
-    elQ.addEventListener('input', (e) => { view.q = e.target.value || ''; render(); });
-    elCat.addEventListener('change', (e) => { view.cat = e.target.value || 'all'; render(); });
-    elOrder.addEventListener('change', (e) => { view.order = e.target.value || 'new'; render(); });
-
-    btnNew.addEventListener('click', resetForm);
-
-    btnSlugify.addEventListener('click', () => {
-      const s = slugify(fTitle.value || '');
-      if(!s) return setStatus('Escreva um título para gerar o slug.', 'warn');
-      fId.value = s;
-      if(!clean(fHref.value)) fHref.value = `./posts/${s}.html`;
-      if(!clean(fImage.value)) fImage.value = `./assets/blog/${s}.webp`;
-      setStatus('Slug gerado. Confira href/imagem, escreva o conteúdo e salve.', 'ok');
-      schedulePreview();
-    });
-
-    fId.addEventListener('blur', () => {
-      const s = slugify(fId.value);
-      if(s && s !== fId.value){
-        fId.value = s;
-        setStatus('Slug normalizado (sem acentos / caracteres especiais).', 'warn');
-      }
-      if(s){
-        if(!clean(fHref.value)) fHref.value = `./posts/${s}.html`;
-        if(!clean(fImage.value)) fImage.value = `./assets/blog/${s}.webp`;
-      }
-      schedulePreview();
-    });
-
-    btnSave.addEventListener('click', saveDraft);
-    btnDelete.addEventListener('click', deleteCurrent);
-    btnClear.addEventListener('click', resetForm);
-
+    /* =========================================================
+       Buttons / Events
+       ========================================================= */
     elList.addEventListener('click', (e) => {
-      const b = e.target.closest?.('button[data-edit]');
-      if(!b) return;
-      const id = b.getAttribute('data-edit');
+      const btn = e.target.closest('button[data-edit]');
+      if(!btn) return;
+      const id = btn.getAttribute('data-edit');
       const p = posts.find(x => x.id === id);
       if(p) fillForm(p);
+      render();
+      setStatus('Editando.', 'ok');
     });
 
-    btnExportJson.addEventListener('click', exportJson);
-    btnCopyConst.addEventListener('click', copyConst);
+    elQ.addEventListener('input', () => { view.q = elQ.value; render(); });
+    elCat.addEventListener('change', () => { view.cat = elCat.value; render(); });
+    elOrder.addEventListener('change', () => { view.order = elOrder.value; render(); });
+
+    btnNew.addEventListener('click', () => {
+      resetForm();
+      render();
+      setStatus('Novo post.', 'ok');
+    });
 
     btnImport.addEventListener('click', () => fileInput.click());
-    fileInput.addEventListener('change', async (e) => {
-      const f = e.target.files?.[0];
-      if(!f) return;
-      const text = await f.text();
-      importJsonText(text);
+    fileInput.addEventListener('change', () => {
+      const f = fileInput.files?.[0];
       fileInput.value = '';
+      if(f) importJsonFile(f);
+    });
+
+    btnSlugify.addEventListener('click', () => {
+      const s = slugify(fTitle.value);
+      if(!s){
+        setStatus('Nada para gerar slug.', 'warn');
+        return;
+      }
+      fId.value = s;
+
+      const d = makeDefaultsForId(s);
+      if(!clean(fImage.value)) fImage.value = d.image;
+      if(!clean(fHref.value)) fHref.value = d.href;
+
+      schedulePreview();
+      setStatus('Slug gerado.', 'ok');
+    });
+
+    fId.addEventListener('input', () => {
+      const s = slugify(fId.value);
+      // não força enquanto digita, mas mantém limpo quando o usuário sai do campo
+      const d = makeDefaultsForId(s || fId.value);
+      if(!clean(fHref.value)) fHref.value = d.href;
+      if(!clean(fImage.value)) fImage.value = d.image;
+      schedulePreview();
+    });
+    fId.addEventListener('blur', () => {
+      const s = slugify(fId.value);
+      if(s && s !== fId.value) fId.value = s;
+
+      const d = makeDefaultsForId(s || fId.value);
+      if(!clean(fHref.value)) fHref.value = d.href;
+      if(!clean(fImage.value)) fImage.value = d.image;
+
+      schedulePreview();
     });
 
     btnPlainToHtml.addEventListener('click', () => {
-      const out = plainTextToHtml(fContent.value || '');
-      if(!out) return setStatus('Cole texto no campo de conteúdo antes de converter.', 'warn');
-      fContent.value = out;
-      setStatus('Convertido: texto → HTML (parágrafos).', 'ok');
+      const cur = clean(fContent.value);
+      if(!cur){
+        setStatus('Nada para converter.', 'warn');
+        return;
+      }
+      // se já parece HTML, não converte
+      if(/<\/(p|h2|h3|ul|ol|li|blockquote)>/i.test(cur) || /<(p|h2|h3|ul|ol|li|blockquote)\b/i.test(cur)){
+        setStatus('Parece que já é HTML. (Não converti)', 'warn');
+        return;
+      }
+      fContent.value = plainTextToHtml(cur);
       schedulePreview();
+      setStatus('Convertido para HTML.', 'ok');
     });
 
     btnInsertStarter.addEventListener('click', () => {
       const starter = [
-        "<p><strong>Objetivo:</strong> descreva em 1 frase o benefício prático.</p>",
-        "<h2>O que fazer (passo a passo)</h2>",
-        "<ol>",
-        "  <li>Passo 1 (curto e acionável)</li>",
-        "  <li>Passo 2 (sem teoria demais)</li>",
-        "  <li>Passo 3 (checagem rápida)</li>",
-        "</ol>",
-        "<h2>Erros comuns</h2>",
-        "<ul>",
-        "  <li>Erro 1 → correção</li>",
-        "  <li>Erro 2 → correção</li>",
-        "</ul>",
-        "<h2>Protocolo mínimo (3–5 min)</h2>",
-        "<p>Feche com uma versão simples que caiba na rotina.</p>",
-        "<blockquote>Regra: consistência > intensidade.</blockquote>",
-      ].join("\n");
-      if(fContent.value.trim() && !confirm("Substituir o conteúdo atual pelo esqueleto?")) return;
+        `<p>Quando a mente está “barulhenta”, o corpo normalmente já está acelerado. A forma mais rápida de trazer o sistema de volta para um estado útil é ajustar <strong>ritmo</strong>, <strong>amplitude</strong> e <strong>pausas</strong> da respiração.</p>`,
+        `<p><strong>Se você quer foco:</strong> primeiro reduza o ruído fisiológico. Depois, direcione atenção.</p>`,
+        `<h2>O protocolo (passo a passo)</h2>`,
+        `<p>Escreva aqui o protocolo em linguagem simples. Regra: <strong>sem força</strong>, sem “segurar no sofrimento”. O objetivo é <strong>estabilizar</strong>.</p>`,
+        `<h3>Passo 1 — Postura</h3>`,
+        `<ul><li>Item</li><li>Item</li></ul>`,
+        `<h3>Passo 2 — Ritmo</h3>`,
+        `<ul><li>Item</li><li>Item</li></ul>`,
+        `<div class="divider"></div>`,
+        `<h2>Erros comuns</h2>`,
+        `<ul><li>Erro + correção</li><li>Erro + correção</li></ul>`,
+        `<h2>Quando usar no dia</h2>`,
+        `<p>Explique quando e por quê. Consistência supera intensidade.</p>`
+      ].join('\n\n');
+
+      if(clean(fContent.value)){
+        const ok = confirm('Substituir o conteúdo atual pelo esqueleto?');
+        if(!ok) return;
+      }
       fContent.value = starter;
-      setStatus('Esqueleto inserido.', 'ok');
       schedulePreview();
+      setStatus('Esqueleto inserido.', 'ok');
     });
 
-    btnDownloadPost.addEventListener('click', downloadPostHtml);
-    btnOpenPreviewTab.addEventListener('click', openPreviewInNewTab);
-
-    [fTitle,fId,fDate,fCategory,fReadMin,fTags,fExcerpt,fImage,fHref,fFeatured,fContent]
-      .forEach(el => el?.addEventListener('input', schedulePreview));
-
-    btnResetAll.addEventListener('click', () => {
-      if(!confirm('Reset local: apagar dados do CMS no seu navegador e recarregar seed?')) return;
-      localStorage.removeItem(STORAGE_KEY);
-      for(const k of LEGACY_KEYS) localStorage.removeItem(k);
-      posts = SEED_POSTS.slice();
-      ensureSingleFeatured();
-      persist();
-      refreshTaxonomy();
+    btnClear.addEventListener('click', () => {
+      const ok = confirm('Limpar o editor?');
+      if(!ok) return;
       resetForm();
       render();
-      setStatus('Reset local concluído. Seed recarregado.', 'ok');
+      setStatus('Editor limpo.', 'warn');
     });
 
-    // Init
+    btnSave.addEventListener('click', () => savePost());
+    btnDelete.addEventListener('click', () => deletePost());
+
+    btnExportJson.addEventListener('click', () => exportJson());
+    btnCopyConst.addEventListener('click', () => copyConst());
+    btnResetAll.addEventListener('click', () => resetAll());
+
+    // live preview
+    [
+      fTitle, fDate, fCategory, fReadMin, fTags, fExcerpt, fImage, fHref, fFeatured, fContent
+    ].forEach(el => {
+      el.addEventListener('input', schedulePreview);
+      el.addEventListener('change', schedulePreview);
+    });
+
+    btnDownloadPost.addEventListener('click', () => {
+      const p = currentFormPost();
+      const errs = validatePost(p);
+      if(errs.length){
+        setStatus(`Não baixei: faltando/errado: ${errs.join(', ')}.`, 'err');
+        return;
+      }
+      const html = generatePostHtml(p);
+      downloadText(`${p.id}.html`, html, 'text/html;charset=utf-8');
+      setStatus(`Baixado: ${p.id}.html (coloque em /posts/)`, 'ok');
+    });
+
+    btnOpenPreviewTab.addEventListener('click', () => {
+      const p = currentFormPost();
+      const html = generatePostHtml(p);
+      const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      window.open(url, '_blank', 'noopener');
+      setTimeout(()=> URL.revokeObjectURL(url), 2000);
+      setStatus('Preview aberto em nova aba.', 'ok');
+    });
+
+    /* =========================================================
+       Init
+       ========================================================= */
     loadPosts();
     refreshTaxonomy();
     render();
     resetForm();
-    schedulePreview();
+    updatePreview();
   </script>
 </body>
 </html>
-
