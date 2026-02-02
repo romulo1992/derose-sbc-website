@@ -5,15 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#297E8A" />
 
-  <!-- =========
-    POST META (EDIT THESE)
-    ========= -->
-  <title>Respiração Transformadora em 3 minutos • DeRose SBC</title>
-  <meta name="description" content="Um protocolo simples para baixar ruído, organizar foco e começar o dia com mais clareza — sem misticismo e sem drama." />
-  <meta property="og:title" content="Respiração Transformadora em 3 minutos • DeRose SBC" />
-  <meta property="og:description" content="Um protocolo simples para baixar ruído, organizar foco e começar o dia com mais clareza — sem misticismo e sem drama." />
+  <!-- BASIC SEO (script also syncs title/description) -->
+  <title>Post • DeRose SBC</title>
+  <meta name="description" content="Post do Blog DeRose SBC." />
+  <meta property="og:title" content="Post • DeRose SBC" />
+  <meta property="og:description" content="Post do Blog DeRose SBC." />
   <meta property="og:type" content="article" />
-  <meta property="og:image" content="../assets/blog/respiracao.webp" />
+  <meta property="og:image" content="../assets/blog/featured.webp" />
+
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
 
   <style>
@@ -37,23 +36,21 @@
       --accent: #FC883A;
       --teal: #297E8A;
       --ink: #393939;
+
       --glass-bg: rgba(255,255,255,0.26);
       --glass-br: rgba(41,126,138,0.22);
-      --shadow: 0 18px 60px rgba(57,57,57,0.12);
       --shadow-soft: 0 10px 30px rgba(57,57,57,0.10);
+
       --radius-xl: 28px;
       --radius-lg: 22px;
       --radius-md: 16px;
-      --radius-sm: 12px;
+
       --max: 1120px;
 
       /* baseline */
       --type-scale: 0.77;
       /* blog reading comfort */
       --type-scale-blog: 0.92;
-
-      --control-h: 56px;
-      --control-pad-x: 18px;
 
       --page-bg:
         radial-gradient(1000px 700px at 20% 10%, rgba(252,136,58,0.12), transparent 60%),
@@ -71,6 +68,7 @@
       background: var(--page-bg);
       overflow-x: hidden;
     }
+
     a{ color: inherit; text-decoration: none; }
     .container{ width:min(var(--max), calc(100% - 40px)); margin: 0 auto; }
 
@@ -83,22 +81,10 @@
       -webkit-backdrop-filter: blur(18px);
     }
 
-    /* Progress bar */
-    .progress{
-      position: fixed;
-      top: 0; left: 0;
-      height: 3px;
-      width: 0%;
-      background: linear-gradient(90deg, rgba(41,126,138,0.95), rgba(252,136,58,0.95));
-      z-index: 80;
-      transform-origin: left center;
-    }
-
     /* Header */
     header{
       position: sticky; top: 0; z-index: 40;
       padding: 14px 0;
-      transition: transform .2s ease, background .2s ease, border-color .2s ease;
     }
     header .bar{
       border-radius: 999px;
@@ -106,6 +92,7 @@
       display:flex; align-items:center; justify-content: space-between;
       gap: 14px;
     }
+
     .brand{
       display:flex; align-items:center; gap: 10px; min-width: 210px;
       padding: 8px 10px; border-radius: 999px;
@@ -123,11 +110,7 @@
       background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.55), transparent 55%);
       transform: rotate(18deg);
     }
-    .brand-name{
-      line-height: 1;
-      display:flex; flex-direction: column;
-      gap: 4px;
-    }
+    .brand-name{ line-height: 1; display:flex; flex-direction: column; gap: 4px; }
     .brand-name strong{ font-size: calc(15px * var(--type-scale)); letter-spacing: .2px; }
     .brand-name span{ font-size: calc(12px * var(--type-scale)); opacity: .75; }
 
@@ -212,11 +195,44 @@
     html[data-theme="dark"] .theme-toggle .moon{ display:none; }
     svg [stroke="#393939"]{ stroke: var(--ink) !important; }
 
+    /* Mobile drawer */
+    .drawer{
+      position: fixed;
+      inset: 0;
+      background: rgba(57,57,57,0.28);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      display:none;
+      z-index: 60;
+    }
+    .drawer.open{ display:block; }
+    .drawer .panel{
+      width: min(520px, calc(100% - 26px));
+      margin: 86px auto 0;
+      border-radius: var(--radius-xl);
+      padding: 14px;
+    }
+    .drawer a{
+      display:flex;
+      justify-content: space-between;
+      align-items:center;
+      padding: 14px 12px;
+      border-radius: 16px;
+      font-weight: 900;
+      border: 1px solid rgba(41,126,138,0.14);
+      background: rgba(255,255,255,0.14);
+      margin: 10px 0;
+      line-height: 1;
+    }
+    .drawer a span{ font-size: calc(12px * var(--type-scale)); opacity: .75; font-weight: 700; }
+    .drawer a.is-disabled{ opacity: .62; cursor: not-allowed; }
+
     /* Sections */
-    section{ padding: 54px 0; }
-    .hero{ padding: 34px 0 18px; }
+    section{ padding: 44px 0; }
+    .hero{ padding: 30px 0 18px; }
+
     .hero-card{
-      padding: 26px;
+      padding: 22px;
       border-radius: var(--radius-xl);
       position: relative;
       overflow:hidden;
@@ -234,32 +250,14 @@
     }
     .hero-card > *{ position: relative; z-index: 1; }
 
-    .kicker{
+    .topline{
       display:flex;
+      justify-content: space-between;
+      align-items: center;
       gap: 10px;
       flex-wrap: wrap;
-      align-items:center;
     }
-    .pill{
-      display:inline-flex; align-items:center; gap: 10px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(41,126,138,0.18);
-      background: rgba(255,255,255,0.22);
-      font-size: calc(13px * var(--type-scale));
-      font-weight: 900;
-      letter-spacing: .25px;
-      line-height: 1;
-    }
-    .pill .dot{
-      width: 8px; height: 8px; border-radius: 999px;
-      background: var(--teal);
-      box-shadow: 0 0 0 4px rgba(41,126,138,0.14);
-    }
-    .pill.alt .dot{
-      background: var(--accent);
-      box-shadow: 0 0 0 4px rgba(252,136,58,0.14);
-    }
+
     .crumb{
       display:inline-flex; align-items:center; gap: 10px;
       padding: 10px 12px;
@@ -274,14 +272,38 @@
     }
     .crumb:hover{ transform: translateY(-1px); box-shadow: var(--shadow-soft); opacity: 1; }
 
+    .pill{
+      display:inline-flex; align-items:center; gap: 10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(41,126,138,0.18);
+      background: rgba(255,255,255,0.22);
+      font-size: calc(13px * var(--type-scale));
+      font-weight: 900;
+      letter-spacing: .25px;
+      line-height: 1;
+      opacity: .94;
+      white-space: nowrap;
+    }
+    .pill .dot{
+      width: 8px; height: 8px; border-radius: 999px;
+      background: var(--teal);
+      box-shadow: 0 0 0 4px rgba(41,126,138,0.14);
+    }
+    .pill.alt .dot{
+      background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(252,136,58,0.14);
+    }
+
     h1{
-      margin: 16px 0 10px;
+      margin: 14px 0 10px;
       font-size: calc(50px * var(--type-scale));
       line-height: 0.98;
       letter-spacing: -1px;
+      max-width: 22ch;
     }
     .sub{
-      margin: 12px 0 0;
+      margin: 10px 0 0;
       font-size: calc(18px * var(--type-scale-blog));
       line-height: 1.55;
       opacity: 0.9;
@@ -298,9 +320,8 @@
       opacity: .88;
       line-height: 1;
     }
-    .meta-row span.sep{ opacity: .5; }
+    .meta-row .sep{ opacity: .55; }
 
-    /* Cover */
     .cover{
       margin-top: 18px;
       border-radius: var(--radius-xl);
@@ -309,7 +330,7 @@
     }
     .cover img{
       width: 100%;
-      height: min(520px, 56vh);
+      height: min(480px, 54vh);
       object-fit: cover;
       display:block;
       filter: saturate(1.02) contrast(1.02);
@@ -318,79 +339,59 @@
     .cover:after{
       content:"";
       position:absolute; inset: 0;
-      background:
-        linear-gradient(180deg, rgba(0,0,0,0.00), rgba(0,0,0,0.20) 75%, rgba(0,0,0,0.28));
+      background: linear-gradient(180deg, rgba(0,0,0,0.00), rgba(0,0,0,0.18) 75%, rgba(0,0,0,0.26));
       pointer-events:none;
       opacity: .45;
     }
 
-    /* Article layout */
-    .article{
-      display:grid;
-      grid-template-columns: 1fr 320px;
-      gap: 16px;
-      align-items: start;
-      margin-top: 18px;
-    }
+    /* Article */
     .article-card{
       border-radius: var(--radius-xl);
       padding: 22px;
     }
-    .side{
-      position: sticky;
-      top: 104px;
-      border-radius: var(--radius-xl);
+
+    .tocbox{
+      border-radius: var(--radius-md);
       padding: 14px;
-      display:grid;
-      gap: 10px;
+      border: 1px solid rgba(41,126,138,0.14);
+      background: rgba(255,255,255,0.14);
+      margin-bottom: 16px;
+      display:none;
     }
-    .side h3{
-      margin: 6px 6px 4px;
-      font-size: calc(16px * var(--type-scale));
-      letter-spacing: -0.2px;
-    }
-    .side .mini{
-      margin: 0 6px 10px;
+    .tocbox .t{
+      font-weight: 900;
       font-size: calc(13px * var(--type-scale));
-      opacity: .78;
-      line-height: 1.35;
+      letter-spacing: .2px;
+      opacity: .92;
+      margin: 0 0 10px 0;
+      line-height: 1;
     }
-    .side .toc a{
+    .toclist{
       display:flex;
-      gap: 10px;
-      align-items:flex-start;
-      padding: 12px 12px;
-      border-radius: 16px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .toclink{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      padding: 10px 12px;
+      border-radius: 999px;
       border: 1px solid rgba(41,126,138,0.14);
       background: rgba(255,255,255,0.14);
       font-weight: 900;
       font-size: calc(13px * var(--type-scale));
-      line-height: 1.2;
+      line-height: 1;
       opacity: .92;
       transition: transform .2s ease, box-shadow .2s ease, opacity .2s ease;
-      margin: 8px 6px;
+      max-width: 100%;
     }
-    .side .toc a:hover{ transform: translateY(-1px); box-shadow: var(--shadow-soft); opacity: 1; }
-    .side .toc a span{
-      opacity: .75;
-      font-weight: 800;
-      font-size: calc(12px * var(--type-scale));
-      margin-left: auto;
-      white-space: nowrap;
-    }
-    .side .actions2{
-      display:flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      justify-content: flex-start;
-      padding: 6px;
-    }
-    .side .btn{ width: 100%; justify-content:center; }
+    .toclink:hover{ transform: translateY(-1px); box-shadow: var(--shadow-soft); opacity: 1; }
+    .toclink .hash{ opacity: .7; font-weight: 900; }
 
-    /* Prose (reading comfort) */
     .prose{
       font-size: calc(16px * var(--type-scale-blog));
-      line-height: 1.75;
+      line-height: 1.78;
       max-width: 78ch;
     }
     .prose p{ margin: 0 0 14px 0; opacity: .92; }
@@ -406,10 +407,7 @@
       letter-spacing: -0.2px;
       line-height: 1.25;
     }
-    .prose ul, .prose ol{
-      margin: 0 0 14px 18px;
-      padding: 0;
-    }
+    .prose ul, .prose ol{ margin: 0 0 14px 18px; padding: 0; }
     .prose li{ margin: 8px 0; }
     .prose strong{ font-weight: 900; }
     .prose a{
@@ -426,6 +424,7 @@
       background: rgba(255,255,255,0.18);
       opacity: .98;
     }
+
     .callout{
       margin: 16px 0;
       padding: 14px 14px;
@@ -446,7 +445,16 @@
       margin: 18px 0;
     }
 
-    /* Related */
+    /* Bottom actions */
+    .post-actions{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      margin-top: 18px;
+    }
+
+    /* Related (clean) */
     .section-head{
       display:flex;
       align-items:flex-end;
@@ -454,9 +462,7 @@
       gap: 14px;
       margin-bottom: 18px;
       flex-wrap: wrap;
-      container-type: inline-size;
     }
-    .section-head > div{ flex: 1 1 auto; min-width: 0; }
     .section-head h2{
       margin: 0 0 10px 0;
       font-size: calc(30px * var(--type-scale));
@@ -490,7 +496,7 @@
       border-radius: var(--radius-lg);
       overflow:hidden;
       position: relative;
-      min-height: 300px;
+      min-height: 280px;
     }
     .post:before{
       content:"";
@@ -517,24 +523,11 @@
       filter: saturate(1.02) contrast(1.02);
       transform: scale(1.02);
     }
-    .post-body{
-      padding: 16px;
-      display:grid;
-      gap: 10px;
-    }
-    .post-top{
-      display:flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      align-items: center;
-      justify-content: space-between;
-    }
+    .post-body{ padding: 16px; display:grid; gap: 10px; }
+    .post-top{ display:flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; }
     .post-cat{
-      display:inline-flex;
-      align-items:center;
-      gap: 8px;
-      padding: 8px 10px;
-      border-radius: 999px;
+      display:inline-flex; align-items:center; gap: 8px;
+      padding: 8px 10px; border-radius: 999px;
       border: 1px solid rgba(41,126,138,0.18);
       background: rgba(255,255,255,0.18);
       font-weight: 900;
@@ -548,51 +541,12 @@
       background: var(--teal);
       box-shadow: 0 0 0 4px rgba(41,126,138,0.14);
     }
-    .post-date{
-      font-size: calc(12px * var(--type-scale));
-      opacity: .72;
-      font-weight: 800;
-      white-space: nowrap;
-      line-height: 1;
-    }
-    .post h3{
-      margin: 0;
-      font-size: calc(18px * var(--type-scale-blog));
-      letter-spacing: -0.3px;
-      line-height: 1.15;
-    }
-    .post p{
-      margin: 0;
-      font-size: calc(14px * var(--type-scale-blog));
-      opacity: .84;
-      line-height: 1.45;
-    }
-    .post-bottom{
-      display:flex;
-      align-items:center;
-      justify-content: space-between;
-      gap: 10px;
-      margin-top: 2px;
-    }
-    .post-meta{
-      font-size: calc(12px * var(--type-scale));
-      opacity: .72;
-      font-weight: 900;
-      display:flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      align-items:center;
-      line-height: 1;
-    }
-    .read{
-      display:inline-flex;
-      align-items:center;
-      gap: 8px;
-      font-weight: 900;
-      font-size: calc(14px * var(--type-scale));
-      color: rgba(41,126,138,1);
-      line-height: 1;
-    }
+    .post-date{ font-size: calc(12px * var(--type-scale)); opacity: .72; font-weight: 800; white-space: nowrap; line-height: 1; }
+    .post h3{ margin: 0; font-size: calc(18px * var(--type-scale-blog)); letter-spacing: -0.3px; line-height: 1.15; }
+    .post p{ margin: 0; font-size: calc(14px * var(--type-scale-blog)); opacity: .84; line-height: 1.45; }
+    .post-bottom{ display:flex; align-items:center; justify-content: space-between; gap: 10px; margin-top: 2px; }
+    .post-meta{ font-size: calc(12px * var(--type-scale)); opacity: .72; font-weight: 900; display:flex; gap: 10px; flex-wrap: wrap; align-items:center; line-height: 1; }
+    .read{ display:inline-flex; align-items:center; gap: 8px; font-weight: 900; font-size: calc(14px * var(--type-scale)); color: rgba(41,126,138,1); line-height: 1; }
     .read:hover{ text-decoration: underline; }
 
     /* CTA band */
@@ -638,64 +592,28 @@
     }
     .reveal.in{ opacity: 1; transform: translateY(0); }
 
-    /* Mobile drawer */
-    .drawer{
-      position: fixed;
-      inset: 0;
-      background: rgba(57,57,57,0.28);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      display:none;
-      z-index: 60;
-    }
-    .drawer.open{ display:block; }
-    .drawer .panel{
-      width: min(520px, calc(100% - 26px));
-      margin: 86px auto 0;
-      border-radius: var(--radius-xl);
-      padding: 14px;
-    }
-    .drawer a{
-      display:flex;
-      justify-content: space-between;
-      align-items:center;
-      padding: 14px 12px;
-      border-radius: 16px;
-      font-weight: 900;
-      border: 1px solid rgba(41,126,138,0.14);
-      background: rgba(255,255,255,0.14);
-      margin: 10px 0;
-      line-height: 1;
-    }
-    .drawer a span{ font-size: calc(12px * var(--type-scale)); opacity: .75; font-weight: 700; }
-    .drawer a.is-disabled{ opacity: .62; cursor: not-allowed; }
-
     /* Responsive */
     @media (max-width: 980px){
       nav{ display:none; }
       .mobile-toggle{ display:inline-flex; }
       header .bar{ border-radius: 22px; }
       h1{ font-size: calc(44px * var(--type-scale)); }
-      .article{ grid-template-columns: 1fr; }
-      .side{ position: static; }
-      .side .btn{ width: auto; }
       .related-grid{ grid-template-columns: 1fr; }
     }
     @media (max-width: 520px){
-      h1{ font-size: calc(38px * var(--type-scale)); }
       .container{ width: min(var(--max), calc(100% - 28px)); }
-      .brand{ min-width: unset; }
+      h1{ font-size: calc(38px * var(--type-scale)); }
+      .cover img{ height: min(420px, 52vh); }
       .actions{ gap: 8px; }
       .btn{ padding: 11px 12px; }
       .theme-toggle{ width: 42px; height: 42px; }
-      .cover img{ height: min(420px, 52vh); }
     }
 
     /* Reduced motion */
     @media (prefers-reduced-motion: reduce){
       html{ scroll-behavior: auto; }
       .reveal{ opacity: 1 !important; transform: none !important; transition: none !important; }
-      .btn, nav a, .crumb, .side .toc a{ transition: none !important; }
+      .btn, nav a, .crumb, .toclink{ transition: none !important; }
     }
 
     /* ========= Dark theme ========= */
@@ -706,7 +624,6 @@
       --ink: rgba(245,246,247,0.92);
       --glass-bg: rgba(18,26,28,0.62);
       --glass-br: rgba(255,255,255,0.10);
-      --shadow: 0 18px 60px rgba(0,0,0,0.55);
       --shadow-soft: 0 10px 30px rgba(0,0,0,0.45);
       --page-bg:
         radial-gradient(1000px 700px at 20% 10%, rgba(252,136,58,0.10), transparent 60%),
@@ -714,17 +631,14 @@
         linear-gradient(180deg, #06090b, var(--bg) 28%, #06090b 100%);
     }
     html[data-theme="dark"] nav a:hover{ background: rgba(255,255,255,0.06); }
-    html[data-theme="dark"] nav a.active{
-      background: rgba(255,255,255,0.08);
-      border-color: rgba(255,255,255,0.14);
-    }
+    html[data-theme="dark"] nav a.active{ background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.14); }
     html[data-theme="dark"] .btn.ghost{ background: rgba(255,255,255,0.06); }
     html[data-theme="dark"] .hero-card,
-    html[data-theme="dark"] .pill,
     html[data-theme="dark"] .crumb,
+    html[data-theme="dark"] .pill,
     html[data-theme="dark"] .article-card,
-    html[data-theme="dark"] .side,
-    html[data-theme="dark"] .side .toc a,
+    html[data-theme="dark"] .tocbox,
+    html[data-theme="dark"] .toclink,
     html[data-theme="dark"] .post,
     html[data-theme="dark"] .post-cat,
     html[data-theme="dark"] .drawer a{
@@ -736,8 +650,6 @@
 </head>
 
 <body>
-  <div class="progress" id="progress" aria-hidden="true"></div>
-
   <!-- Mobile drawer -->
   <div class="drawer" id="drawer" aria-hidden="true">
     <div class="container">
@@ -805,149 +717,119 @@
   </header>
 
   <main id="top">
-    <!-- POST HERO -->
     <section class="hero">
       <div class="container">
         <div class="hero-card glass reveal">
-          <div style="display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap;">
-            <a class="crumb" href="../blog.html">
-              ← Voltar ao Blog
-            </a>
-
-            <div class="kicker" aria-label="Metadados do post">
-              <span class="pill"><span class="dot" aria-hidden="true"></span><span id="postCategory">Respiração</span></span>
-              <span class="pill alt"><span class="dot" aria-hidden="true"></span><span id="postTag">Foco</span></span>
+          <div class="topline">
+            <a class="crumb" href="../blog.html">← Voltar ao Blog</a>
+            <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
+              <span class="pill"><span class="dot" aria-hidden="true"></span><span id="postCategory">—</span></span>
+              <span class="pill alt"><span class="dot" aria-hidden="true"></span><span id="postTag">—</span></span>
             </div>
           </div>
 
-          <h1 id="postTitle">Respiração Transformadora em 3 minutos: estabilize energia e ruído mental</h1>
+          <h1 id="postTitle">—</h1>
+          <p class="sub" id="postExcerpt">—</p>
 
-          <p class="sub" id="postExcerpt">
-            Um protocolo simples para você baixar ruído, organizar foco e começar o dia com mais clareza — sem misticismo e sem drama.
-          </p>
-
-          <div class="meta-row">
-            <span id="postDateLabel">20 jan 2026</span>
+          <div class="meta-row" aria-label="Metadados">
+            <span id="postDateLabel">—</span>
             <span class="sep">•</span>
-            <span><strong id="postRead">4</strong> min de leitura</span>
+            <span><strong id="postRead">—</strong> min</span>
             <span class="sep">•</span>
-            <span>Por <strong id="postAuthor">DeRose SBC</strong></span>
+            <span>Por <strong id="postAuthor">—</strong></span>
           </div>
 
           <div class="cover glass reveal" style="margin-top:18px;">
-            <img id="postCover" src="../assets/blog/respiracao.webp" alt="Respiração Transformadora em 3 minutos" loading="eager" />
-          </div>
-
-          <div class="article reveal">
-            <!-- MAIN -->
-            <article class="article-card glass">
-              <div class="prose" id="postBody">
-                <!-- =========
-                  POST CONTENT (EDIT FREELY)
-                  Keep headings (h2/h3) to auto-build the “Nesta página” list.
-                  ========= -->
-
-                <p>
-                  Quando a mente está “barulhenta”, o corpo normalmente já está acelerado. A forma mais rápida de trazer o sistema de volta
-                  para um estado útil é ajustar <strong>ritmo</strong>, <strong>amplitude</strong> e <strong>pausas</strong> da respiração.
-                </p>
-
-                <blockquote>
-                  Se você quer foco, primeiro reduza o ruído fisiológico. Depois, direcione atenção.
-                </blockquote>
-
-                <h2 id="protocolo-3-min">O protocolo de 3 minutos</h2>
-                <p>
-                  Você vai repetir um ciclo simples por 3 minutos. A regra é: <strong>sem força</strong>, sem “segurar no sofrimento”.
-                  O objetivo é <strong>estabilizar</strong>, não “provar algo”.
-                </p>
-
-                <h3 id="passo-1">Passo 1 — Ajuste de postura (20s)</h3>
-                <ul>
-                  <li>Pés firmes no chão, coluna “alta” sem rigidez.</li>
-                  <li>Queixo levemente recolhido (pescoço longo).</li>
-                  <li>Ombros soltos, mandíbula destravada.</li>
-                </ul>
-
-                <h3 id="passo-2">Passo 2 — Ritmo básico (2 min)</h3>
-                <p>
-                  Escolha um ritmo confortável e constante:
-                </p>
-                <ul>
-                  <li><strong>Inspire</strong> pelo nariz por <strong>4</strong> tempos.</li>
-                  <li><strong>Expire</strong> pelo nariz por <strong>6</strong> tempos (um pouco mais longa).</li>
-                  <li>Se quiser, adicione uma <strong>pausa</strong> suave de <strong>1</strong> tempo após expirar.</li>
-                </ul>
-
-                <div class="callout">
-                  <div class="t">Sinal de que está certo</div>
-                  <p>
-                    A expiração fica mais silenciosa, a testa “solta” e a atenção começa a parar de “pular” entre coisas.
-                  </p>
-                </div>
-
-                <h3 id="passo-3">Passo 3 — Direcionar foco (40s)</h3>
-                <p>
-                  Nos últimos 40 segundos, mantenha o mesmo ritmo e escolha <strong>um</strong> foco:
-                  pode ser o ar na narina, o movimento do abdômen, ou um ponto fixo no ambiente.
-                </p>
-
-                <div class="divider"></div>
-
-                <h2 id="erros-comuns">Erros comuns (e como corrigir)</h2>
-                <ul>
-                  <li><strong>Forçar a inspiração:</strong> reduza a amplitude. Respiração “grande” demais tende a gerar tensão.</li>
-                  <li><strong>Prender o ar com rigidez:</strong> se pausar, que seja sutil e confortável.</li>
-                  <li><strong>Querer “zerar” pensamentos:</strong> o objetivo é diminuir intensidade, não virar pedra.</li>
-                </ul>
-
-                <h2 id="quando-usar">Quando usar no dia</h2>
-                <p>
-                  Use antes de tarefas que exigem qualidade: decisão importante, reunião, estudo, treino, ou quando perceber irritação
-                  e dispersão crescendo.
-                </p>
-
-                <p>
-                  Se você quiser, transforme isso em ritual: <strong>3 minutos</strong> ao acordar + <strong>3 minutos</strong> antes do trabalho.
-                  Consistência supera intensidade.
-                </p>
-              </div>
-            </article>
-
-            <!-- SIDE -->
-            <aside class="side glass reveal" aria-label="Navegação do post">
-              <h3>Nesta página</h3>
-              <p class="mini">Atalhos para ir direto ao ponto — e voltar pra prática.</p>
-
-              <nav class="toc" id="toc" aria-label="Sumário do post">
-                <!-- injected by JS -->
-              </nav>
-
-              <div class="actions2">
-                <button class="btn ghost glass" id="copyLink" type="button">Copiar link</button>
-                <a class="btn primary" href="../index.html#contato"><span class="dot" aria-hidden="true"></span>Agendar aula</a>
-                <a class="btn ghost glass" href="../blog.html#posts">Ver mais posts</a>
-              </div>
-            </aside>
+            <img id="postCover" src="../assets/blog/featured.webp" alt="" loading="eager" />
           </div>
         </div>
       </div>
     </section>
 
-    <!-- RELATED -->
+    <section>
+      <div class="container">
+        <article class="article-card glass reveal">
+          <div class="tocbox" id="tocBox" aria-label="Nesta página">
+            <div class="t">Nesta página</div>
+            <div class="toclist" id="tocList"></div>
+          </div>
+
+          <div class="prose" id="postBody">
+            <!-- ====== POST CONTENT (EDIT) ====== -->
+            <p>
+              Quando a mente está barulhenta, o corpo normalmente já está acelerado. Um jeito rápido de trazer o sistema para um estado útil
+              é ajustar <strong>ritmo</strong>, <strong>amplitude</strong> e <strong>pausas</strong> da respiração.
+            </p>
+
+            <blockquote>
+              Primeiro: reduza o ruído fisiológico. Depois: direcione atenção.
+            </blockquote>
+
+            <h2 id="protocolo">O protocolo de 3 minutos</h2>
+            <p>
+              A regra é simples: <strong>sem força</strong>. O objetivo é estabilizar, não “provar algo”.
+            </p>
+
+            <h3 id="passo-1">Passo 1 — Postura (20s)</h3>
+            <ul>
+              <li>Pés firmes no chão, coluna alta sem rigidez.</li>
+              <li>Queixo levemente recolhido (pescoço longo).</li>
+              <li>Ombros soltos, mandíbula destravada.</li>
+            </ul>
+
+            <h3 id="passo-2">Passo 2 — Ritmo (2 min)</h3>
+            <ul>
+              <li><strong>Inspire</strong> pelo nariz por <strong>4</strong> tempos.</li>
+              <li><strong>Expire</strong> pelo nariz por <strong>6</strong> tempos (um pouco mais longa).</li>
+              <li>Opcional: pausa suave de <strong>1</strong> tempo após expirar.</li>
+            </ul>
+
+            <div class="callout">
+              <div class="t">Sinal de que está certo</div>
+              <p>A expiração fica mais silenciosa e a atenção começa a parar de “pular”.</p>
+            </div>
+
+            <h3 id="passo-3">Passo 3 — Direcionar foco (40s)</h3>
+            <p>
+              Mantenha o ritmo e escolha <strong>um</strong> foco: ar na narina, movimento do abdômen, ou um ponto fixo no ambiente.
+            </p>
+
+            <div class="divider"></div>
+
+            <h2 id="erros">Erros comuns (e correções)</h2>
+            <ul>
+              <li><strong>Forçar a inspiração:</strong> reduza a amplitude.</li>
+              <li><strong>Prender o ar:</strong> se pausar, que seja sutil e confortável.</li>
+              <li><strong>Querer “zerar” pensamentos:</strong> diminua intensidade; não precisa apagar tudo.</li>
+            </ul>
+
+            <h2 id="quando-usar">Quando usar no dia</h2>
+            <p>
+              Antes de tarefas que exigem qualidade: decisão importante, reunião, estudo, treino, ou quando notar irritação e dispersão subindo.
+            </p>
+            <!-- ====== /POST CONTENT ====== -->
+          </div>
+
+          <div class="post-actions">
+            <button class="btn ghost glass" id="copyLink" type="button">Copiar link</button>
+            <a class="btn ghost glass" href="../blog.html#posts">Ver mais posts</a>
+            <a class="btn primary" href="../index.html#contato"><span class="dot" aria-hidden="true"></span>Agendar aula</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
     <section>
       <div class="container">
         <div class="section-head reveal">
           <div>
             <h2>Leituras relacionadas</h2>
-            <p class="lead">Mais alguns atalhos práticos na mesma linha: foco, rotina, recuperação.</p>
+            <p class="lead">Mais alguns atalhos práticos na mesma linha.</p>
           </div>
           <a class="pill-link glass" href="../blog.html">Ir para o Blog →</a>
         </div>
 
-        <div class="related-grid" id="related">
-          <!-- injected by JS -->
-        </div>
+        <div class="related-grid" id="related"></div>
 
         <div class="band glass reveal">
           <h2>Consistência é o multiplicador.</h2>
@@ -983,8 +865,53 @@
   </main>
 
   <script>
+    // ===== POST DATA (EDIT THIS PER PAGE) =====
+    const POST = {
+      title: "Respiração Transformadora em 3 minutos: estabilize energia e ruído mental",
+      excerpt: "Um protocolo simples para você baixar ruído, organizar foco e começar o dia com mais clareza — sem misticismo e sem drama.",
+      category: "Respiração",
+      tag: "Foco",
+      date: "2026-01-20",
+      readMin: 4,
+      author: "DeRose SBC",
+      cover: "../assets/blog/respiracao.webp",
+      ogImage: "../assets/blog/respiracao.webp"
+    };
+
     // Year
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Fill header content
+    function formatDateISO(iso){
+      try{
+        const [y,m,d] = iso.split('-').map(Number);
+        const dt = new Date(y, m-1, d);
+        return dt.toLocaleDateString('pt-BR', { day:'2-digit', month:'short', year:'numeric' });
+      }catch(e){ return iso; }
+    }
+
+    document.getElementById('postTitle').textContent = POST.title;
+    document.getElementById('postExcerpt').textContent = POST.excerpt;
+    document.getElementById('postCategory').textContent = POST.category;
+    document.getElementById('postTag').textContent = POST.tag;
+    document.getElementById('postDateLabel').textContent = formatDateISO(POST.date);
+    document.getElementById('postRead').textContent = String(POST.readMin);
+    document.getElementById('postAuthor').textContent = POST.author;
+
+    const cover = document.getElementById('postCover');
+    cover.src = POST.cover;
+    cover.alt = POST.title;
+
+    // Sync SEO tags (safe + simple)
+    document.title = POST.title + " • DeRose SBC";
+    const desc = document.querySelector('meta[name="description"]');
+    if(desc) desc.setAttribute('content', POST.excerpt);
+    const ogt = document.querySelector('meta[property="og:title"]');
+    const ogd = document.querySelector('meta[property="og:description"]');
+    const ogi = document.querySelector('meta[property="og:image"]');
+    if(ogt) ogt.setAttribute('content', document.title);
+    if(ogd) ogd.setAttribute('content', POST.excerpt);
+    if(ogi) ogi.setAttribute('content', POST.ogImage || POST.cover);
 
     // Theme (light/dark) with persistence + system default
     const root = document.documentElement;
@@ -995,7 +922,7 @@
     function systemPrefersDark(){
       return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
     }
-    function setTheme(theme, {persist = true} = {}){
+    function setTheme(theme, persist){
       if(theme === 'dark') root.dataset.theme = 'dark';
       else delete root.dataset.theme;
 
@@ -1010,33 +937,40 @@
         metaTheme.setAttribute('content', theme === 'dark' ? '#0b1012' : '#297E8A');
       }
     }
-    function initTheme(){
+    (function initTheme(){
       const saved = localStorage.getItem(THEME_KEY);
-      if(saved === 'light' || saved === 'dark') setTheme(saved, {persist:false});
-      else setTheme(systemPrefersDark() ? 'dark' : 'light', {persist:false});
-    }
-    initTheme();
-    themeBtn?.addEventListener('click', () => {
-      const current = root.dataset.theme === 'dark' ? 'dark' : 'light';
-      setTheme(current === 'dark' ? 'light' : 'dark');
-    });
-    const mq = window.matchMedia?.('(prefers-color-scheme: dark)');
-    mq?.addEventListener?.('change', (e) => {
-      const saved = localStorage.getItem(THEME_KEY);
-      if(saved !== 'light' && saved !== 'dark'){
-        setTheme(e.matches ? 'dark' : 'light', {persist:false});
-      }
-    });
+      if(saved === 'light' || saved === 'dark') setTheme(saved, false);
+      else setTheme(systemPrefersDark() ? 'dark' : 'light', false);
+    })();
 
-    // Prevent placeholder links from navigating
-    document.querySelectorAll('a[aria-disabled="true"]').forEach(a => {
-      a.addEventListener('click', (e) => e.preventDefault());
-    });
+    if(themeBtn){
+      themeBtn.addEventListener('click', function(){
+        const current = root.dataset.theme === 'dark' ? 'dark' : 'light';
+        setTheme(current === 'dark' ? 'light' : 'dark', true);
+      });
+    }
+
+    const mq = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+    if(mq && mq.addEventListener){
+      mq.addEventListener('change', function(e){
+        const saved = localStorage.getItem(THEME_KEY);
+        if(saved !== 'light' && saved !== 'dark'){
+          setTheme(e.matches ? 'dark' : 'light', false);
+        }
+      });
+    }
+
+    // Prevent placeholder links
+    var disabledLinks = document.querySelectorAll('a[aria-disabled="true"]');
+    for(var i=0;i<disabledLinks.length;i++){
+      disabledLinks[i].addEventListener('click', function(e){ e.preventDefault(); });
+    }
 
     // Mobile drawer
     const drawer = document.getElementById('drawer');
     const toggle = document.getElementById('mobileToggle');
     const closeBtn = document.getElementById('drawerClose');
+
     function openDrawer(){
       drawer.classList.add('open');
       drawer.setAttribute('aria-hidden', 'false');
@@ -1047,82 +981,91 @@
       drawer.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
     }
-    toggle?.addEventListener('click', openDrawer);
-    closeBtn?.addEventListener('click', closeDrawer);
-    drawer?.addEventListener('click', (e) => { if(e.target === drawer) closeDrawer(); });
-    drawer?.querySelectorAll('[data-close]')?.forEach(a => a.addEventListener('click', closeDrawer));
 
-    // Reveal on scroll
-    const io = new IntersectionObserver((entries)=>{
-      entries.forEach(entry=>{
-        if(entry.isIntersecting){
-          entry.target.classList.add('in');
-          io.unobserve(entry.target);
+    if(toggle) toggle.addEventListener('click', openDrawer);
+    if(closeBtn) closeBtn.addEventListener('click', closeDrawer);
+    if(drawer){
+      drawer.addEventListener('click', function(e){ if(e.target === drawer) closeDrawer(); });
+      var closes = drawer.querySelectorAll('[data-close]');
+      for(var j=0;j<closes.length;j++){
+        closes[j].addEventListener('click', closeDrawer);
+      }
+    }
+
+    // Reveal on scroll (safe fallback)
+    (function(){
+      if(!('IntersectionObserver' in window)){
+        var all = document.querySelectorAll('.reveal');
+        for(var k=0;k<all.length;k++) all[k].classList.add('in');
+        return;
+      }
+      const io = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if(entry.isIntersecting){
+            entry.target.classList.add('in');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+
+      var els = document.querySelectorAll('.reveal');
+      for(var k2=0;k2<els.length;k2++) io.observe(els[k2]);
+    })();
+
+    // Build TOC (chips) from h2/h3 in #postBody
+    (function(){
+      const body = document.getElementById('postBody');
+      const tocBox = document.getElementById('tocBox');
+      const tocList = document.getElementById('tocList');
+      if(!body || !tocBox || !tocList) return;
+
+      const heads = Array.prototype.slice.call(body.querySelectorAll('h2[id], h3[id]'));
+      if(!heads.length) return;
+
+      function text(el){
+        return (el.textContent || '').trim();
+      }
+
+      tocList.innerHTML = heads.slice(0, 10).map(function(h){
+        const t = text(h);
+        const isH3 = h.tagName.toLowerCase() === 'h3';
+        return (
+          '<a class="toclink" href="#' + h.id + '" title="' + t.replace(/"/g,'&quot;') + '">' +
+            '<span class="hash" aria-hidden="true">' + (isH3 ? '•' : '#') + '</span>' +
+            t +
+          '</a>'
+        );
+      }).join('');
+
+      tocBox.style.display = 'block';
+    })();
+
+    // Copy link
+    const copyBtn = document.getElementById('copyLink');
+    if(copyBtn){
+      copyBtn.addEventListener('click', async function(){
+        const url = window.location.href;
+        try{
+          if(navigator.clipboard && navigator.clipboard.writeText){
+            await navigator.clipboard.writeText(url);
+          }else{
+            const tmp = document.createElement('input');
+            tmp.value = url;
+            document.body.appendChild(tmp);
+            tmp.select();
+            document.execCommand('copy');
+            document.body.removeChild(tmp);
+          }
+          copyBtn.textContent = 'Link copiado ✓';
+          setTimeout(function(){ copyBtn.textContent = 'Copiar link'; }, 1400);
+        }catch(e){
+          copyBtn.textContent = 'Falhou :(';
+          setTimeout(function(){ copyBtn.textContent = 'Copiar link'; }, 1400);
         }
       });
-    }, { threshold: 0.12 });
-    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-
-    // Progress bar
-    const progress = document.getElementById('progress');
-    function updateProgress(){
-      const doc = document.documentElement;
-      const scrollTop = doc.scrollTop || document.body.scrollTop;
-      const scrollHeight = (doc.scrollHeight || document.body.scrollHeight) - doc.clientHeight;
-      const pct = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
-      progress.style.width = Math.min(100, Math.max(0, pct)) + '%';
-    }
-    window.addEventListener('scroll', updateProgress, { passive: true });
-    updateProgress();
-
-    // Build TOC from h2/h3 inside #postBody
-    const toc = document.getElementById('toc');
-    const body = document.getElementById('postBody');
-    const headings = Array.from(body.querySelectorAll('h2[id], h3[id]'));
-
-    function labelFor(el){
-      const txt = (el.textContent || '').trim();
-      const isH3 = el.tagName.toLowerCase() === 'h3';
-      return { txt, isH3 };
-    }
-    if(headings.length){
-      toc.innerHTML = headings.map((h, idx) => {
-        const { txt, isH3 } = labelFor(h);
-        const n = String(idx + 1).padStart(2,'0');
-        return `
-          <a href="#${h.id}" style="${isH3 ? 'opacity:.88; padding-left:18px;' : ''}">
-            ${txt}
-            <span>${n}</span>
-          </a>
-        `;
-      }).join('');
-    } else {
-      toc.innerHTML = `<div class="mini" style="margin: 0 6px 12px;">Sem seções detectadas.</div>`;
     }
 
-    // Copy link button
-    const copyBtn = document.getElementById('copyLink');
-    copyBtn?.addEventListener('click', async () => {
-      try{
-        await navigator.clipboard.writeText(window.location.href);
-        copyBtn.textContent = 'Link copiado ✓';
-        setTimeout(()=> (copyBtn.textContent = 'Copiar link'), 1400);
-      }catch(e){
-        // fallback
-        const tmp = document.createElement('input');
-        tmp.value = window.location.href;
-        document.body.appendChild(tmp);
-        tmp.select();
-        document.execCommand('copy');
-        document.body.removeChild(tmp);
-        copyBtn.textContent = 'Link copiado ✓';
-        setTimeout(()=> (copyBtn.textContent = 'Copiar link'), 1400);
-      }
-    });
-
-    /* =========================
-       OPTIONAL: Related posts (edit list to match your blog.html POSTS)
-       ========================= */
+    // Related posts (keep minimal; edit to match your blog.html)
     const RELATED = [
       {
         title: "Foco & Concentração: volte ao centro em qualquer rotina",
@@ -1144,15 +1087,6 @@
       }
     ];
 
-    function formatDateISO(iso){
-      try{
-        const [y,m,d] = iso.split('-').map(Number);
-        const dt = new Date(y, m-1, d);
-        return dt.toLocaleDateString('pt-BR', { day:'2-digit', month:'short', year:'numeric' });
-      }catch(e){
-        return iso;
-      }
-    }
     function escapeHtml(str){
       return String(str)
         .replaceAll('&','&amp;')
@@ -1162,34 +1096,34 @@
         .replaceAll("'","&#039;");
     }
 
-    const related = document.getElementById('related');
-    related.innerHTML = RELATED.map(p => `
-      <article class="post glass reveal">
-        <a href="${escapeHtml(p.href)}" aria-label="Abrir post: ${escapeHtml(p.title)}">
-          <div class="post-media" aria-hidden="true">
-            <img src="${escapeHtml(p.image)}" alt="${escapeHtml(p.title)}" loading="lazy" />
-          </div>
-          <div class="post-body">
-            <div class="post-top">
-              <div class="post-cat"><span class="dot" aria-hidden="true"></span>${escapeHtml(p.category)}</div>
-              <div class="post-date">${escapeHtml(formatDateISO(p.date))}</div>
-            </div>
-            <h3>${escapeHtml(p.title)}</h3>
-            <p>${escapeHtml(p.excerpt)}</p>
-            <div class="post-bottom">
-              <div class="post-meta">
-                <span>${escapeHtml(p.readMin)} min</span>
-                <span>•</span>
-                <span>Leitura objetiva</span>
-              </div>
-              <span class="read">Ler →</span>
-            </div>
-          </div>
-        </a>
-      </article>
-    `).join('');
-    related.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    const relatedEl = document.getElementById('related');
+    if(relatedEl){
+      relatedEl.innerHTML = RELATED.map(function(p){
+        return (
+          '<article class="post glass reveal">' +
+            '<a href="' + escapeHtml(p.href) + '" aria-label="Abrir post: ' + escapeHtml(p.title) + '">' +
+              '<div class="post-media" aria-hidden="true">' +
+                '<img src="' + escapeHtml(p.image) + '" alt="' + escapeHtml(p.title) + '" loading="lazy" />' +
+              '</div>' +
+              '<div class="post-body">' +
+                '<div class="post-top">' +
+                  '<div class="post-cat"><span class="dot" aria-hidden="true"></span>' + escapeHtml(p.category) + '</div>' +
+                  '<div class="post-date">' + escapeHtml(formatDateISO(p.date)) + '</div>' +
+                '</div>' +
+                '<h3>' + escapeHtml(p.title) + '</h3>' +
+                '<p>' + escapeHtml(p.excerpt) + '</p>' +
+                '<div class="post-bottom">' +
+                  '<div class="post-meta"><span>' + escapeHtml(p.readMin) + ' min</span><span>•</span><span>Leitura objetiva</span></div>' +
+                  '<span class="read">Ler →</span>' +
+                '</div>' +
+              '</div>' +
+            '</a>' +
+          '</article>'
+        );
+      }).join('');
+    }
   </script>
 </body>
 </html>
+
 
