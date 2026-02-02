@@ -1,17 +1,18 @@
 (() => {
   "use strict";
 
-  function disablePlaceholderLinks() {
-    const links = document.querySelectorAll('a[aria-disabled="true"]');
-    links.forEach((a) => {
-      a.addEventListener("click", (e) => e.preventDefault());
-    });
+  const PARTIAL_URL = "/assets/partials/navbar.html";
+  const MOUNT_SEL = "[data-navbar]";
+
+  function disablePlaceholderLinks(scope) {
+    const links = scope.querySelectorAll('a[aria-disabled="true"]');
+    links.forEach((a) => a.addEventListener("click", (e) => e.preventDefault()));
   }
 
-  function initDrawer() {
-    const drawer = document.getElementById("drawer");
-    const toggle = document.getElementById("mobileToggle");
-    const closeBtn = document.getElementById("drawerClose");
+  function initDrawer(scope) {
+    const drawer = scope.querySelector("#drawer");
+    const toggle = scope.querySelector("#mobileToggle");
+    const closeBtn = scope.querySelector("#drawerClose");
 
     if (!drawer) return;
 
@@ -39,19 +40,67 @@
     });
 
     document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && drawer.classList.contains("open")) {
-        closeDrawer();
-      }
+      if (e.key === "Escape" && drawer.classList.contains("open")) closeDrawer();
     });
 
     window.Navbar = { openDrawer, closeDrawer };
   }
 
-  function init() {
-    disablePlaceholderLinks();
-    initDrawer();
+  function setActiveLink(scope) {
+    const links = scope.querySelectorAll('nav a[data-nav]');
+    links.forEach((a) => {
+      a.classList.remove("active");
+      a.removeAttribute("aria-current");
+    });
+
+    const path = (location.pathname || "/").replace(/\/+$/, "") || "/";
+    if (path.indexOf("/blog") === 0) {
+      const blog = scope.querySelector('nav a[data-nav="blog"]');
+      if (blog) {
+        blog.classList.add("active");
+        blog.setAttribute("aria-current", "page");
+      }
+      return;
+    }
+
+    const hash = (location.hash || "").replace("#", "");
+    if (!hash) return;
+
+    const a = scope.querySelector(`nav a[data-nav="${hash}"]`);
+    if (a) {
+      a.classList.add("active");
+      a.setAttribute("aria-current", "page");
+    }
   }
 
-  if (window.Utils && window.Utils.ready) window.Utils.ready(init);
-  else document.addEventListener("DOMContentLoaded", init, { once: true });
+  function wireNavbar(scope) {
+    disablePlaceholderLinks(scope);
+    initDrawer(scope);
+    setActiveLink(scope);
+
+    window.addEventListener("hashchange", () => setActiveLink(scope));
+  }
+
+  function injectNavbar() {
+    const mount = document.querySelector(MOUNT_SEL);
+    if (!mount) return;
+
+    fetch(PARTIAL_URL, { cache: "no-cache" })
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to fetch navbar: " + res.status);
+        return res.text();
+      })
+      .then((html) => {
+        mount.innerHTML = html;
+        wireNavbar(mount);
+
+        document.dispatchEvent(new CustomEvent("navbar:ready"));
+      })
+      .catch((err) => {
+        console.warn("[navbar] inject failed:", err);
+      });
+  }
+
+  if (window.Utils && window.Utils.ready) window.Utils.ready(injectNavbar);
+  else document.addEventListener("DOMContentLoaded", injectNavbar, { once: true });
 })();
