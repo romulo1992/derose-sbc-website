@@ -52,9 +52,6 @@
       /* blog reading comfort */
       --type-scale-blog: 0.92;
 
-      --control-h: 56px;
-      --control-pad-x: 18px;
-
       --page-bg:
         radial-gradient(1000px 700px at 20% 10%, rgba(252,136,58,0.12), transparent 60%),
         radial-gradient(1100px 820px at 90% 15%, rgba(41,126,138,0.14), transparent 60%),
@@ -168,11 +165,6 @@
       font-weight: 800;
     }
     .btn.ghost{ background: rgba(255,255,255,0.18); }
-    .btn.light{
-      border: 1px solid rgba(255,255,255,0.25);
-      background: rgba(255,255,255,0.12);
-      color: rgba(255,255,255,0.94);
-    }
     .btn .dot{
       width: 8px; height: 8px; border-radius: 999px;
       margin-right: 10px;
@@ -215,6 +207,7 @@
     /* Sections */
     section{ padding: 54px 0; }
     .hero{ padding: 34px 0 18px; }
+
     .hero-card{
       padding: 26px;
       border-radius: var(--radius-xl);
@@ -324,70 +317,13 @@
       opacity: .45;
     }
 
-    /* Article layout */
-    .article{
-      display:grid;
-      grid-template-columns: 1fr 320px;
-      gap: 16px;
-      align-items: start;
-      margin-top: 18px;
-    }
+    /* Article (single clean card, not nested inside hero) */
     .article-card{
       border-radius: var(--radius-xl);
       padding: 22px;
     }
-    .side{
-      position: sticky;
-      top: 104px;
-      border-radius: var(--radius-xl);
-      padding: 14px;
-      display:grid;
-      gap: 10px;
-    }
-    .side h3{
-      margin: 6px 6px 4px;
-      font-size: calc(16px * var(--type-scale));
-      letter-spacing: -0.2px;
-    }
-    .side .mini{
-      margin: 0 6px 10px;
-      font-size: calc(13px * var(--type-scale));
-      opacity: .78;
-      line-height: 1.35;
-    }
-    .side .toc a{
-      display:flex;
-      gap: 10px;
-      align-items:flex-start;
-      padding: 12px 12px;
-      border-radius: 16px;
-      border: 1px solid rgba(41,126,138,0.14);
-      background: rgba(255,255,255,0.14);
-      font-weight: 900;
-      font-size: calc(13px * var(--type-scale));
-      line-height: 1.2;
-      opacity: .92;
-      transition: transform .2s ease, box-shadow .2s ease, opacity .2s ease;
-      margin: 8px 6px;
-    }
-    .side .toc a:hover{ transform: translateY(-1px); box-shadow: var(--shadow-soft); opacity: 1; }
-    .side .toc a span{
-      opacity: .75;
-      font-weight: 800;
-      font-size: calc(12px * var(--type-scale));
-      margin-left: auto;
-      white-space: nowrap;
-    }
-    .side .actions2{
-      display:flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      justify-content: flex-start;
-      padding: 6px;
-    }
-    .side .btn{ width: 100%; justify-content:center; }
 
-    /* Prose (reading comfort) */
+    /* Prose (plain reading, no callout boxes) */
     .prose{
       font-size: calc(16px * var(--type-scale-blog));
       line-height: 1.75;
@@ -418,32 +354,20 @@
       text-underline-offset: 3px;
       text-decoration-thickness: 2px;
     }
-    .prose blockquote{
-      margin: 16px 0;
-      padding: 14px 14px;
-      border-radius: var(--radius-md);
-      border: 1px solid rgba(41,126,138,0.18);
-      background: rgba(255,255,255,0.18);
-      opacity: .98;
-    }
-    .callout{
-      margin: 16px 0;
-      padding: 14px 14px;
-      border-radius: var(--radius-md);
-      border: 1px solid rgba(252,136,58,0.28);
-      background: rgba(252,136,58,0.10);
-    }
-    .callout .t{
-      font-weight: 900;
-      margin: 0 0 6px 0;
-      letter-spacing: .2px;
-    }
-    .callout p{ margin: 0; }
 
     .divider{
       height: 1px;
       background: rgba(41,126,138,0.14);
       margin: 18px 0;
+    }
+
+    /* Post actions (below text) */
+    .post-actions{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      margin-top: 18px;
     }
 
     /* Related */
@@ -676,9 +600,6 @@
       .mobile-toggle{ display:inline-flex; }
       header .bar{ border-radius: 22px; }
       h1{ font-size: calc(44px * var(--type-scale)); }
-      .article{ grid-template-columns: 1fr; }
-      .side{ position: static; }
-      .side .btn{ width: auto; }
       .related-grid{ grid-template-columns: 1fr; }
     }
     @media (max-width: 520px){
@@ -695,7 +616,7 @@
     @media (prefers-reduced-motion: reduce){
       html{ scroll-behavior: auto; }
       .reveal{ opacity: 1 !important; transform: none !important; transition: none !important; }
-      .btn, nav a, .crumb, .side .toc a{ transition: none !important; }
+      .btn, nav a, .crumb{ transition: none !important; }
     }
 
     /* ========= Dark theme ========= */
@@ -723,8 +644,6 @@
     html[data-theme="dark"] .pill,
     html[data-theme="dark"] .crumb,
     html[data-theme="dark"] .article-card,
-    html[data-theme="dark"] .side,
-    html[data-theme="dark"] .side .toc a,
     html[data-theme="dark"] .post,
     html[data-theme="dark"] .post-cat,
     html[data-theme="dark"] .drawer a{
@@ -810,9 +729,7 @@
       <div class="container">
         <div class="hero-card glass reveal">
           <div style="display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap;">
-            <a class="crumb" href="../blog.html">
-              ← Voltar ao Blog
-            </a>
+            <a class="crumb" href="../blog.html">← Voltar ao Blog</a>
 
             <div class="kicker" aria-label="Metadados do post">
               <span class="pill"><span class="dot" aria-hidden="true"></span><span id="postCategory">Respiração</span></span>
@@ -834,103 +751,85 @@
             <span>Por <strong id="postAuthor">DeRose SBC</strong></span>
           </div>
 
-          <div class="cover glass reveal" style="margin-top:18px;">
+          <div class="cover reveal" style="margin-top:18px;">
             <img id="postCover" src="../assets/blog/respiracao.webp" alt="Respiração Transformadora em 3 minutos" loading="eager" />
           </div>
-
-          <div class="article reveal">
-            <!-- MAIN -->
-            <article class="article-card glass">
-              <div class="prose" id="postBody">
-                <!-- =========
-                  POST CONTENT (EDIT FREELY)
-                  Keep headings (h2/h3) to auto-build the “Nesta página” list.
-                  ========= -->
-
-                <p>
-                  Quando a mente está “barulhenta”, o corpo normalmente já está acelerado. A forma mais rápida de trazer o sistema de volta
-                  para um estado útil é ajustar <strong>ritmo</strong>, <strong>amplitude</strong> e <strong>pausas</strong> da respiração.
-                </p>
-
-                <blockquote>
-                  Se você quer foco, primeiro reduza o ruído fisiológico. Depois, direcione atenção.
-                </blockquote>
-
-                <h2 id="protocolo-3-min">O protocolo de 3 minutos</h2>
-                <p>
-                  Você vai repetir um ciclo simples por 3 minutos. A regra é: <strong>sem força</strong>, sem “segurar no sofrimento”.
-                  O objetivo é <strong>estabilizar</strong>, não “provar algo”.
-                </p>
-
-                <h3 id="passo-1">Passo 1 — Ajuste de postura (20s)</h3>
-                <ul>
-                  <li>Pés firmes no chão, coluna “alta” sem rigidez.</li>
-                  <li>Queixo levemente recolhido (pescoço longo).</li>
-                  <li>Ombros soltos, mandíbula destravada.</li>
-                </ul>
-
-                <h3 id="passo-2">Passo 2 — Ritmo básico (2 min)</h3>
-                <p>
-                  Escolha um ritmo confortável e constante:
-                </p>
-                <ul>
-                  <li><strong>Inspire</strong> pelo nariz por <strong>4</strong> tempos.</li>
-                  <li><strong>Expire</strong> pelo nariz por <strong>6</strong> tempos (um pouco mais longa).</li>
-                  <li>Se quiser, adicione uma <strong>pausa</strong> suave de <strong>1</strong> tempo após expirar.</li>
-                </ul>
-
-                <div class="callout">
-                  <div class="t">Sinal de que está certo</div>
-                  <p>
-                    A expiração fica mais silenciosa, a testa “solta” e a atenção começa a parar de “pular” entre coisas.
-                  </p>
-                </div>
-
-                <h3 id="passo-3">Passo 3 — Direcionar foco (40s)</h3>
-                <p>
-                  Nos últimos 40 segundos, mantenha o mesmo ritmo e escolha <strong>um</strong> foco:
-                  pode ser o ar na narina, o movimento do abdômen, ou um ponto fixo no ambiente.
-                </p>
-
-                <div class="divider"></div>
-
-                <h2 id="erros-comuns">Erros comuns (e como corrigir)</h2>
-                <ul>
-                  <li><strong>Forçar a inspiração:</strong> reduza a amplitude. Respiração “grande” demais tende a gerar tensão.</li>
-                  <li><strong>Prender o ar com rigidez:</strong> se pausar, que seja sutil e confortável.</li>
-                  <li><strong>Querer “zerar” pensamentos:</strong> o objetivo é diminuir intensidade, não virar pedra.</li>
-                </ul>
-
-                <h2 id="quando-usar">Quando usar no dia</h2>
-                <p>
-                  Use antes de tarefas que exigem qualidade: decisão importante, reunião, estudo, treino, ou quando perceber irritação
-                  e dispersão crescendo.
-                </p>
-
-                <p>
-                  Se você quiser, transforme isso em ritual: <strong>3 minutos</strong> ao acordar + <strong>3 minutos</strong> antes do trabalho.
-                  Consistência supera intensidade.
-                </p>
-              </div>
-            </article>
-
-            <!-- SIDE -->
-            <aside class="side glass reveal" aria-label="Navegação do post">
-              <h3>Nesta página</h3>
-              <p class="mini">Atalhos para ir direto ao ponto — e voltar pra prática.</p>
-
-              <nav class="toc" id="toc" aria-label="Sumário do post">
-                <!-- injected by JS -->
-              </nav>
-
-              <div class="actions2">
-                <button class="btn ghost glass" id="copyLink" type="button">Copiar link</button>
-                <a class="btn primary" href="../index.html#contato"><span class="dot" aria-hidden="true"></span>Agendar aula</a>
-                <a class="btn ghost glass" href="../blog.html#posts">Ver mais posts</a>
-              </div>
-            </aside>
-          </div>
         </div>
+      </div>
+    </section>
+
+    <!-- POST CONTENT (separate card; no nested glass) -->
+    <section style="padding-top: 18px;">
+      <div class="container">
+        <article class="article-card glass reveal">
+          <div class="prose" id="postBody">
+            <p>
+              Quando a mente está “barulhenta”, o corpo normalmente já está acelerado. A forma mais rápida de trazer o sistema de volta
+              para um estado útil é ajustar <strong>ritmo</strong>, <strong>amplitude</strong> e <strong>pausas</strong> da respiração.
+            </p>
+
+            <p>
+              <strong>Se você quer foco:</strong> primeiro reduza o ruído fisiológico. Depois, direcione atenção.
+            </p>
+
+            <h2 id="protocolo-3-min">O protocolo de 3 minutos</h2>
+            <p>
+              Você vai repetir um ciclo simples por 3 minutos. A regra é: <strong>sem força</strong>, sem “segurar no sofrimento”.
+              O objetivo é <strong>estabilizar</strong>, não “provar algo”.
+            </p>
+
+            <h3 id="passo-1">Passo 1 — Ajuste de postura (20s)</h3>
+            <ul>
+              <li>Pés firmes no chão, coluna “alta” sem rigidez.</li>
+              <li>Queixo levemente recolhido (pescoço longo).</li>
+              <li>Ombros soltos, mandíbula destravada.</li>
+            </ul>
+
+            <h3 id="passo-2">Passo 2 — Ritmo básico (2 min)</h3>
+            <p>Escolha um ritmo confortável e constante:</p>
+            <ul>
+              <li><strong>Inspire</strong> pelo nariz por <strong>4</strong> tempos.</li>
+              <li><strong>Expire</strong> pelo nariz por <strong>6</strong> tempos (um pouco mais longa).</li>
+              <li>Se quiser, adicione uma <strong>pausa</strong> suave de <strong>1</strong> tempo após expirar.</li>
+            </ul>
+
+            <p>
+              <strong>Sinal de que está certo:</strong> a expiração fica mais silenciosa, a testa “solta” e a atenção começa a parar de “pular” entre coisas.
+            </p>
+
+            <h3 id="passo-3">Passo 3 — Direcionar foco (40s)</h3>
+            <p>
+              Nos últimos 40 segundos, mantenha o mesmo ritmo e escolha <strong>um</strong> foco:
+              pode ser o ar na narina, o movimento do abdômen, ou um ponto fixo no ambiente.
+            </p>
+
+            <div class="divider"></div>
+
+            <h2 id="erros-comuns">Erros comuns (e como corrigir)</h2>
+            <ul>
+              <li><strong>Forçar a inspiração:</strong> reduza a amplitude. Respiração “grande” demais tende a gerar tensão.</li>
+              <li><strong>Prender o ar com rigidez:</strong> se pausar, que seja sutil e confortável.</li>
+              <li><strong>Querer “zerar” pensamentos:</strong> o objetivo é diminuir intensidade, não virar pedra.</li>
+            </ul>
+
+            <h2 id="quando-usar">Quando usar no dia</h2>
+            <p>
+              Use antes de tarefas que exigem qualidade: decisão importante, reunião, estudo, treino, ou quando perceber irritação
+              e dispersão crescendo.
+            </p>
+
+            <p>
+              Se você quiser, transforme isso em ritual: <strong>3 minutos</strong> ao acordar + <strong>3 minutos</strong> antes do trabalho.
+              Consistência supera intensidade.
+            </p>
+          </div>
+
+          <div class="post-actions">
+            <button class="btn ghost glass" id="copyLink" type="button">Copiar link</button>
+            <a class="btn ghost glass" href="../blog.html#posts">Ver mais posts</a>
+            <a class="btn primary" href="../index.html#contato"><span class="dot" aria-hidden="true"></span>Agendar aula</a>
+          </div>
+        </article>
       </div>
     </section>
 
@@ -945,9 +844,7 @@
           <a class="pill-link glass" href="../blog.html">Ir para o Blog →</a>
         </div>
 
-        <div class="related-grid" id="related">
-          <!-- injected by JS -->
-        </div>
+        <div class="related-grid" id="related"><!-- injected by JS --></div>
 
         <div class="band glass reveal">
           <h2>Consistência é o multiplicador.</h2>
@@ -1010,16 +907,17 @@
         metaTheme.setAttribute('content', theme === 'dark' ? '#0b1012' : '#297E8A');
       }
     }
-    function initTheme(){
+    (function initTheme(){
       const saved = localStorage.getItem(THEME_KEY);
       if(saved === 'light' || saved === 'dark') setTheme(saved, {persist:false});
       else setTheme(systemPrefersDark() ? 'dark' : 'light', {persist:false});
-    }
-    initTheme();
+    })();
+
     themeBtn?.addEventListener('click', () => {
       const current = root.dataset.theme === 'dark' ? 'dark' : 'light';
       setTheme(current === 'dark' ? 'light' : 'dark');
     });
+
     const mq = window.matchMedia?.('(prefers-color-scheme: dark)');
     mq?.addEventListener?.('change', (e) => {
       const saved = localStorage.getItem(THEME_KEY);
@@ -1052,16 +950,24 @@
     drawer?.addEventListener('click', (e) => { if(e.target === drawer) closeDrawer(); });
     drawer?.querySelectorAll('[data-close]')?.forEach(a => a.addEventListener('click', closeDrawer));
 
-    // Reveal on scroll
-    const io = new IntersectionObserver((entries)=>{
-      entries.forEach(entry=>{
-        if(entry.isIntersecting){
-          entry.target.classList.add('in');
-          io.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12 });
-    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    // Reveal on scroll (safe fallback)
+    (function(){
+      const els = document.querySelectorAll('.reveal');
+      if(!('IntersectionObserver' in window)){
+        els.forEach(el => el.classList.add('in'));
+        return;
+      }
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(entry=>{
+          if(entry.isIntersecting){
+            entry.target.classList.add('in');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      els.forEach(el => io.observe(el));
+      window.__revealIO = io;
+    })();
 
     // Progress bar
     const progress = document.getElementById('progress');
@@ -1075,31 +981,6 @@
     window.addEventListener('scroll', updateProgress, { passive: true });
     updateProgress();
 
-    // Build TOC from h2/h3 inside #postBody
-    const toc = document.getElementById('toc');
-    const body = document.getElementById('postBody');
-    const headings = Array.from(body.querySelectorAll('h2[id], h3[id]'));
-
-    function labelFor(el){
-      const txt = (el.textContent || '').trim();
-      const isH3 = el.tagName.toLowerCase() === 'h3';
-      return { txt, isH3 };
-    }
-    if(headings.length){
-      toc.innerHTML = headings.map((h, idx) => {
-        const { txt, isH3 } = labelFor(h);
-        const n = String(idx + 1).padStart(2,'0');
-        return `
-          <a href="#${h.id}" style="${isH3 ? 'opacity:.88; padding-left:18px;' : ''}">
-            ${txt}
-            <span>${n}</span>
-          </a>
-        `;
-      }).join('');
-    } else {
-      toc.innerHTML = `<div class="mini" style="margin: 0 6px 12px;">Sem seções detectadas.</div>`;
-    }
-
     // Copy link button
     const copyBtn = document.getElementById('copyLink');
     copyBtn?.addEventListener('click', async () => {
@@ -1108,7 +989,6 @@
         copyBtn.textContent = 'Link copiado ✓';
         setTimeout(()=> (copyBtn.textContent = 'Copiar link'), 1400);
       }catch(e){
-        // fallback
         const tmp = document.createElement('input');
         tmp.value = window.location.href;
         document.body.appendChild(tmp);
@@ -1121,7 +1001,7 @@
     });
 
     /* =========================
-       OPTIONAL: Related posts (edit list to match your blog.html POSTS)
+       Related posts (edit list to match your blog.html POSTS)
        ========================= */
     const RELATED = [
       {
@@ -1188,10 +1068,18 @@
         </a>
       </article>
     `).join('');
-    related.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    // observe newly injected cards
+    const io = window.__revealIO;
+    if(io){
+      related.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    }else{
+      related.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+    }
   </script>
 </body>
 </html>
+
 
 
 
