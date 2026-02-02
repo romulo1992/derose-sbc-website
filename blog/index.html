@@ -1147,7 +1147,7 @@
       const excerpt = document.getElementById('featuredExcerpt');
       const tagPill = document.getElementById('featuredTagPill');
       link.href = featured.href;
-      img.src = featured.image || "./assets/blog/featured.webp";
+      img.src = featured.image || "/assets/blog/featured.webp";
       img.alt = featured.title;
       cat.textContent = featured.category;
       meta.textContent = `${formatDateISO(featured.date)} • ${featured.readMin} min`;
@@ -1189,7 +1189,7 @@
           <article class="post glass reveal" data-id="${escapeHtml(p.id)}">
             <a href="${escapeHtml(p.href)}" aria-label="Abrir post: ${escapeHtml(p.title)}">
               <div class="post-media" aria-hidden="true">
-                <img src="${escapeHtml(p.image || './assets/blog/placeholder.webp')}" alt="${escapeHtml(p.title)}" loading="lazy" />
+                <img src="${escapeHtml(p.image || '/assets/blog/placeholder.webp')}" alt="${escapeHtml(p.title)}" loading="lazy" />
               </div>
               <div class="post-body">
                 <div class="post-top">
