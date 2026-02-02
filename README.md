@@ -2,21 +2,19 @@
 
 This repo is organized as a static site with clean, folder-based routes (each page lives in its own folder as `index.html`).
 
+> Note: prefer `formacao/` (no accent) to avoid URL/encoding issues.
+
 ---
 
 ## Root
 
 | Parent folder | Direct child folders |
 | --- | --- |
-| `/` (root) | `aulas/`, `cursos/`, `formacao/`, `eventos/`, `bistro/`, `blog/`, `lp/`, `assets/`, `data/` *(optional)* |
-
-> Note: use `formacao/` (no accent) to avoid URL/encoding issues.
+| `/` (root) | `aulas/`, `cursos/`, `formacao/`, `eventos/`, `bistro/`, `blog/`, `lp/`, `assets/`, `data/` (optional) |
 
 ---
 
-## Subfolders
-
-### `/aulas/`
+## Aulas
 
 | Parent folder | Direct child folders |
 | --- | --- |
@@ -30,7 +28,7 @@ This repo is organized as a static site with clean, folder-based routes (each pa
 
 ---
 
-### `/cursos/`
+## Cursos
 
 | Parent folder | Direct child folders |
 | --- | --- |
@@ -44,7 +42,7 @@ This repo is organized as a static site with clean, folder-based routes (each pa
 
 ---
 
-### `/formacao/`
+## Formação
 
 | Folder | Files |
 | --- | --- |
@@ -52,7 +50,7 @@ This repo is organized as a static site with clean, folder-based routes (each pa
 
 ---
 
-### `/blog/`
+## Blog
 
 | Folder | Files |
 | --- | --- |
@@ -61,7 +59,7 @@ This repo is organized as a static site with clean, folder-based routes (each pa
 
 ---
 
-### `/eventos/`
+## Eventos
 
 | Parent folder | Direct child folders |
 | --- | --- |
@@ -75,7 +73,7 @@ This repo is organized as a static site with clean, folder-based routes (each pa
 
 ---
 
-### `/bistro/`
+## Bistrô
 
 | Parent folder | Direct child folders |
 | --- | --- |
@@ -89,7 +87,7 @@ This repo is organized as a static site with clean, folder-based routes (each pa
 
 ---
 
-### `/lp/`
+## LP
 
 | Parent folder | Direct child folders |
 | --- | --- |
@@ -98,29 +96,27 @@ This repo is organized as a static site with clean, folder-based routes (each pa
 
 | Folder | Files |
 | --- | --- |
-| `/lp/` | `index.html` *(optional)* |
+| `/lp/` | `index.html` (optional) |
 | `/lp/p/<slug>/` | `index.html` |
 
 ---
 
 ## Assets
 
-### `/assets/`
-
 | Parent folder | Direct child folders |
 | --- | --- |
-| `/assets/` | `fonts/`, `img/`, `blog/`, `cursos/`, `eventos/`, `bistro/`, `css/` *(optional)*, `js/` *(optional)* |
+| `/assets/` | `fonts/`, `img/`, `blog/`, `cursos/`, `eventos/`, `bistro/`, `css/` (optional), `js/` (optional) |
 
 | Folder | Content |
 | --- | --- |
-| `/assets/fonts/` | `Spartan-Black.ttf`, `Spartan-Bold.ttf`, `Spartan-ExtraBold.ttf`, `Spartan-ExtraLight.ttf`, `Spartan-Light.ttf`, `Spartan-Medium.ttf`, `Spartan-Regular.ttf`, `Spartan-SemiBold.ttf`, `Spartan-Thin.ttf` |
-| `/assets/img/` | `favicon.svg`, `hero.png` |
-| `/assets/blog/` | `featured.webp` |
-| `/assets/cursos/` | `featured.webp` |
-| `/assets/eventos/` | `featured.webp` |
+| `/assets/fonts/` | Spartan-Black.ttf; Spartan-Bold.ttf; Spartan-ExtraBold.ttf; Spartan-ExtraLight.ttf; Spartan-Light.ttf; Spartan-Medium.ttf; Spartan-Regular.ttf; Spartan-SemiBold.ttf; Spartan-Thin.ttf |
+| `/assets/img/` | favicon.svg; hero.png |
+| `/assets/blog/` | featured.webp |
+| `/assets/cursos/` | featured.webp |
+| `/assets/eventos/` | featured.webp |
 | `/assets/bistro/` | Bistro images (items, ambience, etc.) |
-| `/assets/css/` *(optional)* | Shared CSS (if you want to move CSS out of HTML files) |
-| `/assets/js/` *(optional)* | Shared scripts (navbar, theme, helpers, etc.) |
+| `/assets/css/` (optional) | Shared CSS (if you want to move CSS out of HTML files) |
+| `/assets/js/` (optional) | Shared scripts (navbar, theme, helpers, etc.) |
 
 ---
 
