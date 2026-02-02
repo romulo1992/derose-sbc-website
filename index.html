@@ -11,93 +11,15 @@
   <meta property="og:type" content="website" />
 
   <!-- Repo map: /assets/img/favicon.svg -->
-  <link rel="icon" href="./assets/img/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" />
 
   <!-- Repo map: /assets/css/style.css -->
-  <link rel="stylesheet" href="./assets/css/style.css" />
+  <link rel="stylesheet" href="/assets/css/style.css" />
 </head>
 
 <body>
-  <!-- Mobile drawer -->
-  <div class="drawer" id="drawer" aria-hidden="true">
-    <div class="container">
-      <div class="panel glass">
-        <a href="#aulas" data-close> Aulas <span>presencial + online</span></a>
-        <a href="#cursos" data-close> Cursos <span>precisão & consistência</span></a>
-        <a href="#formacao" data-close> Formação <span>aprofundamento</span></a>
-
-        <!-- placeholders (no link) -->
-        <a href="#" class="is-disabled" aria-disabled="true" data-close>Eventos</a>
-        <a href="#" class="is-disabled" aria-disabled="true" data-close>Bistrô</a>
-
-        <!-- Repo map: /blog/index.html -->
-        <a href="./blog/" data-close> Blog <span>clareza sem misticismo</span></a>
-
-        <a href="#contato" data-close> Contato <span>rota rápida</span></a>
-
-        <div class="drawer-actions">
-          <button class="btn ghost glass" id="drawerClose" type="button">Fechar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <header>
-    <div class="container">
-      <div class="bar glass">
-        <a class="brand" href="#top" aria-label="Ir para o topo">
-          <span class="brand-mark" aria-hidden="true"></span>
-          <span class="brand-name">
-            <strong>DeRose SBC</strong>
-            <span>Yôga de Alto Rendimento</span>
-          </span>
-        </a>
-
-        <nav aria-label="Navegação principal">
-          <a href="#aulas">AULAS</a>
-          <a href="#cursos">CURSOS</a>
-          <a href="#formacao">FORMAÇÃO</a>
-
-          <!-- placeholders (no link) -->
-          <a href="#" class="is-disabled" aria-disabled="true">EVENTOS</a>
-          <a href="#" class="is-disabled" aria-disabled="true">BISTRÔ</a>
-
-          <!-- Repo map: /blog/index.html -->
-          <a href="./blog/">BLOG</a>
-        </nav>
-
-        <div class="actions">
-          <button class="mobile-toggle" id="mobileToggle" aria-label="Abrir menu">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M4 7H20" stroke="#393939" stroke-width="2.4" stroke-linecap="round"/>
-              <path d="M4 12H20" stroke="#393939" stroke-width="2.4" stroke-linecap="round" opacity="0.9"/>
-              <path d="M4 17H20" stroke="#393939" stroke-width="2.4" stroke-linecap="round" opacity="0.8"/>
-            </svg>
-          </button>
-
-          <!-- Theme switch -->
-          <button class="theme-toggle" id="themeToggle" type="button" aria-label="Ativar modo escuro" aria-pressed="false">
-            <!-- Moon (shown in light mode) -->
-            <svg class="moon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M21 14.5A8.5 8.5 0 1 1 9.5 3a7 7 0 0 0 11.5 11.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            <!-- Sun (shown in dark mode) -->
-            <svg class="sun" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12Z" stroke="currentColor" stroke-width="2"/>
-              <path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5l-1.5-1.5M20.5 20.5 19 19M5 19l-1.5 1.5M20.5 3.5 19 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-          </button>
-
-          <a class="btn primary" href="#contato" title="Agendar uma aula">
-            <span class="dot" aria-hidden="true"></span>
-            Entre em Contato
-          </a>
-          </a>
-          </a>
-        </div>
-      </div>
-    </div>
-  </header>
+  <!-- NAVBAR INJETADA -->
+  <div data-navbar></div>
 
   <main id="top">
     <!-- HERO -->
@@ -142,7 +64,7 @@
 
           <div class="hero-art glass reveal" aria-label="Imagem abstrata, minimalista e moderna">
             <!-- Repo map: /assets/img/hero.png -->
-            <img src="./assets/img/hero.png" alt="Ilustração moderna abstrata com sensação de calma e foco" />
+            <img src="/assets/img/hero.png" alt="Ilustração moderna abstrata com sensação de calma e foco" />
             <div class="art-badges" aria-hidden="true">
               <div class="badge"><span class="mini-dot"></span>Alinhamento</div>
               <div class="badge alt"><span class="mini-dot"></span>Estabilidade</div>
@@ -326,7 +248,7 @@
         <div class="grid-3">
           <div class="testi glass reveal">
             <div class="avatar">
-              <img src="./assets/img/testimonials/romulo.webp" alt="Romulo" loading="lazy" />
+              <img src="/assets/img/testimonials/romulo.webp" alt="Romulo" loading="lazy" />
             </div>
             <p class="testi-quote">
               “Sou empreendedor e o método me ensinou a melhorar a relação com meus clientes e me proporcionou parcerias incríveis através de networking!”
@@ -343,7 +265,7 @@
 
           <div class="testi glass reveal">
             <div class="avatar">
-              <img src="./assets/img/testimonials/vanessa.webp" alt="Vanessa" loading="lazy" />
+              <img src="/assets/img/testimonials/vanessa.webp" alt="Vanessa" loading="lazy" />
             </div>
             <p class="testi-quote">
               “Mudei meus padrões mentais e passei a gerenciar minhas emoções, usando elas a meu favor.”
@@ -360,7 +282,7 @@
 
           <div class="testi glass reveal">
             <div class="avatar">
-              <img src="./assets/img/testimonials/rodolfo.webp" alt="Rodolfo" loading="lazy" />
+              <img src="/assets/img/testimonials/rodolfo.webp" alt="Rodolfo" loading="lazy" />
             </div>
             <p class="testi-quote">
               “Comecei a praticar buscando melhora no triathlon. Foi fácil perceber que a prática melhorou minha performance na natação, corrida e ciclismo.”
@@ -509,9 +431,10 @@
   </main>
 
   <!-- JS (repo map: /assets/js/) -->
-  <script src="./assets/js/utils.js" defer></script>
-  <script src="./assets/js/theme.js" defer></script>
-  <script src="./assets/js/navbar.js" defer></script>
-  <script src="./assets/js/main.js" defer></script>
+  <script defer src="/assets/js/utils.js"></script>
+  <script defer src="/assets/js/theme.js"></script>
+  <script defer src="/assets/js/navbar.js"></script>
+  <script defer src="/assets/js/main.js"></script>
 </body>
 </html>
+
