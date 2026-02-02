@@ -1,8 +1,9 @@
-# DeRose SBC (static)
-This is a simple static site (HTML + CSS + a small JS snippet).
+#Root
+Este é o diretório raíz do site
 
-## Deploy on Vercel
-- Push this folder to GitHub
-- In Vercel: New Project → Import repo → Framework Preset: **Other**
-- Build Command: (leave empty)
-- Output Directory: (leave empty)
+#Conteúdo
+Ele contém as pastas 
+
+| Pasta mãe | Pastas filhas (diretas) |
+| --- | --- |
+| `/` (root) | `aulas/`, `blog/`, `cursos/`, `eventos/`, `bistro/`, `lp/`, `assets/`, `data/` *(opcional)* |
