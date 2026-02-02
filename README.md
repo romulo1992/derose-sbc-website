@@ -120,7 +120,7 @@ This repo is organized as a static site with clean, folder-based routes (each pa
 
 ---
 
-## Data (optional)
+## Data
 
 | Folder | Files |
 | --- | --- |
