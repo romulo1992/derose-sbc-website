@@ -1,7 +1,7 @@
-#Root
+# Root
 Este é o diretório raíz do site
 
-#Conteúdo
+# Conteúdo
 Ele contém as pastas 
 
 | Pasta mãe | Pastas filhas (diretas) |
