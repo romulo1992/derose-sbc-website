@@ -61,6 +61,9 @@
     const btn = document.getElementById("themeToggle");
     if (!btn) return;
 
+    if (btn.dataset.bound === "1") return;
+    btn.dataset.bound = "1";
+
     btn.addEventListener("click", () => {
       const root = document.documentElement;
       const current = root.getAttribute("data-theme") === "dark" ? "dark" : "light";
@@ -79,7 +82,6 @@
       }
     };
 
-    // Compat
     if (typeof mq.addEventListener === "function") mq.addEventListener("change", handler);
     else if (typeof mq.addListener === "function") mq.addListener(handler);
   }
@@ -94,4 +96,12 @@
 
   if (window.Utils && window.Utils.ready) window.Utils.ready(init);
   else document.addEventListener("DOMContentLoaded", init, { once: true });
+
+  // Quando a navbar for injetada, o botão #themeToggle passa a existir
+  document.addEventListener("navbar:ready", () => {
+    const root = document.documentElement;
+    const current = root.getAttribute("data-theme") === "dark" ? "dark" : "light";
+    applyTheme(current, { persist: false });
+    bindToggle();
+  });
 })();
