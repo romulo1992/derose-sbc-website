@@ -4,68 +4,64 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#297E8A" />
-  <title>CMS • DeRose SBC</title>
-  <meta name="robots" content="noindex,nofollow" />
-  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+  <title>CMS • Blog • DeRose SBC</title>
+  <meta name="description" content="CMS local para criar, editar e excluir posts do Blog DeRose SBC." />
+  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
 
   <style>
     /* =========================
-       Fonts (same as your site)
+       Self-hosted Spartan (TTF)
+       Put files in: /assets/fonts/
        ========================= */
-    @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-Thin.ttf") format("truetype"); font-weight:100; font-style:normal; font-display:swap; }
-    @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-ExtraLight.ttf") format("truetype"); font-weight:200; font-style:normal; font-display:swap; }
-    @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-Light.ttf") format("truetype"); font-weight:300; font-style:normal; font-display:swap; }
-    @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-Regular.ttf") format("truetype"); font-weight:400; font-style:normal; font-display:swap; }
-    @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-Medium.ttf") format("truetype"); font-weight:500; font-style:normal; font-display:swap; }
-    @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-SemiBold.ttf") format("truetype"); font-weight:600; font-style:normal; font-display:swap; }
-    @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-Bold.ttf") format("truetype"); font-weight:700; font-style:normal; font-display:swap; }
-    @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-ExtraBold.ttf") format("truetype"); font-weight:800; font-style:normal; font-display:swap; }
-    @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-Black.ttf") format("truetype"); font-weight:900; font-style:normal; font-display:swap; }
+    @font-face{ font-family:"Spartan"; src:url("./assets/fonts/Spartan-Thin.ttf") format("truetype"); font-weight:100; font-style:normal; font-display:swap; }
+    @font-face{ font-family:"Spartan"; src:url("./assets/fonts/Spartan-ExtraLight.ttf") format("truetype"); font-weight:200; font-style:normal; font-display:swap; }
+    @font-face{ font-family:"Spartan"; src:url("./assets/fonts/Spartan-Light.ttf") format("truetype"); font-weight:300; font-style:normal; font-display:swap; }
+    @font-face{ font-family:"Spartan"; src:url("./assets/fonts/Spartan-Regular.ttf") format("truetype"); font-weight:400; font-style:normal; font-display:swap; }
+    @font-face{ font-family:"Spartan"; src:url("./assets/fonts/Spartan-Medium.ttf") format("truetype"); font-weight:500; font-style:normal; font-display:swap; }
+    @font-face{ font-family:"Spartan"; src:url("./assets/fonts/Spartan-SemiBold.ttf") format("truetype"); font-weight:600; font-style:normal; font-display:swap; }
+    @font-face{ font-family:"Spartan"; src:url("./assets/fonts/Spartan-Bold.ttf") format("truetype"); font-weight:700; font-style:normal; font-display:swap; }
+    @font-face{ font-family:"Spartan"; src:url("./assets/fonts/Spartan-ExtraBold.ttf") format("truetype"); font-weight:800; font-style:normal; font-display:swap; }
+    @font-face{ font-family:"Spartan"; src:url("./assets/fonts/Spartan-Black.ttf") format("truetype"); font-weight:900; font-style:normal; font-display:swap; }
 
     :root{
       --bg: #FFF9EF;
-      --ink: #393939;
-      --teal: #297E8A;
+      --surface: #FFECD1;
       --accent: #FC883A;
-
+      --teal: #297E8A;
+      --ink: #393939;
       --glass-bg: rgba(255,255,255,0.26);
       --glass-br: rgba(41,126,138,0.22);
+      --shadow: 0 18px 60px rgba(57,57,57,0.12);
       --shadow-soft: 0 10px 30px rgba(57,57,57,0.10);
-
-      --r-xl: 22px;
-      --r-lg: 18px;
-      --r-md: 14px;
-
+      --radius-xl: 28px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --radius-sm: 12px;
+      --max: 1160px;
+      --type-scale: 0.77;
+      --type-scale-blog: 0.88;
+      --control-h: 56px;
+      --control-pad-x: 18px;
       --page-bg:
         radial-gradient(1000px 700px at 20% 10%, rgba(252,136,58,0.12), transparent 60%),
         radial-gradient(1100px 820px at 90% 15%, rgba(41,126,138,0.14), transparent 60%),
         linear-gradient(180deg, var(--bg), #fff 28%, var(--bg) 100%);
     }
 
-    html[data-theme="dark"]{
-      color-scheme: dark;
-      --bg: #0b1012;
-      --ink: rgba(245,246,247,0.92);
-      --glass-bg: rgba(18,26,28,0.62);
-      --glass-br: rgba(255,255,255,0.10);
-      --shadow-soft: 0 10px 30px rgba(0,0,0,0.45);
-      --page-bg:
-        radial-gradient(1000px 700px at 20% 10%, rgba(252,136,58,0.10), transparent 60%),
-        radial-gradient(1100px 820px at 90% 15%, rgba(41,126,138,0.18), transparent 60%),
-        linear-gradient(180deg, #06090b, var(--bg) 28%, #06090b 100%);
-    }
-
     *{ box-sizing: border-box; }
+    html{ scroll-behavior: smooth; }
     body{
       margin:0;
       font-family: "Spartan", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      line-height: 1.25;
       color: var(--ink);
       background: var(--page-bg);
-      line-height: 1.25;
-      overflow-x:hidden;
+      overflow-x: hidden;
     }
     a{ color: inherit; text-decoration: none; }
+    .container{ width:min(var(--max), calc(100% - 40px)); margin: 0 auto; }
 
+    /* Glass */
     .glass{
       background: var(--glass-bg);
       border: 1px solid var(--glass-br);
@@ -74,306 +70,535 @@
       -webkit-backdrop-filter: blur(18px);
     }
 
-    .wrap{
-      width: min(1200px, calc(100% - 40px));
-      margin: 0 auto;
-      padding: 18px 0 34px;
-    }
-
-    /* Top bar */
-    .top{
-      position: sticky; top: 0; z-index: 50;
+    /* Header */
+    header{
+      position: sticky; top: 0; z-index: 40;
       padding: 14px 0;
     }
-    .bar{
+    header .bar{
       border-radius: 999px;
-      padding: 10px 12px;
-      display:flex;
-      align-items:center;
-      justify-content: space-between;
-      gap: 12px;
+      padding: 10px 14px;
+      display:flex; align-items:center; justify-content: space-between;
+      gap: 14px;
     }
     .brand{
-      display:flex; align-items:center; gap: 10px;
-      padding: 8px 10px;
-      border-radius: 999px;
+      display:flex; align-items:center; gap: 10px; min-width: 210px;
+      padding: 8px 10px; border-radius: 999px;
     }
-    .mark{
-      width: 34px; height: 34px; border-radius: 14px;
+    .brand-mark{
+      width: 36px; height: 36px; border-radius: 14px;
       background: linear-gradient(135deg, rgba(41,126,138,0.9), rgba(252,136,58,0.85));
+      box-shadow: 0 10px 22px rgba(41,126,138,0.18);
+      position: relative;
+      overflow: hidden;
     }
-    .brand strong{ font-weight: 900; font-size: 14px; letter-spacing: .2px; }
-    .brand span{ display:block; font-size: 12px; opacity:.75; margin-top: 2px; }
-
-    .right{
-      display:flex; align-items:center; gap: 10px; flex-wrap: wrap;
-      justify-content:flex-end;
+    .brand-mark:after{
+      content:"";
+      position:absolute; inset:-30%;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.55), transparent 55%);
+      transform: rotate(18deg);
     }
+    .brand-name{
+      line-height: 1;
+      display:flex; flex-direction: column;
+      gap: 4px;
+    }
+    .brand-name strong{ font-size: calc(15px * var(--type-scale)); letter-spacing: .2px; }
+    .brand-name span{ font-size: calc(12px * var(--type-scale)); opacity: .75; }
 
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center;
+    nav{ display:flex; align-items:center; gap: 10px; }
+    nav a{
+      font-size: calc(14px * var(--type-scale));
       padding: 10px 12px;
       border-radius: 999px;
-      border: 1px solid rgba(41,126,138,0.22);
-      background: rgba(255,255,255,0.18);
-      font-weight: 800;
-      font-size: 13px;
-      cursor:pointer;
-      user-select:none;
-      transition: transform .15s ease, box-shadow .15s ease;
+      opacity: .86;
+      transition: background .2s ease, opacity .2s ease, transform .2s ease;
       line-height: 1;
+    }
+    nav a:hover{ background: rgba(255,255,255,0.35); opacity: 1; transform: translateY(-1px); }
+    nav a.active{ background: rgba(255,255,255,0.45); opacity: 1; border: 1px solid rgba(41,126,138,0.18); }
+
+    .actions{ display:flex; align-items:center; gap: 10px; }
+
+    .btn{
+      display:inline-flex; align-items:center; justify-content: center;
+      padding: 11px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(41,126,138,0.22);
+      font-weight: 800;
+      font-size: calc(14px * var(--type-scale));
+      letter-spacing: .2px;
+      cursor: pointer;
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+      user-select: none;
       white-space: nowrap;
+      line-height: 1;
+      background: rgba(255,255,255,0.12);
     }
     .btn:hover{ transform: translateY(-1px); box-shadow: var(--shadow-soft); }
     .btn.primary{
       border: 1px solid rgba(252,136,58,0.35);
       background: linear-gradient(135deg, rgba(252,136,58,0.95), rgba(252,136,58,0.65));
       color: #1f1f1f;
+      font-weight: 900;
     }
     .btn.danger{
-      border-color: rgba(255,70,70,0.35);
-      background: rgba(255,70,70,0.12);
+      border-color: rgba(230,80,80,0.35);
+      background: rgba(230,80,80,0.12);
+      color: rgba(230,80,80,0.95);
+      font-weight: 900;
     }
+    .btn.ghost{ background: rgba(255,255,255,0.10); }
+    .btn.small{ padding: 10px 12px; font-size: calc(13px * var(--type-scale)); }
+    .btn:disabled{ opacity: .55; cursor: not-allowed; transform:none; box-shadow:none; }
 
-    .theme{
-      width: 42px; height: 42px;
+    /* Theme toggle */
+    .theme-toggle{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width: 44px;
+      height: 44px;
       border-radius: 999px;
       border: 1px solid rgba(41,126,138,0.22);
       background: rgba(255,255,255,0.18);
       cursor:pointer;
-      display:inline-flex; align-items:center; justify-content:center;
-      transition: transform .15s ease, box-shadow .15s ease;
-    }
-    .theme:hover{ transform: translateY(-1px); box-shadow: var(--shadow-soft); }
-    .theme svg{ width: 18px; height: 18px; display:block; }
-    .theme .sun{ display:none; }
-    html[data-theme="dark"] .theme .sun{ display:block; }
-    html[data-theme="dark"] .theme .moon{ display:none; }
-
-    /* Main grid */
-    .grid{
-      display:grid;
-      grid-template-columns: 330px 1fr;
-      gap: 14px;
-      margin-top: 14px;
-      align-items:start;
-    }
-
-    .panel{
-      border-radius: var(--r-xl);
-      padding: 12px;
-    }
-
-    /* Left list */
-    .search{
-      display:flex; gap: 10px; align-items:center;
-      padding: 10px;
-      border-radius: var(--r-lg);
-      border: 1px solid rgba(41,126,138,0.14);
-      background: rgba(255,255,255,0.12);
-      margin-bottom: 10px;
-    }
-    .search input{
-      width: 100%;
-      border: 0;
-      outline: none;
-      background: transparent;
-      color: inherit;
-      font-weight: 700;
-      font-size: 13px;
-    }
-
-    .list{
-      display:grid;
-      gap: 10px;
-      max-height: 64vh;
-      overflow:auto;
-      padding-right: 4px;
-    }
-    .item{
-      border-radius: var(--r-lg);
-      padding: 12px;
-      border: 1px solid rgba(41,126,138,0.14);
-      background: rgba(255,255,255,0.12);
-      cursor:pointer;
-      transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
-    }
-    .item:hover{ transform: translateY(-1px); box-shadow: var(--shadow-soft); }
-    .item.active{ border-color: rgba(41,126,138,0.34); background: rgba(255,255,255,0.18); }
-    .item .t{ font-weight: 900; font-size: 13px; line-height: 1.15; }
-    .item .m{ margin-top: 6px; font-size: 12px; opacity:.78; display:flex; gap: 8px; flex-wrap:wrap; }
-    .badge{
-      display:inline-flex; align-items:center; gap: 8px;
-      padding: 6px 8px;
-      border-radius: 999px;
-      border: 1px solid rgba(41,126,138,0.14);
-      background: rgba(255,255,255,0.10);
-      font-weight: 900;
-      font-size: 11px;
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+      color: var(--ink);
       line-height: 1;
-      white-space: nowrap;
     }
-    .dot{ width: 8px; height: 8px; border-radius: 999px; background: var(--teal); }
-    .dot.alt{ background: var(--accent); }
+    .theme-toggle:hover{ transform: translateY(-1px); box-shadow: var(--shadow-soft); }
+    .theme-toggle svg{ width: 18px; height: 18px; display:block; }
+    .theme-toggle .sun{ display:none; }
+    html[data-theme="dark"] .theme-toggle .sun{ display:block; }
+    html[data-theme="dark"] .theme-toggle .moon{ display:none; }
+    svg [stroke="#393939"]{ stroke: var(--ink) !important; }
 
-    /* Form */
-    .form{
-      display:grid;
-      gap: 10px;
+    /* Sections */
+    section{ padding: 38px 0; }
+    .hero-card{
+      padding: 26px;
+      border-radius: var(--radius-xl);
+      position: relative;
+      overflow:hidden;
     }
-    .row{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
+    .hero-card:before{
+      content:"";
+      position:absolute; inset:-40%;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(252,136,58,0.18), transparent 55%),
+        radial-gradient(circle at 80% 25%, rgba(41,126,138,0.18), transparent 58%),
+        radial-gradient(circle at 50% 80%, rgba(255,236,209,0.55), transparent 60%);
+      filter: blur(10px);
+      transform: rotate(10deg);
+      pointer-events:none;
     }
-    .field{
-      display:grid;
-      gap: 6px;
+    .hero-card > *{ position: relative; z-index: 1; }
+
+    .kicker{
+      display:inline-flex; align-items:center; gap: 10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(41,126,138,0.18);
+      background: rgba(255,255,255,0.22);
+      font-size: calc(13px * var(--type-scale));
+      font-weight: 800;
+      letter-spacing: .25px;
+      line-height: 1;
     }
-    label{
+    .kicker .pill{
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(41,126,138,0.14);
+      border: 1px solid rgba(41,126,138,0.18);
       font-weight: 900;
-      font-size: 12px;
-      opacity:.85;
+      color: rgba(41,126,138,1);
     }
-    input, textarea{
-      width: 100%;
-      border-radius: 14px;
-      border: 1px solid rgba(41,126,138,0.14);
-      background: rgba(255,255,255,0.12);
-      color: inherit;
-      padding: 11px 12px;
-      outline: none;
-      font-weight: 700;
-      font-size: 13px;
+    h1{
+      margin: 14px 0 8px;
+      font-size: calc(44px * var(--type-scale));
+      line-height: 0.98;
+      letter-spacing: -1px;
     }
-    textarea{
-      min-height: 240px;
-      resize: vertical;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      font-weight: 650;
+    .sub{
+      margin: 8px 0 0;
+      font-size: calc(16px * var(--type-scale-blog));
       line-height: 1.45;
+      opacity: 0.9;
+      max-width: 80ch;
     }
-
-    .hint{
-      font-size: 12px;
-      opacity: .72;
-      line-height: 1.35;
-    }
-
-    .toolbar{
+    .note{
+      margin-top: 12px;
       display:flex;
       gap: 10px;
       flex-wrap: wrap;
-      justify-content:flex-end;
-      margin-top: 4px;
+      align-items:center;
+      opacity: .9;
+      font-size: calc(13px * var(--type-scale));
+      line-height: 1.35;
+    }
+    .note .tag{
+      display:inline-flex; align-items:center; gap: 8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(41,126,138,0.18);
+      background: rgba(255,255,255,0.18);
+      font-weight: 900;
+      white-space: nowrap;
+      line-height: 1;
+    }
+    .dot{
+      width: 8px; height: 8px; border-radius: 999px;
+      background: var(--teal);
+      box-shadow: 0 0 0 4px rgba(41,126,138,0.14);
     }
 
-    /* Preview */
-    .preview{
-      border-radius: var(--r-xl);
-      padding: 0;
-      overflow:hidden;
-      margin-top: 14px;
+    /* Controls */
+    .controls{
+      margin-top: 18px;
+      display:grid;
+      grid-template-columns: 1.2fr 0.6fr 0.6fr;
+      gap: 12px;
+      align-items: start;
     }
-    .preview-head{
+    .field{ display:grid; gap: 8px; min-width: 0; }
+    .label{
+      font-size: calc(13px * var(--type-scale));
+      opacity: .78;
+      font-weight: 900;
+      letter-spacing: .2px;
+      line-height: 1;
+    }
+    .control{
+      width: 100%;
+      height: var(--control-h);
+      border-radius: 18px;
+      border: 1px solid rgba(41,126,138,0.18);
+      background: rgba(255,255,255,0.18);
+      outline: none;
+      font-family: inherit;
+      font-size: calc(14px * var(--type-scale-blog));
+      color: var(--ink);
+      padding: 0 var(--control-pad-x);
+      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease, background .2s ease;
+      box-shadow: none;
+    }
+    .control:focus{
+      border-color: rgba(41,126,138,0.32);
+      box-shadow: 0 0 0 5px rgba(41,126,138,0.10);
+    }
+    input[type="search"].control{
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    input[type="search"].control::-webkit-search-decoration,
+    input[type="search"].control::-webkit-search-cancel-button,
+    input[type="search"].control::-webkit-search-results-button,
+    input[type="search"].control::-webkit-search-results-decoration {
+      display: none;
+    }
+    select.control{
+      -webkit-appearance: none !important;
+      -moz-appearance: none !important;
+      appearance: none !important;
+      padding-right: calc(var(--control-pad-x) + 34px) !important;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M7 10l5 5 5-5' stroke='%23393939' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") !important;
+      background-repeat: no-repeat !important;
+      background-size: 16px 16px !important;
+      background-position: right var(--control-pad-x) center !important;
+    }
+
+    /* Layout */
+    .layout{
+      margin-top: 16px;
+      display:grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 14px;
+      align-items: start;
+    }
+    .panel{
+      border-radius: var(--radius-xl);
+      overflow:hidden;
+    }
+    .panel .head{
+      padding: 16px;
+      border-bottom: 1px solid rgba(41,126,138,0.14);
       display:flex;
+      justify-content: space-between;
+      align-items:flex-start;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .panel .head h2{
+      margin: 0 0 6px 0;
+      font-size: calc(20px * var(--type-scale));
+      letter-spacing: -0.4px;
+    }
+    .panel .head p{
+      margin: 0;
+      opacity: .82;
+      line-height: 1.35;
+      font-size: calc(13px * var(--type-scale-blog));
+      max-width: 70ch;
+    }
+    .panel .body{ padding: 14px; }
+
+    /* List cards */
+    .list{
+      display:grid;
+      gap: 10px;
+    }
+    .card{
+      border-radius: var(--radius-lg);
+      overflow:hidden;
+      position: relative;
+    }
+    .card:before{
+      content:"";
+      position:absolute; inset:-60%;
+      background:
+        radial-gradient(circle at 30% 25%, rgba(252,136,58,0.14), transparent 55%),
+        radial-gradient(circle at 70% 40%, rgba(41,126,138,0.16), transparent 60%);
+      filter: blur(10px);
+      transform: rotate(12deg);
+      pointer-events:none;
+    }
+    .card > *{ position: relative; z-index: 1; }
+    .card-row{
+      display:flex;
+      gap: 12px;
+      align-items: stretch;
+    }
+    .thumb{
+      width: 140px;
+      min-width: 140px;
+      height: 110px;
+      border-right: 1px solid rgba(41,126,138,0.14);
+      background: rgba(255,255,255,0.10);
+      overflow:hidden;
+    }
+    .thumb img{
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display:block;
+      filter: saturate(1.02) contrast(1.02);
+      transform: scale(1.02);
+    }
+    .info{
+      padding: 12px;
+      flex: 1 1 auto;
+      min-width: 0;
+      display:grid;
+      gap: 8px;
+    }
+    .topline{
+      display:flex;
+      gap: 10px;
       align-items:center;
       justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    .pill2{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(41,126,138,0.18);
+      background: rgba(255,255,255,0.18);
+      font-weight: 900;
+      font-size: calc(12px * var(--type-scale));
+      line-height: 1;
+      white-space: nowrap;
+    }
+    .pill2 .dot{ background: var(--teal); }
+    .pill2.featured .dot{ background: var(--accent); box-shadow: 0 0 0 4px rgba(252,136,58,0.14); }
+    .meta{
+      font-size: calc(12px * var(--type-scale));
+      opacity: .74;
+      font-weight: 800;
+      line-height: 1;
+      white-space: nowrap;
+    }
+    .title{
+      margin: 0;
+      font-size: calc(16px * var(--type-scale-blog));
+      letter-spacing: -0.2px;
+      line-height: 1.15;
+      font-weight: 900;
+      overflow:hidden;
+      text-overflow: ellipsis;
+      display:-webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+    .excerpt{
+      margin: 0;
+      font-size: calc(13px * var(--type-scale-blog));
+      opacity: .84;
+      line-height: 1.35;
+      overflow:hidden;
+      text-overflow: ellipsis;
+      display:-webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+    .card-actions{
+      display:flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items:center;
+      margin-top: 2px;
+    }
+
+    /* Editor */
+    form{ display:grid; gap: 10px; }
+    .row2{ display:grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .row3{ display:grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+    .rowAuto{ display:grid; grid-template-columns: 1fr auto; gap: 10px; align-items:end; }
+    .help{
+      font-size: calc(12px * var(--type-scale));
+      opacity: .74;
+      line-height: 1.35;
+      margin-top: -4px;
+    }
+    textarea.control{
+      height: auto;
+      min-height: 110px;
+      padding: 12px var(--control-pad-x);
+      resize: vertical;
+    }
+    .switch{
+      display:flex;
       gap: 10px;
-      padding: 12px;
-      border-bottom: 1px solid rgba(41,126,138,0.14);
-      background: rgba(255,255,255,0.10);
-    }
-    .preview-head strong{ font-weight: 900; font-size: 13px; }
-    .preview-body{
-      padding: 16px;
-      background: rgba(255,255,255,0.06);
-    }
-    .preview-body h1{
-      margin: 0 0 10px 0;
-      font-size: 32px;
-      letter-spacing: -0.8px;
-      line-height: 1.05;
-    }
-    .preview-body .meta{
-      display:flex; gap: 10px; flex-wrap:wrap;
-      font-size: 12px; opacity:.8; font-weight: 800;
-      margin-bottom: 14px;
-    }
-    .preview-body img{
-      width: 100%;
-      max-height: 340px;
-      object-fit: cover;
+      align-items:center;
+      padding: 12px 14px;
       border-radius: 18px;
-      border: 1px solid rgba(41,126,138,0.12);
-      margin: 8px 0 14px;
-      display:block;
+      border: 1px solid rgba(41,126,138,0.18);
+      background: rgba(255,255,255,0.14);
     }
-    .prose{
-      font-size: 16px;
-      line-height: 1.75;
-      max-width: 78ch;
+    .switch input{ width: 18px; height: 18px; }
+    .switch strong{
+      font-size: calc(13px * var(--type-scale));
+      letter-spacing: .2px;
     }
-    .prose p{ margin: 0 0 14px 0; opacity: .92; }
-    .prose h2{
-      margin: 22px 0 10px;
-      font-size: 22px;
-      letter-spacing: -0.4px;
+    .switch span{
+      font-size: calc(12px * var(--type-scale));
+      opacity: .75;
       line-height: 1.2;
     }
-    .prose h3{
-      margin: 18px 0 8px;
-      font-size: 18px;
-      letter-spacing: -0.2px;
-      line-height: 1.25;
+    .editor-actions{
+      margin-top: 6px;
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items:center;
+      justify-content: space-between;
     }
-    .prose ul, .prose ol{ margin: 0 0 14px 18px; padding:0; }
-    .prose li{ margin: 8px 0; }
-    .prose strong{ font-weight: 900; }
-    .prose a{ color: rgba(41,126,138,1); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 2px; }
-
     .status{
-      margin-top: 10px;
-      font-size: 12px;
-      font-weight: 800;
+      padding: 10px 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(41,126,138,0.18);
+      background: rgba(255,255,255,0.12);
+      font-size: calc(12px * var(--type-scale));
+      line-height: 1.35;
+      opacity: .92;
+      flex: 1 1 280px;
+      min-width: 0;
+    }
+    .status.ok{ border-color: rgba(41,126,138,0.24); }
+    .status.warn{ border-color: rgba(252,136,58,0.28); }
+    .status.err{ border-color: rgba(230,80,80,0.35); color: rgba(230,80,80,0.95); }
+
+    /* Footer tiny */
+    footer{
+      padding: 26px 0 42px;
       opacity: .85;
     }
-    .status.ok{ color: rgba(41,126,138,1); }
-    .status.bad{ color: rgba(220,70,70,1); }
+    .foot{
+      padding-top: 14px;
+      border-top: 1px solid rgba(41,126,138,0.14);
+      display:flex;
+      justify-content: space-between;
+      align-items:center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .tiny{ font-size: calc(13px * var(--type-scale)); opacity: .82; }
 
+    /* Responsive */
     @media (max-width: 980px){
-      .grid{ grid-template-columns: 1fr; }
-      .list{ max-height: 38vh; }
-      .row{ grid-template-columns: 1fr; }
+      nav{ display:none; }
+      .controls{ grid-template-columns: 1fr; }
+      .layout{ grid-template-columns: 1fr; }
+      .thumb{ width: 120px; min-width: 120px; }
+    }
+    @media (max-width: 520px){
+      :root{ --control-h: 54px; }
+      .container{ width:min(var(--max), calc(100% - 28px)); }
+      h1{ font-size: calc(38px * var(--type-scale)); }
+      .thumb{ display:none; }
+      .row2, .row3{ grid-template-columns: 1fr; }
     }
 
-    @media (prefers-reduced-motion: reduce){
-      .btn, .item, .theme{ transition: none !important; }
+    /* ========= Dark theme ========= */
+    html[data-theme="dark"]{
+      color-scheme: dark;
+      --bg: #0b1012;
+      --surface: #0f171a;
+      --ink: rgba(245,246,247,0.92);
+      --glass-bg: rgba(18,26,28,0.62);
+      --glass-br: rgba(255,255,255,0.10);
+      --shadow: 0 18px 60px rgba(0,0,0,0.55);
+      --shadow-soft: 0 10px 30px rgba(0,0,0,0.45);
+      --page-bg:
+        radial-gradient(1000px 700px at 20% 10%, rgba(252,136,58,0.10), transparent 60%),
+        radial-gradient(1100px 820px at 90% 15%, rgba(41,126,138,0.18), transparent 60%),
+        linear-gradient(180deg, #06090b, var(--bg) 28%, #06090b 100%);
+    }
+    html[data-theme="dark"] nav a:hover{ background: rgba(255,255,255,0.06); }
+    html[data-theme="dark"] nav a.active{
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.14);
+    }
+    html[data-theme="dark"] .btn.ghost{ background: rgba(255,255,255,0.06); }
+    html[data-theme="dark"] .kicker,
+    html[data-theme="dark"] .hero-card,
+    html[data-theme="dark"] .panel,
+    html[data-theme="dark"] .card,
+    html[data-theme="dark"] .control,
+    html[data-theme="dark"] .pill2,
+    html[data-theme="dark"] .switch,
+    html[data-theme="dark"] .status{
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.12);
+    }
+    html[data-theme="dark"] select.control{
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M7 10l5 5 5-5' stroke='%23f5f6f7' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") !important;
     }
   </style>
 </head>
 
 <body>
-  <div class="top">
-    <div class="wrap">
+  <header>
+    <div class="container">
       <div class="bar glass">
-        <a class="brand" href="../blog.html" title="Voltar para o Blog">
-          <span class="mark" aria-hidden="true"></span>
-          <div>
-            <strong>DeRose SBC • CMS</strong>
-            <span>admin local (static)</span>
-          </div>
+        <a class="brand" href="./index.html#top" aria-label="Ir para a home">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span class="brand-name">
+            <strong>DeRose SBC</strong>
+            <span>Yôga de Alto Rendimento</span>
+          </span>
         </a>
 
-        <div class="right">
-          <a class="btn" href="../blog.html">Ver Blog</a>
-          <button class="btn" id="btnNew" type="button">Novo post</button>
-          <button class="btn" id="btnExport" type="button">Exportar posts.json</button>
-          <label class="btn" style="cursor:pointer;">
-            Importar JSON
-            <input id="fileImport" type="file" accept="application/json" style="display:none;" />
-          </label>
-          <button class="theme" id="themeToggle" type="button" aria-label="Ativar modo escuro" aria-pressed="false">
+        <nav aria-label="Navegação principal">
+          <a href="./index.html#top">HOME</a>
+          <a href="./blog.html">BLOG</a>
+          <a href="./cms.html" class="active" aria-current="page">CMS</a>
+        </nav>
+
+        <div class="actions">
+          <button class="theme-toggle" id="themeToggle" type="button" aria-label="Ativar modo escuro" aria-pressed="false">
             <svg class="moon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M21 14.5A8.5 8.5 0 1 1 9.5 3a7 7 0 0 0 11.5 11.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
@@ -382,634 +607,9 @@
               <path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5l-1.5-1.5M20.5 20.5 19 19M5 19l-1.5 1.5M20.5 3.5 19 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
             </svg>
           </button>
-        </div>
-      </div>
 
-      <div class="grid">
-        <!-- LEFT: list -->
-        <aside class="panel glass">
-          <div class="search">
-            <input id="q" placeholder="Buscar por título / slug / categoria..." />
-          </div>
-
-          <div class="list" id="list"></div>
-
-          <div class="hint" style="margin-top:10px;">
-            Dica: este CMS salva em <strong>localStorage</strong>. Use <strong>Exportar</strong> para gerar <code>posts.json</code>.
-          </div>
-        </aside>
-
-        <!-- RIGHT: editor -->
-        <section class="panel glass">
-          <div class="form">
-            <div class="row">
-              <div class="field">
-                <label for="slug">Slug (arquivo .html)</label>
-                <input id="slug" placeholder="ex: respiracao-3-minutos" />
-                <div class="hint">Sem espaços, só letras/números/hífens. Isso vira <code>./slug.html</code>.</div>
-              </div>
-
-              <div class="field">
-                <label for="title">Título</label>
-                <input id="title" placeholder="Título do post" />
-              </div>
-            </div>
-
-            <div class="field">
-              <label for="excerpt">Excerpt (resumo)</label>
-              <input id="excerpt" placeholder="Uma frase curta que aparece no blog.html" />
-            </div>
-
-            <div class="row">
-              <div class="field">
-                <label for="category">Categoria</label>
-                <input id="category" placeholder="ex: Respiração" />
-              </div>
-              <div class="field">
-                <label for="tag">Tag</label>
-                <input id="tag" placeholder="ex: Foco" />
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="field">
-                <label for="date">Data (YYYY-MM-DD)</label>
-                <input id="date" placeholder="2026-01-20" />
-              </div>
-              <div class="field">
-                <label for="readMin">Minutos de leitura</label>
-                <input id="readMin" placeholder="4" />
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="field">
-                <label for="image">Imagem (path)</label>
-                <input id="image" placeholder="../assets/blog/respiracao.webp" />
-              </div>
-              <div class="field">
-                <label for="author">Autor</label>
-                <input id="author" placeholder="DeRose SBC" />
-              </div>
-            </div>
-
-            <div class="field">
-              <label for="bodyHtml">Conteúdo (HTML simples)</label>
-              <textarea id="bodyHtml" placeholder="<p>Seu texto...</p>&#10;<h2>Seção</h2>&#10;<p>...</p>"></textarea>
-              <div class="hint">
-                Use <code>&lt;p&gt;</code>, <code>&lt;h2&gt;</code>, <code>&lt;h3&gt;</code>, <code>&lt;ul&gt;</code>, <code>&lt;li&gt;</code>, <code>&lt;strong&gt;</code>, <code>&lt;a&gt;</code>.
-                Evite <code>&lt;script&gt;</code>.
-              </div>
-            </div>
-
-            <div class="toolbar">
-              <button class="btn danger" id="btnDelete" type="button">Excluir</button>
-              <button class="btn" id="btnCopyJson" type="button">Copiar JSON do post</button>
-              <button class="btn" id="btnDownloadPost" type="button">Baixar slug.html</button>
-              <button class="btn primary" id="btnSave" type="button">Salvar</button>
-            </div>
-
-            <div id="status" class="status">—</div>
-          </div>
-        </section>
-      </div>
-
-      <!-- PREVIEW -->
-      <div class="preview glass">
-        <div class="preview-head">
-          <strong>Preview</strong>
-          <div style="display:flex; gap:10px; flex-wrap:wrap;">
-            <button class="btn" id="btnCopyLink" type="button">Copiar link</button>
-            <button class="btn" id="btnClearStorage" type="button" title="Limpa o banco local do CMS">Limpar local</button>
-          </div>
-        </div>
-        <div class="preview-body">
-          <h1 id="pvTitle">—</h1>
-          <div class="meta" id="pvMeta">—</div>
-          <img id="pvImg" alt="" style="display:none;" />
-          <div class="prose" id="pvBody">—</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    /* =========================
-       Storage + helpers
-       ========================= */
-    const STORE_KEY = "derose_blog_posts_v1";
-
-    function nowISO(){
-      const d = new Date();
-      const pad = (n)=> String(n).padStart(2,"0");
-      return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
-    }
-
-    function safeSlug(s){
-      return String(s || "")
-        .trim()
-        .toLowerCase()
-        .replace(/\s+/g, "-")
-        .replace(/[^a-z0-9\-]/g, "")
-        .replace(/\-+/g, "-")
-        .replace(/^\-+|\-+$/g, "");
-    }
-
-    // minimal safety: strip <script> and inline on* handlers
-    function sanitizeHtml(html){
-      let out = String(html || "");
-      out = out.replace(/<script[\s\S]*?>[\s\S]*?<\/script>/gi, "");
-      out = out.replace(/\son\w+="[^"]*"/gi, "");
-      out = out.replace(/\son\w+='[^']*'/gi, "");
-      return out;
-    }
-
-    function loadPosts(){
-      try{
-        const raw = localStorage.getItem(STORE_KEY);
-        if(!raw) return [];
-        const arr = JSON.parse(raw);
-        return Array.isArray(arr) ? arr : [];
-      }catch(e){
-        return [];
-      }
-    }
-
-    function savePosts(posts){
-      localStorage.setItem(STORE_KEY, JSON.stringify(posts, null, 2));
-    }
-
-    function sortPosts(posts){
-      // newest first (YYYY-MM-DD)
-      return [...posts].sort((a,b)=> String(b.date||"").localeCompare(String(a.date||"")));
-    }
-
-    function escapeHtml(str){
-      return String(str ?? "")
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
-    }
-
-    function formatDateBR(iso){
-      try{
-        const [y,m,d] = String(iso).split("-").map(Number);
-        const dt = new Date(y, m-1, d);
-        return dt.toLocaleDateString("pt-BR", { day:"2-digit", month:"short", year:"numeric" });
-      }catch(e){
-        return iso || "—";
-      }
-    }
-
-    /* =========================
-       Theme toggle (same idea)
-       ========================= */
-    const root = document.documentElement;
-    const themeBtn = document.getElementById("themeToggle");
-    const THEME_KEY = "theme";
-
-    function systemPrefersDark(){
-      return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
-    }
-    function setTheme(theme, {persist=true} = {}){
-      if(theme === "dark") root.dataset.theme = "dark";
-      else delete root.dataset.theme;
-
-      if(persist) localStorage.setItem(THEME_KEY, theme);
-
-      const isDark = theme === "dark";
-      themeBtn?.setAttribute("aria-pressed", String(isDark));
-      themeBtn?.setAttribute("aria-label", isDark ? "Desativar modo escuro" : "Ativar modo escuro");
-      document.querySelector('meta[name="theme-color"]')
-        ?.setAttribute("content", isDark ? "#0b1012" : "#297E8A");
-    }
-    (function initTheme(){
-      const saved = localStorage.getItem(THEME_KEY);
-      if(saved === "light" || saved === "dark") setTheme(saved, {persist:false});
-      else setTheme(systemPrefersDark() ? "dark" : "light", {persist:false});
-    })();
-    themeBtn?.addEventListener("click", ()=>{
-      const current = root.dataset.theme === "dark" ? "dark" : "light";
-      setTheme(current === "dark" ? "light" : "dark");
-    });
-
-    /* =========================
-       UI refs
-       ========================= */
-    const listEl = document.getElementById("list");
-    const qEl = document.getElementById("q");
-    const statusEl = document.getElementById("status");
-
-    const f = {
-      slug: document.getElementById("slug"),
-      title: document.getElementById("title"),
-      excerpt: document.getElementById("excerpt"),
-      category: document.getElementById("category"),
-      tag: document.getElementById("tag"),
-      date: document.getElementById("date"),
-      readMin: document.getElementById("readMin"),
-      image: document.getElementById("image"),
-      author: document.getElementById("author"),
-      bodyHtml: document.getElementById("bodyHtml"),
-    };
-
-    const pv = {
-      title: document.getElementById("pvTitle"),
-      meta: document.getElementById("pvMeta"),
-      img: document.getElementById("pvImg"),
-      body: document.getElementById("pvBody"),
-    };
-
-    const btnNew = document.getElementById("btnNew");
-    const btnSave = document.getElementById("btnSave");
-    const btnDelete = document.getElementById("btnDelete");
-    const btnExport = document.getElementById("btnExport");
-    const btnCopyJson = document.getElementById("btnCopyJson");
-    const btnDownloadPost = document.getElementById("btnDownloadPost");
-    const btnCopyLink = document.getElementById("btnCopyLink");
-    const btnClearStorage = document.getElementById("btnClearStorage");
-    const fileImport = document.getElementById("fileImport");
-
-    /* =========================
-       State
-       ========================= */
-    let posts = sortPosts(loadPosts());
-    let activeSlug = posts[0]?.slug || null;
-
-    function setStatus(msg, ok=true){
-      statusEl.textContent = msg;
-      statusEl.className = "status " + (ok ? "ok" : "bad");
-    }
-
-    function currentFormPost(){
-      const slug = safeSlug(f.slug.value);
-      const read = Number(f.readMin.value || 0) || 0;
-      return {
-        slug,
-        title: String(f.title.value || "").trim(),
-        excerpt: String(f.excerpt.value || "").trim(),
-        category: String(f.category.value || "").trim(),
-        tag: String(f.tag.value || "").trim(),
-        date: String(f.date.value || "").trim(),
-        readMin: read,
-        image: String(f.image.value || "").trim(),
-        author: String(f.author.value || "").trim(),
-        bodyHtml: sanitizeHtml(String(f.bodyHtml.value || "")),
-      };
-    }
-
-    function fillForm(p){
-      f.slug.value = p?.slug || "";
-      f.title.value = p?.title || "";
-      f.excerpt.value = p?.excerpt || "";
-      f.category.value = p?.category || "";
-      f.tag.value = p?.tag || "";
-      f.date.value = p?.date || "";
-      f.readMin.value = String(p?.readMin ?? "");
-      f.image.value = p?.image || "";
-      f.author.value = p?.author || "";
-      f.bodyHtml.value = p?.bodyHtml || "";
-      renderPreview();
-    }
-
-    function renderList(){
-      const q = String(qEl.value || "").trim().toLowerCase();
-      const filtered = posts.filter(p => {
-        const hay = `${p.title||""} ${p.slug||""} ${p.category||""} ${p.tag||""}`.toLowerCase();
-        return !q || hay.includes(q);
-      });
-
-      listEl.innerHTML = filtered.length ? filtered.map(p => `
-        <div class="item ${p.slug === activeSlug ? "active" : ""}" data-slug="${escapeHtml(p.slug)}">
-          <div class="t">${escapeHtml(p.title || "(sem título)")}</div>
-          <div class="m">
-            <span class="badge"><span class="dot"></span>${escapeHtml(p.category || "—")}</span>
-            <span class="badge"><span class="dot alt"></span>${escapeHtml(p.tag || "—")}</span>
-            <span class="badge">${escapeHtml(formatDateBR(p.date || "—"))}</span>
-          </div>
-        </div>
-      `).join("") : `<div class="hint">Nenhum post. Clique em <strong>Novo post</strong>.</div>`;
-
-      listEl.querySelectorAll(".item").forEach(el=>{
-        el.addEventListener("click", ()=>{
-          const slug = el.getAttribute("data-slug");
-          selectPost(slug);
-        });
-      });
-    }
-
-    function selectPost(slug){
-      const p = posts.find(x => x.slug === slug);
-      if(!p){
-        activeSlug = null;
-        fillForm(makeBlank());
-        renderList();
-        return;
-      }
-      activeSlug = p.slug;
-      fillForm(p);
-      renderList();
-      setStatus(`Editando: ${p.slug}`, true);
-    }
-
-    function makeBlank(){
-      return {
-        slug: "",
-        title: "",
-        excerpt: "",
-        category: "",
-        tag: "",
-        date: nowISO(),
-        readMin: 4,
-        image: "",
-        author: "DeRose SBC",
-        bodyHtml: "<p>Escreva aqui...</p>"
-      };
-    }
-
-    function persist(){
-      posts = sortPosts(posts);
-      savePosts(posts);
-      renderList();
-    }
-
-    function renderPreview(){
-      const p = currentFormPost();
-
-      pv.title.textContent = p.title || "—";
-      pv.meta.textContent = [
-        p.category ? `Categoria: ${p.category}` : null,
-        p.tag ? `Tag: ${p.tag}` : null,
-        p.date ? `Data: ${formatDateBR(p.date)}` : null,
-        p.readMin ? `${p.readMin} min` : null,
-        p.author ? `Por ${p.author}` : null,
-        p.slug ? `Arquivo: ${p.slug}.html` : null,
-      ].filter(Boolean).join(" • ") || "—";
-
-      if(p.image){
-        pv.img.style.display = "block";
-        pv.img.src = p.image;
-        pv.img.alt = p.title || "";
-      }else{
-        pv.img.style.display = "none";
-        pv.img.removeAttribute("src");
-      }
-
-      pv.body.innerHTML = sanitizeHtml(p.bodyHtml || "—");
-    }
-
-    /* =========================
-       Actions
-       ========================= */
-    qEl.addEventListener("input", renderList);
-
-    // live preview on typing
-    Object.values(f).forEach(el=>{
-      el.addEventListener("input", ()=>{
-        if(el === f.slug){
-          const s = safeSlug(f.slug.value);
-          if(f.slug.value !== s) f.slug.value = s;
-        }
-        renderPreview();
-      });
-    });
-
-    btnNew.addEventListener("click", ()=>{
-      activeSlug = null;
-      fillForm(makeBlank());
-      renderList();
-      setStatus("Novo post (não salvo)", true);
-      f.slug.focus();
-    });
-
-    btnSave.addEventListener("click", ()=>{
-      const p = currentFormPost();
-
-      if(!p.slug){
-        setStatus("Slug é obrigatório.", false);
-        f.slug.focus();
-        return;
-      }
-      if(!p.title){
-        setStatus("Título é obrigatório.", false);
-        f.title.focus();
-        return;
-      }
-      if(!p.date || !/^\d{4}-\d{2}-\d{2}$/.test(p.date)){
-        setStatus("Data inválida. Use YYYY-MM-DD.", false);
-        f.date.focus();
-        return;
-      }
-
-      const existsOther = posts.find(x => x.slug === p.slug && x.slug !== activeSlug);
-      if(existsOther){
-        setStatus("Slug já existe. Use outro slug.", false);
-        f.slug.focus();
-        return;
-      }
-
-      // upsert
-      posts = posts.filter(x => x.slug !== activeSlug);
-      posts.push(p);
-      activeSlug = p.slug;
-
-      persist();
-      setStatus(`Salvo: ${p.slug}`, true);
-    });
-
-    btnDelete.addEventListener("click", ()=>{
-      if(!activeSlug){
-        setStatus("Nada para excluir.", false);
-        return;
-      }
-      const ok = confirm(`Excluir o post "${activeSlug}"?`);
-      if(!ok) return;
-
-      posts = posts.filter(x => x.slug !== activeSlug);
-      activeSlug = posts[0]?.slug || null;
-      persist();
-
-      if(activeSlug) selectPost(activeSlug);
-      else fillForm(makeBlank());
-
-      setStatus("Post excluído.", true);
-    });
-
-    btnExport.addEventListener("click", ()=>{
-      const data = JSON.stringify(sortPosts(posts), null, 2);
-      const blob = new Blob([data], { type: "application/json" });
-      const url = URL.createObjectURL(blob);
-
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "posts.json";
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      URL.revokeObjectURL(url);
-
-      setStatus("Exportado: posts.json", true);
-    });
-
-    fileImport.addEventListener("change", async (e)=>{
-      const file = e.target.files?.[0];
-      if(!file) return;
-      try{
-        const txt = await file.text();
-        const arr = JSON.parse(txt);
-        if(!Array.isArray(arr)) throw new Error("JSON deve ser um array.");
-        // normalize
-        const normalized = arr.map(x => ({
-          slug: safeSlug(x.slug),
-          title: String(x.title || "").trim(),
-          excerpt: String(x.excerpt || "").trim(),
-          category: String(x.category || "").trim(),
-          tag: String(x.tag || "").trim(),
-          date: String(x.date || "").trim(),
-          readMin: Number(x.readMin || 0) || 0,
-          image: String(x.image || "").trim(),
-          author: String(x.author || "").trim(),
-          bodyHtml: sanitizeHtml(String(x.bodyHtml || "")),
-        })).filter(x => x.slug && x.title);
-
-        posts = sortPosts(normalized);
-        savePosts(posts);
-        activeSlug = posts[0]?.slug || null;
-        renderList();
-        if(activeSlug) selectPost(activeSlug);
-        else fillForm(makeBlank());
-
-        setStatus("Import OK.", true);
-      }catch(err){
-        setStatus("Falha ao importar: " + (err?.message || "erro"), false);
-      }finally{
-        fileImport.value = "";
-      }
-    });
-
-    btnCopyJson.addEventListener("click", async ()=>{
-      const p = currentFormPost();
-      const json = JSON.stringify(p, null, 2);
-      try{
-        await navigator.clipboard.writeText(json);
-        setStatus("JSON do post copiado.", true);
-      }catch(e){
-        setStatus("Não consegui copiar (permissão do navegador).", false);
-      }
-    });
-
-    btnCopyLink.addEventListener("click", async ()=>{
-      const p = currentFormPost();
-      const link = p.slug ? `${location.origin}${location.pathname.replace(/\/[^\/]*$/, "/")}${p.slug}.html` : location.href;
-      try{
-        await navigator.clipboard.writeText(link);
-        setStatus("Link copiado.", true);
-      }catch(e){
-        setStatus("Não consegui copiar (permissão do navegador).", false);
-      }
-    });
-
-    btnClearStorage.addEventListener("click", ()=>{
-      const ok = confirm("Limpar todos os posts salvos neste navegador?");
-      if(!ok) return;
-      localStorage.removeItem(STORE_KEY);
-      posts = [];
-      activeSlug = null;
-      fillForm(makeBlank());
-      renderList();
-      setStatus("Local limpo.", true);
-    });
-
-    function buildPostHtml(p){
-      const title = escapeHtml(p.title || "");
-      const desc = escapeHtml(p.excerpt || "");
-      const ogImg = escapeHtml(p.image || "../assets/blog/cover.webp");
-
-      // Same “clean” post page style: no TOC sidebar, no callout boxes, no nested glass.
-      return `<!doctype html>
-<html lang="pt-BR">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#297E8A" />
-  <title>${title} • DeRose SBC</title>
-  <meta name="description" content="${desc}" />
-  <meta property="og:title" content="${title} • DeRose SBC" />
-  <meta property="og:description" content="${desc}" />
-  <meta property="og:type" content="article" />
-  <meta property="og:image" content="${ogImg}" />
-  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
-
-  <style>
-    @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-Regular.ttf") format("truetype"); font-weight:400; font-style:normal; font-display:swap; }
-    @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-Bold.ttf") format("truetype"); font-weight:700; font-style:normal; font-display:swap; }
-    @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-Black.ttf") format("truetype"); font-weight:900; font-style:normal; font-display:swap; }
-
-    :root{
-      --bg:#FFF9EF; --ink:#393939; --teal:#297E8A; --accent:#FC883A;
-      --glass-bg: rgba(255,255,255,0.26);
-      --glass-br: rgba(41,126,138,0.22);
-      --shadow-soft: 0 10px 30px rgba(57,57,57,0.10);
-      --r-xl: 28px;
-      --max: 1120px;
-      --page-bg:
-        radial-gradient(1000px 700px at 20% 10%, rgba(252,136,58,0.12), transparent 60%),
-        radial-gradient(1100px 820px at 90% 15%, rgba(41,126,138,0.14), transparent 60%),
-        linear-gradient(180deg, var(--bg), #fff 28%, var(--bg) 100%);
-    }
-    *{ box-sizing:border-box; }
-    body{ margin:0; font-family:"Spartan", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color:var(--ink); background:var(--page-bg); line-height:1.25; }
-    a{ color:inherit; text-decoration:none; }
-    .container{ width:min(var(--max), calc(100% - 40px)); margin:0 auto; }
-    .glass{ background:var(--glass-bg); border:1px solid var(--glass-br); box-shadow:var(--shadow-soft); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); }
-    header{ position:sticky; top:0; z-index:40; padding:14px 0; }
-    header .bar{ border-radius:999px; padding:10px 14px; display:flex; align-items:center; justify-content:space-between; gap:14px; }
-    .btn{ display:inline-flex; align-items:center; justify-content:center; padding:11px 14px; border-radius:999px; border:1px solid rgba(41,126,138,0.22); background:rgba(255,255,255,0.18); font-weight:800; font-size:13px; cursor:pointer; white-space:nowrap; line-height:1; }
-    .btn.primary{ border:1px solid rgba(252,136,58,0.35); background:linear-gradient(135deg, rgba(252,136,58,0.95), rgba(252,136,58,0.65)); color:#1f1f1f; }
-    section{ padding:34px 0 18px; }
-    h1{ margin:16px 0 10px; font-size:46px; line-height:1.02; letter-spacing:-1px; }
-    .sub{ margin:12px 0 0; font-size:18px; line-height:1.55; opacity:.9; max-width:75ch; }
-    .meta{ margin-top:14px; display:flex; gap:10px; flex-wrap:wrap; align-items:center; font-size:13px; opacity:.86; font-weight:800; }
-    .cover{ margin-top:18px; border-radius:var(--r-xl); overflow:hidden; }
-    .cover img{ width:100%; height:min(520px, 56vh); object-fit:cover; display:block; }
-    .card{ border-radius:var(--r-xl); padding:22px; }
-    .prose{ font-size:16px; line-height:1.75; max-width:78ch; }
-    .prose p{ margin:0 0 14px 0; opacity:.92; }
-    .prose h2{ margin:22px 0 10px; font-size:22px; letter-spacing:-0.4px; line-height:1.2; }
-    .prose h3{ margin:18px 0 8px; font-size:18px; letter-spacing:-0.2px; line-height:1.25; }
-    .prose ul, .prose ol{ margin:0 0 14px 18px; padding:0; }
-    .prose li{ margin:8px 0; }
-    .prose strong{ font-weight:900; }
-    .prose a{ color:rgba(41,126,138,1); text-decoration:underline; text-underline-offset:3px; text-decoration-thickness:2px; }
-    .actions{ display:flex; gap:10px; flex-wrap:wrap; margin-top:18px; }
-    footer{ padding:36px 0 46px; opacity:.85; }
-    footer .foot{ display:flex; justify-content:space-between; align-items:center; gap:12px; padding-top:16px; border-top:1px solid rgba(41,126,138,0.14); flex-wrap:wrap; }
-    .tiny{ font-size:13px; opacity:.8; }
-
-    html[data-theme="dark"]{
-      color-scheme: dark;
-      --bg:#0b1012;
-      --ink: rgba(245,246,247,0.92);
-      --glass-bg: rgba(18,26,28,0.62);
-      --glass-br: rgba(255,255,255,0.10);
-      --shadow-soft: 0 10px 30px rgba(0,0,0,0.45);
-      --page-bg:
-        radial-gradient(1000px 700px at 20% 10%, rgba(252,136,58,0.10), transparent 60%),
-        radial-gradient(1100px 820px at 90% 15%, rgba(41,126,138,0.18), transparent 60%),
-        linear-gradient(180deg, #06090b, var(--bg) 28%, #06090b 100%);
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <div class="container">
-      <div class="bar glass">
-        <a class="btn" href="../blog.html">← Voltar</a>
-        <div style="display:flex; gap:10px; align-items:center;">
-          <button class="btn" id="themeToggle" type="button">Tema</button>
-          <a class="btn primary" href="../index.html#contato">Entre em Contato</a>
+          <button class="btn ghost" id="btnExportJson" type="button" title="Exportar posts.json">Exportar JSON</button>
+          <button class="btn ghost" id="btnCopyConst" type="button" title="Copiar const POSTS = [...]">Copiar const</button>
         </div>
       </div>
     </div>
@@ -1018,149 +618,804 @@
   <main id="top">
     <section>
       <div class="container">
-        <div class="glass card">
-          <h1>${title}</h1>
-          <p class="sub">${desc}</p>
+        <div class="hero-card glass">
+          <div class="kicker">
+            <span class="pill">CMS</span>
+            <span>Local • simples • sem multiusuário</span>
+          </div>
+          <h1>Gerenciar posts do Blog.</h1>
+          <p class="sub">
+            Crie, edite e exclua posts. Depois exporte para <strong>assets/blog/posts.json</strong> (recomendado) ou copie
+            o snippet <strong>const POSTS = [...]</strong> para colar no seu <strong>blog.html</strong>.
+          </p>
 
-          <div class="meta">
-            <span>${escapeHtml(formatDateBR(p.date || ""))}</span>
-            <span>•</span>
-            <span><strong>${escapeHtml(String(p.readMin || 0))}</strong> min de leitura</span>
-            <span>•</span>
-            <span>Por <strong>${escapeHtml(p.author || "")}</strong></span>
+          <div class="note">
+            <span class="tag"><span class="dot"></span>Dados ficam no seu navegador (localStorage)</span>
+            <span class="tag"><span class="dot" style="background:var(--accent)"></span>Exportar = publicar</span>
           </div>
 
-          ${p.image ? `<div class="cover" style="margin-top:18px;"><img src="${escapeHtml(p.image)}" alt="${title}" loading="eager" /></div>` : ""}
-        </div>
-      </div>
-    </section>
-
-    <section style="padding-top:18px;">
-      <div class="container">
-        <article class="glass card">
-          <div class="prose">
-            ${sanitizeHtml(p.bodyHtml || "")}
-          </div>
-
-          <div class="actions">
-            <a class="btn" href="../blog.html#posts">Ver mais posts</a>
-            <a class="btn primary" href="../index.html#contato">Agendar aula</a>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <footer>
-      <div class="container">
-        <div class="foot">
-          <div>
-            <div style="font-weight:900;">DeRose SBC</div>
-            <div class="tiny">Blog • Yôga de Alto Rendimento</div>
-          </div>
-          <div style="display:flex; gap:10px; flex-wrap:wrap;">
-            <a class="btn" href="#top">Topo ↑</a>
-            <a class="btn" href="../blog.html">Blog</a>
-            <a class="btn" href="../index.html#contato">Contato</a>
+          <div class="controls" aria-label="Filtros do CMS">
+            <div class="field">
+              <div class="label">Buscar</div>
+              <input class="control glass" id="q" type="search" placeholder="Procure por título, tag, categoria..." autocomplete="off" />
+            </div>
+            <div class="field">
+              <div class="label">Categoria</div>
+              <select class="control glass" id="cat">
+                <option value="all">Todas</option>
+              </select>
+            </div>
+            <div class="field">
+              <div class="label">Ordenar</div>
+              <select class="control glass" id="order">
+                <option value="new">Mais recentes</option>
+                <option value="old">Mais antigos</option>
+                <option value="read">Menor leitura</option>
+                <option value="title">Título (A–Z)</option>
+              </select>
+            </div>
           </div>
         </div>
-        <div class="tiny" style="margin-top:12px;">© <span id="year"></span> DeRose SBC.</div>
+
+        <div class="layout">
+          <!-- LIST -->
+          <div class="panel glass">
+            <div class="head">
+              <div>
+                <h2>Posts</h2>
+                <p id="listHint">Selecione um item para editar, ou crie um novo post.</p>
+              </div>
+              <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+                <button class="btn primary small" id="btnNew" type="button">Novo Post</button>
+                <button class="btn small" id="btnImport" type="button">Importar</button>
+                <input type="file" id="file" accept="application/json" style="display:none" />
+              </div>
+            </div>
+            <div class="body">
+              <div class="list" id="list"></div>
+              <div id="empty" class="status warn" style="display:none; margin-top:10px;">
+                Nenhum post encontrado com os filtros atuais.
+              </div>
+            </div>
+          </div>
+
+          <!-- EDITOR -->
+          <div class="panel glass">
+            <div class="head">
+              <div>
+                <h2 id="editorTitle">Editor</h2>
+                <p id="editorSub">Crie ou edite um post. Campos essenciais: <strong>Título</strong>, <strong>Slug (id)</strong>, <strong>Data</strong>, <strong>Categoria</strong>.</p>
+              </div>
+            </div>
+            <div class="body">
+              <form id="form" novalidate>
+                <div class="rowAuto">
+                  <div class="field">
+                    <div class="label">Título</div>
+                    <input class="control glass" id="title" type="text" placeholder="Ex.: Respiração Transformadora em 3 minutos..." />
+                    <div class="help">Dica: curto, assertivo, com benefício claro.</div>
+                  </div>
+                  <button class="btn small" id="btnSlugify" type="button" title="Gerar slug a partir do título">Gerar slug</button>
+                </div>
+
+                <div class="row2">
+                  <div class="field">
+                    <div class="label">Slug (id)</div>
+                    <input class="control glass" id="id" type="text" placeholder="ex.: respiracao-3-minutos" />
+                    <div class="help">Apenas letras/números e hífen. (Sem acentos.)</div>
+                  </div>
+                  <div class="field">
+                    <div class="label">Data (YYYY-MM-DD)</div>
+                    <input class="control glass" id="date" type="date" />
+                    <div class="help">Use a data de publicação.</div>
+                  </div>
+                </div>
+
+                <div class="row2">
+                  <div class="field">
+                    <div class="label">Categoria</div>
+                    <input class="control glass" id="category" type="text" placeholder="Ex.: Respiração" list="catList" />
+                    <datalist id="catList"></datalist>
+                  </div>
+                  <div class="field">
+                    <div class="label">Tempo de leitura (min)</div>
+                    <input class="control glass" id="readMin" type="number" min="1" step="1" placeholder="Ex.: 5" />
+                  </div>
+                </div>
+
+                <div class="field">
+                  <div class="label">Tags (separe por vírgula)</div>
+                  <input class="control glass" id="tags" type="text" placeholder="Ex.: Foco, Rotina, Respiratórios" />
+                  <div class="help">O blog usa tags para chips e busca. Evite duplicatas.</div>
+                </div>
+
+                <div class="field">
+                  <div class="label">Excerpt</div>
+                  <textarea class="control glass" id="excerpt" placeholder="Resumo curto (1–2 frases) com utilidade prática..."></textarea>
+                </div>
+
+                <div class="row2">
+                  <div class="field">
+                    <div class="label">Imagem (path)</div>
+                    <input class="control glass" id="image" type="text" placeholder="./assets/blog/seu-post.webp" />
+                    <div class="help">Sugestão: ./assets/blog/&lt;slug&gt;.webp</div>
+                  </div>
+                  <div class="field">
+                    <div class="label">Link (href)</div>
+                    <input class="control glass" id="href" type="text" placeholder="./posts/seu-post.html" />
+                    <div class="help">Sugestão: ./posts/&lt;slug&gt;.html</div>
+                  </div>
+                </div>
+
+                <label class="switch">
+                  <input id="featured" type="checkbox" />
+                  <div style="display:grid; gap:2px;">
+                    <strong>Post em destaque</strong>
+                    <span>Se marcar, ele vira o “Destaque” do blog. (Somente 1.)</span>
+                  </div>
+                </label>
+
+                <div class="editor-actions">
+                  <div class="status ok" id="status">Pronto.</div>
+                  <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;">
+                    <button class="btn danger" id="btnDelete" type="button" disabled>Excluir</button>
+                    <button class="btn ghost" id="btnReset" type="button">Limpar</button>
+                    <button class="btn primary" id="btnSave" type="button">Salvar</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+
+        </div>
+
+        <footer>
+          <div class="container">
+            <div class="foot">
+              <div class="tiny">© <span id="year"></span> DeRose SBC • CMS local</div>
+              <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                <a class="btn small" href="./blog.html" style="text-decoration:none;">Abrir Blog</a>
+                <a class="btn small" href="./index.html#top" style="text-decoration:none;">Abrir Home</a>
+              </div>
+            </div>
+          </div>
+        </footer>
       </div>
-    </footer>
+    </section>
   </main>
 
   <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
+    // =========================
+    // Helpers
+    // =========================
+    const $ = (sel, root=document) => root.querySelector(sel);
+    const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel));
+    const nowYear = new Date().getFullYear();
+    $('#year').textContent = nowYear;
+
+    function escapeHtml(str){
+      return String(str)
+        .replaceAll('&','&amp;')
+        .replaceAll('<','&lt;')
+        .replaceAll('>','&gt;')
+        .replaceAll('"','&quot;')
+        .replaceAll("'","&#039;");
+    }
+    function unique(arr){ return Array.from(new Set(arr)); }
+    function formatDateISO(iso){
+      try{
+        if(!iso) return '—';
+        const [y,m,d] = iso.split('-').map(Number);
+        const dt = new Date(y, m-1, d);
+        return dt.toLocaleDateString('pt-BR', { day:'2-digit', month:'short', year:'numeric' });
+      }catch(e){
+        return iso || '—';
+      }
+    }
+    function slugify(input){
+      return String(input || '')
+        .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase()
+        .trim()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/-+/g, '-')
+        .replace(/^-|-$/g, '');
+    }
+    function parseTags(str){
+      return unique(String(str || '')
+        .split(',')
+        .map(s => s.trim())
+        .filter(Boolean));
+    }
+    function cleanString(s){ return String(s || '').trim(); }
+
+    function normalizePost(p){
+      const id = cleanString(p?.id);
+      const title = cleanString(p?.title);
+      const excerpt = cleanString(p?.excerpt);
+      const category = cleanString(p?.category);
+      const tags = Array.isArray(p?.tags) ? unique(p.tags.map(t => cleanString(t)).filter(Boolean)) : parseTags(p?.tags);
+      const date = cleanString(p?.date);
+      const readMin = Number.isFinite(Number(p?.readMin)) ? Number(p.readMin) : (p?.readMin ? Number(p.readMin) : 5);
+      const featured = Boolean(p?.featured);
+      const image = cleanString(p?.image) || `./assets/blog/${id || 'placeholder'}.webp`;
+      const href = cleanString(p?.href) || `./posts/${id || 'novo-post'}.html`;
+      return { id, title, excerpt, category, tags, date, readMin, featured, image, href };
+    }
+
+    // =========================
+    // Theme (same behavior)
+    // =========================
     const root = document.documentElement;
-    const THEME_KEY = "theme";
-    function systemPrefersDark(){ return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches; }
-    function setTheme(t, persist=true){
-      if(t === "dark") root.dataset.theme = "dark";
+    const themeBtn = $('#themeToggle');
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const THEME_KEY = 'theme';
+    function systemPrefersDark(){
+      return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
+    function setTheme(theme, {persist = true} = {}){
+      if(theme === 'dark') root.dataset.theme = 'dark';
       else delete root.dataset.theme;
-      if(persist) localStorage.setItem(THEME_KEY, t);
+      if(persist){
+        localStorage.setItem(THEME_KEY, theme);
+      }
+      if(themeBtn){
+        const isDark = theme === 'dark';
+        themeBtn.setAttribute('aria-pressed', String(isDark));
+        themeBtn.setAttribute('aria-label', isDark ? 'Desativar modo escuro' : 'Ativar modo escuro');
+      }
+      if(metaTheme){
+        metaTheme.setAttribute('content', theme === 'dark' ? '#0b1012' : '#297E8A');
+      }
     }
-    (function(){
+    function initTheme(){
       const saved = localStorage.getItem(THEME_KEY);
-      if(saved === "light" || saved === "dark") setTheme(saved, false);
-      else setTheme(systemPrefersDark() ? "dark" : "light", false);
-    })();
-    document.getElementById("themeToggle")?.addEventListener("click", ()=>{
-      const cur = root.dataset.theme === "dark" ? "dark" : "light";
-      setTheme(cur === "dark" ? "light" : "dark", true);
+      if(saved === 'light' || saved === 'dark'){
+        setTheme(saved, {persist:false});
+      } else {
+        setTheme(systemPrefersDark() ? 'dark' : 'light', {persist:false});
+      }
+    }
+    initTheme();
+    themeBtn?.addEventListener('click', () => {
+      const current = root.dataset.theme === 'dark' ? 'dark' : 'light';
+      setTheme(current === 'dark' ? 'light' : 'dark');
     });
-  </script>
-</body>
-</html>`;
+    const mq = window.matchMedia?.('(prefers-color-scheme: dark)');
+    mq?.addEventListener?.('change', (e) => {
+      const saved = localStorage.getItem(THEME_KEY);
+      if(saved !== 'light' && saved !== 'dark'){
+        setTheme(e.matches ? 'dark' : 'light', {persist:false});
+      }
+    });
+
+    // =========================
+    // Data
+    // =========================
+    const STORAGE_KEY = 'derose_blog_posts_v1';
+
+    // Seed = your current POSTS
+    const SEED_POSTS = [
+      {
+        id: "respiracao-3-minutos",
+        title: "Respiração Transformadora em 3 minutos: estabilize energia e ruído mental",
+        excerpt: "Um protocolo simples para você baixar ruído, organizar foco e começar o dia com mais clareza — sem misticismo e sem drama.",
+        category: "Respiração",
+        tags: ["Respiratórios", "Foco", "Rotina"],
+        date: "2026-01-20",
+        readMin: 4,
+        featured: true,
+        image: "./assets/blog/respiracao.webp",
+        href: "./posts/respiracao-3-minutos.html"
+      },
+      {
+        id: "mobilidade-postura",
+        title: "Mobilidade & Força Útil: o básico que muda postura e eficiência",
+        excerpt: "Se você treina, trabalha sentado ou sente o corpo travado, este é o mapa de prioridades para recuperar eixo e estabilidade.",
+        category: "Mobilidade",
+        tags: ["Força & Flexibilidade", "Postura"],
+        date: "2026-01-14",
+        readMin: 6,
+        featured: false,
+        image: "./assets/blog/mobilidade.webp",
+        href: "./posts/mobilidade-postura.html"
+      },
+      {
+        id: "recuperacao-profunda",
+        title: "Recuperação Profunda: por que descansar não é perder tempo",
+        excerpt: "Recuperação não é pausa passiva — é assimilação ativa. Entenda como melhorar recuperação física e emocional com técnica.",
+        category: "Recuperação",
+        tags: ["Descontração", "Estabilidade"],
+        date: "2026-01-10",
+        readMin: 5,
+        featured: false,
+        image: "./assets/blog/recuperacao.webp",
+        href: "./posts/recuperacao-profunda.html"
+      },
+      {
+        id: "foco-centro",
+        title: "Foco & Concentração: volte ao centro em qualquer rotina",
+        excerpt: "Uma abordagem prática para treinar foco profundo e reduzir dispersão — útil para trabalho, estudo e decisões melhores.",
+        category: "Foco",
+        tags: ["Mindfulness & Meditação", "Discernimento"],
+        date: "2026-01-05",
+        readMin: 7,
+        featured: false,
+        image: "./assets/blog/foco.webp",
+        href: "./posts/foco-centro.html"
+      },
+      {
+        id: "discernimento-decisoes",
+        title: "Discernimento: decisões boas e repetíveis (sem depender de motivação)",
+        excerpt: "Discernimento é clareza + consistência. Aqui vai um framework simples para reduzir arrependimento e aumentar previsibilidade.",
+        category: "Mentalidade",
+        tags: ["Discernimento", "Rotina"],
+        date: "2025-12-22",
+        readMin: 6,
+        featured: false,
+        image: "./assets/blog/discernimento.webp",
+        href: "./posts/discernimento-decisoes.html"
+      },
+      {
+        id: "consistencia-ritual",
+        title: "Consistência: como criar ritual sem virar prisão",
+        excerpt: "A diferença entre disciplina rígida e ritual inteligente. Um jeito adulto de manter o prumo mesmo com rotina atribulada.",
+        category: "Rotina",
+        tags: ["Rotina", "Estabilidade"],
+        date: "2025-12-12",
+        readMin: 5,
+        featured: false,
+        image: "./assets/blog/consistencia.webp",
+        href: "./posts/consistencia-ritual.html"
+      }
+    ].map(normalizePost);
+
+    let posts = [];
+    let view = { q: '', cat: 'all', order: 'new' };
+    let editingId = null;
+
+    function loadPosts(){
+      try{
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if(raw){
+          const parsed = JSON.parse(raw);
+          if(Array.isArray(parsed) && parsed.length){
+            posts = parsed.map(normalizePost);
+            ensureSingleFeatured();
+            return;
+          }
+        }
+      }catch(e){}
+      posts = SEED_POSTS.map(normalizePost);
+      ensureSingleFeatured();
+      persist();
+    }
+    function persist(){
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(posts, null, 2));
+      refreshTaxonomy();
+    }
+    function ensureSingleFeatured(){
+      // Keep only the newest "featured" if multiple
+      const featured = posts.filter(p => p.featured);
+      if(featured.length <= 1) return;
+      featured.sort((a,b)=> (b.date || '').localeCompare(a.date || ''));
+      const keepId = featured[0].id;
+      posts = posts.map(p => ({...p, featured: p.id === keepId}));
     }
 
-    btnDownloadPost.addEventListener("click", ()=>{
-      const p = currentFormPost();
-      if(!p.slug){
-        setStatus("Slug é obrigatório para baixar o HTML.", false);
-        f.slug.focus();
-        return;
-      }
-      if(!p.title){
-        setStatus("Título é obrigatório para baixar o HTML.", false);
-        f.title.focus();
-        return;
-      }
-      if(!p.date || !/^\d{4}-\d{2}-\d{2}$/.test(p.date)){
-        setStatus("Data inválida. Use YYYY-MM-DD.", false);
-        f.date.focus();
+    // =========================
+    // UI refs
+    // =========================
+    const elList = $('#list');
+    const elEmpty = $('#empty');
+    const elListHint = $('#listHint');
+
+    const elQ = $('#q');
+    const elCat = $('#cat');
+    const elOrder = $('#order');
+
+    const form = $('#form');
+    const fTitle = $('#title');
+    const fId = $('#id');
+    const fDate = $('#date');
+    const fCategory = $('#category');
+    const fReadMin = $('#readMin');
+    const fTags = $('#tags');
+    const fExcerpt = $('#excerpt');
+    const fImage = $('#image');
+    const fHref = $('#href');
+    const fFeatured = $('#featured');
+
+    const btnNew = $('#btnNew');
+    const btnImport = $('#btnImport');
+    const fileInput = $('#file');
+
+    const btnSlugify = $('#btnSlugify');
+    const btnDelete = $('#btnDelete');
+    const btnReset = $('#btnReset');
+    const btnSave = $('#btnSave');
+
+    const btnExportJson = $('#btnExportJson');
+    const btnCopyConst = $('#btnCopyConst');
+
+    const elStatus = $('#status');
+    const editorTitle = $('#editorTitle');
+
+    const catList = $('#catList');
+
+    // =========================
+    // Filtering + Sorting
+    // =========================
+    function matches(p){
+      const q = view.q.trim().toLowerCase();
+      const inText = !q
+        || (p.title || '').toLowerCase().includes(q)
+        || (p.excerpt || '').toLowerCase().includes(q)
+        || (p.category || '').toLowerCase().includes(q)
+        || (p.tags || []).some(t => (t || '').toLowerCase().includes(q))
+        || (p.id || '').toLowerCase().includes(q);
+      const inCat = (view.cat === 'all') || (p.category === view.cat);
+      return inText && inCat;
+    }
+    function sortList(list){
+      const out = list.slice();
+      if(view.order === 'new') out.sort((a,b)=> (b.date || '').localeCompare(a.date || ''));
+      else if(view.order === 'old') out.sort((a,b)=> (a.date || '').localeCompare(b.date || ''));
+      else if(view.order === 'read') out.sort((a,b)=> (a.readMin ?? 99) - (b.readMin ?? 99));
+      else if(view.order === 'title') out.sort((a,b)=> (a.title || '').localeCompare(b.title || '', 'pt-BR'));
+      return out;
+    }
+
+    // =========================
+    // Render
+    // =========================
+    function render(){
+      const filtered = sortList(posts.filter(matches));
+      elListHint.textContent = `${filtered.length} post(s) • ${posts.length} total • ${editingId ? 'editando' : 'sem seleção'}`;
+      elEmpty.style.display = filtered.length ? 'none' : 'block';
+
+      elList.innerHTML = filtered.map(p => {
+        const isEditing = editingId === p.id;
+        const pill = p.featured
+          ? `<span class="pill2 featured"><span class="dot"></span>Destaque</span>`
+          : `<span class="pill2"><span class="dot"></span>${escapeHtml(p.category || 'Sem categoria')}</span>`;
+        const meta = `${escapeHtml(formatDateISO(p.date))} • ${escapeHtml(String(p.readMin ?? '—'))} min • ${escapeHtml(p.id)}`;
+        const img = escapeHtml(p.image || './assets/blog/placeholder.webp');
+
+        return `
+          <div class="card glass" data-id="${escapeHtml(p.id)}" style="${isEditing ? 'outline: 2px solid rgba(41,126,138,0.30); outline-offset: -2px;' : ''}">
+            <div class="card-row">
+              <div class="thumb" aria-hidden="true">
+                <img src="${img}" alt="" loading="lazy" />
+              </div>
+              <div class="info">
+                <div class="topline">
+                  ${pill}
+                  <div class="meta">${meta}</div>
+                </div>
+                <h3 class="title">${escapeHtml(p.title || 'Sem título')}</h3>
+                <p class="excerpt">${escapeHtml(p.excerpt || '')}</p>
+                <div class="card-actions">
+                  <button class="btn small ${isEditing ? 'primary' : 'ghost'}" type="button" data-action="edit" data-id="${escapeHtml(p.id)}">
+                    ${isEditing ? 'Editando' : 'Editar'}
+                  </button>
+                  <a class="btn small ghost" href="${escapeHtml(p.href || '#')}" target="_blank" rel="noopener">Abrir</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function refreshTaxonomy(){
+      const cats = unique(posts.map(p => p.category).filter(Boolean)).sort((a,b)=>a.localeCompare(b,'pt-BR'));
+      elCat.innerHTML = `<option value="all">Todas</option>` + cats.map(c => `<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`).join('');
+      catList.innerHTML = cats.map(c => `<option value="${escapeHtml(c)}"></option>`).join('');
+      // Keep selection if still valid
+      if(view.cat !== 'all' && !cats.includes(view.cat)) view.cat = 'all';
+      elCat.value = view.cat;
+    }
+
+    // =========================
+    // Editor
+    // =========================
+    function setStatus(msg, type='ok'){
+      elStatus.classList.remove('ok','warn','err');
+      elStatus.classList.add(type);
+      elStatus.textContent = msg;
+    }
+
+    function resetForm({keepTitle=false} = {}){
+      editingId = null;
+      editorTitle.textContent = 'Editor (Novo Post)';
+      btnDelete.disabled = true;
+
+      const title = keepTitle ? fTitle.value : '';
+      form.reset();
+      fTitle.value = title;
+
+      // Defaults
+      const today = new Date();
+      const yyyy = String(today.getFullYear());
+      const mm = String(today.getMonth()+1).padStart(2,'0');
+      const dd = String(today.getDate()).padStart(2,'0');
+      fDate.value = `${yyyy}-${mm}-${dd}`;
+      fReadMin.value = 5;
+      fFeatured.checked = false;
+      fImage.value = '';
+      fHref.value = '';
+      setStatus('Novo post pronto para preencher.', 'ok');
+      render();
+    }
+
+    function fillForm(p){
+      editingId = p.id;
+      editorTitle.textContent = `Editor (Editando: ${p.id})`;
+      btnDelete.disabled = false;
+
+      fTitle.value = p.title || '';
+      fId.value = p.id || '';
+      fDate.value = p.date || '';
+      fCategory.value = p.category || '';
+      fReadMin.value = Number.isFinite(Number(p.readMin)) ? Number(p.readMin) : '';
+      fTags.value = (p.tags || []).join(', ');
+      fExcerpt.value = p.excerpt || '';
+      fImage.value = p.image || '';
+      fHref.value = p.href || '';
+      fFeatured.checked = Boolean(p.featured);
+
+      setStatus('Editando post existente. Salve para aplicar alterações.', 'ok');
+      render();
+    }
+
+    function validateDraft(d){
+      const id = slugify(d.id);
+      if(!id) return { ok:false, msg:'Slug (id) é obrigatório.', type:'err' };
+      if(id !== d.id) return { ok:false, msg:'Slug (id) inválido. Use apenas letras/números e hífen (sem acentos).', type:'err' };
+
+      if(!cleanString(d.title)) return { ok:false, msg:'Título é obrigatório.', type:'err' };
+      if(!cleanString(d.category)) return { ok:false, msg:'Categoria é obrigatória.', type:'err' };
+      if(!cleanString(d.date)) return { ok:false, msg:'Data é obrigatória.', type:'err' };
+
+      // Date shape
+      if(!/^\d{4}-\d{2}-\d{2}$/.test(d.date)) return { ok:false, msg:'Data deve estar no formato YYYY-MM-DD.', type:'err' };
+
+      const readMin = Number(d.readMin);
+      if(!Number.isFinite(readMin) || readMin <= 0) return { ok:false, msg:'Tempo de leitura deve ser um número > 0.', type:'err' };
+
+      // href/image best practices
+      if(!cleanString(d.href)) return { ok:false, msg:'href é obrigatório (ex.: ./posts/seu-post.html).', type:'err' };
+      if(!cleanString(d.image)) return { ok:false, msg:'image é obrigatório (ex.: ./assets/blog/seu-post.webp).', type:'err' };
+
+      return { ok:true, msg:'OK', type:'ok' };
+    }
+
+    function draftFromForm(){
+      const id = cleanString(fId.value);
+      const title = cleanString(fTitle.value);
+      const date = cleanString(fDate.value);
+      const category = cleanString(fCategory.value);
+      const readMin = Number(fReadMin.value);
+      const tags = parseTags(fTags.value);
+      const excerpt = cleanString(fExcerpt.value);
+      const image = cleanString(fImage.value) || `./assets/blog/${id || 'placeholder'}.webp`;
+      const href = cleanString(fHref.value) || `./posts/${id || 'novo-post'}.html`;
+      const featured = Boolean(fFeatured.checked);
+
+      return normalizePost({ id, title, excerpt, category, tags, date, readMin, featured, image, href });
+    }
+
+    function saveDraft(){
+      const draft = draftFromForm();
+      const v = validateDraft(draft);
+      if(!v.ok){
+        setStatus(v.msg, v.type);
         return;
       }
 
-      const html = buildPostHtml(p);
-      const blob = new Blob([html], { type: "text/html" });
-      const url = URL.createObjectURL(blob);
+      // Unique id rules
+      const exists = posts.find(p => p.id === draft.id);
+      if(editingId && editingId !== draft.id){
+        // Renaming id while editing: block if new id already exists
+        if(exists) return setStatus('Esse slug (id) já existe. Escolha outro.', 'err');
+      }
+      if(!editingId && exists){
+        return setStatus('Esse slug (id) já existe. Para alterar, clique em "Editar" no item.', 'err');
+      }
 
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = `${p.slug}.html`;
+      // If featured, unfeature others
+      if(draft.featured){
+        posts = posts.map(p => ({...p, featured: p.id === draft.id}));
+      } else {
+        // keep as-is, but if un-featuring the only featured, that's ok (blog will fallback to newest)
+        posts = posts.map(p => (p.id === draft.id ? {...p, featured:false} : p));
+      }
+
+      if(editingId){
+        // Update
+        posts = posts.map(p => p.id === editingId ? draft : p);
+
+        // If id changed, ensure featured integrity
+        ensureSingleFeatured();
+        editingId = draft.id;
+        setStatus('Alterações salvas.', 'ok');
+      } else {
+        // Insert
+        posts.push(draft);
+        ensureSingleFeatured();
+        editingId = draft.id;
+        setStatus('Post criado e salvo.', 'ok');
+      }
+
+      persist();
+      refreshTaxonomy();
+      render();
+      fillForm(draft); // normalize and refresh UI
+    }
+
+    function deleteCurrent(){
+      if(!editingId){
+        setStatus('Nada para excluir.', 'warn');
+        return;
+      }
+      const p = posts.find(x => x.id === editingId);
+      if(!p){
+        setStatus('Post não encontrado.', 'err');
+        return;
+      }
+      const ok = confirm(`Excluir o post "${p.title}"?\n\nIsso remove do CMS/localStorage. Para publicar, exporte e commite a alteração no posts.json.`);
+      if(!ok) return;
+
+      posts = posts.filter(x => x.id !== editingId);
+      ensureSingleFeatured();
+      persist();
+      refreshTaxonomy();
+      resetForm();
+      setStatus('Post excluído.', 'ok');
+    }
+
+    // =========================
+    // Import / Export
+    // =========================
+    function exportJson(){
+      // Recommended output for assets/blog/posts.json
+      const data = JSON.stringify(posts.map(normalizePost), null, 2);
+      const blob = new Blob([data], {type:'application/json'});
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'posts.json';
       document.body.appendChild(a);
       a.click();
       a.remove();
-      URL.revokeObjectURL(url);
-
-      setStatus(`Baixado: ${p.slug}.html`, true);
-    });
-
-    /* =========================
-       Init
-       ========================= */
-    function seedIfEmpty(){
-      if(posts.length) return;
-      const demo = {
-        slug: "respiracao-3-minutos",
-        title: "Respiração Transformadora em 3 minutos: estabilize energia e ruído mental",
-        excerpt: "Um protocolo simples para baixar ruído, organizar foco e começar o dia com mais clareza — sem misticismo e sem drama.",
-        category: "Respiração",
-        tag: "Foco",
-        date: nowISO(),
-        readMin: 4,
-        image: "../assets/blog/respiracao.webp",
-        author: "DeRose SBC",
-        bodyHtml: [
-          "<p>Quando a mente está “barulhenta”, o corpo normalmente já está acelerado. A forma mais rápida de trazer o sistema de volta para um estado útil é ajustar <strong>ritmo</strong>, <strong>amplitude</strong> e <strong>pausas</strong> da respiração.</p>",
-          "<p><strong>Se você quer foco:</strong> primeiro reduza o ruído fisiológico. Depois, direcione atenção.</p>",
-          "<h2>O protocolo de 3 minutos</h2>",
-          "<p>Você vai repetir um ciclo simples por 3 minutos. A regra é: <strong>sem força</strong>, sem “segurar no sofrimento”. O objetivo é <strong>estabilizar</strong>, não “provar algo”.</p>",
-          "<h3>Passo 1 — Ajuste de postura (20s)</h3>",
-          "<ul><li>Pés firmes no chão, coluna “alta” sem rigidez.</li><li>Queixo levemente recolhido (pescoço longo).</li><li>Ombros soltos, mandíbula destravada.</li></ul>"
-        ].join("\n")
-      };
-      posts = [demo];
-      savePosts(posts);
-      posts = sortPosts(posts);
+      URL.revokeObjectURL(a.href);
+      setStatus('Exportado: posts.json (baixe e coloque em assets/blog/posts.json).', 'ok');
     }
 
-    seedIfEmpty();
-    posts = sortPosts(loadPosts());
-    activeSlug = posts[0]?.slug || null;
-    renderList();
-    if(activeSlug) selectPost(activeSlug);
-    else fillForm(makeBlank());
-    setStatus("Pronto.", true);
+    function copyConst(){
+      const data = JSON.stringify(posts.map(normalizePost), null, 2);
+      const snippet = `const POSTS = ${data};`;
+      navigator.clipboard?.writeText(snippet).then(() => {
+        setStatus('Copiado: const POSTS = [...] (cole no blog.html se preferir).', 'ok');
+      }).catch(() => {
+        // fallback
+        const ta = document.createElement('textarea');
+        ta.value = snippet;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        ta.remove();
+        setStatus('Copiado (fallback).', 'ok');
+      });
+    }
+
+    function importJsonText(text){
+      let parsed;
+      try{
+        parsed = JSON.parse(text);
+      }catch(e){
+        setStatus('JSON inválido.', 'err');
+        return;
+      }
+      if(!Array.isArray(parsed)){
+        setStatus('O JSON precisa ser um array de posts.', 'err');
+        return;
+      }
+
+      const incoming = parsed.map(normalizePost);
+      // Basic sanity
+      const ids = incoming.map(p => p.id);
+      const uniqueIds = new Set(ids);
+      if(uniqueIds.size !== ids.length){
+        setStatus('Import falhou: existem slugs (id) duplicados no JSON.', 'err');
+        return;
+      }
+
+      const ok = confirm(`Importar ${incoming.length} post(s) e substituir os atuais (${posts.length})?`);
+      if(!ok) return;
+
+      posts = incoming;
+      ensureSingleFeatured();
+      persist();
+      refreshTaxonomy();
+      resetForm();
+      render();
+      setStatus('Import concluído. (Lembre: exportar = publicar.)', 'ok');
+    }
+
+    // =========================
+    // Events
+    // =========================
+    elQ.addEventListener('input', (e) => { view.q = e.target.value || ''; render(); });
+    elCat.addEventListener('change', (e) => { view.cat = e.target.value || 'all'; render(); });
+    elOrder.addEventListener('change', (e) => { view.order = e.target.value || 'new'; render(); });
+
+    btnNew.addEventListener('click', () => resetForm());
+
+    btnSlugify.addEventListener('click', () => {
+      const s = slugify(fTitle.value || '');
+      if(!s){
+        setStatus('Escreva um título para gerar o slug.', 'warn');
+        return;
+      }
+      fId.value = s;
+      // defaults
+      if(!cleanString(fHref.value)) fHref.value = `./posts/${s}.html`;
+      if(!cleanString(fImage.value)) fImage.value = `./assets/blog/${s}.webp`;
+      setStatus('Slug gerado. Confira href/imagem e salve.', 'ok');
+    });
+
+    btnSave.addEventListener('click', saveDraft);
+    btnReset.addEventListener('click', () => resetForm({keepTitle:false}));
+    btnDelete.addEventListener('click', deleteCurrent);
+
+    elList.addEventListener('click', (e) => {
+      const btn = e.target.closest?.('button[data-action="edit"]');
+      if(!btn) return;
+      const id = btn.getAttribute('data-id');
+      const p = posts.find(x => x.id === id);
+      if(!p) return;
+      fillForm(p);
+    });
+
+    btnExportJson.addEventListener('click', exportJson);
+    btnCopyConst.addEventListener('click', copyConst);
+
+    btnImport.addEventListener('click', () => fileInput.click());
+    fileInput.addEventListener('change', async (e) => {
+      const f = e.target.files?.[0];
+      if(!f) return;
+      const text = await f.text();
+      importJsonText(text);
+      fileInput.value = '';
+    });
+
+    // Inline “auto-fix” helpers
+    fId.addEventListener('blur', () => {
+      const s = slugify(fId.value);
+      if(s && s !== fId.value){
+        fId.value = s;
+        setStatus('Slug normalizado (sem acentos / caracteres especiais).', 'warn');
+      }
+      if(s){
+        if(!cleanString(fHref.value)) fHref.value = `./posts/${s}.html`;
+        if(!cleanString(fImage.value)) fImage.value = `./assets/blog/${s}.webp`;
+      }
+    });
+
+    fFeatured.addEventListener('change', () => {
+      if(fFeatured.checked){
+        setStatus('Marcou como Destaque. Ao salvar, os outros serão desmarcados.', 'warn');
+      }
+    });
+
+    // =========================
+    // Init
+    // =========================
+    loadPosts();
+    refreshTaxonomy();
+    render();
+    resetForm();
   </script>
 </body>
 </html>
