@@ -1,106 +1,79 @@
-(() => {
-  "use strict";
+<!-- Mobile drawer -->
+<div class="drawer" id="drawer" aria-hidden="true">
+  <div class="container">
+    <div class="panel glass">
+      <a href="/#aulas" data-close> Aulas <span>presencial + online</span></a>
+      <a href="/#cursos" data-close> Cursos <span>precisão & consistência</span></a>
+      <a href="/#formacao" data-close> Formação <span>aprofundamento</span></a>
 
-  const PARTIAL_URL = "/assets/partials/navbar.html";
-  const MOUNT_SEL = "[data-navbar]";
+      <!-- placeholders (no link) -->
+      <a href="#" class="is-disabled" aria-disabled="true" data-close>Eventos</a>
+      <a href="#" class="is-disabled" aria-disabled="true" data-close>Bistrô</a>
 
-  function disablePlaceholderLinks(scope) {
-    const links = scope.querySelectorAll('a[aria-disabled="true"]');
-    links.forEach((a) => a.addEventListener("click", (e) => e.preventDefault()));
-  }
+      <a href="/blog/" data-close> Blog <span>clareza sem misticismo</span></a>
+      <a href="/#contato" data-close> Contato <span>rota rápida</span></a>
 
-  function initDrawer(scope) {
-    const drawer = scope.querySelector("#drawer");
-    const toggle = scope.querySelector("#mobileToggle");
-    const closeBtn = scope.querySelector("#drawerClose");
+      <div class="drawer-actions">
+        <button class="btn ghost glass" id="drawerClose" type="button">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>
 
-    if (!drawer) return;
+<header>
+  <div class="container">
+    <div class="bar glass">
+      <a class="brand" href="/#top" aria-label="Ir para o topo">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-name">
+          <strong>DeRose SBC</strong>
+          <span>Yôga de Alto Rendimento</span>
+        </span>
+      </a>
 
-    function openDrawer() {
-      drawer.classList.add("open");
-      drawer.setAttribute("aria-hidden", "false");
-      document.body.style.overflow = "hidden";
-    }
+      <nav aria-label="Navegação principal">
+        <a href="/#aulas" data-nav="aulas">AULAS</a>
+        <a href="/#cursos" data-nav="cursos">CURSOS</a>
+        <a href="/#formacao" data-nav="formacao">FORMAÇÃO</a>
 
-    function closeDrawer() {
-      drawer.classList.remove("open");
-      drawer.setAttribute("aria-hidden", "true");
-      document.body.style.overflow = "";
-    }
+        <!-- placeholders (no link) -->
+        <a href="#" class="is-disabled" aria-disabled="true">EVENTOS</a>
+        <a href="#" class="is-disabled" aria-disabled="true">BISTRÔ</a>
 
-    if (toggle) toggle.addEventListener("click", openDrawer);
-    if (closeBtn) closeBtn.addEventListener("click", closeDrawer);
+        <a href="/blog/" data-nav="blog">BLOG</a>
+      </nav>
 
-    drawer.addEventListener("click", (e) => {
-      if (e.target === drawer) closeDrawer();
-    });
+      <div class="actions">
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Abrir menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M4 7H20" stroke="#393939" stroke-width="2.4" stroke-linecap="round"/>
+            <path d="M4 12H20" stroke="#393939" stroke-width="2.4" stroke-linecap="round" opacity="0.9"/>
+            <path d="M4 17H20" stroke="#393939" stroke-width="2.4" stroke-linecap="round" opacity="0.8"/>
+          </svg>
+        </button>
 
-    drawer.querySelectorAll("[data-close]").forEach((el) => {
-      el.addEventListener("click", closeDrawer);
-    });
+        <!-- Theme switch -->
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Ativar modo escuro" aria-pressed="false">
+          <svg class="moon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M21 14.5A8.5 8.5 0 1 1 9.5 3a7 7 0 0 0 11.5 11.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <svg class="sun" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12Z" stroke="currentColor" stroke-width="2"/>
+            <path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5l-1.5-1.5M20.5 20.5 19 19M5 19l-1.5 1.5M20.5 3.5 19 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
 
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && drawer.classList.contains("open")) closeDrawer();
-    });
+        <!-- CTA: WhatsApp -->
+        <a class="btn primary"
+           href="https://wa.me/5511975123336"
+           target="_blank"
+           rel="noreferrer"
+           title="Chamar no WhatsApp">
+          <span class="dot" aria-hidden="true"></span>
+          Entre em Contato
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
 
-    window.Navbar = { openDrawer, closeDrawer };
-  }
-
-  function setActiveLink(scope) {
-    const links = scope.querySelectorAll('nav a[data-nav]');
-    links.forEach((a) => {
-      a.classList.remove("active");
-      a.removeAttribute("aria-current");
-    });
-
-    const path = (location.pathname || "/").replace(/\/+$/, "") || "/";
-    if (path.indexOf("/blog") === 0) {
-      const blog = scope.querySelector('nav a[data-nav="blog"]');
-      if (blog) {
-        blog.classList.add("active");
-        blog.setAttribute("aria-current", "page");
-      }
-      return;
-    }
-
-    const hash = (location.hash || "").replace("#", "");
-    if (!hash) return;
-
-    const a = scope.querySelector(`nav a[data-nav="${hash}"]`);
-    if (a) {
-      a.classList.add("active");
-      a.setAttribute("aria-current", "page");
-    }
-  }
-
-  function wireNavbar(scope) {
-    disablePlaceholderLinks(scope);
-    initDrawer(scope);
-    setActiveLink(scope);
-
-    window.addEventListener("hashchange", () => setActiveLink(scope));
-  }
-
-  function injectNavbar() {
-    const mount = document.querySelector(MOUNT_SEL);
-    if (!mount) return;
-
-    fetch(PARTIAL_URL, { cache: "no-cache" })
-      .then((res) => {
-        if (!res.ok) throw new Error("Failed to fetch navbar: " + res.status);
-        return res.text();
-      })
-      .then((html) => {
-        mount.innerHTML = html;
-        wireNavbar(mount);
-
-        document.dispatchEvent(new CustomEvent("navbar:ready"));
-      })
-      .catch((err) => {
-        console.warn("[navbar] inject failed:", err);
-      });
-  }
-
-  if (window.Utils && window.Utils.ready) window.Utils.ready(injectNavbar);
-  else document.addEventListener("DOMContentLoaded", injectNavbar, { once: true });
-})();
