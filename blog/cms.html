@@ -25,7 +25,6 @@
 
     :root{
       --bg: #FFF9EF;
-      --surface: #FFECD1;
       --accent: #FC883A;
       --teal: #297E8A;
       --ink: #393939;
@@ -34,7 +33,6 @@
       --shadow-soft: 0 10px 30px rgba(57,57,57,0.10);
       --radius-xl: 28px;
       --radius-lg: 22px;
-      --radius-md: 16px;
       --max: 1180px;
       --type-scale: 0.77;
       --type-scale-blog: 0.88;
@@ -47,7 +45,6 @@
     }
 
     *{ box-sizing: border-box; }
-    html{ scroll-behavior: smooth; }
     body{
       margin:0;
       font-family: "Spartan", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
@@ -67,31 +64,23 @@
       -webkit-backdrop-filter: blur(18px);
     }
 
-    header{
-      position: sticky; top: 0; z-index: 40;
-      padding: 14px 0;
-    }
+    header{ position: sticky; top:0; z-index: 50; padding: 14px 0; }
     header .bar{
       border-radius: 999px;
       padding: 10px 14px;
       display:flex; align-items:center; justify-content: space-between;
       gap: 14px;
+      flex-wrap: wrap;
     }
-    .brand{
-      display:flex; align-items:center; gap: 10px;
-      padding: 8px 10px; border-radius: 999px;
-      min-width: 210px;
-    }
+    .brand{ display:flex; align-items:center; gap: 10px; padding: 8px 10px; border-radius: 999px; }
     .brand-mark{
       width: 36px; height: 36px; border-radius: 14px;
       background: linear-gradient(135deg, rgba(41,126,138,0.9), rgba(252,136,58,0.85));
       box-shadow: 0 10px 22px rgba(41,126,138,0.18);
-      position: relative;
-      overflow: hidden;
+      position: relative; overflow: hidden;
     }
     .brand-mark:after{
-      content:"";
-      position:absolute; inset:-30%;
+      content:""; position:absolute; inset:-30%;
       background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.55), transparent 55%);
       transform: rotate(18deg);
     }
@@ -111,7 +100,7 @@
     nav a:hover{ background: rgba(255,255,255,0.35); opacity: 1; transform: translateY(-1px); }
     nav a.active{ background: rgba(255,255,255,0.45); opacity: 1; border: 1px solid rgba(41,126,138,0.18); }
 
-    .actions{ display:flex; align-items:center; gap: 10px; flex-wrap: wrap; }
+    .actions{ display:flex; gap: 10px; align-items:center; flex-wrap: wrap; }
 
     .btn{
       display:inline-flex; align-items:center; justify-content: center;
@@ -122,11 +111,11 @@
       font-size: calc(14px * var(--type-scale));
       letter-spacing: .2px;
       cursor: pointer;
+      background: rgba(255,255,255,0.12);
       transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+      line-height: 1;
       user-select: none;
       white-space: nowrap;
-      line-height: 1;
-      background: rgba(255,255,255,0.12);
     }
     .btn:hover{ transform: translateY(-1px); box-shadow: var(--shadow-soft); }
     .btn.primary{
@@ -143,18 +132,14 @@
     .btn:disabled{ opacity: .55; cursor: not-allowed; transform:none; box-shadow:none; }
 
     .theme-toggle{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      width: 44px;
-      height: 44px;
+      display:inline-flex; align-items:center; justify-content:center;
+      width: 44px; height: 44px;
       border-radius: 999px;
       border: 1px solid rgba(41,126,138,0.22);
       background: rgba(255,255,255,0.18);
       cursor:pointer;
-      transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+      transition: transform .2s ease, box-shadow .2s ease;
       color: var(--ink);
-      line-height: 1;
     }
     .theme-toggle:hover{ transform: translateY(-1px); box-shadow: var(--shadow-soft); }
     .theme-toggle svg{ width: 18px; height: 18px; display:block; }
@@ -162,17 +147,11 @@
     html[data-theme="dark"] .theme-toggle .sun{ display:block; }
     html[data-theme="dark"] .theme-toggle .moon{ display:none; }
 
-    section{ padding: 38px 0; }
+    section{ padding: 36px 0; }
 
-    .hero-card{
-      padding: 26px;
-      border-radius: var(--radius-xl);
-      position: relative;
-      overflow:hidden;
-    }
+    .hero-card{ border-radius: var(--radius-xl); padding: 24px; position: relative; overflow:hidden; }
     .hero-card:before{
-      content:"";
-      position:absolute; inset:-40%;
+      content:""; position:absolute; inset:-40%;
       background:
         radial-gradient(circle at 20% 20%, rgba(252,136,58,0.18), transparent 55%),
         radial-gradient(circle at 80% 25%, rgba(41,126,138,0.18), transparent 58%),
@@ -184,7 +163,7 @@
     .hero-card > *{ position: relative; z-index: 1; }
 
     .kicker{
-      display:inline-flex; align-items:center; gap: 10px;
+      display:inline-flex; align-items:center; gap: 10px; flex-wrap: wrap;
       padding: 8px 12px;
       border-radius: 999px;
       border: 1px solid rgba(41,126,138,0.18);
@@ -193,7 +172,6 @@
       font-weight: 900;
       letter-spacing: .25px;
       line-height: 1;
-      flex-wrap: wrap;
     }
     .kicker .pill{
       padding: 6px 10px;
@@ -213,7 +191,7 @@
       margin: 8px 0 0;
       font-size: calc(16px * var(--type-scale-blog));
       line-height: 1.45;
-      opacity: 0.9;
+      opacity: .9;
       max-width: 90ch;
     }
 
@@ -264,10 +242,8 @@
       gap: 14px;
       align-items: start;
     }
-    .panel{
-      border-radius: var(--radius-xl);
-      overflow:hidden;
-    }
+
+    .panel{ border-radius: var(--radius-xl); overflow:hidden; }
     .panel .head{
       padding: 16px;
       border-bottom: 1px solid rgba(41,126,138,0.14);
@@ -292,29 +268,15 @@
     .panel .body{ padding: 14px; }
 
     .list{ display:grid; gap: 10px; }
-    .card{
-      border-radius: var(--radius-lg);
-      overflow:hidden;
-      position: relative;
-    }
-    .card-row{
-      display:flex;
-      gap: 12px;
-      align-items: stretch;
-    }
+    .card{ border-radius: var(--radius-lg); overflow:hidden; }
+    .card-row{ display:flex; gap: 12px; align-items: stretch; }
     .thumb{
-      width: 140px;
-      min-width: 140px;
-      height: 110px;
+      width: 140px; min-width: 140px; height: 110px;
       border-right: 1px solid rgba(41,126,138,0.14);
       background: rgba(255,255,255,0.10);
       overflow:hidden;
     }
-    .thumb img{
-      width: 100%; height: 100%;
-      object-fit: cover;
-      display:block;
-    }
+    .thumb img{ width: 100%; height: 100%; object-fit: cover; display:block; }
     .info{
       padding: 12px;
       flex: 1 1 auto;
@@ -469,11 +431,9 @@
       .row2,.row3{ grid-template-columns: 1fr; }
     }
 
-    /* ========= Dark theme ========= */
     html[data-theme="dark"]{
       color-scheme: dark;
       --bg: #0b1012;
-      --surface: #0f171a;
       --ink: rgba(245,246,247,0.92);
       --glass-bg: rgba(18,26,28,0.62);
       --glass-br: rgba(255,255,255,0.10);
@@ -482,11 +442,6 @@
         radial-gradient(1000px 700px at 20% 10%, rgba(252,136,58,0.10), transparent 60%),
         radial-gradient(1100px 820px at 90% 15%, rgba(41,126,138,0.18), transparent 60%),
         linear-gradient(180deg, #06090b, var(--bg) 28%, #06090b 100%);
-    }
-    html[data-theme="dark"] nav a:hover{ background: rgba(255,255,255,0.06); }
-    html[data-theme="dark"] nav a.active{
-      background: rgba(255,255,255,0.08);
-      border-color: rgba(255,255,255,0.14);
     }
     html[data-theme="dark"] .kicker,
     html[data-theme="dark"] .hero-card,
@@ -550,7 +505,7 @@
           </div>
           <h1>Gerenciar posts do Blog.</h1>
           <p class="sub">
-            Preencha o post (inclusive <strong>Conteúdo do Post (HTML)</strong>), salve, depois exporte o JSON e gere o HTML do post.
+            Preencha o post (inclusive <strong>Conteúdo do Post (HTML)</strong>), salve e gere o HTML do post.
           </p>
 
           <div class="controls" aria-label="Filtros do CMS">
@@ -701,9 +656,8 @@
                 <iframe id="previewFrame" sandbox="allow-same-origin"></iframe>
               </div>
               <div class="help" style="margin-top:8px;">
-                O preview usa HTML gerado. (Imagens podem não carregar via srcdoc — mas layout/tema ficam fiéis.)
+                Preview é via srcdoc. Imagens podem não carregar no iframe, mas o HTML/tema ficam fiéis.
               </div>
-
             </div>
           </div>
         </div>
@@ -725,11 +679,9 @@
   </main>
 
   <script>
-    // =========================
-    // Small helpers
-    // =========================
     const $ = (sel, root=document) => root.querySelector(sel);
-    const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel));
+    const unique = (arr) => Array.from(new Set(arr));
+
     $('#year').textContent = new Date().getFullYear();
 
     function escapeHtml(str){
@@ -740,26 +692,21 @@
         .replaceAll('"','&quot;')
         .replaceAll("'","&#039;");
     }
-    function unique(arr){ return Array.from(new Set(arr)); }
     function clean(s){ return String(s ?? '').trim(); }
-
     function slugify(input){
       return String(input || '')
         .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-        .toLowerCase()
-        .trim()
+        .toLowerCase().trim()
         .replace(/[^a-z0-9]+/g, '-')
         .replace(/-+/g, '-')
         .replace(/^-|-$/g, '');
     }
-
     function parseTags(str){
       return unique(String(str || '')
         .split(',')
         .map(s => s.trim())
         .filter(Boolean));
     }
-
     function formatDateISO(iso){
       try{
         if(!iso) return '—';
@@ -770,15 +717,13 @@
         return iso || '—';
       }
     }
-
     function plainTextToHtml(text){
       const t = String(text || '').trim();
       if(!t) return '';
       const escaped = escapeHtml(t);
       const blocks = escaped.split(/\n\s*\n/g).map(b => b.trim()).filter(Boolean);
-      return blocks.map(b => `<p>${b.replace(/\n/g,'<br/>')}</p>`).join('\\n');
+      return blocks.map(b => `<p>${b.replace(/\n/g,'<br/>')}</p>`).join('\n');
     }
-
     function normalizePost(p){
       const id = clean(p?.id);
       return {
@@ -796,9 +741,7 @@
       };
     }
 
-    // =========================
     // Theme
-    // =========================
     const root = document.documentElement;
     const themeBtn = $('#themeToggle');
     const metaTheme = document.querySelector('meta[name="theme-color"]');
@@ -816,16 +759,15 @@
       const isDark = theme === 'dark';
       themeBtn?.setAttribute('aria-pressed', String(isDark));
       themeBtn?.setAttribute('aria-label', isDark ? 'Desativar modo escuro' : 'Ativar modo escuro');
-
       metaTheme?.setAttribute('content', isDark ? '#0b1012' : '#297E8A');
+
       schedulePreview();
     }
-    function initTheme(){
+    (function initTheme(){
       const saved = localStorage.getItem(THEME_KEY);
       if(saved === 'light' || saved === 'dark') setTheme(saved, {persist:false});
       else setTheme(systemPrefersDark() ? 'dark' : 'light', {persist:false});
-    }
-    initTheme();
+    })();
     themeBtn?.addEventListener('click', () => {
       const current = root.dataset.theme === 'dark' ? 'dark' : 'light';
       setTheme(current === 'dark' ? 'light' : 'dark');
@@ -835,14 +777,13 @@
       if(saved !== 'light' && saved !== 'dark') setTheme(e.matches ? 'dark' : 'light', {persist:false});
     });
 
-    // =========================
-    // Data (with migration)
-    // =========================
-    const STORAGE_KEY = 'derose_blog_posts_cms_v3'; // stable key for this CMS
+    // Data
+    const STORAGE_KEY = 'derose_blog_posts_cms_v3';
     const LEGACY_KEYS = [
       'derose_blog_posts_v2_with_content',
       'derose_blog_posts_v2',
       'derose_blog_posts_v1',
+      'derose_blog_posts_v0',
       'derose_blog_posts',
       'posts'
     ];
@@ -873,69 +814,12 @@
         image: "./assets/blog/mobilidade.webp",
         href: "./posts/mobilidade-postura.html",
         contentHtml: ""
-      },
-      {
-        id: "recuperacao-profunda",
-        title: "Recuperação Profunda: por que descansar não é perder tempo",
-        excerpt: "Recuperação não é pausa passiva — é assimilação ativa com técnica.",
-        category: "Recuperação",
-        tags: ["Descontração", "Estabilidade"],
-        date: "2026-01-10",
-        readMin: 5,
-        featured: false,
-        image: "./assets/blog/recuperacao.webp",
-        href: "./posts/recuperacao-profunda.html",
-        contentHtml: ""
-      },
-      {
-        id: "foco-centro",
-        title: "Foco & Concentração: volte ao centro em qualquer rotina",
-        excerpt: "Abordagem prática para treinar foco e reduzir dispersão para trabalho e decisões melhores.",
-        category: "Foco",
-        tags: ["Mindfulness & Meditação", "Discernimento"],
-        date: "2026-01-05",
-        readMin: 7,
-        featured: false,
-        image: "./assets/blog/foco.webp",
-        href: "./posts/foco-centro.html",
-        contentHtml: ""
-      },
-      {
-        id: "discernimento-decisoes",
-        title: "Discernimento: decisões boas e repetíveis (sem depender de motivação)",
-        excerpt: "Um framework simples para reduzir arrependimento e aumentar previsibilidade.",
-        category: "Mentalidade",
-        tags: ["Discernimento", "Rotina"],
-        date: "2025-12-22",
-        readMin: 6,
-        featured: false,
-        image: "./assets/blog/discernimento.webp",
-        href: "./posts/discernimento-decisoes.html",
-        contentHtml: ""
-      },
-      {
-        id: "consistencia-ritual",
-        title: "Consistência: como criar ritual sem virar prisão",
-        excerpt: "Diferença entre disciplina rígida e ritual inteligente — consistência sem se quebrar.",
-        category: "Rotina",
-        tags: ["Rotina", "Estabilidade"],
-        date: "2025-12-12",
-        readMin: 5,
-        featured: false,
-        image: "./assets/blog/consistencia.webp",
-        href: "./posts/consistencia-ritual.html",
-        contentHtml: ""
       }
     ].map(normalizePost);
 
     let posts = [];
     let view = { q:'', cat:'all', order:'new' };
     let editingId = null;
-
-    function persist(){
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(posts, null, 2));
-      refreshTaxonomy();
-    }
 
     function ensureSingleFeatured(){
       const featured = posts.filter(p => p.featured);
@@ -955,39 +839,36 @@
       return null;
     }
 
+    function persist(){
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(posts, null, 2));
+      refreshTaxonomy();
+    }
+
     function loadPosts(){
-      // 1) current
       const current = tryLoadFromKey(STORAGE_KEY);
       if(current){
         posts = current;
         ensureSingleFeatured();
         return;
       }
-
-      // 2) legacy
       for(const k of LEGACY_KEYS){
         const legacy = tryLoadFromKey(k);
         if(legacy){
           posts = legacy;
           ensureSingleFeatured();
-          persist(); // migrate into new key
+          persist();
           return;
         }
       }
-
-      // 3) seed
       posts = SEED_POSTS.slice();
       ensureSingleFeatured();
       persist();
     }
 
-    // =========================
     // UI refs
-    // =========================
     const elList = $('#list');
     const elEmpty = $('#empty');
     const elListHint = $('#listHint');
-
     const elQ = $('#q');
     const elCat = $('#cat');
     const elOrder = $('#order');
@@ -1035,9 +916,6 @@
       elStatus.textContent = msg;
     }
 
-    // =========================
-    // Filtering + sorting
-    // =========================
     function matches(p){
       const q = view.q.trim().toLowerCase();
       const inText = !q
@@ -1106,9 +984,6 @@
       }).join('');
     }
 
-    // =========================
-    // Editor
-    // =========================
     function resetForm(){
       editingId = null;
       editorTitle.textContent = 'Editor (Novo Post)';
@@ -1189,7 +1064,6 @@
       if(!v.ok) return setStatus(v.msg, v.type);
 
       const exists = posts.find(p => p.id === draft.id);
-
       if(editingId && editingId !== draft.id && exists) return setStatus('Esse slug (id) já existe. Escolha outro.', 'err');
       if(!editingId && exists) return setStatus('Esse slug (id) já existe. Clique em "Editar" no item.', 'err');
 
@@ -1220,9 +1094,7 @@
       if(!editingId) return setStatus('Nada para excluir.', 'warn');
       const p = posts.find(x => x.id === editingId);
       if(!p) return setStatus('Post não encontrado.', 'err');
-
-      const ok = confirm(`Excluir o post "${p.title}"? (Isso remove do CMS/localStorage.)`);
-      if(!ok) return;
+      if(!confirm(`Excluir o post "${p.title}"? (Remove do CMS/localStorage.)`)) return;
 
       posts = posts.filter(x => x.id !== editingId);
       ensureSingleFeatured();
@@ -1232,9 +1104,6 @@
       setStatus('Post excluído.', 'ok');
     }
 
-    // =========================
-    // Import / Export
-    // =========================
     function exportJson(){
       const data = JSON.stringify(posts.map(normalizePost), null, 2);
       const blob = new Blob([data], {type:'application/json'});
@@ -1274,8 +1143,7 @@
       const ids = incoming.map(p => p.id);
       if(new Set(ids).size !== ids.length) return setStatus('Import falhou: slugs duplicados no JSON.', 'err');
 
-      const ok = confirm(`Importar ${incoming.length} post(s) e substituir os atuais (${posts.length})?`);
-      if(!ok) return;
+      if(!confirm(`Importar ${incoming.length} post(s) e substituir os atuais (${posts.length})?`)) return;
 
       posts = incoming;
       ensureSingleFeatured();
@@ -1286,26 +1154,28 @@
       setStatus('Import concluído.', 'ok');
     }
 
-    // =========================
-    // Build post HTML (NO literal </script> in this file!)
-    // =========================
+    function currentTheme(){
+      return root.dataset.theme === 'dark' ? 'dark' : 'light';
+    }
+
+    // Build post HTML: IMPORTANT -> não colocar a sequência de fechamento de script literal aqui.
     function buildPostHtml(post, theme){
       const safeTitle = escapeHtml(post.title);
       const safeDesc  = escapeHtml(post.excerpt || '');
       const safeCat   = escapeHtml(post.category || 'Post');
       const safeDate  = escapeHtml(formatDateISO(post.date));
       const safeRead  = escapeHtml(String(post.readMin ?? '—'));
-      const safeTags  = (post.tags || []).length
+
+      const safeTags = (post.tags || []).length
         ? (post.tags || []).map(t => `<span class="chip"><span class="dot"></span>${escapeHtml(t)}</span>`).join('')
         : `<span class="chip"><span class="dot"></span>Leitura objetiva</span>`;
 
       const img = (post.image || './assets/blog/placeholder.webp').replace('./assets','../assets');
-
       const isDark = theme === 'dark';
       const htmlAttr = isDark ? ` data-theme="dark"` : ``;
 
-      // IMPORTANT: split closing script tag to avoid breaking THIS cms.html script parser
-      const closeScript = '</scr' + 'ipt>';
+      // "Quebra" o fechamento do script para não virar texto no CMS.
+      const closeScript = '<' + '/scr' + 'ipt>';
 
       return `<!doctype html>
 <html lang="pt-BR"${htmlAttr}>
@@ -1315,10 +1185,6 @@
   <meta name="theme-color" content="${isDark ? '#0b1012' : '#297E8A'}" />
   <title>${safeTitle} • Blog • DeRose SBC</title>
   <meta name="description" content="${safeDesc}" />
-  <meta property="og:title" content="${safeTitle} • Blog • DeRose SBC" />
-  <meta property="og:description" content="${safeDesc}" />
-  <meta property="og:type" content="article" />
-  <meta property="og:image" content="${img}" />
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
 
   <style>
@@ -1344,12 +1210,7 @@
         linear-gradient(180deg, var(--bg), #fff 28%, var(--bg) 100%);
     }
     *{ box-sizing: border-box; }
-    body{
-      margin:0;
-      font-family:"Spartan", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color: var(--ink);
-      background: var(--page-bg);
-    }
+    body{ margin:0; font-family:"Spartan", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: var(--ink); background: var(--page-bg); }
     a{ color: inherit; text-decoration: none; }
     .container{ width:min(var(--max), calc(100% - 40px)); margin: 0 auto; }
     .glass{
@@ -1359,7 +1220,6 @@
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
     }
-
     header{ position: sticky; top:0; z-index: 10; padding:14px 0; }
     .bar{ border-radius:999px; padding:10px 14px; display:flex; justify-content:space-between; align-items:center; gap:12px; }
     .btn{ display:inline-flex; align-items:center; justify-content:center; padding:11px 14px; border-radius:999px; border:1px solid rgba(41,126,138,0.22); font-weight:900; font-size: calc(14px * var(--type-scale)); background: rgba(255,255,255,0.12); cursor:pointer; }
@@ -1441,11 +1301,14 @@
     </div>
   </header>
 
-  <main>
+  <main id="top">
     <section>
       <div class="container">
         <div class="hero glass">
-          <div class="kicker"><span style="padding:6px 10px; border-radius:999px; background: rgba(41,126,138,0.14); border: 1px solid rgba(41,126,138,0.18);">${safeCat}</span> <span>${safeDate} • ${safeRead} min</span></div>
+          <div class="kicker">
+            <span style="padding:6px 10px; border-radius:999px; background: rgba(41,126,138,0.14); border: 1px solid rgba(41,126,138,0.18);">${safeCat}</span>
+            <span>${safeDate} • ${safeRead} min</span>
+          </div>
           <h1>${safeTitle}</h1>
           <p class="sub">${safeDesc}</p>
           <div class="meta">${safeTags}</div>
@@ -1474,6 +1337,7 @@
       const root = document.documentElement;
       const btn = document.getElementById('t');
       const meta = document.querySelector('meta[name="theme-color"]');
+
       function systemPrefersDark(){ return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches; }
       function setTheme(t, persist){
         if(t === 'dark') root.dataset.theme = 'dark'; else delete root.dataset.theme;
@@ -1494,10 +1358,6 @@
 </html>`;
     }
 
-    function currentTheme(){
-      return root.dataset.theme === 'dark' ? 'dark' : 'light';
-    }
-
     function downloadPostHtml(){
       const draft = draftFromForm();
       const v = validateDraft(draft);
@@ -1516,13 +1376,10 @@
       setStatus(`Baixado: ${draft.id}.html (coloque em /posts/).`, 'ok');
     }
 
-    // =========================
-    // Preview (debounced)
-    // =========================
     let previewTimer = null;
     function schedulePreview(){
       clearTimeout(previewTimer);
-      previewTimer = setTimeout(updatePreview, 140);
+      previewTimer = setTimeout(updatePreview, 120);
     }
     function updatePreview(){
       const d = draftFromForm();
@@ -1552,7 +1409,6 @@
         image: d.image || './assets/blog/placeholder.webp',
         contentHtml: d.contentHtml || '<p>Escreva o conteúdo no campo “Conteúdo do Post (HTML)”.</p>'
       };
-
       const html = buildPostHtml(safe, currentTheme());
       const blob = new Blob([html], {type:'text/html'});
       const url = URL.createObjectURL(blob);
@@ -1560,9 +1416,7 @@
       setTimeout(()=> URL.revokeObjectURL(url), 30000);
     }
 
-    // =========================
     // Wire events
-    // =========================
     elQ.addEventListener('input', (e) => { view.q = e.target.value || ''; render(); });
     elCat.addEventListener('change', (e) => { view.cat = e.target.value || 'all'; render(); });
     elOrder.addEventListener('change', (e) => { view.order = e.target.value || 'new'; render(); });
@@ -1641,11 +1495,8 @@
         "<h2>Protocolo mínimo (3–5 min)</h2>",
         "<p>Feche com uma versão simples que caiba na rotina.</p>",
         "<blockquote>Regra: consistência > intensidade.</blockquote>",
-      ].join("\\n");
-      if(fContent.value.trim()){
-        const ok = confirm("Substituir o conteúdo atual pelo esqueleto?");
-        if(!ok) return;
-      }
+      ].join("\n");
+      if(fContent.value.trim() && !confirm("Substituir o conteúdo atual pelo esqueleto?")) return;
       fContent.value = starter;
       setStatus('Esqueleto inserido.', 'ok');
       schedulePreview();
@@ -1654,13 +1505,11 @@
     btnDownloadPost.addEventListener('click', downloadPostHtml);
     btnOpenPreviewTab.addEventListener('click', openPreviewInNewTab);
 
-    // update preview on inputs
     [fTitle,fId,fDate,fCategory,fReadMin,fTags,fExcerpt,fImage,fHref,fFeatured,fContent]
       .forEach(el => el?.addEventListener('input', schedulePreview));
 
     btnResetAll.addEventListener('click', () => {
-      const ok = confirm('Reset local: apagar dados do CMS no seu navegador e recarregar seed?');
-      if(!ok) return;
+      if(!confirm('Reset local: apagar dados do CMS no seu navegador e recarregar seed?')) return;
       localStorage.removeItem(STORAGE_KEY);
       for(const k of LEGACY_KEYS) localStorage.removeItem(k);
       posts = SEED_POSTS.slice();
@@ -1672,9 +1521,7 @@
       setStatus('Reset local concluído. Seed recarregado.', 'ok');
     });
 
-    // =========================
     // Init
-    // =========================
     loadPosts();
     refreshTaxonomy();
     render();
@@ -1683,3 +1530,4 @@
   </script>
 </body>
 </html>
+
