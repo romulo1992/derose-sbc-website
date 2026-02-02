@@ -1,7 +1,3 @@
-# Root
-Este é o diretório raíz do site
-
-# Subpastas
 # Site Structure
 
 This repo is organized as a static site with clean, folder-based routes (each page lives in its own folder as `index.html`).
@@ -58,4 +54,78 @@ This repo is organized as a static site with clean, folder-based routes (each pa
 
 ### `/blog/`
 
-| Fol
+| Folder | Files |
+| --- | --- |
+| `/blog/` | `index.html` |
+| `/blog/p/<slug>/` | `index.html` |
+
+---
+
+### `/eventos/`
+
+| Parent folder | Direct child folders |
+| --- | --- |
+| `/eventos/` | `p/` |
+| `/eventos/p/` | `<slug>/` |
+
+| Folder | Files |
+| --- | --- |
+| `/eventos/` | `index.html` |
+| `/eventos/p/<slug>/` | `index.html` |
+
+---
+
+### `/bistro/`
+
+| Parent folder | Direct child folders |
+| --- | --- |
+| `/bistro/` | `p/` |
+| `/bistro/p/` | `<slug>/` |
+
+| Folder | Files |
+| --- | --- |
+| `/bistro/` | `index.html` |
+| `/bistro/p/<slug>/` | `index.html` |
+
+---
+
+### `/lp/`
+
+| Parent folder | Direct child folders |
+| --- | --- |
+| `/lp/` | `p/` |
+| `/lp/p/` | `<slug>/` |
+
+| Folder | Files |
+| --- | --- |
+| `/lp/` | `index.html` *(optional)* |
+| `/lp/p/<slug>/` | `index.html` |
+
+---
+
+## Assets
+
+### `/assets/`
+
+| Parent folder | Direct child folders |
+| --- | --- |
+| `/assets/` | `fonts/`, `img/`, `blog/`, `cursos/`, `eventos/`, `bistro/`, `css/` *(optional)*, `js/` *(optional)* |
+
+| Folder | Content |
+| --- | --- |
+| `/assets/fonts/` | `Spartan-Black.ttf`, `Spartan-Bold.ttf`, `Spartan-ExtraBold.ttf`, `Spartan-ExtraLight.ttf`, `Spartan-Light.ttf`, `Spartan-Medium.ttf`, `Spartan-Regular.ttf`, `Spartan-SemiBold.ttf`, `Spartan-Thin.ttf` |
+| `/assets/img/` | `favicon.svg`, `hero.png` |
+| `/assets/blog/` | `featured.webp` |
+| `/assets/cursos/` | `featured.webp` |
+| `/assets/eventos/` | `featured.webp` |
+| `/assets/bistro/` | Bistro images (items, ambience, etc.) |
+| `/assets/css/` *(optional)* | Shared CSS (if you want to move CSS out of HTML files) |
+| `/assets/js/` *(optional)* | Shared scripts (navbar, theme, helpers, etc.) |
+
+---
+
+## Data (optional)
+
+| Folder | Files |
+| --- | --- |
+| `/data/` | `blog.json`, `cursos.json`, `eventos.json`, `bistro.json` |
