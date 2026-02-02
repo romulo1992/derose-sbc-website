@@ -1,0 +1,1166 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#297E8A" />
+  <title>CMS • DeRose SBC</title>
+  <meta name="robots" content="noindex,nofollow" />
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+
+  <style>
+    /* =========================
+       Fonts (same as your site)
+       ========================= */
+    @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-Thin.ttf") format("truetype"); font-weight:100; font-style:normal; font-display:swap; }
+    @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-ExtraLight.ttf") format("truetype"); font-weight:200; font-style:normal; font-display:swap; }
+    @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-Light.ttf") format("truetype"); font-weight:300; font-style:normal; font-display:swap; }
+    @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-Regular.ttf") format("truetype"); font-weight:400; font-style:normal; font-display:swap; }
+    @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-Medium.ttf") format("truetype"); font-weight:500; font-style:normal; font-display:swap; }
+    @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-SemiBold.ttf") format("truetype"); font-weight:600; font-style:normal; font-display:swap; }
+    @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-Bold.ttf") format("truetype"); font-weight:700; font-style:normal; font-display:swap; }
+    @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-ExtraBold.ttf") format("truetype"); font-weight:800; font-style:normal; font-display:swap; }
+    @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-Black.ttf") format("truetype"); font-weight:900; font-style:normal; font-display:swap; }
+
+    :root{
+      --bg: #FFF9EF;
+      --ink: #393939;
+      --teal: #297E8A;
+      --accent: #FC883A;
+
+      --glass-bg: rgba(255,255,255,0.26);
+      --glass-br: rgba(41,126,138,0.22);
+      --shadow-soft: 0 10px 30px rgba(57,57,57,0.10);
+
+      --r-xl: 22px;
+      --r-lg: 18px;
+      --r-md: 14px;
+
+      --page-bg:
+        radial-gradient(1000px 700px at 20% 10%, rgba(252,136,58,0.12), transparent 60%),
+        radial-gradient(1100px 820px at 90% 15%, rgba(41,126,138,0.14), transparent 60%),
+        linear-gradient(180deg, var(--bg), #fff 28%, var(--bg) 100%);
+    }
+
+    html[data-theme="dark"]{
+      color-scheme: dark;
+      --bg: #0b1012;
+      --ink: rgba(245,246,247,0.92);
+      --glass-bg: rgba(18,26,28,0.62);
+      --glass-br: rgba(255,255,255,0.10);
+      --shadow-soft: 0 10px 30px rgba(0,0,0,0.45);
+      --page-bg:
+        radial-gradient(1000px 700px at 20% 10%, rgba(252,136,58,0.10), transparent 60%),
+        radial-gradient(1100px 820px at 90% 15%, rgba(41,126,138,0.18), transparent 60%),
+        linear-gradient(180deg, #06090b, var(--bg) 28%, #06090b 100%);
+    }
+
+    *{ box-sizing: border-box; }
+    body{
+      margin:0;
+      font-family: "Spartan", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--ink);
+      background: var(--page-bg);
+      line-height: 1.25;
+      overflow-x:hidden;
+    }
+    a{ color: inherit; text-decoration: none; }
+
+    .glass{
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-br);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    .wrap{
+      width: min(1200px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 18px 0 34px;
+    }
+
+    /* Top bar */
+    .top{
+      position: sticky; top: 0; z-index: 50;
+      padding: 14px 0;
+    }
+    .bar{
+      border-radius: 999px;
+      padding: 10px 12px;
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .brand{
+      display:flex; align-items:center; gap: 10px;
+      padding: 8px 10px;
+      border-radius: 999px;
+    }
+    .mark{
+      width: 34px; height: 34px; border-radius: 14px;
+      background: linear-gradient(135deg, rgba(41,126,138,0.9), rgba(252,136,58,0.85));
+    }
+    .brand strong{ font-weight: 900; font-size: 14px; letter-spacing: .2px; }
+    .brand span{ display:block; font-size: 12px; opacity:.75; margin-top: 2px; }
+
+    .right{
+      display:flex; align-items:center; gap: 10px; flex-wrap: wrap;
+      justify-content:flex-end;
+    }
+
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(41,126,138,0.22);
+      background: rgba(255,255,255,0.18);
+      font-weight: 800;
+      font-size: 13px;
+      cursor:pointer;
+      user-select:none;
+      transition: transform .15s ease, box-shadow .15s ease;
+      line-height: 1;
+      white-space: nowrap;
+    }
+    .btn:hover{ transform: translateY(-1px); box-shadow: var(--shadow-soft); }
+    .btn.primary{
+      border: 1px solid rgba(252,136,58,0.35);
+      background: linear-gradient(135deg, rgba(252,136,58,0.95), rgba(252,136,58,0.65));
+      color: #1f1f1f;
+    }
+    .btn.danger{
+      border-color: rgba(255,70,70,0.35);
+      background: rgba(255,70,70,0.12);
+    }
+
+    .theme{
+      width: 42px; height: 42px;
+      border-radius: 999px;
+      border: 1px solid rgba(41,126,138,0.22);
+      background: rgba(255,255,255,0.18);
+      cursor:pointer;
+      display:inline-flex; align-items:center; justify-content:center;
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .theme:hover{ transform: translateY(-1px); box-shadow: var(--shadow-soft); }
+    .theme svg{ width: 18px; height: 18px; display:block; }
+    .theme .sun{ display:none; }
+    html[data-theme="dark"] .theme .sun{ display:block; }
+    html[data-theme="dark"] .theme .moon{ display:none; }
+
+    /* Main grid */
+    .grid{
+      display:grid;
+      grid-template-columns: 330px 1fr;
+      gap: 14px;
+      margin-top: 14px;
+      align-items:start;
+    }
+
+    .panel{
+      border-radius: var(--r-xl);
+      padding: 12px;
+    }
+
+    /* Left list */
+    .search{
+      display:flex; gap: 10px; align-items:center;
+      padding: 10px;
+      border-radius: var(--r-lg);
+      border: 1px solid rgba(41,126,138,0.14);
+      background: rgba(255,255,255,0.12);
+      margin-bottom: 10px;
+    }
+    .search input{
+      width: 100%;
+      border: 0;
+      outline: none;
+      background: transparent;
+      color: inherit;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .list{
+      display:grid;
+      gap: 10px;
+      max-height: 64vh;
+      overflow:auto;
+      padding-right: 4px;
+    }
+    .item{
+      border-radius: var(--r-lg);
+      padding: 12px;
+      border: 1px solid rgba(41,126,138,0.14);
+      background: rgba(255,255,255,0.12);
+      cursor:pointer;
+      transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+    }
+    .item:hover{ transform: translateY(-1px); box-shadow: var(--shadow-soft); }
+    .item.active{ border-color: rgba(41,126,138,0.34); background: rgba(255,255,255,0.18); }
+    .item .t{ font-weight: 900; font-size: 13px; line-height: 1.15; }
+    .item .m{ margin-top: 6px; font-size: 12px; opacity:.78; display:flex; gap: 8px; flex-wrap:wrap; }
+    .badge{
+      display:inline-flex; align-items:center; gap: 8px;
+      padding: 6px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(41,126,138,0.14);
+      background: rgba(255,255,255,0.10);
+      font-weight: 900;
+      font-size: 11px;
+      line-height: 1;
+      white-space: nowrap;
+    }
+    .dot{ width: 8px; height: 8px; border-radius: 999px; background: var(--teal); }
+    .dot.alt{ background: var(--accent); }
+
+    /* Form */
+    .form{
+      display:grid;
+      gap: 10px;
+    }
+    .row{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .field{
+      display:grid;
+      gap: 6px;
+    }
+    label{
+      font-weight: 900;
+      font-size: 12px;
+      opacity:.85;
+    }
+    input, textarea{
+      width: 100%;
+      border-radius: 14px;
+      border: 1px solid rgba(41,126,138,0.14);
+      background: rgba(255,255,255,0.12);
+      color: inherit;
+      padding: 11px 12px;
+      outline: none;
+      font-weight: 700;
+      font-size: 13px;
+    }
+    textarea{
+      min-height: 240px;
+      resize: vertical;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-weight: 650;
+      line-height: 1.45;
+    }
+
+    .hint{
+      font-size: 12px;
+      opacity: .72;
+      line-height: 1.35;
+    }
+
+    .toolbar{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content:flex-end;
+      margin-top: 4px;
+    }
+
+    /* Preview */
+    .preview{
+      border-radius: var(--r-xl);
+      padding: 0;
+      overflow:hidden;
+      margin-top: 14px;
+    }
+    .preview-head{
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 12px;
+      border-bottom: 1px solid rgba(41,126,138,0.14);
+      background: rgba(255,255,255,0.10);
+    }
+    .preview-head strong{ font-weight: 900; font-size: 13px; }
+    .preview-body{
+      padding: 16px;
+      background: rgba(255,255,255,0.06);
+    }
+    .preview-body h1{
+      margin: 0 0 10px 0;
+      font-size: 32px;
+      letter-spacing: -0.8px;
+      line-height: 1.05;
+    }
+    .preview-body .meta{
+      display:flex; gap: 10px; flex-wrap:wrap;
+      font-size: 12px; opacity:.8; font-weight: 800;
+      margin-bottom: 14px;
+    }
+    .preview-body img{
+      width: 100%;
+      max-height: 340px;
+      object-fit: cover;
+      border-radius: 18px;
+      border: 1px solid rgba(41,126,138,0.12);
+      margin: 8px 0 14px;
+      display:block;
+    }
+    .prose{
+      font-size: 16px;
+      line-height: 1.75;
+      max-width: 78ch;
+    }
+    .prose p{ margin: 0 0 14px 0; opacity: .92; }
+    .prose h2{
+      margin: 22px 0 10px;
+      font-size: 22px;
+      letter-spacing: -0.4px;
+      line-height: 1.2;
+    }
+    .prose h3{
+      margin: 18px 0 8px;
+      font-size: 18px;
+      letter-spacing: -0.2px;
+      line-height: 1.25;
+    }
+    .prose ul, .prose ol{ margin: 0 0 14px 18px; padding:0; }
+    .prose li{ margin: 8px 0; }
+    .prose strong{ font-weight: 900; }
+    .prose a{ color: rgba(41,126,138,1); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 2px; }
+
+    .status{
+      margin-top: 10px;
+      font-size: 12px;
+      font-weight: 800;
+      opacity: .85;
+    }
+    .status.ok{ color: rgba(41,126,138,1); }
+    .status.bad{ color: rgba(220,70,70,1); }
+
+    @media (max-width: 980px){
+      .grid{ grid-template-columns: 1fr; }
+      .list{ max-height: 38vh; }
+      .row{ grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .btn, .item, .theme{ transition: none !important; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="top">
+    <div class="wrap">
+      <div class="bar glass">
+        <a class="brand" href="../blog.html" title="Voltar para o Blog">
+          <span class="mark" aria-hidden="true"></span>
+          <div>
+            <strong>DeRose SBC • CMS</strong>
+            <span>admin local (static)</span>
+          </div>
+        </a>
+
+        <div class="right">
+          <a class="btn" href="../blog.html">Ver Blog</a>
+          <button class="btn" id="btnNew" type="button">Novo post</button>
+          <button class="btn" id="btnExport" type="button">Exportar posts.json</button>
+          <label class="btn" style="cursor:pointer;">
+            Importar JSON
+            <input id="fileImport" type="file" accept="application/json" style="display:none;" />
+          </label>
+          <button class="theme" id="themeToggle" type="button" aria-label="Ativar modo escuro" aria-pressed="false">
+            <svg class="moon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M21 14.5A8.5 8.5 0 1 1 9.5 3a7 7 0 0 0 11.5 11.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <svg class="sun" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12Z" stroke="currentColor" stroke-width="2"/>
+              <path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5l-1.5-1.5M20.5 20.5 19 19M5 19l-1.5 1.5M20.5 3.5 19 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="grid">
+        <!-- LEFT: list -->
+        <aside class="panel glass">
+          <div class="search">
+            <input id="q" placeholder="Buscar por título / slug / categoria..." />
+          </div>
+
+          <div class="list" id="list"></div>
+
+          <div class="hint" style="margin-top:10px;">
+            Dica: este CMS salva em <strong>localStorage</strong>. Use <strong>Exportar</strong> para gerar <code>posts.json</code>.
+          </div>
+        </aside>
+
+        <!-- RIGHT: editor -->
+        <section class="panel glass">
+          <div class="form">
+            <div class="row">
+              <div class="field">
+                <label for="slug">Slug (arquivo .html)</label>
+                <input id="slug" placeholder="ex: respiracao-3-minutos" />
+                <div class="hint">Sem espaços, só letras/números/hífens. Isso vira <code>./slug.html</code>.</div>
+              </div>
+
+              <div class="field">
+                <label for="title">Título</label>
+                <input id="title" placeholder="Título do post" />
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="excerpt">Excerpt (resumo)</label>
+              <input id="excerpt" placeholder="Uma frase curta que aparece no blog.html" />
+            </div>
+
+            <div class="row">
+              <div class="field">
+                <label for="category">Categoria</label>
+                <input id="category" placeholder="ex: Respiração" />
+              </div>
+              <div class="field">
+                <label for="tag">Tag</label>
+                <input id="tag" placeholder="ex: Foco" />
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="field">
+                <label for="date">Data (YYYY-MM-DD)</label>
+                <input id="date" placeholder="2026-01-20" />
+              </div>
+              <div class="field">
+                <label for="readMin">Minutos de leitura</label>
+                <input id="readMin" placeholder="4" />
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="field">
+                <label for="image">Imagem (path)</label>
+                <input id="image" placeholder="../assets/blog/respiracao.webp" />
+              </div>
+              <div class="field">
+                <label for="author">Autor</label>
+                <input id="author" placeholder="DeRose SBC" />
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="bodyHtml">Conteúdo (HTML simples)</label>
+              <textarea id="bodyHtml" placeholder="<p>Seu texto...</p>&#10;<h2>Seção</h2>&#10;<p>...</p>"></textarea>
+              <div class="hint">
+                Use <code>&lt;p&gt;</code>, <code>&lt;h2&gt;</code>, <code>&lt;h3&gt;</code>, <code>&lt;ul&gt;</code>, <code>&lt;li&gt;</code>, <code>&lt;strong&gt;</code>, <code>&lt;a&gt;</code>.
+                Evite <code>&lt;script&gt;</code>.
+              </div>
+            </div>
+
+            <div class="toolbar">
+              <button class="btn danger" id="btnDelete" type="button">Excluir</button>
+              <button class="btn" id="btnCopyJson" type="button">Copiar JSON do post</button>
+              <button class="btn" id="btnDownloadPost" type="button">Baixar slug.html</button>
+              <button class="btn primary" id="btnSave" type="button">Salvar</button>
+            </div>
+
+            <div id="status" class="status">—</div>
+          </div>
+        </section>
+      </div>
+
+      <!-- PREVIEW -->
+      <div class="preview glass">
+        <div class="preview-head">
+          <strong>Preview</strong>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <button class="btn" id="btnCopyLink" type="button">Copiar link</button>
+            <button class="btn" id="btnClearStorage" type="button" title="Limpa o banco local do CMS">Limpar local</button>
+          </div>
+        </div>
+        <div class="preview-body">
+          <h1 id="pvTitle">—</h1>
+          <div class="meta" id="pvMeta">—</div>
+          <img id="pvImg" alt="" style="display:none;" />
+          <div class="prose" id="pvBody">—</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* =========================
+       Storage + helpers
+       ========================= */
+    const STORE_KEY = "derose_blog_posts_v1";
+
+    function nowISO(){
+      const d = new Date();
+      const pad = (n)=> String(n).padStart(2,"0");
+      return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+    }
+
+    function safeSlug(s){
+      return String(s || "")
+        .trim()
+        .toLowerCase()
+        .replace(/\s+/g, "-")
+        .replace(/[^a-z0-9\-]/g, "")
+        .replace(/\-+/g, "-")
+        .replace(/^\-+|\-+$/g, "");
+    }
+
+    // minimal safety: strip <script> and inline on* handlers
+    function sanitizeHtml(html){
+      let out = String(html || "");
+      out = out.replace(/<script[\s\S]*?>[\s\S]*?<\/script>/gi, "");
+      out = out.replace(/\son\w+="[^"]*"/gi, "");
+      out = out.replace(/\son\w+='[^']*'/gi, "");
+      return out;
+    }
+
+    function loadPosts(){
+      try{
+        const raw = localStorage.getItem(STORE_KEY);
+        if(!raw) return [];
+        const arr = JSON.parse(raw);
+        return Array.isArray(arr) ? arr : [];
+      }catch(e){
+        return [];
+      }
+    }
+
+    function savePosts(posts){
+      localStorage.setItem(STORE_KEY, JSON.stringify(posts, null, 2));
+    }
+
+    function sortPosts(posts){
+      // newest first (YYYY-MM-DD)
+      return [...posts].sort((a,b)=> String(b.date||"").localeCompare(String(a.date||"")));
+    }
+
+    function escapeHtml(str){
+      return String(str ?? "")
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+    }
+
+    function formatDateBR(iso){
+      try{
+        const [y,m,d] = String(iso).split("-").map(Number);
+        const dt = new Date(y, m-1, d);
+        return dt.toLocaleDateString("pt-BR", { day:"2-digit", month:"short", year:"numeric" });
+      }catch(e){
+        return iso || "—";
+      }
+    }
+
+    /* =========================
+       Theme toggle (same idea)
+       ========================= */
+    const root = document.documentElement;
+    const themeBtn = document.getElementById("themeToggle");
+    const THEME_KEY = "theme";
+
+    function systemPrefersDark(){
+      return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+    }
+    function setTheme(theme, {persist=true} = {}){
+      if(theme === "dark") root.dataset.theme = "dark";
+      else delete root.dataset.theme;
+
+      if(persist) localStorage.setItem(THEME_KEY, theme);
+
+      const isDark = theme === "dark";
+      themeBtn?.setAttribute("aria-pressed", String(isDark));
+      themeBtn?.setAttribute("aria-label", isDark ? "Desativar modo escuro" : "Ativar modo escuro");
+      document.querySelector('meta[name="theme-color"]')
+        ?.setAttribute("content", isDark ? "#0b1012" : "#297E8A");
+    }
+    (function initTheme(){
+      const saved = localStorage.getItem(THEME_KEY);
+      if(saved === "light" || saved === "dark") setTheme(saved, {persist:false});
+      else setTheme(systemPrefersDark() ? "dark" : "light", {persist:false});
+    })();
+    themeBtn?.addEventListener("click", ()=>{
+      const current = root.dataset.theme === "dark" ? "dark" : "light";
+      setTheme(current === "dark" ? "light" : "dark");
+    });
+
+    /* =========================
+       UI refs
+       ========================= */
+    const listEl = document.getElementById("list");
+    const qEl = document.getElementById("q");
+    const statusEl = document.getElementById("status");
+
+    const f = {
+      slug: document.getElementById("slug"),
+      title: document.getElementById("title"),
+      excerpt: document.getElementById("excerpt"),
+      category: document.getElementById("category"),
+      tag: document.getElementById("tag"),
+      date: document.getElementById("date"),
+      readMin: document.getElementById("readMin"),
+      image: document.getElementById("image"),
+      author: document.getElementById("author"),
+      bodyHtml: document.getElementById("bodyHtml"),
+    };
+
+    const pv = {
+      title: document.getElementById("pvTitle"),
+      meta: document.getElementById("pvMeta"),
+      img: document.getElementById("pvImg"),
+      body: document.getElementById("pvBody"),
+    };
+
+    const btnNew = document.getElementById("btnNew");
+    const btnSave = document.getElementById("btnSave");
+    const btnDelete = document.getElementById("btnDelete");
+    const btnExport = document.getElementById("btnExport");
+    const btnCopyJson = document.getElementById("btnCopyJson");
+    const btnDownloadPost = document.getElementById("btnDownloadPost");
+    const btnCopyLink = document.getElementById("btnCopyLink");
+    const btnClearStorage = document.getElementById("btnClearStorage");
+    const fileImport = document.getElementById("fileImport");
+
+    /* =========================
+       State
+       ========================= */
+    let posts = sortPosts(loadPosts());
+    let activeSlug = posts[0]?.slug || null;
+
+    function setStatus(msg, ok=true){
+      statusEl.textContent = msg;
+      statusEl.className = "status " + (ok ? "ok" : "bad");
+    }
+
+    function currentFormPost(){
+      const slug = safeSlug(f.slug.value);
+      const read = Number(f.readMin.value || 0) || 0;
+      return {
+        slug,
+        title: String(f.title.value || "").trim(),
+        excerpt: String(f.excerpt.value || "").trim(),
+        category: String(f.category.value || "").trim(),
+        tag: String(f.tag.value || "").trim(),
+        date: String(f.date.value || "").trim(),
+        readMin: read,
+        image: String(f.image.value || "").trim(),
+        author: String(f.author.value || "").trim(),
+        bodyHtml: sanitizeHtml(String(f.bodyHtml.value || "")),
+      };
+    }
+
+    function fillForm(p){
+      f.slug.value = p?.slug || "";
+      f.title.value = p?.title || "";
+      f.excerpt.value = p?.excerpt || "";
+      f.category.value = p?.category || "";
+      f.tag.value = p?.tag || "";
+      f.date.value = p?.date || "";
+      f.readMin.value = String(p?.readMin ?? "");
+      f.image.value = p?.image || "";
+      f.author.value = p?.author || "";
+      f.bodyHtml.value = p?.bodyHtml || "";
+      renderPreview();
+    }
+
+    function renderList(){
+      const q = String(qEl.value || "").trim().toLowerCase();
+      const filtered = posts.filter(p => {
+        const hay = `${p.title||""} ${p.slug||""} ${p.category||""} ${p.tag||""}`.toLowerCase();
+        return !q || hay.includes(q);
+      });
+
+      listEl.innerHTML = filtered.length ? filtered.map(p => `
+        <div class="item ${p.slug === activeSlug ? "active" : ""}" data-slug="${escapeHtml(p.slug)}">
+          <div class="t">${escapeHtml(p.title || "(sem título)")}</div>
+          <div class="m">
+            <span class="badge"><span class="dot"></span>${escapeHtml(p.category || "—")}</span>
+            <span class="badge"><span class="dot alt"></span>${escapeHtml(p.tag || "—")}</span>
+            <span class="badge">${escapeHtml(formatDateBR(p.date || "—"))}</span>
+          </div>
+        </div>
+      `).join("") : `<div class="hint">Nenhum post. Clique em <strong>Novo post</strong>.</div>`;
+
+      listEl.querySelectorAll(".item").forEach(el=>{
+        el.addEventListener("click", ()=>{
+          const slug = el.getAttribute("data-slug");
+          selectPost(slug);
+        });
+      });
+    }
+
+    function selectPost(slug){
+      const p = posts.find(x => x.slug === slug);
+      if(!p){
+        activeSlug = null;
+        fillForm(makeBlank());
+        renderList();
+        return;
+      }
+      activeSlug = p.slug;
+      fillForm(p);
+      renderList();
+      setStatus(`Editando: ${p.slug}`, true);
+    }
+
+    function makeBlank(){
+      return {
+        slug: "",
+        title: "",
+        excerpt: "",
+        category: "",
+        tag: "",
+        date: nowISO(),
+        readMin: 4,
+        image: "",
+        author: "DeRose SBC",
+        bodyHtml: "<p>Escreva aqui...</p>"
+      };
+    }
+
+    function persist(){
+      posts = sortPosts(posts);
+      savePosts(posts);
+      renderList();
+    }
+
+    function renderPreview(){
+      const p = currentFormPost();
+
+      pv.title.textContent = p.title || "—";
+      pv.meta.textContent = [
+        p.category ? `Categoria: ${p.category}` : null,
+        p.tag ? `Tag: ${p.tag}` : null,
+        p.date ? `Data: ${formatDateBR(p.date)}` : null,
+        p.readMin ? `${p.readMin} min` : null,
+        p.author ? `Por ${p.author}` : null,
+        p.slug ? `Arquivo: ${p.slug}.html` : null,
+      ].filter(Boolean).join(" • ") || "—";
+
+      if(p.image){
+        pv.img.style.display = "block";
+        pv.img.src = p.image;
+        pv.img.alt = p.title || "";
+      }else{
+        pv.img.style.display = "none";
+        pv.img.removeAttribute("src");
+      }
+
+      pv.body.innerHTML = sanitizeHtml(p.bodyHtml || "—");
+    }
+
+    /* =========================
+       Actions
+       ========================= */
+    qEl.addEventListener("input", renderList);
+
+    // live preview on typing
+    Object.values(f).forEach(el=>{
+      el.addEventListener("input", ()=>{
+        if(el === f.slug){
+          const s = safeSlug(f.slug.value);
+          if(f.slug.value !== s) f.slug.value = s;
+        }
+        renderPreview();
+      });
+    });
+
+    btnNew.addEventListener("click", ()=>{
+      activeSlug = null;
+      fillForm(makeBlank());
+      renderList();
+      setStatus("Novo post (não salvo)", true);
+      f.slug.focus();
+    });
+
+    btnSave.addEventListener("click", ()=>{
+      const p = currentFormPost();
+
+      if(!p.slug){
+        setStatus("Slug é obrigatório.", false);
+        f.slug.focus();
+        return;
+      }
+      if(!p.title){
+        setStatus("Título é obrigatório.", false);
+        f.title.focus();
+        return;
+      }
+      if(!p.date || !/^\d{4}-\d{2}-\d{2}$/.test(p.date)){
+        setStatus("Data inválida. Use YYYY-MM-DD.", false);
+        f.date.focus();
+        return;
+      }
+
+      const existsOther = posts.find(x => x.slug === p.slug && x.slug !== activeSlug);
+      if(existsOther){
+        setStatus("Slug já existe. Use outro slug.", false);
+        f.slug.focus();
+        return;
+      }
+
+      // upsert
+      posts = posts.filter(x => x.slug !== activeSlug);
+      posts.push(p);
+      activeSlug = p.slug;
+
+      persist();
+      setStatus(`Salvo: ${p.slug}`, true);
+    });
+
+    btnDelete.addEventListener("click", ()=>{
+      if(!activeSlug){
+        setStatus("Nada para excluir.", false);
+        return;
+      }
+      const ok = confirm(`Excluir o post "${activeSlug}"?`);
+      if(!ok) return;
+
+      posts = posts.filter(x => x.slug !== activeSlug);
+      activeSlug = posts[0]?.slug || null;
+      persist();
+
+      if(activeSlug) selectPost(activeSlug);
+      else fillForm(makeBlank());
+
+      setStatus("Post excluído.", true);
+    });
+
+    btnExport.addEventListener("click", ()=>{
+      const data = JSON.stringify(sortPosts(posts), null, 2);
+      const blob = new Blob([data], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "posts.json";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+
+      setStatus("Exportado: posts.json", true);
+    });
+
+    fileImport.addEventListener("change", async (e)=>{
+      const file = e.target.files?.[0];
+      if(!file) return;
+      try{
+        const txt = await file.text();
+        const arr = JSON.parse(txt);
+        if(!Array.isArray(arr)) throw new Error("JSON deve ser um array.");
+        // normalize
+        const normalized = arr.map(x => ({
+          slug: safeSlug(x.slug),
+          title: String(x.title || "").trim(),
+          excerpt: String(x.excerpt || "").trim(),
+          category: String(x.category || "").trim(),
+          tag: String(x.tag || "").trim(),
+          date: String(x.date || "").trim(),
+          readMin: Number(x.readMin || 0) || 0,
+          image: String(x.image || "").trim(),
+          author: String(x.author || "").trim(),
+          bodyHtml: sanitizeHtml(String(x.bodyHtml || "")),
+        })).filter(x => x.slug && x.title);
+
+        posts = sortPosts(normalized);
+        savePosts(posts);
+        activeSlug = posts[0]?.slug || null;
+        renderList();
+        if(activeSlug) selectPost(activeSlug);
+        else fillForm(makeBlank());
+
+        setStatus("Import OK.", true);
+      }catch(err){
+        setStatus("Falha ao importar: " + (err?.message || "erro"), false);
+      }finally{
+        fileImport.value = "";
+      }
+    });
+
+    btnCopyJson.addEventListener("click", async ()=>{
+      const p = currentFormPost();
+      const json = JSON.stringify(p, null, 2);
+      try{
+        await navigator.clipboard.writeText(json);
+        setStatus("JSON do post copiado.", true);
+      }catch(e){
+        setStatus("Não consegui copiar (permissão do navegador).", false);
+      }
+    });
+
+    btnCopyLink.addEventListener("click", async ()=>{
+      const p = currentFormPost();
+      const link = p.slug ? `${location.origin}${location.pathname.replace(/\/[^\/]*$/, "/")}${p.slug}.html` : location.href;
+      try{
+        await navigator.clipboard.writeText(link);
+        setStatus("Link copiado.", true);
+      }catch(e){
+        setStatus("Não consegui copiar (permissão do navegador).", false);
+      }
+    });
+
+    btnClearStorage.addEventListener("click", ()=>{
+      const ok = confirm("Limpar todos os posts salvos neste navegador?");
+      if(!ok) return;
+      localStorage.removeItem(STORE_KEY);
+      posts = [];
+      activeSlug = null;
+      fillForm(makeBlank());
+      renderList();
+      setStatus("Local limpo.", true);
+    });
+
+    function buildPostHtml(p){
+      const title = escapeHtml(p.title || "");
+      const desc = escapeHtml(p.excerpt || "");
+      const ogImg = escapeHtml(p.image || "../assets/blog/cover.webp");
+
+      // Same “clean” post page style: no TOC sidebar, no callout boxes, no nested glass.
+      return `<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#297E8A" />
+  <title>${title} • DeRose SBC</title>
+  <meta name="description" content="${desc}" />
+  <meta property="og:title" content="${title} • DeRose SBC" />
+  <meta property="og:description" content="${desc}" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="${ogImg}" />
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+
+  <style>
+    @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-Regular.ttf") format("truetype"); font-weight:400; font-style:normal; font-display:swap; }
+    @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-Bold.ttf") format("truetype"); font-weight:700; font-style:normal; font-display:swap; }
+    @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-Black.ttf") format("truetype"); font-weight:900; font-style:normal; font-display:swap; }
+
+    :root{
+      --bg:#FFF9EF; --ink:#393939; --teal:#297E8A; --accent:#FC883A;
+      --glass-bg: rgba(255,255,255,0.26);
+      --glass-br: rgba(41,126,138,0.22);
+      --shadow-soft: 0 10px 30px rgba(57,57,57,0.10);
+      --r-xl: 28px;
+      --max: 1120px;
+      --page-bg:
+        radial-gradient(1000px 700px at 20% 10%, rgba(252,136,58,0.12), transparent 60%),
+        radial-gradient(1100px 820px at 90% 15%, rgba(41,126,138,0.14), transparent 60%),
+        linear-gradient(180deg, var(--bg), #fff 28%, var(--bg) 100%);
+    }
+    *{ box-sizing:border-box; }
+    body{ margin:0; font-family:"Spartan", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color:var(--ink); background:var(--page-bg); line-height:1.25; }
+    a{ color:inherit; text-decoration:none; }
+    .container{ width:min(var(--max), calc(100% - 40px)); margin:0 auto; }
+    .glass{ background:var(--glass-bg); border:1px solid var(--glass-br); box-shadow:var(--shadow-soft); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); }
+    header{ position:sticky; top:0; z-index:40; padding:14px 0; }
+    header .bar{ border-radius:999px; padding:10px 14px; display:flex; align-items:center; justify-content:space-between; gap:14px; }
+    .btn{ display:inline-flex; align-items:center; justify-content:center; padding:11px 14px; border-radius:999px; border:1px solid rgba(41,126,138,0.22); background:rgba(255,255,255,0.18); font-weight:800; font-size:13px; cursor:pointer; white-space:nowrap; line-height:1; }
+    .btn.primary{ border:1px solid rgba(252,136,58,0.35); background:linear-gradient(135deg, rgba(252,136,58,0.95), rgba(252,136,58,0.65)); color:#1f1f1f; }
+    section{ padding:34px 0 18px; }
+    h1{ margin:16px 0 10px; font-size:46px; line-height:1.02; letter-spacing:-1px; }
+    .sub{ margin:12px 0 0; font-size:18px; line-height:1.55; opacity:.9; max-width:75ch; }
+    .meta{ margin-top:14px; display:flex; gap:10px; flex-wrap:wrap; align-items:center; font-size:13px; opacity:.86; font-weight:800; }
+    .cover{ margin-top:18px; border-radius:var(--r-xl); overflow:hidden; }
+    .cover img{ width:100%; height:min(520px, 56vh); object-fit:cover; display:block; }
+    .card{ border-radius:var(--r-xl); padding:22px; }
+    .prose{ font-size:16px; line-height:1.75; max-width:78ch; }
+    .prose p{ margin:0 0 14px 0; opacity:.92; }
+    .prose h2{ margin:22px 0 10px; font-size:22px; letter-spacing:-0.4px; line-height:1.2; }
+    .prose h3{ margin:18px 0 8px; font-size:18px; letter-spacing:-0.2px; line-height:1.25; }
+    .prose ul, .prose ol{ margin:0 0 14px 18px; padding:0; }
+    .prose li{ margin:8px 0; }
+    .prose strong{ font-weight:900; }
+    .prose a{ color:rgba(41,126,138,1); text-decoration:underline; text-underline-offset:3px; text-decoration-thickness:2px; }
+    .actions{ display:flex; gap:10px; flex-wrap:wrap; margin-top:18px; }
+    footer{ padding:36px 0 46px; opacity:.85; }
+    footer .foot{ display:flex; justify-content:space-between; align-items:center; gap:12px; padding-top:16px; border-top:1px solid rgba(41,126,138,0.14); flex-wrap:wrap; }
+    .tiny{ font-size:13px; opacity:.8; }
+
+    html[data-theme="dark"]{
+      color-scheme: dark;
+      --bg:#0b1012;
+      --ink: rgba(245,246,247,0.92);
+      --glass-bg: rgba(18,26,28,0.62);
+      --glass-br: rgba(255,255,255,0.10);
+      --shadow-soft: 0 10px 30px rgba(0,0,0,0.45);
+      --page-bg:
+        radial-gradient(1000px 700px at 20% 10%, rgba(252,136,58,0.10), transparent 60%),
+        radial-gradient(1100px 820px at 90% 15%, rgba(41,126,138,0.18), transparent 60%),
+        linear-gradient(180deg, #06090b, var(--bg) 28%, #06090b 100%);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="bar glass">
+        <a class="btn" href="../blog.html">← Voltar</a>
+        <div style="display:flex; gap:10px; align-items:center;">
+          <button class="btn" id="themeToggle" type="button">Tema</button>
+          <a class="btn primary" href="../index.html#contato">Entre em Contato</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section>
+      <div class="container">
+        <div class="glass card">
+          <h1>${title}</h1>
+          <p class="sub">${desc}</p>
+
+          <div class="meta">
+            <span>${escapeHtml(formatDateBR(p.date || ""))}</span>
+            <span>•</span>
+            <span><strong>${escapeHtml(String(p.readMin || 0))}</strong> min de leitura</span>
+            <span>•</span>
+            <span>Por <strong>${escapeHtml(p.author || "")}</strong></span>
+          </div>
+
+          ${p.image ? `<div class="cover" style="margin-top:18px;"><img src="${escapeHtml(p.image)}" alt="${title}" loading="eager" /></div>` : ""}
+        </div>
+      </div>
+    </section>
+
+    <section style="padding-top:18px;">
+      <div class="container">
+        <article class="glass card">
+          <div class="prose">
+            ${sanitizeHtml(p.bodyHtml || "")}
+          </div>
+
+          <div class="actions">
+            <a class="btn" href="../blog.html#posts">Ver mais posts</a>
+            <a class="btn primary" href="../index.html#contato">Agendar aula</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <div class="foot">
+          <div>
+            <div style="font-weight:900;">DeRose SBC</div>
+            <div class="tiny">Blog • Yôga de Alto Rendimento</div>
+          </div>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <a class="btn" href="#top">Topo ↑</a>
+            <a class="btn" href="../blog.html">Blog</a>
+            <a class="btn" href="../index.html#contato">Contato</a>
+          </div>
+        </div>
+        <div class="tiny" style="margin-top:12px;">© <span id="year"></span> DeRose SBC.</div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+    const root = document.documentElement;
+    const THEME_KEY = "theme";
+    function systemPrefersDark(){ return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches; }
+    function setTheme(t, persist=true){
+      if(t === "dark") root.dataset.theme = "dark";
+      else delete root.dataset.theme;
+      if(persist) localStorage.setItem(THEME_KEY, t);
+    }
+    (function(){
+      const saved = localStorage.getItem(THEME_KEY);
+      if(saved === "light" || saved === "dark") setTheme(saved, false);
+      else setTheme(systemPrefersDark() ? "dark" : "light", false);
+    })();
+    document.getElementById("themeToggle")?.addEventListener("click", ()=>{
+      const cur = root.dataset.theme === "dark" ? "dark" : "light";
+      setTheme(cur === "dark" ? "light" : "dark", true);
+    });
+  </script>
+</body>
+</html>`;
+    }
+
+    btnDownloadPost.addEventListener("click", ()=>{
+      const p = currentFormPost();
+      if(!p.slug){
+        setStatus("Slug é obrigatório para baixar o HTML.", false);
+        f.slug.focus();
+        return;
+      }
+      if(!p.title){
+        setStatus("Título é obrigatório para baixar o HTML.", false);
+        f.title.focus();
+        return;
+      }
+      if(!p.date || !/^\d{4}-\d{2}-\d{2}$/.test(p.date)){
+        setStatus("Data inválida. Use YYYY-MM-DD.", false);
+        f.date.focus();
+        return;
+      }
+
+      const html = buildPostHtml(p);
+      const blob = new Blob([html], { type: "text/html" });
+      const url = URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `${p.slug}.html`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+
+      setStatus(`Baixado: ${p.slug}.html`, true);
+    });
+
+    /* =========================
+       Init
+       ========================= */
+    function seedIfEmpty(){
+      if(posts.length) return;
+      const demo = {
+        slug: "respiracao-3-minutos",
+        title: "Respiração Transformadora em 3 minutos: estabilize energia e ruído mental",
+        excerpt: "Um protocolo simples para baixar ruído, organizar foco e começar o dia com mais clareza — sem misticismo e sem drama.",
+        category: "Respiração",
+        tag: "Foco",
+        date: nowISO(),
+        readMin: 4,
+        image: "../assets/blog/respiracao.webp",
+        author: "DeRose SBC",
+        bodyHtml: [
+          "<p>Quando a mente está “barulhenta”, o corpo normalmente já está acelerado. A forma mais rápida de trazer o sistema de volta para um estado útil é ajustar <strong>ritmo</strong>, <strong>amplitude</strong> e <strong>pausas</strong> da respiração.</p>",
+          "<p><strong>Se você quer foco:</strong> primeiro reduza o ruído fisiológico. Depois, direcione atenção.</p>",
+          "<h2>O protocolo de 3 minutos</h2>",
+          "<p>Você vai repetir um ciclo simples por 3 minutos. A regra é: <strong>sem força</strong>, sem “segurar no sofrimento”. O objetivo é <strong>estabilizar</strong>, não “provar algo”.</p>",
+          "<h3>Passo 1 — Ajuste de postura (20s)</h3>",
+          "<ul><li>Pés firmes no chão, coluna “alta” sem rigidez.</li><li>Queixo levemente recolhido (pescoço longo).</li><li>Ombros soltos, mandíbula destravada.</li></ul>"
+        ].join("\n")
+      };
+      posts = [demo];
+      savePosts(posts);
+      posts = sortPosts(posts);
+    }
+
+    seedIfEmpty();
+    posts = sortPosts(loadPosts());
+    activeSlug = posts[0]?.slug || null;
+    renderList();
+    if(activeSlug) selectPost(activeSlug);
+    else fillForm(makeBlank());
+    setStatus("Pronto.", true);
+  </script>
+</body>
+</html>
