@@ -477,7 +477,7 @@
         </nav>
 
         <div class="actions">
-          <button class="theme-toggle" id="themeToggle" type="button" aria-label="Ativar modo escuro" aria-pressed="false">
+          <button class="theme-toggle" id="themeToggle" type="button" aria-label="Alternar tema" aria-pressed="false">
             <svg class="moon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M21 14.5A8.5 8.5 0 1 1 9.5 3a7 7 0 0 0 11.5 11.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
@@ -679,18 +679,21 @@
   </main>
 
   <script>
+    "use strict";
+
     const $ = (sel, root=document) => root.querySelector(sel);
     const unique = (arr) => Array.from(new Set(arr));
 
     $('#year').textContent = new Date().getFullYear();
 
     function escapeHtml(str){
-      return String(str ?? '')
-        .replaceAll('&','&amp;')
-        .replaceAll('<','&lt;')
-        .replaceAll('>','&gt;')
-        .replaceAll('"','&quot;')
-        .replaceAll("'","&#039;");
+      const s = String(str ?? '');
+      return s
+        .replace(/&/g,'&amp;')
+        .replace(/</g,'&lt;')
+        .replace(/>/g,'&gt;')
+        .replace(/"/g,'&quot;')
+        .replace(/'/g,'&#039;');
     }
     function clean(s){ return String(s ?? '').trim(); }
     function slugify(input){
@@ -741,43 +744,80 @@
       };
     }
 
-    // Theme
+    /* =========================
+       THEME (FIXED: robust light-mode switch)
+       ========================= */
     const root = document.documentElement;
     const themeBtn = $('#themeToggle');
     const metaTheme = document.querySelector('meta[name="theme-color"]');
     const THEME_KEY = 'theme';
 
-    function systemPrefersDark(){
-      return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    function systemTheme(){
+      try{
+        return (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+      }catch(_){
+        return 'light';
+      }
     }
-    function setTheme(theme, {persist = true} = {}){
-      if(theme === 'dark') root.dataset.theme = 'dark';
-      else delete root.dataset.theme;
+    function currentTheme(){
+      return root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+    }
+    function applyTheme(theme, persist=true){
+      const t = (theme === 'dark') ? 'dark' : 'light';
 
-      if(persist) localStorage.setItem(THEME_KEY, theme);
+      // IMPORTANT: removeAttribute é mais confiável do que delete dataset.*
+      if(t === 'dark') root.setAttribute('data-theme', 'dark');
+      else root.removeAttribute('data-theme');
 
-      const isDark = theme === 'dark';
-      themeBtn?.setAttribute('aria-pressed', String(isDark));
-      themeBtn?.setAttribute('aria-label', isDark ? 'Desativar modo escuro' : 'Ativar modo escuro');
-      metaTheme?.setAttribute('content', isDark ? '#0b1012' : '#297E8A');
+      if(persist){
+        try{ localStorage.setItem(THEME_KEY, t); }catch(_){}
+      }
+
+      const isDark = (t === 'dark');
+      if(themeBtn){
+        themeBtn.setAttribute('aria-pressed', String(isDark));
+        themeBtn.setAttribute('aria-label', isDark ? 'Ativar modo claro' : 'Ativar modo escuro');
+      }
+      if(metaTheme){
+        metaTheme.setAttribute('content', isDark ? '#0b1012' : '#297E8A');
+      }
 
       schedulePreview();
     }
-    (function initTheme(){
-      const saved = localStorage.getItem(THEME_KEY);
-      if(saved === 'light' || saved === 'dark') setTheme(saved, {persist:false});
-      else setTheme(systemPrefersDark() ? 'dark' : 'light', {persist:false});
-    })();
-    themeBtn?.addEventListener('click', () => {
-      const current = root.dataset.theme === 'dark' ? 'dark' : 'light';
-      setTheme(current === 'dark' ? 'light' : 'dark');
-    });
-    window.matchMedia?.('(prefers-color-scheme: dark)')?.addEventListener?.('change', (e) => {
-      const saved = localStorage.getItem(THEME_KEY);
-      if(saved !== 'light' && saved !== 'dark') setTheme(e.matches ? 'dark' : 'light', {persist:false});
-    });
+    function initTheme(){
+      let saved = null;
+      try{ saved = localStorage.getItem(THEME_KEY); }catch(_){}
+      if(saved === 'dark' || saved === 'light') applyTheme(saved, false);
+      else applyTheme(systemTheme(), false);
+    }
 
-    // Data
+    initTheme();
+
+    if(themeBtn){
+      themeBtn.addEventListener('click', () => {
+        const next = (currentTheme() === 'dark') ? 'light' : 'dark';
+        applyTheme(next, true);
+      });
+    }
+
+    // Atualiza se o tema do sistema mudar (somente se o usuário não travou manualmente)
+    try{
+      const mql = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+      if(mql){
+        const onChange = (e) => {
+          let saved = null;
+          try{ saved = localStorage.getItem(THEME_KEY); }catch(_){}
+          if(saved === 'dark' || saved === 'light') return; // usuário escolheu manualmente
+          applyTheme(e.matches ? 'dark' : 'light', false);
+        };
+        if(typeof mql.addEventListener === 'function') mql.addEventListener('change', onChange);
+        else if(typeof mql.addListener === 'function') mql.addListener(onChange);
+      }
+    }catch(_){}
+
+    /* =========================
+       DATA
+       ========================= */
     const STORAGE_KEY = 'derose_blog_posts_cms_v3';
     const LEGACY_KEYS = [
       'derose_blog_posts_v2_with_content',
@@ -840,7 +880,9 @@
     }
 
     function persist(){
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(posts, null, 2));
+      try{
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(posts, null, 2));
+      }catch(_){}
       refreshTaxonomy();
     }
 
@@ -917,7 +959,7 @@
     }
 
     function matches(p){
-      const q = view.q.trim().toLowerCase();
+      const q = (view.q || '').trim().toLowerCase();
       const inText = !q
         || (p.title || '').toLowerCase().includes(q)
         || (p.excerpt || '').toLowerCase().includes(q)
@@ -995,6 +1037,7 @@
       const yyyy = String(today.getFullYear());
       const mm = String(today.getMonth()+1).padStart(2,'0');
       const dd = String(today.getDate()).padStart(2,'0');
+
       fDate.value = `${yyyy}-${mm}-${dd}`;
       fReadMin.value = 5;
       fFeatured.checked = false;
@@ -1120,9 +1163,19 @@
     function copyConst(){
       const data = JSON.stringify(posts.map(normalizePost), null, 2);
       const snippet = `const POSTS = ${data};`;
-      navigator.clipboard?.writeText(snippet).then(() => {
-        setStatus('Copiado: const POSTS = [...]', 'ok');
-      }).catch(() => {
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(snippet).then(() => {
+          setStatus('Copiado: const POSTS = [...]', 'ok');
+        }).catch(() => {
+          const ta = document.createElement('textarea');
+          ta.value = snippet;
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand('copy');
+          ta.remove();
+          setStatus('Copiado (fallback).', 'ok');
+        });
+      } else {
         const ta = document.createElement('textarea');
         ta.value = snippet;
         document.body.appendChild(ta);
@@ -1130,7 +1183,7 @@
         document.execCommand('copy');
         ta.remove();
         setStatus('Copiado (fallback).', 'ok');
-      });
+      }
     }
 
     function importJsonText(text){
@@ -1152,10 +1205,6 @@
       resetForm();
       render();
       setStatus('Import concluído.', 'ok');
-    }
-
-    function currentTheme(){
-      return root.dataset.theme === 'dark' ? 'dark' : 'light';
     }
 
     // Build post HTML: IMPORTANT -> não colocar a sequência de fechamento de script literal aqui.
@@ -1286,7 +1335,7 @@
       <div class="bar glass">
         <a class="btn" href="../blog.html">Voltar ao Blog</a>
         <div style="display:flex; gap:10px; align-items:center;">
-          <button class="theme" id="t" type="button" aria-label="Tema">
+          <button class="theme" id="t" type="button" aria-label="Alternar tema">
             <svg class="moon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M21 14.5A8.5 8.5 0 1 1 9.5 3a7 7 0 0 0 11.5 11.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
@@ -1338,19 +1387,28 @@
       const btn = document.getElementById('t');
       const meta = document.querySelector('meta[name="theme-color"]');
 
-      function systemPrefersDark(){ return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches; }
-      function setTheme(t, persist){
-        if(t === 'dark') root.dataset.theme = 'dark'; else delete root.dataset.theme;
-        if(persist) localStorage.setItem(THEME_KEY, t);
-        meta && meta.setAttribute('content', t === 'dark' ? '#0b1012' : '#297E8A');
+      function systemTheme(){
+        try{
+          return (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+        }catch(_){ return 'light'; }
       }
-      const saved = localStorage.getItem(THEME_KEY);
-      if(saved === 'dark' || saved === 'light') setTheme(saved, false);
-      else setTheme(systemPrefersDark() ? 'dark' : 'light', false);
+      function applyTheme(t, persist){
+        const theme = (t === 'dark') ? 'dark' : 'light';
+        if(theme === 'dark') root.setAttribute('data-theme','dark');
+        else root.removeAttribute('data-theme');
+        if(persist){
+          try{ localStorage.setItem(THEME_KEY, theme); }catch(_){}
+        }
+        meta && meta.setAttribute('content', theme === 'dark' ? '#0b1012' : '#297E8A');
+      }
+      let saved = null;
+      try{ saved = localStorage.getItem(THEME_KEY); }catch(_){}
+      if(saved === 'dark' || saved === 'light') applyTheme(saved, false);
+      else applyTheme(systemTheme(), false);
 
       btn && btn.addEventListener('click', () => {
-        const cur = root.dataset.theme === 'dark' ? 'dark' : 'light';
-        setTheme(cur === 'dark' ? 'light' : 'dark', true);
+        const cur = root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+        applyTheme(cur === 'dark' ? 'light' : 'dark', true);
       });
     ${closeScript}
   </main>
@@ -1451,7 +1509,7 @@
     btnClear.addEventListener('click', resetForm);
 
     elList.addEventListener('click', (e) => {
-      const b = e.target.closest?.('button[data-edit]');
+      const b = e.target.closest ? e.target.closest('button[data-edit]') : null;
       if(!b) return;
       const id = b.getAttribute('data-edit');
       const p = posts.find(x => x.id === id);
@@ -1463,7 +1521,7 @@
 
     btnImport.addEventListener('click', () => fileInput.click());
     fileInput.addEventListener('change', async (e) => {
-      const f = e.target.files?.[0];
+      const f = e.target.files && e.target.files[0];
       if(!f) return;
       const text = await f.text();
       importJsonText(text);
@@ -1494,7 +1552,7 @@
         "</ul>",
         "<h2>Protocolo mínimo (3–5 min)</h2>",
         "<p>Feche com uma versão simples que caiba na rotina.</p>",
-        "<blockquote>Regra: consistência > intensidade.</blockquote>",
+        "<blockquote>Regra: consistência &gt; intensidade.</blockquote>",
       ].join("\n");
       if(fContent.value.trim() && !confirm("Substituir o conteúdo atual pelo esqueleto?")) return;
       fContent.value = starter;
@@ -1506,12 +1564,14 @@
     btnOpenPreviewTab.addEventListener('click', openPreviewInNewTab);
 
     [fTitle,fId,fDate,fCategory,fReadMin,fTags,fExcerpt,fImage,fHref,fFeatured,fContent]
-      .forEach(el => el?.addEventListener('input', schedulePreview));
+      .forEach(el => el && el.addEventListener('input', schedulePreview));
 
     btnResetAll.addEventListener('click', () => {
       if(!confirm('Reset local: apagar dados do CMS no seu navegador e recarregar seed?')) return;
-      localStorage.removeItem(STORAGE_KEY);
-      for(const k of LEGACY_KEYS) localStorage.removeItem(k);
+      try{ localStorage.removeItem(STORAGE_KEY); }catch(_){}
+      for(const k of LEGACY_KEYS){
+        try{ localStorage.removeItem(k); }catch(_){}
+      }
       posts = SEED_POSTS.slice();
       ensureSingleFeatured();
       persist();
