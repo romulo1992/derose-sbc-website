@@ -506,102 +506,10 @@
     </footer>
   </main>
 
-  <script>
-    // Year
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Theme (light/dark) with persistence + system default
-    const root = document.documentElement;
-    const themeBtn = document.getElementById('themeToggle');
-    const metaTheme = document.querySelector('meta[name="theme-color"]');
-    const THEME_KEY = 'theme';
-
-    function systemPrefersDark(){
-      return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    }
-
-    function setTheme(theme, {persist = true} = {}){
-      if(theme === 'dark') root.dataset.theme = 'dark';
-      else delete root.dataset.theme;
-
-      if(persist){
-        localStorage.setItem(THEME_KEY, theme);
-      }
-
-      if(themeBtn){
-        const isDark = theme === 'dark';
-        themeBtn.setAttribute('aria-pressed', String(isDark));
-        themeBtn.setAttribute('aria-label', isDark ? 'Desativar modo escuro' : 'Ativar modo escuro');
-      }
-
-      if(metaTheme){
-        metaTheme.setAttribute('content', theme === 'dark' ? '#0b1012' : '#297E8A');
-      }
-    }
-
-    function initTheme(){
-      const saved = localStorage.getItem(THEME_KEY);
-      if(saved === 'light' || saved === 'dark'){
-        setTheme(saved, {persist:false});
-      } else {
-        setTheme(systemPrefersDark() ? 'dark' : 'light', {persist:false});
-      }
-    }
-
-    initTheme();
-
-    themeBtn?.addEventListener('click', () => {
-      const current = root.dataset.theme === 'dark' ? 'dark' : 'light';
-      setTheme(current === 'dark' ? 'light' : 'dark');
-    });
-
-    // If user never chose, follow system changes live
-    const mq = window.matchMedia?.('(prefers-color-scheme: dark)');
-    mq?.addEventListener?.('change', (e) => {
-      const saved = localStorage.getItem(THEME_KEY);
-      if(saved !== 'light' && saved !== 'dark'){
-        setTheme(e.matches ? 'dark' : 'light', {persist:false});
-      }
-    });
-
-    // Prevent placeholder links from navigating
-    document.querySelectorAll('a[aria-disabled="true"]').forEach(a => {
-      a.addEventListener('click', (e) => e.preventDefault());
-    });
-
-    // Mobile drawer
-    const drawer = document.getElementById('drawer');
-    const toggle = document.getElementById('mobileToggle');
-    const closeBtn = document.getElementById('drawerClose');
-
-    function openDrawer(){
-      drawer.classList.add('open');
-      drawer.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeDrawer(){
-      drawer.classList.remove('open');
-      drawer.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-    }
-    toggle?.addEventListener('click', openDrawer);
-    closeBtn?.addEventListener('click', closeDrawer);
-    drawer?.addEventListener('click', (e) => {
-      if(e.target === drawer) closeDrawer();
-    });
-    drawer?.querySelectorAll('[data-close]')?.forEach(a => a.addEventListener('click', closeDrawer));
-
-    // Reveal on scroll
-    const io = new IntersectionObserver((entries)=>{
-      entries.forEach(entry=>{
-        if(entry.isIntersecting){
-          entry.target.classList.add('in');
-          io.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12 });
-
-    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-  </script>
+  <!-- JS (repo map: /assets/js/) -->
+  <script src="./assets/js/utils.js" defer></script>
+  <script src="./assets/js/theme.js" defer></script>
+  <script src="./assets/js/navbar.js" defer></script>
+  <script src="./assets/js/main.js" defer></script>
 </body>
 </html>
