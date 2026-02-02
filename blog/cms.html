@@ -9,9 +9,452 @@
   <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
 
   <style>
-    /* As mesmas regras de estilo que você tinha — mantive intactas por brevidade */
-    /* ... cole aqui todo o seu <style> original ... */
-    /* (não alterei CSS, apenas JS e estrutura HTML) */
+    /* =========================
+       Self-hosted Spartan (TTF)
+       Put files in: /assets/fonts/
+       ========================= */
+    @font-face{ font-family:"Spartan"; src:url("./assets/fonts/Spartan-Thin.ttf") format("truetype"); font-weight:100; font-style:normal; font-display:swap; }
+    @font-face{ font-family:"Spartan"; src:url("./assets/fonts/Spartan-ExtraLight.ttf") format("truetype"); font-weight:200; font-style:normal; font-display:swap; }
+    @font-face{ font-family:"Spartan"; src:url("./assets/fonts/Spartan-Light.ttf") format("truetype"); font-weight:300; font-style:normal; font-display:swap; }
+    @font-face{ font-family:"Spartan"; src:url("./assets/fonts/Spartan-Regular.ttf") format("truetype"); font-weight:400; font-style:normal; font-display:swap; }
+    @font-face{ font-family:"Spartan"; src:url("./assets/fonts/Spartan-Medium.ttf") format("truetype"); font-weight:500; font-style:normal; font-display:swap; }
+    @font-face{ font-family:"Spartan"; src:url("./assets/fonts/Spartan-SemiBold.ttf") format("truetype"); font-weight:600; font-style:normal; font-display:swap; }
+    @font-face{ font-family:"Spartan"; src:url("./assets/fonts/Spartan-Bold.ttf") format("truetype"); font-weight:700; font-style:normal; font-display:swap; }
+    @font-face{ font-family:"Spartan"; src:url("./assets/fonts/Spartan-ExtraBold.ttf") format("truetype"); font-weight:800; font-style:normal; font-display:swap; }
+    @font-face{ font-family:"Spartan"; src:url("./assets/fonts/Spartan-Black.ttf") format("truetype"); font-weight:900; font-style:normal; font-display:swap; }
+
+    :root{
+      --bg: #FFF9EF;
+      --accent: #FC883A;
+      --teal: #297E8A;
+      --ink: #393939;
+      --glass-bg: rgba(255,255,255,0.26);
+      --glass-br: rgba(41,126,138,0.22);
+      --shadow-soft: 0 10px 30px rgba(57,57,57,0.10);
+      --radius-xl: 28px;
+      --radius-lg: 22px;
+      --max: 1180px;
+      --type-scale: 0.77;
+      --type-scale-blog: 0.88;
+      --control-h: 56px;
+      --padx: 18px;
+      --page-bg:
+        radial-gradient(1000px 700px at 20% 10%, rgba(252,136,58,0.12), transparent 60%),
+        radial-gradient(1100px 820px at 90% 15%, rgba(41,126,138,0.14), transparent 60%),
+        linear-gradient(180deg, var(--bg), #fff 28%, var(--bg) 100%);
+    }
+
+    *{ box-sizing: border-box; }
+    body{
+      margin:0;
+      font-family: "Spartan", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      line-height: 1.25;
+      color: var(--ink);
+      background: var(--page-bg);
+      overflow-x: hidden;
+    }
+    a{ color: inherit; text-decoration: none; }
+    .container{ width:min(var(--max), calc(100% - 40px)); margin: 0 auto; }
+
+    .glass{
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-br);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    header{ position: sticky; top:0; z-index: 50; padding: 14px 0; }
+    header .bar{
+      border-radius: 999px;
+      padding: 10px 14px;
+      display:flex; align-items:center; justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .brand{ display:flex; align-items:center; gap: 10px; padding: 8px 10px; border-radius: 999px; }
+    .brand-mark{
+      width: 36px; height: 36px; border-radius: 14px;
+      background: linear-gradient(135deg, rgba(41,126,138,0.9), rgba(252,136,58,0.85));
+      box-shadow: 0 10px 22px rgba(41,126,138,0.18);
+      position: relative; overflow: hidden;
+    }
+    .brand-mark:after{
+      content:""; position:absolute; inset:-30%;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.55), transparent 55%);
+      transform: rotate(18deg);
+    }
+    .brand-name{ line-height: 1; display:flex; flex-direction: column; gap: 4px; }
+    .brand-name strong{ font-size: calc(15px * var(--type-scale)); letter-spacing: .2px; }
+    .brand-name span{ font-size: calc(12px * var(--type-scale)); opacity: .75; }
+
+    nav{ display:flex; align-items:center; gap: 10px; }
+    nav a{
+      font-size: calc(14px * var(--type-scale));
+      padding: 10px 12px;
+      border-radius: 999px;
+      opacity: .86;
+      transition: background .2s ease, opacity .2s ease, transform .2s ease;
+      line-height: 1;
+    }
+    nav a:hover{ background: rgba(255,255,255,0.35); opacity: 1; transform: translateY(-1px); }
+    nav a.active{ background: rgba(255,255,255,0.45); opacity: 1; border: 1px solid rgba(41,126,138,0.18); }
+
+    .actions{ display:flex; gap: 10px; align-items:center; flex-wrap: wrap; }
+
+    .btn{
+      display:inline-flex; align-items:center; justify-content: center;
+      padding: 11px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(41,126,138,0.22);
+      font-weight: 900;
+      font-size: calc(14px * var(--type-scale));
+      letter-spacing: .2px;
+      cursor: pointer;
+      background: rgba(255,255,255,0.12);
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+      line-height: 1;
+      user-select: none;
+      white-space: nowrap;
+    }
+    .btn:hover{ transform: translateY(-1px); box-shadow: var(--shadow-soft); }
+    .btn.primary{
+      border: 1px solid rgba(252,136,58,0.35);
+      background: linear-gradient(135deg, rgba(252,136,58,0.95), rgba(252,136,58,0.65));
+      color: #1f1f1f;
+    }
+    .btn.danger{
+      border-color: rgba(230,80,80,0.35);
+      background: rgba(230,80,80,0.12);
+      color: rgba(230,80,80,0.95);
+    }
+    .btn.small{ padding: 10px 12px; font-size: calc(13px * var(--type-scale)); }
+    .btn:disabled{ opacity: .55; cursor: not-allowed; transform:none; box-shadow:none; }
+
+    .theme-toggle{
+      display:inline-flex; align-items:center; justify-content:center;
+      width: 44px; height: 44px;
+      border-radius: 999px;
+      border: 1px solid rgba(41,126,138,0.22);
+      background: rgba(255,255,255,0.18);
+      cursor:pointer;
+      transition: transform .2s ease, box-shadow .2s ease;
+      color: var(--ink);
+    }
+    .theme-toggle:hover{ transform: translateY(-1px); box-shadow: var(--shadow-soft); }
+    .theme-toggle svg{ width: 18px; height: 18px; display:block; }
+    .theme-toggle .sun{ display:none; }
+    html[data-theme="dark"] .theme-toggle .sun{ display:block; }
+    html[data-theme="dark"] .theme-toggle .moon{ display:none; }
+
+    section{ padding: 36px 0; }
+
+    .hero-card{ border-radius: var(--radius-xl); padding: 24px; position: relative; overflow:hidden; }
+    .hero-card:before{
+      content:""; position:absolute; inset:-40%;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(252,136,58,0.18), transparent 55%),
+        radial-gradient(circle at 80% 25%, rgba(41,126,138,0.18), transparent 58%),
+        radial-gradient(circle at 50% 80%, rgba(255,236,209,0.55), transparent 60%);
+      filter: blur(10px);
+      transform: rotate(10deg);
+      pointer-events:none;
+    }
+    .hero-card > *{ position: relative; z-index: 1; }
+
+    .kicker{
+      display:inline-flex; align-items:center; gap: 10px; flex-wrap: wrap;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(41,126,138,0.18);
+      background: rgba(255,255,255,0.22);
+      font-size: calc(13px * var(--type-scale));
+      font-weight: 900;
+      letter-spacing: .25px;
+      line-height: 1;
+    }
+    .kicker .pill{
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(41,126,138,0.14);
+      border: 1px solid rgba(41,126,138,0.18);
+      font-weight: 900;
+      color: rgba(41,126,138,1);
+    }
+    h1{
+      margin: 14px 0 8px;
+      font-size: calc(44px * var(--type-scale));
+      line-height: 0.98;
+      letter-spacing: -1px;
+    }
+    .sub{
+      margin: 8px 0 0;
+      font-size: calc(16px * var(--type-scale-blog));
+      line-height: 1.45;
+      opacity: .9;
+      max-width: 90ch;
+    }
+
+    .controls{
+      margin-top: 18px;
+      display:grid;
+      grid-template-columns: 1.2fr 0.6fr 0.6fr;
+      gap: 12px;
+      align-items: start;
+    }
+    .field{ display:grid; gap: 8px; min-width: 0; }
+    .label{
+      font-size: calc(13px * var(--type-scale));
+      opacity: .78;
+      font-weight: 900;
+      letter-spacing: .2px;
+      line-height: 1;
+    }
+    .control{
+      width: 100%;
+      height: var(--control-h);
+      border-radius: 18px;
+      border: 1px solid rgba(41,126,138,0.18);
+      background: rgba(255,255,255,0.18);
+      outline: none;
+      font-family: inherit;
+      font-size: calc(14px * var(--type-scale-blog));
+      color: var(--ink);
+      padding: 0 var(--padx);
+      transition: box-shadow .2s ease, border-color .2s ease;
+    }
+    .control:focus{
+      border-color: rgba(41,126,138,0.32);
+      box-shadow: 0 0 0 5px rgba(41,126,138,0.10);
+    }
+    textarea.control{
+      height: auto;
+      min-height: 140px;
+      padding: 12px var(--padx);
+      resize: vertical;
+      line-height: 1.35;
+    }
+
+    .layout{
+      margin-top: 16px;
+      display:grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 14px;
+      align-items: start;
+    }
+
+    .panel{ border-radius: var(--radius-xl); overflow:hidden; }
+    .panel .head{
+      padding: 16px;
+      border-bottom: 1px solid rgba(41,126,138,0.14);
+      display:flex;
+      justify-content: space-between;
+      align-items:flex-start;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .panel .head h2{
+      margin: 0 0 6px 0;
+      font-size: calc(20px * var(--type-scale));
+      letter-spacing: -0.4px;
+    }
+    .panel .head p{
+      margin: 0;
+      opacity: .82;
+      line-height: 1.35;
+      font-size: calc(13px * var(--type-scale-blog));
+      max-width: 75ch;
+    }
+    .panel .body{ padding: 14px; }
+
+    .list{ display:grid; gap: 10px; }
+    .card{ border-radius: var(--radius-lg); overflow:hidden; }
+    .card-row{ display:flex; gap: 12px; align-items: stretch; }
+    .thumb{
+      width: 140px; min-width: 140px; height: 110px;
+      border-right: 1px solid rgba(41,126,138,0.14);
+      background: rgba(255,255,255,0.10);
+      overflow:hidden;
+    }
+    .thumb img{ width: 100%; height: 100%; object-fit: cover; display:block; }
+    .info{
+      padding: 12px;
+      flex: 1 1 auto;
+      min-width: 0;
+      display:grid;
+      gap: 8px;
+    }
+    .topline{
+      display:flex;
+      gap: 10px;
+      align-items:center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    .pill2{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(41,126,138,0.18);
+      background: rgba(255,255,255,0.18);
+      font-weight: 900;
+      font-size: calc(12px * var(--type-scale));
+      line-height: 1;
+      white-space: nowrap;
+    }
+    .dot{
+      width: 8px; height: 8px; border-radius: 999px;
+      background: var(--teal);
+      box-shadow: 0 0 0 4px rgba(41,126,138,0.14);
+    }
+    .pill2.featured .dot{ background: var(--accent); box-shadow: 0 0 0 4px rgba(252,136,58,0.14); }
+
+    .meta{
+      font-size: calc(12px * var(--type-scale));
+      opacity: .74;
+      font-weight: 900;
+      line-height: 1;
+      white-space: nowrap;
+    }
+    .title{
+      margin: 0;
+      font-size: calc(16px * var(--type-scale-blog));
+      letter-spacing: -0.2px;
+      line-height: 1.15;
+      font-weight: 900;
+      overflow:hidden;
+      text-overflow: ellipsis;
+      display:-webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+    .excerpt{
+      margin: 0;
+      font-size: calc(13px * var(--type-scale-blog));
+      opacity: .84;
+      line-height: 1.35;
+      overflow:hidden;
+      text-overflow: ellipsis;
+      display:-webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+    .card-actions{ display:flex; gap: 8px; flex-wrap: wrap; align-items:center; }
+
+    form{ display:grid; gap: 10px; }
+    .row2{ display:grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .row3{ display:grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+    .rowAuto{ display:grid; grid-template-columns: 1fr auto; gap: 10px; align-items:end; }
+
+    .help{
+      font-size: calc(12px * var(--type-scale));
+      opacity: .74;
+      line-height: 1.35;
+      margin-top: -4px;
+    }
+
+    .switch{
+      display:flex;
+      gap: 10px;
+      align-items:center;
+      padding: 12px 14px;
+      border-radius: 18px;
+      border: 1px solid rgba(41,126,138,0.18);
+      background: rgba(255,255,255,0.14);
+    }
+    .switch input{ width: 18px; height: 18px; }
+    .switch strong{ font-size: calc(13px * var(--type-scale)); letter-spacing: .2px; }
+    .switch span{ font-size: calc(12px * var(--type-scale)); opacity: .75; line-height: 1.2; }
+
+    .editor-actions{
+      margin-top: 6px;
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items:center;
+      justify-content: space-between;
+    }
+    .status{
+      padding: 10px 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(41,126,138,0.18);
+      background: rgba(255,255,255,0.12);
+      font-size: calc(12px * var(--type-scale));
+      line-height: 1.35;
+      opacity: .92;
+      flex: 1 1 280px;
+      min-width: 0;
+    }
+    .status.ok{ border-color: rgba(41,126,138,0.24); }
+    .status.warn{ border-color: rgba(252,136,58,0.28); }
+    .status.err{ border-color: rgba(230,80,80,0.35); color: rgba(230,80,80,0.95); }
+
+    .preview{
+      margin-top: 10px;
+      border-radius: var(--radius-xl);
+      overflow:hidden;
+      border: 1px solid rgba(41,126,138,0.14);
+      background: rgba(255,255,255,0.10);
+    }
+    .preview iframe{
+      width: 100%;
+      height: 520px;
+      border: 0;
+      display:block;
+      background: transparent;
+    }
+
+    footer{ padding: 26px 0 42px; opacity: .85; }
+    .foot{
+      padding-top: 14px;
+      border-top: 1px solid rgba(41,126,138,0.14);
+      display:flex;
+      justify-content: space-between;
+      align-items:center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .tiny{ font-size: calc(13px * var(--type-scale)); opacity: .82; }
+
+    @media (max-width: 980px){
+      nav{ display:none; }
+      .controls{ grid-template-columns: 1fr; }
+      .layout{ grid-template-columns: 1fr; }
+      .thumb{ width: 120px; min-width: 120px; }
+    }
+    @media (max-width: 520px){
+      .container{ width:min(var(--max), calc(100% - 28px)); }
+      h1{ font-size: calc(38px * var(--type-scale)); }
+      .thumb{ display:none; }
+      .row2,.row3{ grid-template-columns: 1fr; }
+    }
+
+    html[data-theme="dark"]{
+      color-scheme: dark;
+      --bg: #0b1012;
+      --ink: rgba(245,246,247,0.92);
+      --glass-bg: rgba(18,26,28,0.62);
+      --glass-br: rgba(255,255,255,0.10);
+      --shadow-soft: 0 10px 30px rgba(0,0,0,0.45);
+      --page-bg:
+        radial-gradient(1000px 700px at 20% 10%, rgba(252,136,58,0.10), transparent 60%),
+        radial-gradient(1100px 820px at 90% 15%, rgba(41,126,138,0.18), transparent 60%),
+        linear-gradient(180deg, #06090b, var(--bg) 28%, #06090b 100%);
+    }
+    html[data-theme="dark"] .kicker,
+    html[data-theme="dark"] .hero-card,
+    html[data-theme="dark"] .panel,
+    html[data-theme="dark"] .card,
+    html[data-theme="dark"] .control,
+    html[data-theme="dark"] .pill2,
+    html[data-theme="dark"] .switch,
+    html[data-theme="dark"] .status,
+    html[data-theme="dark"] .preview{
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.12);
+    }
   </style>
 </head>
 
@@ -230,31 +673,27 @@
             </div>
           </div>
         </footer>
+
       </div>
     </section>
   </main>
 
   <script>
-    // ────────────────────────────────────────────────
-    // Helpers
-    // ────────────────────────────────────────────────
-    const $ = (sel, root = document) => root.querySelector(sel);
-    const unique = arr => [...new Set(arr)];
+    const $ = (sel, root=document) => root.querySelector(sel);
+    const unique = (arr) => Array.from(new Set(arr));
 
     $('#year').textContent = new Date().getFullYear();
 
-    function escapeHtml(str) {
+    function escapeHtml(str){
       return String(str ?? '')
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#039;');
+        .replaceAll('&','&amp;')
+        .replaceAll('<','&lt;')
+        .replaceAll('>','&gt;')
+        .replaceAll('"','&quot;')
+        .replaceAll("'","&#039;");
     }
-
-    function clean(s) { return String(s ?? '').trim(); }
-
-    function slugify(input) {
+    function clean(s){ return String(s ?? '').trim(); }
+    function slugify(input){
       return String(input || '')
         .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
         .toLowerCase().trim()
@@ -262,238 +701,251 @@
         .replace(/-+/g, '-')
         .replace(/^-|-$/g, '');
     }
-
-    function parseTags(str) {
-      return unique(
-        String(str || '')
-          .split(',')
-          .map(s => s.trim())
-          .filter(Boolean)
-      );
+    function parseTags(str){
+      return unique(String(str || '')
+        .split(',')
+        .map(s => s.trim())
+        .filter(Boolean));
     }
-
-    function formatDateISO(iso) {
-      if (!iso) return '—';
-      try {
-        const [y, m, d] = iso.split('-').map(Number);
-        return new Date(y, m - 1, d).toLocaleDateString('pt-BR', {
-          day: '2-digit', month: 'short', year: 'numeric'
-        });
-      } catch {
+    function formatDateISO(iso){
+      try{
+        if(!iso) return '—';
+        const [y,m,d] = iso.split('-').map(Number);
+        const dt = new Date(y, m-1, d);
+        return dt.toLocaleDateString('pt-BR', { day:'2-digit', month:'short', year:'numeric' });
+      }catch(e){
         return iso || '—';
       }
     }
-
-    function plainTextToHtml(text) {
-      const t = clean(text);
-      if (!t) return '';
+    function plainTextToHtml(text){
+      const t = String(text || '').trim();
+      if(!t) return '';
       const escaped = escapeHtml(t);
-      const blocks = escaped.split(/\n\s*\n/)
-        .map(b => b.trim())
-        .filter(Boolean)
-        .map(b => `<p>${b.replace(/\n/g, '<br>')}</p>`);
-      return blocks.join('\n');
+      const blocks = escaped.split(/\n\s*\n/g).map(b => b.trim()).filter(Boolean);
+      return blocks.map(b => `<p>${b.replace(/\n/g,'<br/>')}</p>`).join('\n');
     }
-
-    function normalizePost(p) {
+    function normalizePost(p){
       const id = clean(p?.id);
       return {
         id,
         title: clean(p?.title),
         excerpt: clean(p?.excerpt),
         category: clean(p?.category),
-        tags: Array.isArray(p?.tags) ? unique(p.tags.map(clean).filter(Boolean)) : parseTags(p?.tags),
+        tags: Array.isArray(p?.tags) ? unique(p.tags.map(t => clean(t)).filter(Boolean)) : parseTags(p?.tags),
         date: clean(p?.date),
         readMin: Number.isFinite(Number(p?.readMin)) ? Number(p.readMin) : 5,
-        featured: !!p?.featured,
+        featured: Boolean(p?.featured),
         image: clean(p?.image) || `./assets/blog/${id || 'placeholder'}.webp`,
         href: clean(p?.href) || `./posts/${id || 'novo-post'}.html`,
         contentHtml: clean(p?.contentHtml) || ''
       };
     }
 
-    // ────────────────────────────────────────────────
     // Theme
-    // ────────────────────────────────────────────────
     const root = document.documentElement;
     const themeBtn = $('#themeToggle');
-    const metaTheme = $('meta[name="theme-color"]');
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
     const THEME_KEY = 'theme';
 
-    function setTheme(theme, { persist = true } = {}) {
-      if (theme === 'dark') {
-        root.dataset.theme = 'dark';
-      } else {
-        delete root.dataset.theme;
-      }
-      if (persist) localStorage.setItem(THEME_KEY, theme);
+    function systemPrefersDark(){
+      return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
+    function setTheme(theme, {persist = true} = {}){
+      if(theme === 'dark') root.dataset.theme = 'dark';
+      else delete root.dataset.theme;
+
+      if(persist) localStorage.setItem(THEME_KEY, theme);
 
       const isDark = theme === 'dark';
-      themeBtn?.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+      themeBtn?.setAttribute('aria-pressed', String(isDark));
       themeBtn?.setAttribute('aria-label', isDark ? 'Desativar modo escuro' : 'Ativar modo escuro');
       metaTheme?.setAttribute('content', isDark ? '#0b1012' : '#297E8A');
 
       schedulePreview();
     }
-
-    (function initTheme() {
+    (function initTheme(){
       const saved = localStorage.getItem(THEME_KEY);
-      if (saved === 'light' || saved === 'dark') {
-        setTheme(saved, { persist: false });
-      } else {
-        const prefersDark = window.matchMedia?.('(prefers-color-scheme: dark)')?.matches;
-        setTheme(prefersDark ? 'dark' : 'light', { persist: false });
-      }
+      if(saved === 'light' || saved === 'dark') setTheme(saved, {persist:false});
+      else setTheme(systemPrefersDark() ? 'dark' : 'light', {persist:false});
     })();
-
     themeBtn?.addEventListener('click', () => {
       const current = root.dataset.theme === 'dark' ? 'dark' : 'light';
       setTheme(current === 'dark' ? 'light' : 'dark');
     });
+    window.matchMedia?.('(prefers-color-scheme: dark)')?.addEventListener?.('change', (e) => {
+      const saved = localStorage.getItem(THEME_KEY);
+      if(saved !== 'light' && saved !== 'dark') setTheme(e.matches ? 'dark' : 'light', {persist:false});
+    });
 
-    // ────────────────────────────────────────────────
-    // Data & Storage
-    // ────────────────────────────────────────────────
+    // Data
     const STORAGE_KEY = 'derose_blog_posts_cms_v3';
-    const LEGACY_KEYS = ['derose_blog_posts_v2_with_content', 'derose_blog_posts_v2', 'derose_blog_posts_v1', 'derose_blog_posts_v0', 'derose_blog_posts', 'posts'];
+    const LEGACY_KEYS = [
+      'derose_blog_posts_v2_with_content',
+      'derose_blog_posts_v2',
+      'derose_blog_posts_v1',
+      'derose_blog_posts_v0',
+      'derose_blog_posts',
+      'posts'
+    ];
 
     const SEED_POSTS = [
-      // seus posts seed aqui (mantive como estava)
-      { id: "respiracao-3-minutos", title: "Respiração Transformadora em 3 minutos: estabilize energia e ruído mental", /* ... */ contentHtml: "" },
-      { id: "mobilidade-postura", title: "Mobilidade & Força Útil: o básico que muda postura e eficiência", /* ... */ contentHtml: "" }
+      {
+        id: "respiracao-3-minutos",
+        title: "Respiração Transformadora em 3 minutos: estabilize energia e ruído mental",
+        excerpt: "Um protocolo simples para baixar ruído, organizar foco e começar o dia com mais clareza — sem misticismo.",
+        category: "Respiração",
+        tags: ["Respiratórios", "Foco", "Rotina"],
+        date: "2026-01-20",
+        readMin: 4,
+        featured: true,
+        image: "./assets/blog/respiracao.webp",
+        href: "./posts/respiracao-3-minutos.html",
+        contentHtml: ""
+      },
+      {
+        id: "mobilidade-postura",
+        title: "Mobilidade & Força Útil: o básico que muda postura e eficiência",
+        excerpt: "Mapa de prioridades para recuperar eixo, estabilidade e eficiência no corpo.",
+        category: "Mobilidade",
+        tags: ["Força & Flexibilidade", "Postura"],
+        date: "2026-01-14",
+        readMin: 6,
+        featured: false,
+        image: "./assets/blog/mobilidade.webp",
+        href: "./posts/mobilidade-postura.html",
+        contentHtml: ""
+      }
     ].map(normalizePost);
 
     let posts = [];
-    let view = { q: '', cat: 'all', order: 'new' };
+    let view = { q:'', cat:'all', order:'new' };
     let editingId = null;
 
-    function ensureSingleFeatured() {
+    function ensureSingleFeatured(){
       const featured = posts.filter(p => p.featured);
-      if (featured.length <= 1) return;
-      featured.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
-      const keepId = featured[0].id;
-      posts = posts.map(p => ({ ...p, featured: p.id === keepId }));
+      if(featured.length <= 1) return;
+      featured.sort((a,b)=> (b.date || '').localeCompare(a.date || ''));
+      const keepId = featured[0]?.id;
+      posts = posts.map(p => ({...p, featured: p.id === keepId}));
     }
 
-    function persist() {
+    function tryLoadFromKey(key){
+      try{
+        const raw = localStorage.getItem(key);
+        if(!raw) return null;
+        const parsed = JSON.parse(raw);
+        if(Array.isArray(parsed) && parsed.length) return parsed.map(normalizePost);
+      }catch(e){}
+      return null;
+    }
+
+    function persist(){
       localStorage.setItem(STORAGE_KEY, JSON.stringify(posts, null, 2));
       refreshTaxonomy();
     }
 
-    function loadPosts() {
-      let loaded = false;
-      const current = localStorage.getItem(STORAGE_KEY);
-      if (current) {
-        try {
-          posts = JSON.parse(current).map(normalizePost);
-          ensureSingleFeatured();
-          loaded = true;
-        } catch {}
+    function loadPosts(){
+      const current = tryLoadFromKey(STORAGE_KEY);
+      if(current){
+        posts = current;
+        ensureSingleFeatured();
+        return;
       }
-
-      if (!loaded) {
-        for (const k of LEGACY_KEYS) {
-          const legacy = localStorage.getItem(k);
-          if (legacy) {
-            try {
-              posts = JSON.parse(legacy).map(normalizePost);
-              ensureSingleFeatured();
-              persist();
-              loaded = true;
-              break;
-            } catch {}
-          }
+      for(const k of LEGACY_KEYS){
+        const legacy = tryLoadFromKey(k);
+        if(legacy){
+          posts = legacy;
+          ensureSingleFeatured();
+          persist();
+          return;
         }
       }
-
-      if (!loaded) {
-        posts = SEED_POSTS.slice();
-        ensureSingleFeatured();
-        persist();
-      }
+      posts = SEED_POSTS.slice();
+      ensureSingleFeatured();
+      persist();
     }
 
-    // ────────────────────────────────────────────────
-    // DOM Elements
-    // ────────────────────────────────────────────────
-    const elList      = $('#list');
-    const elEmpty     = $('#empty');
-    const elListHint  = $('#listHint');
-    const elQ         = $('#q');
-    const elCat       = $('#cat');
-    const elOrder     = $('#order');
-    const catList     = $('#catList');
+    // UI refs
+    const elList = $('#list');
+    const elEmpty = $('#empty');
+    const elListHint = $('#listHint');
+    const elQ = $('#q');
+    const elCat = $('#cat');
+    const elOrder = $('#order');
+    const catList = $('#catList');
 
     const editorTitle = $('#editorTitle');
-    const elStatus    = $('#status');
+    const elStatus = $('#status');
 
-    const fTitle      = $('#title');
-    const fId         = $('#id');
-    const fDate       = $('#date');
-    const fCategory   = $('#category');
-    const fReadMin    = $('#readMin');
-    const fTags       = $('#tags');
-    const fExcerpt    = $('#excerpt');
-    const fImage      = $('#image');
-    const fHref       = $('#href');
-    const fFeatured   = $('#featured');
-    const fContent    = $('#contentHtml');
+    const fTitle = $('#title');
+    const fId = $('#id');
+    const fDate = $('#date');
+    const fCategory = $('#category');
+    const fReadMin = $('#readMin');
+    const fTags = $('#tags');
+    const fExcerpt = $('#excerpt');
+    const fImage = $('#image');
+    const fHref = $('#href');
+    const fFeatured = $('#featured');
+    const fContent = $('#contentHtml');
 
-    const btnNew          = $('#btnNew');
-    const btnImport       = $('#btnImport');
-    const fileInput       = $('#file');
-    const btnSlugify      = $('#btnSlugify');
-    const btnDelete       = $('#btnDelete');
-    const btnClear        = $('#btnClear');
-    const btnSave         = $('#btnSave');
-    const btnExportJson   = $('#btnExportJson');
-    const btnCopyConst    = $('#btnCopyConst');
-    const btnResetAll     = $('#btnResetAll');
-    const btnPlainToHtml  = $('#btnPlainToHtml');
-    const btnInsertStarter= $('#btnInsertStarter');
+    const btnNew = $('#btnNew');
+    const btnImport = $('#btnImport');
+    const fileInput = $('#file');
+
+    const btnSlugify = $('#btnSlugify');
+    const btnDelete = $('#btnDelete');
+    const btnClear = $('#btnClear');
+    const btnSave = $('#btnSave');
+
+    const btnExportJson = $('#btnExportJson');
+    const btnCopyConst = $('#btnCopyConst');
+    const btnResetAll = $('#btnResetAll');
+
+    const btnPlainToHtml = $('#btnPlainToHtml');
+    const btnInsertStarter = $('#btnInsertStarter');
+
     const btnDownloadPost = $('#btnDownloadPost');
     const btnOpenPreviewTab = $('#btnOpenPreviewTab');
 
     const previewFrame = $('#previewFrame');
 
-    function setStatus(msg, type = 'ok') {
-      elStatus.className = `status ${type}`;
+    function setStatus(msg, type='ok'){
+      elStatus.classList.remove('ok','warn','err');
+      elStatus.classList.add(type);
       elStatus.textContent = msg;
     }
 
-    // ────────────────────────────────────────────────
-    // Render & Filter
-    // ────────────────────────────────────────────────
-    function matches(p) {
+    function matches(p){
       const q = view.q.trim().toLowerCase();
-      if (!q) return true;
-      return (
-        (p.title   || '').toLowerCase().includes(q) ||
-        (p.excerpt || '').toLowerCase().includes(q) ||
-        (p.category|| '').toLowerCase().includes(q) ||
-        (p.id      || '').toLowerCase().includes(q) ||
-        (p.tags    || []).some(t => (t || '').toLowerCase().includes(q))
-      ) && (view.cat === 'all' || p.category === view.cat);
+      const inText = !q
+        || (p.title || '').toLowerCase().includes(q)
+        || (p.excerpt || '').toLowerCase().includes(q)
+        || (p.category || '').toLowerCase().includes(q)
+        || (p.tags || []).some(t => (t || '').toLowerCase().includes(q))
+        || (p.id || '').toLowerCase().includes(q);
+      const inCat = (view.cat === 'all') || (p.category === view.cat);
+      return inText && inCat;
     }
 
-    function sortList(list) {
+    function sortList(list){
       const out = list.slice();
-      if      (view.order === 'new')   out.sort((a,b) => (b.date || '').localeCompare(a.date || ''));
-      else if (view.order === 'old')   out.sort((a,b) => (a.date || '').localeCompare(b.date || ''));
-      else if (view.order === 'read')  out.sort((a,b) => (a.readMin ?? 99) - (b.readMin ?? 99));
-      else if (view.order === 'title') out.sort((a,b) => (a.title || '').localeCompare(b.title || '', 'pt-BR'));
+      if(view.order === 'new') out.sort((a,b)=> (b.date || '').localeCompare(a.date || ''));
+      else if(view.order === 'old') out.sort((a,b)=> (a.date || '').localeCompare(b.date || ''));
+      else if(view.order === 'read') out.sort((a,b)=> (a.readMin ?? 99) - (b.readMin ?? 99));
+      else if(view.order === 'title') out.sort((a,b)=> (a.title || '').localeCompare(b.title || '', 'pt-BR'));
       return out;
     }
 
-    function refreshTaxonomy() {
-      const cats = unique(posts.map(p => p.category).filter(Boolean)).sort();
+    function refreshTaxonomy(){
+      const cats = unique(posts.map(p => p.category).filter(Boolean)).sort((a,b)=>a.localeCompare(b,'pt-BR'));
       elCat.innerHTML = `<option value="all">Todas</option>` + cats.map(c => `<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`).join('');
       catList.innerHTML = cats.map(c => `<option value="${escapeHtml(c)}"></option>`).join('');
-      if (view.cat !== 'all' && !cats.includes(view.cat)) view.cat = 'all';
+      if(view.cat !== 'all' && !cats.includes(view.cat)) view.cat = 'all';
       elCat.value = view.cat;
     }
 
-    function render() {
+    function render(){
       const filtered = sortList(posts.filter(matches));
       elListHint.textContent = `${filtered.length} post(s) • ${posts.length} total • ${editingId ? 'editando' : 'sem seleção'}`;
       elEmpty.style.display = filtered.length ? 'none' : 'block';
@@ -532,18 +984,19 @@
       }).join('');
     }
 
-    // ────────────────────────────────────────────────
-    // Form handling
-    // ────────────────────────────────────────────────
-    function resetForm() {
+    function resetForm(){
       editingId = null;
       editorTitle.textContent = 'Editor (Novo Post)';
       btnDelete.disabled = true;
-      document.getElementById('form').reset();
 
-      const today = new Date().toISOString().split('T')[0];
-      fDate.value = today;
-      fReadMin.value = '5';
+      $('#form').reset();
+
+      const today = new Date();
+      const yyyy = String(today.getFullYear());
+      const mm = String(today.getMonth()+1).padStart(2,'0');
+      const dd = String(today.getDate()).padStart(2,'0');
+      fDate.value = `${yyyy}-${mm}-${dd}`;
+      fReadMin.value = 5;
       fFeatured.checked = false;
       fContent.value = '';
 
@@ -552,29 +1005,29 @@
       schedulePreview();
     }
 
-    function fillForm(p) {
+    function fillForm(p){
       editingId = p.id;
       editorTitle.textContent = `Editor (Editando: ${p.id})`;
       btnDelete.disabled = false;
 
-      fTitle.value     = p.title     || '';
-      fId.value        = p.id        || '';
-      fDate.value      = p.date      || '';
-      fCategory.value  = p.category  || '';
-      fReadMin.value   = p.readMin   ?? 5;
-      fTags.value      = p.tags?.join(', ') || '';
-      fExcerpt.value   = p.excerpt   || '';
-      fImage.value     = p.image     || '';
-      fHref.value      = p.href      || '';
-      fFeatured.checked= !!p.featured;
-      fContent.value   = p.contentHtml || '';
+      fTitle.value = p.title || '';
+      fId.value = p.id || '';
+      fDate.value = p.date || '';
+      fCategory.value = p.category || '';
+      fReadMin.value = Number.isFinite(Number(p.readMin)) ? Number(p.readMin) : 5;
+      fTags.value = (p.tags || []).join(', ');
+      fExcerpt.value = p.excerpt || '';
+      fImage.value = p.image || '';
+      fHref.value = p.href || '';
+      fFeatured.checked = Boolean(p.featured);
+      fContent.value = p.contentHtml || '';
 
       setStatus('Editando post existente. Salve para aplicar alterações.', 'ok');
       render();
       schedulePreview();
     }
 
-    function draftFromForm() {
+    function draftFromForm(){
       const id = clean(fId.value);
       return normalizePost({
         id,
@@ -583,43 +1036,44 @@
         category: clean(fCategory.value),
         tags: parseTags(fTags.value),
         date: clean(fDate.value),
-        readMin: Number(fReadMin.value) || 5,
-        featured: fFeatured.checked,
-        image: clean(fImage.value),
-        href: clean(fHref.value),
+        readMin: Number(fReadMin.value),
+        featured: Boolean(fFeatured.checked),
+        image: clean(fImage.value) || `./assets/blog/${id || 'placeholder'}.webp`,
+        href: clean(fHref.value) || `./posts/${id || 'novo-post'}.html`,
         contentHtml: clean(fContent.value)
       });
     }
 
-    function validateDraft(d) {
+    function validateDraft(d){
       const sid = slugify(d.id);
-      if (!sid)                          return { ok: false, msg: 'Slug (id) é obrigatório.', type: 'err' };
-      if (sid !== d.id)                  return { ok: false, msg: 'Slug inválido (use apenas letras, números e hífen).', type: 'err' };
-      if (!clean(d.title))               return { ok: false, msg: 'Título é obrigatório.', type: 'err' };
-      if (!clean(d.category))            return { ok: false, msg: 'Categoria é obrigatória.', type: 'err' };
-      if (!/^\d{4}-\d{2}-\d{2}$/.test(d.date)) return { ok: false, msg: 'Data inválida (use AAAA-MM-DD).', type: 'err' };
-      if (!Number.isFinite(d.readMin) || d.readMin < 1) return { ok: false, msg: 'Tempo de leitura deve ser ≥ 1 min.', type: 'err' };
-      if (!clean(d.image))               return { ok: false, msg: 'Caminho da imagem é obrigatório.', type: 'err' };
-      if (!clean(d.href))                return { ok: false, msg: 'Link (href) é obrigatório.', type: 'err' };
-      if (!clean(d.contentHtml))         return { ok: false, msg: 'Conteúdo HTML é obrigatório.', type: 'err' };
-      return { ok: true, msg: 'OK', type: 'ok' };
+      if(!sid) return { ok:false, msg:'Slug (id) é obrigatório.', type:'err' };
+      if(sid !== d.id) return { ok:false, msg:'Slug inválido. Use apenas letras/números e hífen (sem acentos).', type:'err' };
+      if(!clean(d.title)) return { ok:false, msg:'Título é obrigatório.', type:'err' };
+      if(!clean(d.category)) return { ok:false, msg:'Categoria é obrigatória.', type:'err' };
+      if(!clean(d.date) || !/^\d{4}-\d{2}-\d{2}$/.test(d.date)) return { ok:false, msg:'Data inválida.', type:'err' };
+      if(!Number.isFinite(Number(d.readMin)) || Number(d.readMin) <= 0) return { ok:false, msg:'Tempo de leitura deve ser > 0.', type:'err' };
+      if(!clean(d.image)) return { ok:false, msg:'Imagem (path) é obrigatória.', type:'err' };
+      if(!clean(d.href)) return { ok:false, msg:'Link (href) é obrigatório.', type:'err' };
+      if(!clean(d.contentHtml)) return { ok:false, msg:'Conteúdo do post (HTML) é obrigatório.', type:'err' };
+      return { ok:true, msg:'OK', type:'ok' };
     }
 
-    function saveDraft() {
+    function saveDraft(){
       const draft = draftFromForm();
       const v = validateDraft(draft);
-      if (!v.ok) return setStatus(v.msg, v.type);
+      if(!v.ok) return setStatus(v.msg, v.type);
 
-      const exists = posts.some(p => p.id === draft.id);
-      if (exists && editingId !== draft.id) {
-        return setStatus('Esse slug já existe. Escolha outro ou edite o existente.', 'err');
+      const exists = posts.find(p => p.id === draft.id);
+      if(editingId && editingId !== draft.id && exists) return setStatus('Esse slug (id) já existe. Escolha outro.', 'err');
+      if(!editingId && exists) return setStatus('Esse slug (id) já existe. Clique em "Editar" no item.', 'err');
+
+      if(draft.featured){
+        posts = posts.map(p => ({...p, featured: p.id === draft.id}));
+      } else {
+        posts = posts.map(p => (p.id === draft.id ? {...p, featured:false} : p));
       }
 
-      if (draft.featured) {
-        posts = posts.map(p => ({ ...p, featured: p.id === draft.id }));
-      }
-
-      if (editingId) {
+      if(editingId){
         posts = posts.map(p => p.id === editingId ? draft : p);
         editingId = draft.id;
         setStatus('Alterações salvas.', 'ok');
@@ -631,14 +1085,16 @@
 
       ensureSingleFeatured();
       persist();
+      refreshTaxonomy();
       render();
       fillForm(draft);
     }
 
-    function deleteCurrent() {
-      if (!editingId) return setStatus('Nada para excluir.', 'warn');
+    function deleteCurrent(){
+      if(!editingId) return setStatus('Nada para excluir.', 'warn');
       const p = posts.find(x => x.id === editingId);
-      if (!p || !confirm(`Excluir "${p.title}"?`)) return;
+      if(!p) return setStatus('Post não encontrado.', 'err');
+      if(!confirm(`Excluir o post "${p.title}"? (Remove do CMS/localStorage.)`)) return;
 
       posts = posts.filter(x => x.id !== editingId);
       ensureSingleFeatured();
@@ -648,57 +1104,46 @@
       setStatus('Post excluído.', 'ok');
     }
 
-    // ────────────────────────────────────────────────
-    // Export / Import / Copy
-    // ────────────────────────────────────────────────
-    function exportJson() {
-      const data = JSON.stringify(posts, null, 2);
-      const blob = new Blob([data], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
+    function exportJson(){
+      const data = JSON.stringify(posts.map(normalizePost), null, 2);
+      const blob = new Blob([data], {type:'application/json'});
       const a = document.createElement('a');
-      a.href = url;
+      a.href = URL.createObjectURL(blob);
       a.download = 'posts.json';
+      document.body.appendChild(a);
       a.click();
-      URL.revokeObjectURL(url);
+      a.remove();
+      URL.revokeObjectURL(a.href);
       setStatus('Exportado: posts.json', 'ok');
     }
 
-    function copyConst() {
-      const data = JSON.stringify(posts, null, 2);
+    function copyConst(){
+      const data = JSON.stringify(posts.map(normalizePost), null, 2);
       const snippet = `const POSTS = ${data};`;
-
-      if (navigator.clipboard?.writeText) {
-        navigator.clipboard.writeText(snippet)
-          .then(() => setStatus('const POSTS copiado!', 'ok'))
-          .catch(() => fallbackCopy());
-      } else {
-        fallbackCopy();
-      }
-
-      function fallbackCopy() {
+      navigator.clipboard?.writeText(snippet).then(() => {
+        setStatus('Copiado: const POSTS = [...]', 'ok');
+      }).catch(() => {
         const ta = document.createElement('textarea');
         ta.value = snippet;
-        ta.setAttribute('readonly', '');
-        ta.style.position = 'absolute';
-        ta.style.left = '-9999px';
         document.body.appendChild(ta);
         ta.select();
-        const success = document.execCommand('copy');
-        document.body.removeChild(ta);
-        setStatus(success ? 'Copiado (método antigo).' : 'Falha ao copiar.', success ? 'ok' : 'err');
-      }
+        document.execCommand('copy');
+        ta.remove();
+        setStatus('Copiado (fallback).', 'ok');
+      });
     }
 
-    function importJsonText(text) {
+    function importJsonText(text){
       let parsed;
-      try { parsed = JSON.parse(text); } catch { return setStatus('JSON inválido.', 'err'); }
-      if (!Array.isArray(parsed)) return setStatus('Deve ser um array de posts.', 'err');
+      try{ parsed = JSON.parse(text); }
+      catch(e){ return setStatus('JSON inválido.', 'err'); }
+      if(!Array.isArray(parsed)) return setStatus('O JSON precisa ser um array de posts.', 'err');
 
       const incoming = parsed.map(normalizePost);
       const ids = incoming.map(p => p.id);
-      if (new Set(ids).size !== ids.length) return setStatus('Slugs duplicados no JSON.', 'err');
+      if(new Set(ids).size !== ids.length) return setStatus('Import falhou: slugs duplicados no JSON.', 'err');
 
-      if (!confirm(`Substituir ${posts.length} post(s) atuais por ${incoming.length}?`)) return;
+      if(!confirm(`Importar ${incoming.length} post(s) e substituir os atuais (${posts.length})?`)) return;
 
       posts = incoming;
       ensureSingleFeatured();
@@ -706,30 +1151,31 @@
       refreshTaxonomy();
       resetForm();
       render();
-      setStatus('Importação concluída.', 'ok');
+      setStatus('Import concluído.', 'ok');
     }
 
-    // ────────────────────────────────────────────────
-    // Post HTML Generator
-    // ────────────────────────────────────────────────
-    function buildPostHtml(post, theme) {
+    function currentTheme(){
+      return root.dataset.theme === 'dark' ? 'dark' : 'light';
+    }
+
+    // Build post HTML: IMPORTANT -> não colocar a sequência de fechamento de script literal aqui.
+    function buildPostHtml(post, theme){
+      const safeTitle = escapeHtml(post.title);
+      const safeDesc  = escapeHtml(post.excerpt || '');
+      const safeCat   = escapeHtml(post.category || 'Post');
+      const safeDate  = escapeHtml(formatDateISO(post.date));
+      const safeRead  = escapeHtml(String(post.readMin ?? '—'));
+
+      const safeTags = (post.tags || []).length
+        ? (post.tags || []).map(t => `<span class="chip"><span class="dot"></span>${escapeHtml(t)}</span>`).join('')
+        : `<span class="chip"><span class="dot"></span>Leitura objetiva</span>`;
+
+      const img = (post.image || './assets/blog/placeholder.webp').replace('./assets','../assets');
       const isDark = theme === 'dark';
-      const htmlAttr = isDark ? ' data-theme="dark"' : '';
+      const htmlAttr = isDark ? ` data-theme="dark"` : ``;
 
-      const safe = {
-        title: escapeHtml(post.title || 'Sem título'),
-        desc:  escapeHtml(post.excerpt || ''),
-        cat:   escapeHtml(post.category || 'Post'),
-        date:  escapeHtml(formatDateISO(post.date)),
-        read:  escapeHtml(String(post.readMin ?? '—')),
-        tags:  (post.tags?.length ? post.tags : ['Leitura objetiva'])
-                 .map(t => `<span class="chip"><span class="dot"></span>${escapeHtml(t)}</span>`)
-                 .join(''),
-        img:   (post.image || './assets/blog/placeholder.webp').replace('./assets', '../assets')
-      };
-
-      // Quebra segura do </script>
-      const scriptEnd = '<\/script>';
+      // "Quebra" o fechamento do script para não virar texto no CMS.
+      const closeScript = '<' + '/scr' + 'ipt>';
 
       return `<!doctype html>
 <html lang="pt-BR"${htmlAttr}>
@@ -737,105 +1183,265 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="${isDark ? '#0b1012' : '#297E8A'}" />
-  <title>${safe.title} • Blog • DeRose SBC</title>
-  <meta name="description" content="${safe.desc}" />
+  <title>${safeTitle} • Blog • DeRose SBC</title>
+  <meta name="description" content="${safeDesc}" />
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
 
-  <!-- Estilos reduzidos para o post individual – cole aqui o CSS mínimo necessário -->
   <style>
-    /* ... seu CSS do post individual aqui ... */
+    @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-Regular.ttf") format("truetype"); font-weight:400; font-style:normal; font-display:swap; }
+    @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-Bold.ttf") format("truetype"); font-weight:700; font-style:normal; font-display:swap; }
+    @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-Black.ttf") format("truetype"); font-weight:900; font-style:normal; font-display:swap; }
+
+    :root{
+      --bg: #FFF9EF;
+      --accent: #FC883A;
+      --teal: #297E8A;
+      --ink: #393939;
+      --glass-bg: rgba(255,255,255,0.26);
+      --glass-br: rgba(41,126,138,0.22);
+      --shadow-soft: 0 10px 30px rgba(57,57,57,0.10);
+      --radius-xl: 28px;
+      --max: 980px;
+      --type-scale: 0.77;
+      --type-scale-blog: 0.92;
+      --page-bg:
+        radial-gradient(1000px 700px at 20% 10%, rgba(252,136,58,0.12), transparent 60%),
+        radial-gradient(1100px 820px at 90% 15%, rgba(41,126,138,0.14), transparent 60%),
+        linear-gradient(180deg, var(--bg), #fff 28%, var(--bg) 100%);
+    }
+    *{ box-sizing: border-box; }
+    body{ margin:0; font-family:"Spartan", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: var(--ink); background: var(--page-bg); }
+    a{ color: inherit; text-decoration: none; }
+    .container{ width:min(var(--max), calc(100% - 40px)); margin: 0 auto; }
+    .glass{
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-br);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+    header{ position: sticky; top:0; z-index: 10; padding:14px 0; }
+    .bar{ border-radius:999px; padding:10px 14px; display:flex; justify-content:space-between; align-items:center; gap:12px; }
+    .btn{ display:inline-flex; align-items:center; justify-content:center; padding:11px 14px; border-radius:999px; border:1px solid rgba(41,126,138,0.22); font-weight:900; font-size: calc(14px * var(--type-scale)); background: rgba(255,255,255,0.12); cursor:pointer; }
+    .theme{ width:44px; height:44px; border-radius:999px; border:1px solid rgba(41,126,138,0.22); background: rgba(255,255,255,0.18); cursor:pointer; display:inline-flex; align-items:center; justify-content:center; }
+    .theme svg{ width:18px; height:18px; display:block; }
+    .theme .sun{ display:none; }
+    html[data-theme="dark"] .theme .sun{ display:block; }
+    html[data-theme="dark"] .theme .moon{ display:none; }
+
+    section{ padding: 30px 0; }
+    .hero{ border-radius: var(--radius-xl); padding: 22px; overflow:hidden; }
+    .kicker{ display:inline-flex; gap:10px; flex-wrap:wrap; font-weight:900; font-size: calc(13px * var(--type-scale)); }
+    h1{ margin: 12px 0 10px; font-size: calc(48px * var(--type-scale)); line-height: 0.98; letter-spacing:-1px; }
+    .sub{ margin: 0; font-size: calc(16px * var(--type-scale-blog)); line-height: 1.55; opacity: .92; }
+    .meta{ margin-top: 12px; display:flex; gap:10px; flex-wrap:wrap; }
+    .chip{ display:inline-flex; align-items:center; gap:8px; padding:10px 12px; border-radius:999px; border:1px solid rgba(41,126,138,0.18); background: rgba(255,255,255,0.18); font-weight:900; font-size: calc(13px * var(--type-scale)); }
+    .dot{ width:8px; height:8px; border-radius:999px; background: var(--teal); box-shadow: 0 0 0 4px rgba(41,126,138,0.14); }
+
+    .cover{ margin-top: 16px; border-radius: var(--radius-xl); overflow:hidden; border: 1px solid rgba(41,126,138,0.14); }
+    .cover img{ width:100%; height: 360px; object-fit: cover; display:block; }
+
+    .prose{ margin-top: 18px; border-radius: var(--radius-xl); padding: 22px; }
+    .prose p{ margin: 0 0 14px; font-size: calc(16px * var(--type-scale-blog)); line-height: 1.7; opacity: .94; }
+    .prose h2{ margin: 22px 0 10px; font-size: calc(26px * var(--type-scale)); letter-spacing: -0.6px; line-height: 1.12; }
+    .prose h3{ margin: 18px 0 10px; font-size: calc(20px * var(--type-scale)); letter-spacing: -0.4px; line-height: 1.18; }
+    .prose ul,.prose ol{ margin: 0 0 14px; padding-left: 22px; font-size: calc(16px * var(--type-scale-blog)); line-height: 1.7; opacity: .94; }
+    .prose blockquote{ margin: 16px 0; padding: 14px 16px; border-left: 4px solid rgba(41,126,138,0.45); background: rgba(255,255,255,0.16); border-radius: 16px; font-style: italic; opacity: .92; }
+    .prose a{ text-decoration: underline; text-underline-offset: 3px; color: rgba(41,126,138,1); font-weight: 900; }
+
+    footer{ padding: 26px 0 42px; opacity: .85; }
+    .foot{ padding-top: 14px; border-top: 1px solid rgba(41,126,138,0.14); display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap; }
+    .tiny{ font-size: calc(13px * var(--type-scale)); opacity: .82; }
+
+    @media (max-width: 740px){
+      h1{ font-size: calc(40px * var(--type-scale)); }
+      .cover img{ height: 260px; }
+    }
+
+    html[data-theme="dark"]{
+      color-scheme: dark;
+      --bg: #0b1012;
+      --ink: rgba(245,246,247,0.92);
+      --glass-bg: rgba(18,26,28,0.62);
+      --glass-br: rgba(255,255,255,0.10);
+      --shadow-soft: 0 10px 30px rgba(0,0,0,0.45);
+      --page-bg:
+        radial-gradient(1000px 700px at 20% 10%, rgba(252,136,58,0.10), transparent 60%),
+        radial-gradient(1100px 820px at 90% 15%, rgba(41,126,138,0.18), transparent 60%),
+        linear-gradient(180deg, #06090b, var(--bg) 28%, #06090b 100%);
+    }
+    html[data-theme="dark"] .chip,
+    html[data-theme="dark"] .hero,
+    html[data-theme="dark"] .prose,
+    html[data-theme="dark"] .cover{
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.12);
+    }
   </style>
 </head>
-<body>
-  <!-- Seu HTML do post aqui -->
-  <header>...</header>
-  <main>
-    <article>${post.contentHtml || '<p>Sem conteúdo.</p>'}</article>
-  </main>
-  <footer>...</footer>
 
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-    // ... lógica de tema ...
-  ${scriptEnd}
+<body>
+  <header>
+    <div class="container">
+      <div class="bar glass">
+        <a class="btn" href="../blog.html">Voltar ao Blog</a>
+        <div style="display:flex; gap:10px; align-items:center;">
+          <button class="theme" id="t" type="button" aria-label="Tema">
+            <svg class="moon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M21 14.5A8.5 8.5 0 1 1 9.5 3a7 7 0 0 0 11.5 11.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <svg class="sun" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12Z" stroke="currentColor" stroke-width="2"/>
+              <path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5l-1.5-1.5M20.5 20.5 19 19M5 19l-1.5 1.5M20.5 3.5 19 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <a class="btn" href="../index.html#contato">Contato</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section>
+      <div class="container">
+        <div class="hero glass">
+          <div class="kicker">
+            <span style="padding:6px 10px; border-radius:999px; background: rgba(41,126,138,0.14); border: 1px solid rgba(41,126,138,0.18);">${safeCat}</span>
+            <span>${safeDate} • ${safeRead} min</span>
+          </div>
+          <h1>${safeTitle}</h1>
+          <p class="sub">${safeDesc}</p>
+          <div class="meta">${safeTags}</div>
+          <div class="cover glass"><img src="${img}" alt="${safeTitle}" loading="lazy"></div>
+        </div>
+
+        <article class="prose glass">
+          ${post.contentHtml || '<p>Conteúdo não informado.</p>'}
+        </article>
+
+        <footer>
+          <div class="foot">
+            <div class="tiny">© <span id="y"></span> DeRose SBC • Blog</div>
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+              <a class="btn" href="#top">Topo ↑</a>
+              <a class="btn" href="../blog.html">Mais posts</a>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </section>
+
+    <script>
+      document.getElementById('y').textContent = new Date().getFullYear();
+      const THEME_KEY = 'theme';
+      const root = document.documentElement;
+      const btn = document.getElementById('t');
+      const meta = document.querySelector('meta[name="theme-color"]');
+
+      function systemPrefersDark(){ return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches; }
+      function setTheme(t, persist){
+        if(t === 'dark') root.dataset.theme = 'dark'; else delete root.dataset.theme;
+        if(persist) localStorage.setItem(THEME_KEY, t);
+        meta && meta.setAttribute('content', t === 'dark' ? '#0b1012' : '#297E8A');
+      }
+      const saved = localStorage.getItem(THEME_KEY);
+      if(saved === 'dark' || saved === 'light') setTheme(saved, false);
+      else setTheme(systemPrefersDark() ? 'dark' : 'light', false);
+
+      btn && btn.addEventListener('click', () => {
+        const cur = root.dataset.theme === 'dark' ? 'dark' : 'light';
+        setTheme(cur === 'dark' ? 'light' : 'dark', true);
+      });
+    ${closeScript}
+  </main>
 </body>
 </html>`;
     }
 
-    function downloadPostHtml() {
+    function downloadPostHtml(){
       const draft = draftFromForm();
       const v = validateDraft(draft);
-      if (!v.ok) return setStatus(`Não é possível gerar HTML: ${v.msg}`, v.type);
+      if(!v.ok) return setStatus(`Não dá pra gerar o HTML: ${v.msg}`, v.type);
 
-      const html = buildPostHtml(draft, root.dataset.theme === 'dark' ? 'dark' : 'light');
-      const blob = new Blob([html], { type: 'text/html' });
-      const url = URL.createObjectURL(blob);
+      const html = buildPostHtml(draft, currentTheme());
+      const blob = new Blob([html], {type:'text/html'});
       const a = document.createElement('a');
-      a.href = url;
+      a.href = URL.createObjectURL(blob);
       a.download = `${draft.id}.html`;
+      document.body.appendChild(a);
       a.click();
-      URL.revokeObjectURL(url);
-      setStatus(`Baixado: ${draft.id}.html`, 'ok');
+      a.remove();
+      URL.revokeObjectURL(a.href);
+
+      setStatus(`Baixado: ${draft.id}.html (coloque em /posts/).`, 'ok');
     }
 
-    // ────────────────────────────────────────────────
-    // Preview
-    // ────────────────────────────────────────────────
     let previewTimer = null;
-    function schedulePreview() {
+    function schedulePreview(){
       clearTimeout(previewTimer);
-      previewTimer = setTimeout(updatePreview, 150);
+      previewTimer = setTimeout(updatePreview, 120);
     }
-
-    function updatePreview() {
+    function updatePreview(){
       const d = draftFromForm();
       const safe = {
         ...d,
         title: d.title || 'Título do Post',
-        excerpt: d.excerpt || 'Resumo do post.',
+        excerpt: d.excerpt || 'Resumo (excerpt) do post.',
         category: d.category || 'Categoria',
-        date: d.date || new Date().toISOString().split('T')[0],
+        date: d.date || '2026-01-01',
         readMin: Number.isFinite(Number(d.readMin)) ? d.readMin : 5,
-        tags: d.tags?.length ? d.tags : ['Leitura objetiva'],
+        tags: (d.tags && d.tags.length) ? d.tags : ['Leitura objetiva'],
         image: d.image || './assets/blog/placeholder.webp',
-        contentHtml: d.contentHtml || '<p>Escreva o conteúdo aqui.</p>'
+        contentHtml: d.contentHtml || '<p>Escreva o conteúdo no campo “Conteúdo do Post (HTML)”.</p>'
       };
-      previewFrame.srcdoc = buildPostHtml(safe, root.dataset.theme === 'dark' ? 'dark' : 'light');
+      previewFrame.srcdoc = buildPostHtml(safe, currentTheme());
     }
-
-    function openPreviewInNewTab() {
+    function openPreviewInNewTab(){
       const d = draftFromForm();
-      const safe = { /* mesmo safe de cima */ };
-      const html = buildPostHtml(safe, root.dataset.theme === 'dark' ? 'dark' : 'light');
-      const blob = new Blob([html], { type: 'text/html' });
+      const safe = {
+        ...d,
+        title: d.title || 'Título do Post',
+        excerpt: d.excerpt || 'Resumo (excerpt) do post.',
+        category: d.category || 'Categoria',
+        date: d.date || '2026-01-01',
+        readMin: Number.isFinite(Number(d.readMin)) ? d.readMin : 5,
+        tags: (d.tags && d.tags.length) ? d.tags : ['Leitura objetiva'],
+        image: d.image || './assets/blog/placeholder.webp',
+        contentHtml: d.contentHtml || '<p>Escreva o conteúdo no campo “Conteúdo do Post (HTML)”.</p>'
+      };
+      const html = buildPostHtml(safe, currentTheme());
+      const blob = new Blob([html], {type:'text/html'});
       const url = URL.createObjectURL(blob);
-      window.open(url, '_blank');
-      setTimeout(() => URL.revokeObjectURL(url), 30000);
+      window.open(url, '_blank', 'noopener');
+      setTimeout(()=> URL.revokeObjectURL(url), 30000);
     }
 
-    // ────────────────────────────────────────────────
-    // Eventos
-    // ────────────────────────────────────────────────
-    elQ.addEventListener('input', e => { view.q = e.target.value; render(); });
-    elCat.addEventListener('change', e => { view.cat = e.target.value; render(); });
-    elOrder.addEventListener('change', e => { view.order = e.target.value; render(); });
+    // Wire events
+    elQ.addEventListener('input', (e) => { view.q = e.target.value || ''; render(); });
+    elCat.addEventListener('change', (e) => { view.cat = e.target.value || 'all'; render(); });
+    elOrder.addEventListener('change', (e) => { view.order = e.target.value || 'new'; render(); });
 
     btnNew.addEventListener('click', resetForm);
+
     btnSlugify.addEventListener('click', () => {
-      const s = slugify(fTitle.value);
-      if (!s) return setStatus('Digite um título primeiro.', 'warn');
+      const s = slugify(fTitle.value || '');
+      if(!s) return setStatus('Escreva um título para gerar o slug.', 'warn');
       fId.value = s;
-      if (!clean(fHref.value)) fHref.value = `./posts/${s}.html`;
-      if (!clean(fImage.value)) fImage.value = `./assets/blog/${s}.webp`;
-      setStatus('Slug gerado.', 'ok');
+      if(!clean(fHref.value)) fHref.value = `./posts/${s}.html`;
+      if(!clean(fImage.value)) fImage.value = `./assets/blog/${s}.webp`;
+      setStatus('Slug gerado. Confira href/imagem, escreva o conteúdo e salve.', 'ok');
       schedulePreview();
     });
 
     fId.addEventListener('blur', () => {
       const s = slugify(fId.value);
-      if (s && s !== fId.value) {
+      if(s && s !== fId.value){
         fId.value = s;
-        setStatus('Slug ajustado (sem acentos).', 'warn');
+        setStatus('Slug normalizado (sem acentos / caracteres especiais).', 'warn');
+      }
+      if(s){
+        if(!clean(fHref.value)) fHref.value = `./posts/${s}.html`;
+        if(!clean(fImage.value)) fImage.value = `./assets/blog/${s}.webp`;
       }
       schedulePreview();
     });
@@ -844,49 +1450,54 @@
     btnDelete.addEventListener('click', deleteCurrent);
     btnClear.addEventListener('click', resetForm);
 
-    elList.addEventListener('click', e => {
-      const btn = e.target.closest('button[data-edit]');
-      if (!btn) return;
-      const id = btn.dataset.edit;
-      const post = posts.find(p => p.id === id);
-      if (post) fillForm(post);
+    elList.addEventListener('click', (e) => {
+      const b = e.target.closest?.('button[data-edit]');
+      if(!b) return;
+      const id = b.getAttribute('data-edit');
+      const p = posts.find(x => x.id === id);
+      if(p) fillForm(p);
     });
 
     btnExportJson.addEventListener('click', exportJson);
     btnCopyConst.addEventListener('click', copyConst);
 
     btnImport.addEventListener('click', () => fileInput.click());
-    fileInput.addEventListener('change', async e => {
-      const file = e.target.files?.[0];
-      if (!file) return;
-      try {
-        const text = await file.text();
-        importJsonText(text);
-      } catch {
-        setStatus('Erro ao ler o arquivo.', 'err');
-      }
+    fileInput.addEventListener('change', async (e) => {
+      const f = e.target.files?.[0];
+      if(!f) return;
+      const text = await f.text();
+      importJsonText(text);
       fileInput.value = '';
     });
 
     btnPlainToHtml.addEventListener('click', () => {
-      const converted = plainTextToHtml(fContent.value);
-      if (!converted) return setStatus('Cole texto antes de converter.', 'warn');
-      fContent.value = converted;
-      setStatus('Texto convertido para HTML.', 'ok');
+      const out = plainTextToHtml(fContent.value || '');
+      if(!out) return setStatus('Cole texto no campo de conteúdo antes de converter.', 'warn');
+      fContent.value = out;
+      setStatus('Convertido: texto → HTML (parágrafos).', 'ok');
       schedulePreview();
     });
 
     btnInsertStarter.addEventListener('click', () => {
-      const skeleton = `<p><strong>Objetivo:</strong> ...</p>
-<h2>O que fazer</h2>
-<ol>
-  <li>Passo 1</li>
-  <li>Passo 2</li>
-</ol>
-<h2>Erros comuns</h2>
-<ul><li>Erro → correção</li></ul>`;
-      if (fContent.value.trim() && !confirm('Substituir conteúdo atual?')) return;
-      fContent.value = skeleton;
+      const starter = [
+        "<p><strong>Objetivo:</strong> descreva em 1 frase o benefício prático.</p>",
+        "<h2>O que fazer (passo a passo)</h2>",
+        "<ol>",
+        "  <li>Passo 1 (curto e acionável)</li>",
+        "  <li>Passo 2 (sem teoria demais)</li>",
+        "  <li>Passo 3 (checagem rápida)</li>",
+        "</ol>",
+        "<h2>Erros comuns</h2>",
+        "<ul>",
+        "  <li>Erro 1 → correção</li>",
+        "  <li>Erro 2 → correção</li>",
+        "</ul>",
+        "<h2>Protocolo mínimo (3–5 min)</h2>",
+        "<p>Feche com uma versão simples que caiba na rotina.</p>",
+        "<blockquote>Regra: consistência > intensidade.</blockquote>",
+      ].join("\n");
+      if(fContent.value.trim() && !confirm("Substituir o conteúdo atual pelo esqueleto?")) return;
+      fContent.value = starter;
       setStatus('Esqueleto inserido.', 'ok');
       schedulePreview();
     });
@@ -894,30 +1505,23 @@
     btnDownloadPost.addEventListener('click', downloadPostHtml);
     btnOpenPreviewTab.addEventListener('click', openPreviewInNewTab);
 
-    // Preview em todos os campos relevantes
-    const previewFields = [fTitle, fId, fDate, fCategory, fReadMin, fTags, fExcerpt, fImage, fHref, fContent, fFeatured];
-    previewFields.forEach(el => {
-      if (!el) return;
-      el.addEventListener('input', schedulePreview);
-      if (el.type === 'checkbox' || el.type === 'date') {
-        el.addEventListener('change', schedulePreview);
-      }
-    });
+    [fTitle,fId,fDate,fCategory,fReadMin,fTags,fExcerpt,fImage,fHref,fFeatured,fContent]
+      .forEach(el => el?.addEventListener('input', schedulePreview));
 
     btnResetAll.addEventListener('click', () => {
-      if (!confirm('Apagar todos os dados locais e recarregar seed?')) return;
+      if(!confirm('Reset local: apagar dados do CMS no seu navegador e recarregar seed?')) return;
       localStorage.removeItem(STORAGE_KEY);
-      LEGACY_KEYS.forEach(k => localStorage.removeItem(k));
+      for(const k of LEGACY_KEYS) localStorage.removeItem(k);
       posts = SEED_POSTS.slice();
       ensureSingleFeatured();
       persist();
       refreshTaxonomy();
       resetForm();
       render();
-      setStatus('Dados resetados. Seed recarregado.', 'ok');
+      setStatus('Reset local concluído. Seed recarregado.', 'ok');
     });
 
-    // Inicialização
+    // Init
     loadPosts();
     refreshTaxonomy();
     render();
