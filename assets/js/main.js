@@ -37,4 +37,6 @@
 
   if (window.Utils && window.Utils.ready) window.Utils.ready(init);
   else document.addEventListener("DOMContentLoaded", init, { once: true });
+
+  document.addEventListener("softnav:loaded", init);
 })();
