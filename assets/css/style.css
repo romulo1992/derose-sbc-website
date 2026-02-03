@@ -957,6 +957,12 @@ html[data-theme="dark"] .badge{
   box-shadow: 0 10px 30px rgba(0,0,0,0.35);
 }
 
+html[data-theme="dark"] .coming-soon-kicker{
+  background: #297E8A;
+  border-color: #297E8A;
+  color: #FFF9EF;
+}
+
 html[data-theme="dark"] .drawer{ background: rgba(0,0,0,0.62); }
 
 /* =========================
