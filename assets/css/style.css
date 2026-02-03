@@ -939,6 +939,12 @@ html[data-theme="dark"] .nav-menu{
 }
 html[data-theme="dark"] .btn.ghost{ background: rgba(255,255,255,0.06); }
 
+html[data-theme="dark"] .coming-soon-kicker{
+  background: rgba(41,126,138,0.14);
+  border-color: rgba(41,126,138,0.18);
+  color: rgba(41,126,138,1);
+}
+
 html[data-theme="dark"] .kicker,
 html[data-theme="dark"] .point,
 html[data-theme="dark"] .mini,
