@@ -222,6 +222,9 @@ nav a.active,
   border: 1px solid transparent;
   cursor: pointer;
   line-height: 1;
+  color: inherit;
+  font-family: inherit;
+  appearance: none;
 }
 .nav-dropdown{
   position: relative;
