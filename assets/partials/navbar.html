@@ -2,16 +2,18 @@
 <div class="drawer" id="drawer" aria-hidden="true">
   <div class="container">
     <div class="panel glass">
-      <a href="/#aulas" data-close> Aulas <span>presencial + online</span></a>
-      <a href="/#cursos" data-close> Cursos <span>precisão & consistência</span></a>
-      <a href="/#formacao" data-close> Formação <span>aprofundamento</span></a>
-
-      <!-- placeholders (no link) -->
-      <a href="#" class="is-disabled" aria-disabled="true" data-close>Eventos</a>
-      <a href="#" class="is-disabled" aria-disabled="true" data-close>Bistrô</a>
-
+      <div class="drawer-group">
+        <div class="drawer-label">Aulas</div>
+        <a href="/aulas/presencial/index.html" data-close>Presencial</a>
+        <a href="/aulas/online/index.html" data-close>Online</a>
+        <a href="/aulas/individual/index.html" data-close>Individual</a>
+      </div>
+      <a href="/cursos/index.html" data-close> Cursos <span>precisão & consistência</span></a>
+      <a href="/formacao/index.html" data-close> Formação <span>aprofundamento</span></a>
+      <a href="/eventos/index.html" data-close>Eventos</a>
+      <a href="/bistro/index.html" data-close>Bistrô</a>
       <a href="/blog/" data-close> Blog <span>clareza sem misticismo</span></a>
-      <a href="/#contato" data-close> Contato <span>rota rápida</span></a>
+      <a href="https://wa.me/5511975123336" target="_blank" rel="noreferrer" data-close> Contato <span>rota rápida</span></a>
 
       <div class="drawer-actions">
         <button class="btn ghost glass" id="drawerClose" type="button">Fechar</button>
@@ -23,7 +25,7 @@
 <header>
   <div class="container">
     <div class="bar glass">
-      <a class="brand" href="/#top" aria-label="Ir para o topo">
+      <a class="brand" href="/" aria-label="Ir para o topo">
         <span class="brand-mark" aria-hidden="true"></span>
         <span class="brand-name">
           <strong>DeRose SBC</strong>
@@ -32,14 +34,20 @@
       </a>
 
       <nav aria-label="Navegação principal">
-        <a href="/#aulas" data-nav="aulas">AULAS</a>
-        <a href="/#cursos" data-nav="cursos">CURSOS</a>
-        <a href="/#formacao" data-nav="formacao">FORMAÇÃO</a>
-
-        <!-- placeholders (no link) -->
-        <a href="#" class="is-disabled" aria-disabled="true">EVENTOS</a>
-        <a href="#" class="is-disabled" aria-disabled="true">BISTRÔ</a>
-
+        <div class="nav-dropdown">
+          <button class="nav-trigger" type="button" data-nav="aulas" aria-haspopup="true">
+            AULAS
+          </button>
+          <div class="nav-menu" role="menu">
+            <a href="/aulas/presencial/index.html" role="menuitem">Presencial</a>
+            <a href="/aulas/online/index.html" role="menuitem">Online</a>
+            <a href="/aulas/individual/index.html" role="menuitem">Individual</a>
+          </div>
+        </div>
+        <a href="/cursos/index.html" data-nav="cursos">CURSOS</a>
+        <a href="/formacao/index.html" data-nav="formacao">FORMAÇÃO</a>
+        <a href="/eventos/index.html" data-nav="eventos">EVENTOS</a>
+        <a href="/bistro/index.html" data-nav="bistro">BISTRÔ</a>
         <a href="/blog/" data-nav="blog">BLOG</a>
       </nav>
 
@@ -76,4 +84,3 @@
     </div>
   </div>
 </header>
-
