@@ -203,6 +203,7 @@ nav{
 nav a,
 .nav-trigger{
   font-size: 14px;
+  font-weight: 500;
   padding: 10px 12px;
   border-radius: 999px;
   opacity: .86;
@@ -243,6 +244,14 @@ nav a.active,
   transform: translateY(-6px);
   transition: opacity .2s ease, transform .2s ease;
   z-index: 10;
+}
+.nav-menu::before{
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -8px;
+  height: 8px;
 }
 .nav-menu a{
   padding: 8px 12px;

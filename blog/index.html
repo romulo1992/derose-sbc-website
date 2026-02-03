@@ -10,91 +10,13 @@
   <meta property="og:description" content="Clareza sem misticismo. Conteúdo prático para evolução pessoal." />
   <meta property="og:type" content="website" />
 
-  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/assets/css/style.css" />
 </head>
 
 <body class="blog-page">
-  <!-- Mobile drawer -->
-  <div class="drawer" id="drawer" aria-hidden="true">
-    <div class="container">
-      <div class="panel glass">
-        <div class="drawer-group">
-          <div class="drawer-label">Aulas</div>
-          <a href="/aulas/presencial/index.html" data-close>Presencial</a>
-          <a href="/aulas/online/index.html" data-close>Online</a>
-          <a href="/aulas/individual/index.html" data-close>Individual</a>
-        </div>
-        <a href="/cursos/index.html" data-close> Cursos <span>precisão & consistência</span></a>
-        <a href="/formacao/index.html" data-close> Formação <span>aprofundamento</span></a>
-        <a href="/eventos/index.html" data-close>Eventos</a>
-        <a href="/bistro/index.html" data-close>Bistrô</a>
-        <a href="./" data-close> Blog <span>clareza sem misticismo</span></a>
-        <a href="https://wa.me/5511975123336" target="_blank" rel="noreferrer" data-close> Contato <span>rota rápida</span></a>
-
-        <div class="drawer-actions">
-          <button class="btn ghost glass" id="drawerClose" type="button">Fechar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <header>
-    <div class="container">
-      <div class="bar glass">
-        <a class="brand" href="/" aria-label="Ir para a home">
-          <span class="brand-mark" aria-hidden="true"></span>
-          <span class="brand-name">
-            <strong>DeRose SBC</strong>
-            <span>Yôga de Alto Rendimento</span>
-          </span>
-        </a>
-
-        <nav aria-label="Navegação principal">
-          <div class="nav-dropdown">
-            <button class="nav-trigger" type="button" aria-haspopup="true">
-              AULAS
-            </button>
-            <div class="nav-menu" role="menu">
-              <a href="/aulas/presencial/index.html" role="menuitem">Presencial</a>
-              <a href="/aulas/online/index.html" role="menuitem">Online</a>
-              <a href="/aulas/individual/index.html" role="menuitem">Individual</a>
-            </div>
-          </div>
-          <a href="/cursos/index.html">CURSOS</a>
-          <a href="/formacao/index.html">FORMAÇÃO</a>
-          <a href="/eventos/index.html">EVENTOS</a>
-          <a href="/bistro/index.html">BISTRÔ</a>
-          <a href="./" class="active" aria-current="page">BLOG</a>
-        </nav>
-
-        <div class="actions">
-          <button class="mobile-toggle" id="mobileToggle" aria-label="Abrir menu">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M4 7H20" stroke="#393939" stroke-width="2.4" stroke-linecap="round"/>
-              <path d="M4 12H20" stroke="#393939" stroke-width="2.4" stroke-linecap="round" opacity="0.9"/>
-              <path d="M4 17H20" stroke="#393939" stroke-width="2.4" stroke-linecap="round" opacity="0.8"/>
-            </svg>
-          </button>
-
-          <button class="theme-toggle" id="themeToggle" type="button" aria-label="Ativar modo escuro" aria-pressed="false">
-            <svg class="moon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M21 14.5A8.5 8.5 0 1 1 9.5 3a7 7 0 0 0 11.5 11.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            <svg class="sun" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12Z" stroke="currentColor" stroke-width="2"/>
-              <path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5l-1.5-1.5M20.5 20.5 19 19M5 19l-1.5 1.5M20.5 3.5 19 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-          </button>
-
-          <a class="btn primary" href="https://wa.me/5511975123336" target="_blank" rel="noreferrer" title="Agendar uma aula">
-            <span class="dot" aria-hidden="true"></span>
-            Entre em Contato
-          </a>
-        </div>
-      </div>
-    </div>
-  </header>
+  <!-- NAVBAR INJETADA -->
+  <div data-navbar></div>
 
   <main id="top">
     <!-- HERO -->
@@ -241,5 +163,6 @@
   <script defer src="/assets/js/utils.js"></script>
   <script defer src="/assets/js/theme.js"></script>
   <script defer src="/assets/js/blog.js"></script>
+  <script defer src="/assets/js/navbar.js"></script>
 </body>
 </html>
