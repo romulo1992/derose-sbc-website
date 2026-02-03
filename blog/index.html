@@ -115,8 +115,19 @@
           </div>
         </div>
 
-        <div class="grid" id="grid" aria-label="Lista de posts">
-          <!-- cards injected by JS -->
+        <div class="posts-stack" id="postsStack">
+          <div class="grid" id="grid" aria-label="Lista de posts">
+            <!-- cards injected by JS -->
+          </div>
+
+          <div class="loadmore-layer" id="loadMoreLayer" hidden>
+            <div class="loadmore-inner">
+              <button type="button" class="btn glass loadmore-btn" id="loadMoreBtn" aria-controls="grid">
+                Carregar mais
+              </button>
+              <div class="loadmore-status tiny" id="loadMoreStatus" aria-live="polite"></div>
+            </div>
+          </div>
         </div>
 
         <div class="empty glass reveal" id="empty">

@@ -1271,6 +1271,51 @@ html[data-theme="dark"] .drawer{ background: rgba(0,0,0,0.62); }
   margin-top: 18px;
 }
 
+.blog-page .posts-stack{
+  position: relative;
+}
+
+.blog-page .loadmore-layer{
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: clamp(160px, 28vh, 260px);
+  display: grid;
+  place-items: end center;
+  padding: 24px 0;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.blog-page .loadmore-layer::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(
+    to bottom,
+    rgb(from var(--bg) r g b / 0) 0%,
+    rgb(from var(--bg) r g b / 0) 20%,
+    rgb(from var(--bg) r g b / 0.72) 60%,
+    rgb(from var(--bg) r g b / 1) 100%
+  );
+}
+
+.blog-page .loadmore-inner{
+  position: relative;
+  display: grid;
+  gap: 10px;
+  justify-items: center;
+  pointer-events: auto;
+}
+
+.blog-page .loadmore-status{ opacity: .85; }
+
+.blog-page .loadmore-btn:focus-visible{
+  outline: 2px solid var(--teal);
+  outline-offset: 3px;
+}
+
 .blog-page .post{
   border-radius: var(--radius-lg);
   overflow:hidden;

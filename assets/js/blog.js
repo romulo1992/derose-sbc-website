@@ -1,6 +1,8 @@
 (() => {
   "use strict";
 
+  const PAGE_SIZE = 6;
+
   const POSTS = [
     {
       id: "respiracao-3-minutos",
@@ -80,6 +82,45 @@
       image: "../assets/blog/consistencia.webp",
       href: "./p/consistencia-ritual/index.html",
     },
+    {
+      id: "respiracao-3-minutos-foco",
+      title: "Respiração em 3 minutos para recuperar foco",
+      excerpt:
+        "Um reset rápido do sistema: clareza, presença e menos ruído mental.",
+      category: "Respiração",
+      tags: ["Foco", "Pranayama"],
+      date: "2026-02-12",
+      readMin: 4,
+      featured: false,
+      image: "../assets/blog/featured.webp",
+      href: "./p/respiracao-3-minutos-foco/index.html",
+    },
+    {
+      id: "rotina-minima-10-minutos",
+      title: "Rotina mínima: 10 minutos que destravam o dia",
+      excerpt:
+        "Um protocolo curto para consistência: mobilidade + respiração + intenção.",
+      category: "Rotina",
+      tags: ["Consistência", "Energia"],
+      date: "2026-02-08",
+      readMin: 5,
+      featured: false,
+      image: "../assets/blog/featured.webp",
+      href: "./p/rotina-minima-10-minutos/index.html",
+    },
+    {
+      id: "mobilidade-sem-dor",
+      title: "Mobilidade sem dor: 5 ajustes práticos",
+      excerpt:
+        "Pequenas correções que melhoram amplitude e reduzem tensão.",
+      category: "Mobilidade",
+      tags: ["Corpo", "Postura"],
+      date: "2026-02-04",
+      readMin: 5,
+      featured: false,
+      image: "../assets/blog/featured.webp",
+      href: "./p/mobilidade-sem-dor/index.html",
+    },
   ];
 
   function setYear() {
@@ -155,10 +196,25 @@
     const category = document.getElementById("category");
     const sort = document.getElementById("sort");
     const tagbar = document.getElementById("tagbar");
+    const loadMoreLayer = document.getElementById("loadMoreLayer");
+    const loadMoreBtn = document.getElementById("loadMoreBtn");
+    const loadMoreStatus = document.getElementById("loadMoreStatus");
 
-    if (!grid || !empty || !search || !category || !sort || !tagbar) return;
+    if (
+      !grid ||
+      !empty ||
+      !search ||
+      !category ||
+      !sort ||
+      !tagbar ||
+      !loadMoreLayer ||
+      !loadMoreBtn ||
+      !loadMoreStatus
+    )
+      return;
 
     let state = { q: "", category: "all", tag: "all", sort: "new" };
+    let visibleCount = PAGE_SIZE;
 
     function formatDateISO(iso) {
       try {
@@ -276,19 +332,38 @@
       return out;
     }
 
+    function updateLoadMore(total, shown) {
+      loadMoreStatus.textContent = total
+        ? `Mostrando ${shown} de ${total}`
+        : "";
+
+      if (total > shown) {
+        loadMoreLayer.hidden = false;
+        loadMoreBtn.disabled = false;
+        return;
+      }
+
+      loadMoreLayer.hidden = true;
+      loadMoreBtn.disabled = true;
+    }
+
     function renderPosts() {
       const filtered = sortPosts(POSTS.filter(matches));
+      const total = filtered.length;
+      const shown = Math.min(visibleCount, total);
 
-      if (filtered.length === 0) {
+      if (total === 0) {
         grid.innerHTML = "";
         empty.style.display = "block";
         revealElement(empty, io);
+        updateLoadMore(0, 0);
         return;
       }
 
       empty.style.display = "none";
 
       grid.innerHTML = filtered
+        .slice(0, visibleCount)
         .map((p) => {
           const tagLine = (p.tags || []).slice(0, 2).join(" • ");
 
@@ -323,10 +398,12 @@
         .join("");
 
       grid.querySelectorAll(".reveal").forEach((el) => revealElement(el, io));
+      updateLoadMore(total, shown);
     }
 
     function setTag(tag) {
       state.tag = tag === "Todas" ? "all" : tag;
+      visibleCount = PAGE_SIZE;
 
       tagbar.querySelectorAll(".chip").forEach((ch) => {
         const t = ch.getAttribute("data-tag");
@@ -342,16 +419,19 @@
 
     search.addEventListener("input", (e) => {
       state.q = e.target.value || "";
+      visibleCount = PAGE_SIZE;
       renderPosts();
     });
 
     category.addEventListener("change", (e) => {
       state.category = e.target.value || "all";
+      visibleCount = PAGE_SIZE;
       renderPosts();
     });
 
     sort.addEventListener("change", (e) => {
       state.sort = e.target.value || "new";
+      visibleCount = PAGE_SIZE;
       renderPosts();
     });
 
@@ -371,6 +451,11 @@
       const t = el.getAttribute("data-tag");
       if (!t) return;
       setTag(t);
+    });
+
+    loadMoreBtn.addEventListener("click", () => {
+      visibleCount += PAGE_SIZE;
+      renderPosts();
     });
 
     buildTaxonomy();
