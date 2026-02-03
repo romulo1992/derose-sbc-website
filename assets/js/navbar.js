@@ -47,18 +47,28 @@
   }
 
   function setActiveLink(scope) {
-    const links = scope.querySelectorAll('nav a[data-nav]');
+    const links = scope.querySelectorAll('nav [data-nav]');
     links.forEach((a) => {
       a.classList.remove("active");
       a.removeAttribute("aria-current");
     });
 
     const path = (location.pathname || "/").replace(/\/+$/, "") || "/";
-    if (path.indexOf("/blog") === 0) {
-      const blog = scope.querySelector('nav a[data-nav="blog"]');
-      if (blog) {
-        blog.classList.add("active");
-        blog.setAttribute("aria-current", "page");
+    const sectionMap = [
+      { prefix: "/blog", key: "blog" },
+      { prefix: "/aulas", key: "aulas" },
+      { prefix: "/cursos", key: "cursos" },
+      { prefix: "/formacao", key: "formacao" },
+      { prefix: "/eventos", key: "eventos" },
+      { prefix: "/bistro", key: "bistro" },
+    ];
+
+    const match = sectionMap.find((item) => path === item.prefix || path.startsWith(`${item.prefix}/`));
+    if (match) {
+      const active = scope.querySelector(`nav [data-nav="${match.key}"]`);
+      if (active) {
+        active.classList.add("active");
+        active.setAttribute("aria-current", "page");
       }
       return;
     }
@@ -66,7 +76,7 @@
     const hash = (location.hash || "").replace("#", "");
     if (!hash) return;
 
-    const a = scope.querySelector(`nav a[data-nav="${hash}"]`);
+    const a = scope.querySelector(`nav [data-nav="${hash}"]`);
     if (a) {
       a.classList.add("active");
       a.setAttribute("aria-current", "page");
