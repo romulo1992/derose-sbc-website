@@ -116,6 +116,8 @@
   }
 
   function initDrawer() {
+    if (window.Navbar && typeof window.Navbar.openDrawer === "function") return;
+
     const drawer = document.getElementById("drawer");
     const toggle = document.getElementById("mobileToggle");
     const closeBtn = document.getElementById("drawerClose");
@@ -377,6 +379,7 @@
   }
 
   function init() {
+    if (!document.body.classList.contains("blog-page")) return;
     setYear();
     disablePlaceholderLinks();
     initDrawer();
@@ -388,4 +391,6 @@
 
   if (window.Utils && window.Utils.ready) window.Utils.ready(init);
   else document.addEventListener("DOMContentLoaded", init, { once: true });
+
+  document.addEventListener("softnav:loaded", init);
 })();

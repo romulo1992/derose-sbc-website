@@ -89,6 +89,7 @@
     setActiveLink(scope);
 
     window.addEventListener("hashchange", () => setActiveLink(scope));
+    document.addEventListener("softnav:loaded", () => setActiveLink(scope));
   }
 
   function injectNavbar() {
