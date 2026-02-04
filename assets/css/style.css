@@ -1286,6 +1286,7 @@ html[data-theme="dark"] .drawer{ background: rgba(0,0,0,0.62); }
   align-items: center;
   justify-content: flex-end;
   gap: 8px;
+  padding-bottom: 18px;
   pointer-events: none;
 }
 
