@@ -13,756 +13,61 @@
   <meta property="og:title" content="Respiração Transformadora em 3 minutos • DeRose SBC" />
   <meta property="og:description" content="Um protocolo simples para baixar ruído, organizar foco e começar o dia com mais clareza — sem misticismo e sem drama." />
   <meta property="og:type" content="article" />
-  <meta property="og:image" content="../assets/blog/respiracao.webp" />
-  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+  <meta property="og:image" content="/assets/blog/respiracao.webp" />
 
-  <style>
-    /* =========================
-       Self-hosted Spartan (TTF)
-       Put files in: /assets/fonts/
-       ========================= */
-    @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-Thin.ttf") format("truetype"); font-weight:100; font-style:normal; font-display:swap; }
-    @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-ExtraLight.ttf") format("truetype"); font-weight:200; font-style:normal; font-display:swap; }
-    @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-Light.ttf") format("truetype"); font-weight:300; font-style:normal; font-display:swap; }
-    @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-Regular.ttf") format("truetype"); font-weight:400; font-style:normal; font-display:swap; }
-    @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-Medium.ttf") format("truetype"); font-weight:500; font-style:normal; font-display:swap; }
-    @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-SemiBold.ttf") format("truetype"); font-weight:600; font-style:normal; font-display:swap; }
-    @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-Bold.ttf") format("truetype"); font-weight:700; font-style:normal; font-display:swap; }
-    @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-ExtraBold.ttf") format("truetype"); font-weight:800; font-style:normal; font-display:swap; }
-    @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-Black.ttf") format("truetype"); font-weight:900; font-style:normal; font-display:swap; }
+  <!-- Repo map: /assets/img/favicon.svg -->
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" />
 
-    :root{
-      --bg: #FFF9EF;
-      --surface: #FFECD1;
-      --accent: #FC883A;
-      --teal: #297E8A;
-      --ink: #393939;
-      --glass-bg: rgba(255,255,255,0.26);
-      --glass-br: rgba(41,126,138,0.22);
-      --shadow: 0 18px 60px rgba(57,57,57,0.12);
-      --shadow-soft: 0 10px 30px rgba(57,57,57,0.10);
-      --radius-xl: 28px;
-      --radius-lg: 22px;
-      --radius-md: 16px;
-      --radius-sm: 12px;
-      --max: 1120px;
-
-      /* baseline */
-      --type-scale: 0.77;
-      /* blog reading comfort */
-      --type-scale-blog: 0.92;
-
-      --page-bg:
-        radial-gradient(1000px 700px at 20% 10%, rgba(252,136,58,0.12), transparent 60%),
-        radial-gradient(1100px 820px at 90% 15%, rgba(41,126,138,0.14), transparent 60%),
-        linear-gradient(180deg, var(--bg), #fff 28%, var(--bg) 100%);
-    }
-
-    *{ box-sizing: border-box; }
-    html{ scroll-behavior: smooth; }
-    body{
-      margin:0;
-      font-family: "Spartan", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      line-height: 1.25;
-      color: var(--ink);
-      background: var(--page-bg);
-      overflow-x: hidden;
-    }
-    a{ color: inherit; text-decoration: none; }
-    .container{ width:min(var(--max), calc(100% - 40px)); margin: 0 auto; }
-
-    /* Glass */
-    .glass{
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-br);
-      box-shadow: var(--shadow-soft);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-    }
-
-    /* Progress bar */
-    .progress{
-      position: fixed;
-      top: 0; left: 0;
-      height: 3px;
-      width: 0%;
-      background: linear-gradient(90deg, rgba(41,126,138,0.95), rgba(252,136,58,0.95));
-      z-index: 80;
-      transform-origin: left center;
-    }
-
-    /* Header */
-    header{
-      position: sticky; top: 0; z-index: 40;
-      padding: 14px 0;
-      transition: transform .2s ease, background .2s ease, border-color .2s ease;
-    }
-    header .bar{
-      border-radius: 999px;
-      padding: 10px 14px;
-      display:flex; align-items:center; justify-content: space-between;
-      gap: 14px;
-    }
-    .brand{
-      display:flex; align-items:center; gap: 10px; min-width: 210px;
-      padding: 8px 10px; border-radius: 999px;
-    }
-    .brand-mark{
-      width: 36px; height: 36px; border-radius: 14px;
-      background: linear-gradient(135deg, rgba(41,126,138,0.9), rgba(252,136,58,0.85));
-      box-shadow: 0 10px 22px rgba(41,126,138,0.18);
-      position: relative;
-      overflow: hidden;
-    }
-    .brand-mark:after{
-      content:"";
-      position:absolute; inset:-30%;
-      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.55), transparent 55%);
-      transform: rotate(18deg);
-    }
-    .brand-name{
-      line-height: 1;
-      display:flex; flex-direction: column;
-      gap: 4px;
-    }
-    .brand-name strong{ font-size: calc(15px * var(--type-scale)); letter-spacing: .2px; }
-    .brand-name span{ font-size: calc(12px * var(--type-scale)); opacity: .75; }
-
-    nav{ display:flex; align-items:center; gap: 10px; }
-    nav a{
-      font-size: calc(14px * var(--type-scale));
-      padding: 10px 12px;
-      border-radius: 999px;
-      opacity: .86;
-      transition: background .2s ease, opacity .2s ease, transform .2s ease;
-      line-height: 1;
-    }
-    nav a:hover{ background: rgba(255,255,255,0.35); opacity: 1; transform: translateY(-1px); }
-    nav a.active{ background: rgba(255,255,255,0.45); opacity: 1; border: 1px solid rgba(41,126,138,0.18); }
-    nav a.is-disabled{ opacity: .62; cursor: not-allowed; }
-    nav a.is-disabled:hover{ background: transparent; transform: none; opacity: .62; }
-
-    .actions{ display:flex; align-items:center; gap: 10px; }
-    .btn{
-      display:inline-flex; align-items:center; justify-content: center;
-      padding: 11px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(41,126,138,0.22);
-      font-weight: 600;
-      font-size: calc(14px * var(--type-scale));
-      letter-spacing: .2px;
-      cursor: pointer;
-      transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
-      user-select: none;
-      white-space: nowrap;
-      line-height: 1;
-    }
-    .btn:hover{ transform: translateY(-1px); box-shadow: var(--shadow-soft); }
-    .btn.primary{
-      border: 1px solid rgba(252,136,58,0.35);
-      background: linear-gradient(135deg, rgba(252,136,58,0.95), rgba(252,136,58,0.65));
-      color: #1f1f1f;
-      font-weight: 800;
-    }
-    .btn.ghost{ background: rgba(255,255,255,0.18); }
-    .btn .dot{
-      width: 8px; height: 8px; border-radius: 999px;
-      margin-right: 10px;
-      background: var(--teal);
-      box-shadow: 0 0 0 4px rgba(41,126,138,0.16);
-    }
-
-    .mobile-toggle{
-      display:none;
-      padding: 10px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(41,126,138,0.22);
-      background: rgba(255,255,255,0.18);
-      cursor:pointer;
-    }
-    .mobile-toggle svg{ display:block; }
-
-    /* Theme toggle */
-    .theme-toggle{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      width: 44px;
-      height: 44px;
-      border-radius: 999px;
-      border: 1px solid rgba(41,126,138,0.22);
-      background: rgba(255,255,255,0.18);
-      cursor:pointer;
-      transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
-      color: var(--ink);
-      line-height: 1;
-    }
-    .theme-toggle:hover{ transform: translateY(-1px); box-shadow: var(--shadow-soft); }
-    .theme-toggle svg{ width: 18px; height: 18px; display:block; }
-    .theme-toggle .sun{ display:none; }
-    html[data-theme="dark"] .theme-toggle .sun{ display:block; }
-    html[data-theme="dark"] .theme-toggle .moon{ display:none; }
-    svg [stroke="#393939"]{ stroke: var(--ink) !important; }
-
-    /* Sections */
-    section{ padding: 54px 0; }
-    .hero{ padding: 34px 0 18px; }
-
-    .hero-card{
-      padding: 26px;
-      border-radius: var(--radius-xl);
-      position: relative;
-      overflow:hidden;
-    }
-    .hero-card:before{
-      content:"";
-      position:absolute; inset:-40%;
-      background:
-        radial-gradient(circle at 20% 20%, rgba(252,136,58,0.18), transparent 55%),
-        radial-gradient(circle at 80% 25%, rgba(41,126,138,0.18), transparent 58%),
-        radial-gradient(circle at 50% 80%, rgba(255,236,209,0.55), transparent 60%);
-      filter: blur(10px);
-      transform: rotate(10deg);
-      pointer-events:none;
-    }
-    .hero-card > *{ position: relative; z-index: 1; }
-
-    .kicker{
-      display:flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      align-items:center;
-    }
-    .pill{
-      display:inline-flex; align-items:center; gap: 10px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(41,126,138,0.18);
-      background: rgba(255,255,255,0.22);
-      font-size: calc(13px * var(--type-scale));
-      font-weight: 900;
-      letter-spacing: .25px;
-      line-height: 1;
-    }
-    .pill .dot{
-      width: 8px; height: 8px; border-radius: 999px;
-      background: var(--teal);
-      box-shadow: 0 0 0 4px rgba(41,126,138,0.14);
-    }
-    .pill.alt .dot{
-      background: var(--accent);
-      box-shadow: 0 0 0 4px rgba(252,136,58,0.14);
-    }
-    .crumb{
-      display:inline-flex; align-items:center; gap: 10px;
-      padding: 10px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(41,126,138,0.18);
-      background: rgba(255,255,255,0.18);
-      font-weight: 900;
-      font-size: calc(13px * var(--type-scale));
-      line-height: 1;
-      opacity: .92;
-      transition: transform .2s ease, box-shadow .2s ease, opacity .2s ease;
-    }
-    .crumb:hover{ transform: translateY(-1px); box-shadow: var(--shadow-soft); opacity: 1; }
-
-    h1{
-      margin: 16px 0 10px;
-      font-size: calc(50px * var(--type-scale));
-      line-height: 0.98;
-      letter-spacing: -1px;
-    }
-    .sub{
-      margin: 12px 0 0;
-      font-size: calc(18px * var(--type-scale-blog));
-      line-height: 1.55;
-      opacity: 0.9;
-      max-width: 75ch;
-    }
-
-    .meta-row{
-      margin-top: 14px;
-      display:flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items:center;
-      font-size: calc(14px * var(--type-scale));
-      opacity: .88;
-      line-height: 1;
-    }
-    .meta-row span.sep{ opacity: .5; }
-
-    /* Cover */
-    .cover{
-      margin-top: 18px;
-      border-radius: var(--radius-xl);
-      overflow: hidden;
-      position: relative;
-    }
-    .cover img{
-      width: 100%;
-      height: min(520px, 56vh);
-      object-fit: cover;
-      display:block;
-      filter: saturate(1.02) contrast(1.02);
-      transform: scale(1.01);
-    }
-    .cover:after{
-      content:"";
-      position:absolute; inset: 0;
-      background:
-        linear-gradient(180deg, rgba(0,0,0,0.00), rgba(0,0,0,0.20) 75%, rgba(0,0,0,0.28));
-      pointer-events:none;
-      opacity: .45;
-    }
-
-    /* Article (single clean card, not nested inside hero) */
-    .article-card{
-      border-radius: var(--radius-xl);
-      padding: 22px;
-    }
-
-    /* Prose (plain reading, no callout boxes) */
-    .prose{
-      font-size: calc(16px * var(--type-scale-blog));
-      line-height: 1.75;
-      max-width: 78ch;
-    }
-    .prose p{ margin: 0 0 14px 0; opacity: .92; }
-    .prose h2{
-      margin: 22px 0 10px;
-      font-size: calc(22px * var(--type-scale-blog));
-      letter-spacing: -0.4px;
-      line-height: 1.2;
-    }
-    .prose h3{
-      margin: 18px 0 8px;
-      font-size: calc(18px * var(--type-scale-blog));
-      letter-spacing: -0.2px;
-      line-height: 1.25;
-    }
-    .prose ul, .prose ol{
-      margin: 0 0 14px 18px;
-      padding: 0;
-    }
-    .prose li{ margin: 8px 0; }
-    .prose strong{ font-weight: 900; }
-    .prose a{
-      color: rgba(41,126,138,1);
-      text-decoration: underline;
-      text-underline-offset: 3px;
-      text-decoration-thickness: 2px;
-    }
-
-    .divider{
-      height: 1px;
-      background: rgba(41,126,138,0.14);
-      margin: 18px 0;
-    }
-
-    /* Post actions (below text) */
-    .post-actions{
-      display:flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      justify-content: flex-start;
-      margin-top: 18px;
-    }
-
-    /* Related */
-    .section-head{
-      display:flex;
-      align-items:flex-end;
-      justify-content: space-between;
-      gap: 14px;
-      margin-bottom: 18px;
-      flex-wrap: wrap;
-      container-type: inline-size;
-    }
-    .section-head > div{ flex: 1 1 auto; min-width: 0; }
-    .section-head h2{
-      margin: 0 0 10px 0;
-      font-size: calc(30px * var(--type-scale));
-      letter-spacing: -0.6px;
-    }
-    .lead{
-      margin: 0;
-      font-size: calc(16px * var(--type-scale-blog));
-      opacity: .84;
-      line-height: 1.45;
-      max-width: 70ch;
-    }
-    .pill-link{
-      display:inline-flex; align-items:center; gap: 10px;
-      padding: 10px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(41,126,138,0.18);
-      background: rgba(255,255,255,0.18);
-      font-weight: 900;
-      font-size: calc(13px * var(--type-scale));
-      line-height: 1;
-    }
-
-    .related-grid{
-      display:grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
-      margin-top: 18px;
-    }
-    .post{
-      border-radius: var(--radius-lg);
-      overflow:hidden;
-      position: relative;
-      min-height: 300px;
-    }
-    .post:before{
-      content:"";
-      position:absolute; inset:-60%;
-      background:
-        radial-gradient(circle at 30% 25%, rgba(252,136,58,0.14), transparent 55%),
-        radial-gradient(circle at 70% 40%, rgba(41,126,138,0.16), transparent 60%);
-      filter: blur(10px);
-      transform: rotate(12deg);
-      pointer-events:none;
-    }
-    .post > *{ position: relative; z-index: 1; }
-    .post-media{
-      height: 150px;
-      overflow:hidden;
-      border-bottom: 1px solid rgba(41,126,138,0.14);
-      background: rgba(255,255,255,0.10);
-    }
-    .post-media img{
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display:block;
-      filter: saturate(1.02) contrast(1.02);
-      transform: scale(1.02);
-    }
-    .post-body{
-      padding: 16px;
-      display:grid;
-      gap: 10px;
-    }
-    .post-top{
-      display:flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .post-cat{
-      display:inline-flex;
-      align-items:center;
-      gap: 8px;
-      padding: 8px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(41,126,138,0.18);
-      background: rgba(255,255,255,0.18);
-      font-weight: 900;
-      font-size: calc(12px * var(--type-scale));
-      opacity: .9;
-      white-space: nowrap;
-      line-height: 1;
-    }
-    .post-cat .dot{
-      width: 8px; height: 8px; border-radius: 999px;
-      background: var(--teal);
-      box-shadow: 0 0 0 4px rgba(41,126,138,0.14);
-    }
-    .post-date{
-      font-size: calc(12px * var(--type-scale));
-      opacity: .72;
-      font-weight: 800;
-      white-space: nowrap;
-      line-height: 1;
-    }
-    .post h3{
-      margin: 0;
-      font-size: calc(18px * var(--type-scale-blog));
-      letter-spacing: -0.3px;
-      line-height: 1.15;
-    }
-    .post p{
-      margin: 0;
-      font-size: calc(14px * var(--type-scale-blog));
-      opacity: .84;
-      line-height: 1.45;
-    }
-    .post-bottom{
-      display:flex;
-      align-items:center;
-      justify-content: space-between;
-      gap: 10px;
-      margin-top: 2px;
-    }
-    .post-meta{
-      font-size: calc(12px * var(--type-scale));
-      opacity: .72;
-      font-weight: 900;
-      display:flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      align-items:center;
-      line-height: 1;
-    }
-    .read{
-      display:inline-flex;
-      align-items:center;
-      gap: 8px;
-      font-weight: 900;
-      font-size: calc(14px * var(--type-scale));
-      color: rgba(41,126,138,1);
-      line-height: 1;
-    }
-    .read:hover{ text-decoration: underline; }
-
-    /* CTA band */
-    .band{
-      padding: 26px;
-      border-radius: var(--radius-xl);
-      text-align: center;
-      position: relative;
-      overflow:hidden;
-      margin-top: 38px;
-    }
-    .band:before{
-      content:"";
-      position:absolute; inset:-30%;
-      background:
-        radial-gradient(circle at 25% 30%, rgba(41,126,138,0.18), transparent 55%),
-        radial-gradient(circle at 70% 25%, rgba(252,136,58,0.18), transparent 58%),
-        radial-gradient(circle at 50% 85%, rgba(255,236,209,0.55), transparent 60%);
-      filter: blur(10px);
-      transform: rotate(-8deg);
-      pointer-events:none;
-    }
-    .band > *{ position: relative; z-index: 1; }
-    .band h2{ margin: 0 0 8px; font-size: calc(28px * var(--type-scale)); letter-spacing: -0.6px; }
-    .band p{ margin: 0 auto 16px; max-width: 80ch; opacity: .85; line-height: 1.45; font-size: calc(16px * var(--type-scale-blog)); }
-
-    /* Footer */
-    footer{ padding: 36px 0 46px; opacity: .85; }
-    footer .foot{
-      display:flex; justify-content: space-between; align-items:center; gap: 12px;
-      padding-top: 16px;
-      border-top: 1px solid rgba(41,126,138,0.14);
-      flex-wrap: wrap;
-    }
-    .foot-brand{ display:flex; flex-direction: column; gap: 4px; line-height: 1; }
-    .tiny{ font-size: calc(13px * var(--type-scale)); opacity: .8; }
-
-    /* Reveal */
-    .reveal{
-      opacity: 0;
-      transform: translateY(10px);
-      transition: opacity .6s ease, transform .6s ease;
-    }
-    .reveal.in{ opacity: 1; transform: translateY(0); }
-
-    /* Mobile drawer */
-    .drawer{
-      position: fixed;
-      inset: 0;
-      background: rgba(57,57,57,0.28);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      display:none;
-      z-index: 60;
-    }
-    .drawer.open{ display:block; }
-    .drawer .panel{
-      width: min(520px, calc(100% - 26px));
-      margin: 86px auto 0;
-      border-radius: var(--radius-xl);
-      padding: 14px;
-    }
-    .drawer a{
-      display:flex;
-      justify-content: space-between;
-      align-items:center;
-      padding: 14px 12px;
-      border-radius: 16px;
-      font-weight: 900;
-      border: 1px solid rgba(41,126,138,0.14);
-      background: rgba(255,255,255,0.14);
-      margin: 10px 0;
-      line-height: 1;
-    }
-    .drawer a span{ font-size: calc(12px * var(--type-scale)); opacity: .75; font-weight: 700; }
-    .drawer a.is-disabled{ opacity: .62; cursor: not-allowed; }
-
-    /* Responsive */
-    @media (max-width: 980px){
-      nav{ display:none; }
-      .mobile-toggle{ display:inline-flex; }
-      header .bar{ border-radius: 22px; }
-      h1{ font-size: calc(44px * var(--type-scale)); }
-      .related-grid{ grid-template-columns: 1fr; }
-    }
-    @media (max-width: 520px){
-      h1{ font-size: calc(38px * var(--type-scale)); }
-      .container{ width: min(var(--max), calc(100% - 28px)); }
-      .brand{ min-width: unset; }
-      .actions{ gap: 8px; }
-      .btn{ padding: 11px 12px; }
-      .theme-toggle{ width: 42px; height: 42px; }
-      .cover img{ height: min(420px, 52vh); }
-    }
-
-    /* Reduced motion */
-    @media (prefers-reduced-motion: reduce){
-      html{ scroll-behavior: auto; }
-      .reveal{ opacity: 1 !important; transform: none !important; transition: none !important; }
-      .btn, nav a, .crumb{ transition: none !important; }
-    }
-
-    /* ========= Dark theme ========= */
-    html[data-theme="dark"]{
-      color-scheme: dark;
-      --bg: #0b1012;
-      --surface: #0f171a;
-      --ink: rgba(245,246,247,0.92);
-      --glass-bg: rgba(18,26,28,0.62);
-      --glass-br: rgba(255,255,255,0.10);
-      --shadow: 0 18px 60px rgba(0,0,0,0.55);
-      --shadow-soft: 0 10px 30px rgba(0,0,0,0.45);
-      --page-bg:
-        radial-gradient(1000px 700px at 20% 10%, rgba(252,136,58,0.10), transparent 60%),
-        radial-gradient(1100px 820px at 90% 15%, rgba(41,126,138,0.18), transparent 60%),
-        linear-gradient(180deg, #06090b, var(--bg) 28%, #06090b 100%);
-    }
-    html[data-theme="dark"] nav a:hover{ background: rgba(255,255,255,0.06); }
-    html[data-theme="dark"] nav a.active{
-      background: rgba(255,255,255,0.08);
-      border-color: rgba(255,255,255,0.14);
-    }
-    html[data-theme="dark"] .btn.ghost{ background: rgba(255,255,255,0.06); }
-    html[data-theme="dark"] .hero-card,
-    html[data-theme="dark"] .pill,
-    html[data-theme="dark"] .crumb,
-    html[data-theme="dark"] .article-card,
-    html[data-theme="dark"] .post,
-    html[data-theme="dark"] .post-cat,
-    html[data-theme="dark"] .drawer a{
-      background: rgba(255,255,255,0.06);
-      border-color: rgba(255,255,255,0.12);
-    }
-    html[data-theme="dark"] .drawer{ background: rgba(0,0,0,0.62); }
-  </style>
+  <!-- Repo map: /assets/css/style.css -->
+  <link rel="stylesheet" href="/assets/css/style.css" />
 </head>
 
-<body>
+<body class="blog-post-page">
   <div class="progress" id="progress" aria-hidden="true"></div>
 
-  <!-- Mobile drawer -->
-  <div class="drawer" id="drawer" aria-hidden="true">
-    <div class="container">
-      <div class="panel glass">
-        <a href="../index.html#aulas" data-close> Aulas <span>presencial + online</span></a>
-        <a href="../index.html#cursos" data-close> Cursos <span>precisão & consistência</span></a>
-        <a href="../index.html#formacao" data-close> Formação <span>aprofundamento</span></a>
-        <a href="#" class="is-disabled" aria-disabled="true" data-close>Eventos</a>
-        <a href="#" class="is-disabled" aria-disabled="true" data-close>Bistrô</a>
-        <a href="../blog.html" data-close> Blog <span>clareza sem misticismo</span></a>
-        <a href="../index.html#contato" data-close> Contato <span>rota rápida</span></a>
-        <div style="display:flex; gap:10px; justify-content:flex-end; margin-top: 10px;">
-          <button class="btn ghost glass" id="drawerClose" type="button">Fechar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <header>
-    <div class="container">
-      <div class="bar glass">
-        <a class="brand" href="../index.html#top" aria-label="Ir para a home">
-          <span class="brand-mark" aria-hidden="true"></span>
-          <span class="brand-name">
-            <strong>DeRose SBC</strong>
-            <span>Yôga de Alto Rendimento</span>
-          </span>
-        </a>
-
-        <nav aria-label="Navegação principal">
-          <a href="../index.html#aulas">AULAS</a>
-          <a href="../index.html#cursos">CURSOS</a>
-          <a href="../index.html#formacao">FORMAÇÃO</a>
-          <a href="#" class="is-disabled" aria-disabled="true">EVENTOS</a>
-          <a href="#" class="is-disabled" aria-disabled="true">BISTRÔ</a>
-          <a href="../blog.html" class="active" aria-current="page">BLOG</a>
-        </nav>
-
-        <div class="actions">
-          <button class="mobile-toggle" id="mobileToggle" aria-label="Abrir menu">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M4 7H20" stroke="#393939" stroke-width="2.4" stroke-linecap="round"/>
-              <path d="M4 12H20" stroke="#393939" stroke-width="2.4" stroke-linecap="round" opacity="0.9"/>
-              <path d="M4 17H20" stroke="#393939" stroke-width="2.4" stroke-linecap="round" opacity="0.8"/>
-            </svg>
-          </button>
-
-          <button class="theme-toggle" id="themeToggle" type="button" aria-label="Ativar modo escuro" aria-pressed="false">
-            <svg class="moon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M21 14.5A8.5 8.5 0 1 1 9.5 3a7 7 0 0 0 11.5 11.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            <svg class="sun" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12Z" stroke="currentColor" stroke-width="2"/>
-              <path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5l-1.5-1.5M20.5 20.5 19 19M5 19l-1.5 1.5M20.5 3.5 19 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-          </button>
-
-          <a class="btn primary" href="../index.html#contato" title="Agendar uma aula">
-            <span class="dot" aria-hidden="true"></span>
-            Entre em Contato
-          </a>
-        </div>
-      </div>
-    </div>
-  </header>
+  <!-- NAVBAR INJETADA -->
+  <div data-navbar></div>
 
   <main id="top">
     <!-- POST HERO -->
     <section class="hero">
       <div class="container">
-        <div class="hero-card glass reveal">
-          <div style="display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap;">
-            <a class="crumb" href="../blog.html">← Voltar ao Blog</a>
+        <div class="post-hero glass reveal">
+          <div class="post-hero-top">
+            <a class="crumb" href="/blog/">← Voltar ao Blog</a>
 
-            <div class="kicker" aria-label="Metadados do post">
-              <span class="pill"><span class="dot" aria-hidden="true"></span><span id="postCategory">Respiração</span></span>
-              <span class="pill alt"><span class="dot" aria-hidden="true"></span><span id="postTag">Foco</span></span>
+            <div class="post-tags" aria-label="Metadados do post">
+              <span class="post-pill"><span class="dot" aria-hidden="true"></span>Respiração</span>
+              <span class="post-pill alt"><span class="dot" aria-hidden="true"></span>Foco</span>
             </div>
           </div>
 
-          <h1 id="postTitle">Respiração Transformadora em 3 minutos: estabilize energia e ruído mental</h1>
+          <h1>Respiração Transformadora em 3 minutos: estabilize energia e ruído mental</h1>
 
-          <p class="sub" id="postExcerpt">
+          <p class="sub">
             Um protocolo simples para você baixar ruído, organizar foco e começar o dia com mais clareza — sem misticismo e sem drama.
           </p>
 
           <div class="meta-row">
-            <span id="postDateLabel">20 jan 2026</span>
+            <span>20 jan 2026</span>
             <span class="sep">•</span>
-            <span><strong id="postRead">4</strong> min de leitura</span>
+            <span><strong>4</strong> min de leitura</span>
             <span class="sep">•</span>
-            <span>Por <strong id="postAuthor">DeRose SBC</strong></span>
+            <span>Por <strong>DeRose SBC</strong></span>
           </div>
 
-          <div class="cover reveal" style="margin-top:18px;">
-            <img id="postCover" src="../assets/blog/respiracao.webp" alt="Respiração Transformadora em 3 minutos" loading="eager" />
+          <div class="cover reveal">
+            <img src="/assets/blog/respiracao.webp" alt="Respiração Transformadora em 3 minutos" loading="eager" />
           </div>
         </div>
       </div>
     </section>
 
-    <!-- POST CONTENT (separate card; no nested glass) -->
-    <section style="padding-top: 18px;">
+    <!-- POST CONTENT -->
+    <section class="post-section">
       <div class="container">
         <article class="article-card glass reveal">
-          <div class="prose" id="postBody">
+          <div class="prose">
             <p>
               Quando a mente está “barulhenta”, o corpo normalmente já está acelerado. A forma mais rápida de trazer o sistema de volta
               para um estado útil é ajustar <strong>ritmo</strong>, <strong>amplitude</strong> e <strong>pausas</strong> da respiração.
@@ -826,8 +131,8 @@
 
           <div class="post-actions">
             <button class="btn ghost glass" id="copyLink" type="button">Copiar link</button>
-            <a class="btn ghost glass" href="../blog.html#posts">Ver mais posts</a>
-            <a class="btn primary" href="../index.html#contato"><span class="dot" aria-hidden="true"></span>Agendar aula</a>
+            <a class="btn ghost glass" href="/blog/#posts">Ver mais posts</a>
+            <a class="btn primary" href="https://wa.me/5511975123336" target="_blank" rel="noreferrer"><span class="dot" aria-hidden="true"></span>Agendar aula</a>
           </div>
         </article>
       </div>
@@ -841,19 +146,67 @@
             <h2>Leituras relacionadas</h2>
             <p class="lead">Mais alguns atalhos práticos na mesma linha: foco, rotina, recuperação.</p>
           </div>
-          <a class="pill-link glass" href="../blog.html">Ir para o Blog →</a>
+          <a class="pill-link glass" href="/blog/">Ir para o Blog →</a>
         </div>
 
-        <div class="related-grid" id="related"><!-- injected by JS --></div>
+        <div class="related-grid">
+          <article class="post glass reveal">
+            <a href="/blog/p/foco-centro/" aria-label="Abrir post: Foco &amp; Concentração">
+              <div class="post-media" aria-hidden="true">
+                <img src="/assets/blog/foco.webp" alt="Foco &amp; Concentração" loading="lazy" />
+              </div>
+              <div class="post-body">
+                <div class="post-top">
+                  <div class="post-cat"><span class="dot" aria-hidden="true"></span>Foco</div>
+                  <div class="post-date">05 jan 2026</div>
+                </div>
+                <h3>Foco &amp; Concentração: volte ao centro em qualquer rotina</h3>
+                <p>Uma abordagem prática para treinar foco profundo e reduzir dispersão — útil para trabalho, estudo e decisões melhores.</p>
+                <div class="post-bottom">
+                  <div class="post-meta">
+                    <span>7 min</span>
+                    <span>•</span>
+                    <span>Leitura objetiva</span>
+                  </div>
+                  <span class="read">Ler →</span>
+                </div>
+              </div>
+            </a>
+          </article>
+
+          <article class="post glass reveal">
+            <a href="/blog/p/recuperacao-profunda/" aria-label="Abrir post: Recuperação Profunda">
+              <div class="post-media" aria-hidden="true">
+                <img src="/assets/blog/recuperacao.webp" alt="Recuperação Profunda" loading="lazy" />
+              </div>
+              <div class="post-body">
+                <div class="post-top">
+                  <div class="post-cat"><span class="dot" aria-hidden="true"></span>Recuperação</div>
+                  <div class="post-date">10 jan 2026</div>
+                </div>
+                <h3>Recuperação Profunda: por que descansar não é perder tempo</h3>
+                <p>Recuperação não é pausa passiva — é assimilação ativa. Entenda como melhorar recuperação física e emocional com técnica.</p>
+                <div class="post-bottom">
+                  <div class="post-meta">
+                    <span>5 min</span>
+                    <span>•</span>
+                    <span>Leitura objetiva</span>
+                  </div>
+                  <span class="read">Ler →</span>
+                </div>
+              </div>
+            </a>
+          </article>
+        </div>
 
         <div class="band glass reveal">
           <h2>Consistência é o multiplicador.</h2>
           <p>
             Se você quer acelerar progresso com orientação, ajuste fino e método progressivo, agende uma aula e alinhe seu plano com clareza.
           </p>
-          <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
-            <a class="btn primary" href="../index.html#contato"><span class="dot" aria-hidden="true"></span>Agendar</a>
-            <a class="btn ghost glass" href="../index.html#aulas">Ver Aulas</a>
+          <div class="cta-center">
+            <a class="btn primary" href="https://wa.me/5511975123336" target="_blank" rel="noreferrer"><span class="dot" aria-hidden="true"></span>Agendar</a>
+            <a class="btn ghost glass" href="/aulas/presencial/index.html">Ver Aulas</a>
           </div>
         </div>
       </div>
@@ -863,219 +216,28 @@
       <div class="container">
         <div class="foot">
           <div class="foot-brand">
-            <div style="font-weight:800;">DeRose SBC</div>
+            <div class="foot-title">DeRose SBC</div>
             <div class="tiny">Blog • Yôga de Alto Rendimento</div>
           </div>
-          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <div class="foot-links">
             <a class="pill-link glass" href="#top">Topo ↑</a>
-            <a class="pill-link glass" href="../blog.html">Blog</a>
-            <a class="pill-link glass" href="../index.html#contato">Contato</a>
+            <a class="pill-link glass" href="/blog/">Blog</a>
+            <a class="pill-link glass" href="https://wa.me/5511975123336" target="_blank" rel="noreferrer">Contato</a>
           </div>
         </div>
-        <div class="tiny" style="margin-top:12px;">
+
+        <div class="tiny mt-12">
           © <span id="year"></span> DeRose SBC.
         </div>
       </div>
     </footer>
   </main>
 
-  <script>
-    // Year
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Theme (light/dark) with persistence + system default
-    const root = document.documentElement;
-    const themeBtn = document.getElementById('themeToggle');
-    const metaTheme = document.querySelector('meta[name="theme-color"]');
-    const THEME_KEY = 'theme';
-
-    function systemPrefersDark(){
-      return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    }
-    function setTheme(theme, {persist = true} = {}){
-      if(theme === 'dark') root.dataset.theme = 'dark';
-      else delete root.dataset.theme;
-
-      if(persist) localStorage.setItem(THEME_KEY, theme);
-
-      if(themeBtn){
-        const isDark = theme === 'dark';
-        themeBtn.setAttribute('aria-pressed', String(isDark));
-        themeBtn.setAttribute('aria-label', isDark ? 'Desativar modo escuro' : 'Ativar modo escuro');
-      }
-      if(metaTheme){
-        metaTheme.setAttribute('content', theme === 'dark' ? '#0b1012' : '#297E8A');
-      }
-    }
-    (function initTheme(){
-      const saved = localStorage.getItem(THEME_KEY);
-      if(saved === 'light' || saved === 'dark') setTheme(saved, {persist:false});
-      else setTheme(systemPrefersDark() ? 'dark' : 'light', {persist:false});
-    })();
-
-    themeBtn?.addEventListener('click', () => {
-      const current = root.dataset.theme === 'dark' ? 'dark' : 'light';
-      setTheme(current === 'dark' ? 'light' : 'dark');
-    });
-
-    const mq = window.matchMedia?.('(prefers-color-scheme: dark)');
-    mq?.addEventListener?.('change', (e) => {
-      const saved = localStorage.getItem(THEME_KEY);
-      if(saved !== 'light' && saved !== 'dark'){
-        setTheme(e.matches ? 'dark' : 'light', {persist:false});
-      }
-    });
-
-    // Prevent placeholder links from navigating
-    document.querySelectorAll('a[aria-disabled="true"]').forEach(a => {
-      a.addEventListener('click', (e) => e.preventDefault());
-    });
-
-    // Mobile drawer
-    const drawer = document.getElementById('drawer');
-    const toggle = document.getElementById('mobileToggle');
-    const closeBtn = document.getElementById('drawerClose');
-    function openDrawer(){
-      drawer.classList.add('open');
-      drawer.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeDrawer(){
-      drawer.classList.remove('open');
-      drawer.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-    }
-    toggle?.addEventListener('click', openDrawer);
-    closeBtn?.addEventListener('click', closeDrawer);
-    drawer?.addEventListener('click', (e) => { if(e.target === drawer) closeDrawer(); });
-    drawer?.querySelectorAll('[data-close]')?.forEach(a => a.addEventListener('click', closeDrawer));
-
-    // Reveal on scroll (safe fallback)
-    (function(){
-      const els = document.querySelectorAll('.reveal');
-      if(!('IntersectionObserver' in window)){
-        els.forEach(el => el.classList.add('in'));
-        return;
-      }
-      const io = new IntersectionObserver((entries)=>{
-        entries.forEach(entry=>{
-          if(entry.isIntersecting){
-            entry.target.classList.add('in');
-            io.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.12 });
-      els.forEach(el => io.observe(el));
-      window.__revealIO = io;
-    })();
-
-    // Progress bar
-    const progress = document.getElementById('progress');
-    function updateProgress(){
-      const doc = document.documentElement;
-      const scrollTop = doc.scrollTop || document.body.scrollTop;
-      const scrollHeight = (doc.scrollHeight || document.body.scrollHeight) - doc.clientHeight;
-      const pct = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
-      progress.style.width = Math.min(100, Math.max(0, pct)) + '%';
-    }
-    window.addEventListener('scroll', updateProgress, { passive: true });
-    updateProgress();
-
-    // Copy link button
-    const copyBtn = document.getElementById('copyLink');
-    copyBtn?.addEventListener('click', async () => {
-      try{
-        await navigator.clipboard.writeText(window.location.href);
-        copyBtn.textContent = 'Link copiado ✓';
-        setTimeout(()=> (copyBtn.textContent = 'Copiar link'), 1400);
-      }catch(e){
-        const tmp = document.createElement('input');
-        tmp.value = window.location.href;
-        document.body.appendChild(tmp);
-        tmp.select();
-        document.execCommand('copy');
-        document.body.removeChild(tmp);
-        copyBtn.textContent = 'Link copiado ✓';
-        setTimeout(()=> (copyBtn.textContent = 'Copiar link'), 1400);
-      }
-    });
-
-    /* =========================
-       Related posts (edit list to match your blog.html POSTS)
-       ========================= */
-    const RELATED = [
-      {
-        title: "Foco & Concentração: volte ao centro em qualquer rotina",
-        excerpt: "Uma abordagem prática para treinar foco profundo e reduzir dispersão — útil para trabalho, estudo e decisões melhores.",
-        category: "Foco",
-        date: "2026-01-05",
-        readMin: 7,
-        image: "../assets/blog/foco.webp",
-        href: "./foco-centro.html"
-      },
-      {
-        title: "Recuperação Profunda: por que descansar não é perder tempo",
-        excerpt: "Recuperação não é pausa passiva — é assimilação ativa. Entenda como melhorar recuperação física e emocional com técnica.",
-        category: "Recuperação",
-        date: "2026-01-10",
-        readMin: 5,
-        image: "../assets/blog/recuperacao.webp",
-        href: "./recuperacao-profunda.html"
-      }
-    ];
-
-    function formatDateISO(iso){
-      try{
-        const [y,m,d] = iso.split('-').map(Number);
-        const dt = new Date(y, m-1, d);
-        return dt.toLocaleDateString('pt-BR', { day:'2-digit', month:'short', year:'numeric' });
-      }catch(e){
-        return iso;
-      }
-    }
-    function escapeHtml(str){
-      return String(str)
-        .replaceAll('&','&amp;')
-        .replaceAll('<','&lt;')
-        .replaceAll('>','&gt;')
-        .replaceAll('"','&quot;')
-        .replaceAll("'","&#039;");
-    }
-
-    const related = document.getElementById('related');
-    related.innerHTML = RELATED.map(p => `
-      <article class="post glass reveal">
-        <a href="${escapeHtml(p.href)}" aria-label="Abrir post: ${escapeHtml(p.title)}">
-          <div class="post-media" aria-hidden="true">
-            <img src="${escapeHtml(p.image)}" alt="${escapeHtml(p.title)}" loading="lazy" />
-          </div>
-          <div class="post-body">
-            <div class="post-top">
-              <div class="post-cat"><span class="dot" aria-hidden="true"></span>${escapeHtml(p.category)}</div>
-              <div class="post-date">${escapeHtml(formatDateISO(p.date))}</div>
-            </div>
-            <h3>${escapeHtml(p.title)}</h3>
-            <p>${escapeHtml(p.excerpt)}</p>
-            <div class="post-bottom">
-              <div class="post-meta">
-                <span>${escapeHtml(p.readMin)} min</span>
-                <span>•</span>
-                <span>Leitura objetiva</span>
-              </div>
-              <span class="read">Ler →</span>
-            </div>
-          </div>
-        </a>
-      </article>
-    `).join('');
-
-    // observe newly injected cards
-    const io = window.__revealIO;
-    if(io){
-      related.querySelectorAll('.reveal').forEach(el => io.observe(el));
-    }else{
-      related.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
-    }
-  </script>
+  <script defer src="/assets/js/utils.js"></script>
+  <script defer src="/assets/js/theme.js"></script>
+  <script defer src="/assets/js/main.js"></script>
+  <script defer src="/assets/js/blog-post.js"></script>
+  <script defer src="/assets/js/navbar.js"></script>
+  <script defer src="/assets/js/soft-nav.js"></script>
 </body>
 </html>
