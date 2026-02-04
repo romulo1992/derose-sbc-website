@@ -38,6 +38,7 @@
 
   /* Base scale (keeps the overall page as-is) */
   --type-scale: 0.77;
+  --nav-offset: 96px;
 
   /* Slightly bigger (v2) for the specific copy blocks you listed (Lugar A–F + section descriptive lines) */
   --type-scale-desc: 0.87;
@@ -59,6 +60,7 @@ body{
   color: var(--ink);
   background: var(--page-bg);
   overflow-x: hidden;
+  padding-top: var(--nav-offset);
 }
 
 a{ color: inherit; text-decoration: none; }
@@ -162,7 +164,7 @@ a{ color: inherit; text-decoration: none; }
 
 /* Header */
 header{
-  position: sticky; top: 0; z-index: 40;
+  position: fixed; top: 0; left: 0; right: 0; z-index: 40;
   padding: 14px 0;
   transition: transform .2s ease, background .2s ease, border-color .2s ease;
 }
@@ -787,6 +789,7 @@ footer .foot{
 
 /* Responsive */
 @media (max-width: 980px){
+  :root{ --nav-offset: 88px; }
   .hero-grid{ grid-template-columns: 1fr; }
   .hero-art{ min-height: 340px; }
   h1{ font-size: 46px; }
