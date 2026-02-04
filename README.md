@@ -10,6 +10,6 @@ This repo is organized as a static site with clean, folder-based routes (each pa
 
 | Parent folder | Direct child folders |
 | --- | --- |
-| `/` (root) | `aulas/`, `cursos/`, `formacao/`, `eventos/`, `bistro/`, `blog/`, `lp/`, `assets/`, `data/` (optional) |
+| `/` (root) | `aulas/`, `cursos/`, `formacao/`, `eventos/`, `bistro/`, `blog/`, `lp/`, `assets/`, `data/`,  `tests` |
 
 
