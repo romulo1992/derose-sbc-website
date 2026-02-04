@@ -1271,6 +1271,58 @@ html[data-theme="dark"] .drawer{ background: rgba(0,0,0,0.62); }
   margin-top: 18px;
 }
 
+.blog-page .posts-stage{
+  position: relative;
+}
+
+.blog-page .posts-overlay{
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 35%;
+  display: none;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 18px;
+  background: linear-gradient(
+    180deg,
+    rgba(248,248,250,0) 0%,
+    rgba(248,248,250,0.72) 60%,
+    rgba(248,248,250,0.96) 100%
+  );
+  pointer-events: none;
+}
+
+.blog-page .posts-overlay-content{
+  pointer-events: auto;
+  display: grid;
+  gap: 10px;
+  text-align: center;
+  padding: 14px 18px;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(41,126,138,0.18);
+  background: rgba(255,255,255,0.82);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: var(--shadow-soft);
+}
+
+.blog-page .posts-count{
+  font-size: calc(13px * var(--type-scale));
+  font-weight: 900;
+  letter-spacing: .2px;
+  opacity: .82;
+}
+
+.blog-page .posts-footer{
+  display:flex;
+  justify-content:center;
+  margin-top: 16px;
+}
+
+.blog-page #showLessBtn{ display:none; }
+
 .blog-page .post{
   border-radius: var(--radius-lg);
   overflow:hidden;
@@ -1430,6 +1482,20 @@ html[data-theme="dark"] .blog-page .pill-link,
 html[data-theme="dark"] .blog-page .empty{
   background: rgba(255,255,255,0.06);
   border-color: rgba(255,255,255,0.12);
+}
+
+html[data-theme="dark"] .blog-page .posts-overlay{
+  background: linear-gradient(
+    180deg,
+    rgba(9,10,12,0) 0%,
+    rgba(9,10,12,0.72) 60%,
+    rgba(9,10,12,0.96) 100%
+  );
+}
+
+html[data-theme="dark"] .blog-page .posts-overlay-content{
+  background: rgba(12,12,14,0.78);
+  border-color: rgba(255,255,255,0.18);
 }
 
 /* Make select arrow follow dark ink */

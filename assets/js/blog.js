@@ -80,6 +80,45 @@
       image: "../assets/blog/consistencia.webp",
       href: "./p/consistencia-ritual/index.html",
     },
+    {
+      id: "sono-restaurador",
+      title: "Sono restaurador: o protocolo de 5 passos para acordar inteiro",
+      excerpt:
+        "Ajustes simples de luz, respiração e ritmo para transformar sua noite em recuperação real, sem depender de suplementos.",
+      category: "Recuperação",
+      tags: ["Sono", "Rotina"],
+      date: "2025-12-05",
+      readMin: 6,
+      featured: false,
+      image: "../assets/blog/recuperacao.webp",
+      href: "./p/sono-restaurador/index.html",
+    },
+    {
+      id: "energia-manha",
+      title: "Energia de manhã: como ligar o corpo sem cafeína extra",
+      excerpt:
+        "Estratégias de mobilidade curta, respiração e foco para ativar o sistema nervoso e começar o dia com presença.",
+      category: "Foco",
+      tags: ["Rotina", "Respiratórios"],
+      date: "2025-11-28",
+      readMin: 4,
+      featured: false,
+      image: "../assets/blog/foco.webp",
+      href: "./p/energia-manha/index.html",
+    },
+    {
+      id: "nutricao-basica",
+      title: "Nutrição básica: o que fazer antes de complicar a dieta",
+      excerpt:
+        "O mapa de decisões simples para ter mais energia e estabilidade sem cair em extremos alimentares.",
+      category: "Alimentação",
+      tags: ["Energia", "Estabilidade"],
+      date: "2025-11-18",
+      readMin: 5,
+      featured: false,
+      image: "../assets/blog/featured.webp",
+      href: "./p/nutricao-basica/index.html",
+    },
   ];
 
   function setYear() {
@@ -155,10 +194,16 @@
     const category = document.getElementById("category");
     const sort = document.getElementById("sort");
     const tagbar = document.getElementById("tagbar");
+    const postsOverlay = document.getElementById("postsOverlay");
+    const postsCount = document.getElementById("postsCount");
+    const showMoreBtn = document.getElementById("showMoreBtn");
+    const showLessBtn = document.getElementById("showLessBtn");
 
     if (!grid || !empty || !search || !category || !sort || !tagbar) return;
 
     let state = { q: "", category: "all", tag: "all", sort: "new" };
+    const INITIAL_VISIBLE = 6;
+    let showAll = false;
 
     function formatDateISO(iso) {
       try {
@@ -278,17 +323,28 @@
 
     function renderPosts() {
       const filtered = sortPosts(POSTS.filter(matches));
+      const total = filtered.length;
+      const canCollapse = total > INITIAL_VISIBLE;
 
-      if (filtered.length === 0) {
+      if (!canCollapse) showAll = false;
+
+      if (total === 0) {
         grid.innerHTML = "";
         empty.style.display = "block";
         revealElement(empty, io);
+        if (postsOverlay) {
+          postsOverlay.style.display = "none";
+          postsOverlay.setAttribute("aria-hidden", "true");
+        }
+        if (showLessBtn) showLessBtn.style.display = "none";
         return;
       }
 
       empty.style.display = "none";
 
-      grid.innerHTML = filtered
+      const visible = !showAll && canCollapse ? filtered.slice(0, INITIAL_VISIBLE) : filtered;
+
+      grid.innerHTML = visible
         .map((p) => {
           const tagLine = (p.tags || []).slice(0, 2).join(" • ");
 
@@ -323,6 +379,20 @@
         .join("");
 
       grid.querySelectorAll(".reveal").forEach((el) => revealElement(el, io));
+
+      if (postsOverlay && postsCount && showMoreBtn) {
+        postsOverlay.style.display = !showAll && canCollapse ? "flex" : "none";
+        postsOverlay.setAttribute(
+          "aria-hidden",
+          String(showAll || !canCollapse)
+        );
+        postsCount.textContent = `${visible.length} de ${total} posts`;
+        showMoreBtn.disabled = showAll || !canCollapse;
+      }
+
+      if (showLessBtn) {
+        showLessBtn.style.display = showAll && canCollapse ? "inline-flex" : "none";
+      }
     }
 
     function setTag(tag) {
@@ -342,16 +412,19 @@
 
     search.addEventListener("input", (e) => {
       state.q = e.target.value || "";
+      showAll = false;
       renderPosts();
     });
 
     category.addEventListener("change", (e) => {
       state.category = e.target.value || "all";
+      showAll = false;
       renderPosts();
     });
 
     sort.addEventListener("change", (e) => {
       state.sort = e.target.value || "new";
+      showAll = false;
       renderPosts();
     });
 
@@ -360,6 +433,7 @@
       if (!el) return;
       const t = el.getAttribute("data-tag");
       if (!t) return;
+      showAll = false;
       setTag(t);
     });
 
@@ -370,8 +444,23 @@
       e.preventDefault();
       const t = el.getAttribute("data-tag");
       if (!t) return;
+      showAll = false;
       setTag(t);
     });
+
+    if (showMoreBtn) {
+      showMoreBtn.addEventListener("click", () => {
+        showAll = true;
+        renderPosts();
+      });
+    }
+
+    if (showLessBtn) {
+      showLessBtn.addEventListener("click", () => {
+        showAll = false;
+        renderPosts();
+      });
+    }
 
     buildTaxonomy();
     pickFeatured();
