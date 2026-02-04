@@ -115,8 +115,20 @@
           </div>
         </div>
 
-        <div class="grid" id="grid" aria-label="Lista de posts">
-          <!-- cards injected by JS -->
+        <div class="posts-wrap">
+          <div class="grid" id="grid" aria-label="Lista de posts">
+            <!-- cards injected by JS -->
+          </div>
+
+          <div class="posts-overlay" id="postsOverlay" aria-hidden="true">
+            <div class="posts-scrim"></div>
+            <button class="btn glass posts-more" id="postsMore" type="button">Mostrar Mais</button>
+            <div class="posts-count" id="postsCount">6 de 6 posts</div>
+          </div>
+        </div>
+
+        <div class="posts-less" id="postsLessWrap">
+          <button class="btn glass posts-less-btn" id="postsLess" type="button">Mostrar Menos</button>
         </div>
 
         <div class="empty glass reveal" id="empty">
