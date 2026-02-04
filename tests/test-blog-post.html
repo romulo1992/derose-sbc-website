@@ -1,0 +1,1001 @@
+<!-- START COPY -->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#297E8A" />
+
+  <!-- =========
+    POST META (EDIT THESE)
+    ========= -->
+  <title>Respiração Transformadora em 3 minutos • DeRose SBC</title>
+  <meta name="description" content="Um protocolo simples para baixar ruído, organizar foco e começar o dia com mais clareza — sem misticismo e sem drama." />
+  <meta property="og:title" content="Respiração Transformadora em 3 minutos • DeRose SBC" />
+  <meta property="og:description" content="Um protocolo simples para baixar ruído, organizar foco e começar o dia com mais clareza — sem misticismo e sem drama." />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="../assets/blog/respiracao.webp" />
+  <meta property="article:published_time" content="2026-01-20" />
+  <meta property="article:modified_time" content="2026-01-20" />
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+
+  <style>
+    @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-Thin.ttf") format("truetype"); font-weight:100; font-style:normal; font-display:swap; }
+    @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-ExtraLight.ttf") format("truetype"); font-weight:200; font-style:normal; font-display:swap; }
+    @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-Light.ttf") format("truetype"); font-weight:300; font-style:normal; font-display:swap; }
+    @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-Regular.ttf") format("truetype"); font-weight:400; font-style:normal; font-display:swap; }
+    @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-Medium.ttf") format("truetype"); font-weight:500; font-style:normal; font-display:swap; }
+    @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-SemiBold.ttf") format("truetype"); font-weight:600; font-style:normal; font-display:swap; }
+    @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-Bold.ttf") format("truetype"); font-weight:700; font-style:normal; font-display:swap; }
+    @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-ExtraBold.ttf") format("truetype"); font-weight:800; font-style:normal; font-display:swap; }
+    @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-Black.ttf") format("truetype"); font-weight:900; font-style:normal; font-display:swap; }
+
+    :root{
+      --bg: #FFF9EF;
+      --surface: #FFECD1;
+      --accent: #FC883A;
+      --teal: #297E8A;
+      --ink: #393939;
+      --glass-bg: rgba(255,255,255,0.26);
+      --glass-br: rgba(41,126,138,0.22);
+      --shadow: 0 18px 60px rgba(57,57,57,0.12);
+      --shadow-soft: 0 10px 30px rgba(57,57,57,0.10);
+      --radius-xl: 28px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --radius-sm: 12px;
+      --max: 1120px;
+      --type-scale: 0.77;
+      --type-scale-blog: 0.92;
+      --page-bg:
+        radial-gradient(1000px 700px at 20% 10%, rgba(252,136,58,0.12), transparent 60%),
+        radial-gradient(1100px 820px at 90% 15%, rgba(41,126,138,0.14), transparent 60%),
+        linear-gradient(180deg, var(--bg), #fff 28%, var(--bg) 100%);
+    }
+
+    *{ box-sizing: border-box; }
+    html{ scroll-behavior: smooth; }
+    body{
+      margin:0;
+      font-family: "Spartan", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      line-height: 1.25;
+      color: var(--ink);
+      background: var(--page-bg);
+      overflow-x: hidden;
+    }
+    a{ color: inherit; text-decoration: none; }
+    .container{ width:min(var(--max), calc(100% - 40px)); margin: 0 auto; }
+
+    .skip{
+      position:absolute;
+      left:-999px; top: 10px;
+      background: rgba(255,255,255,0.92);
+      border: 1px solid rgba(41,126,138,0.22);
+      padding: 10px 12px;
+      border-radius: 12px;
+      font-weight: 900;
+      z-index: 100;
+    }
+    .skip:focus{ left: 12px; }
+
+    .glass{
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-br);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    .progress{
+      position: fixed;
+      top: 0; left: 0;
+      height: 3px;
+      width: 0%;
+      background: linear-gradient(90deg, rgba(41,126,138,0.95), rgba(252,136,58,0.95));
+      z-index: 90;
+      transform-origin: left center;
+    }
+
+    header{
+      position: sticky; top: 0; z-index: 60;
+      padding: 14px 0;
+    }
+    header .bar{
+      border-radius: 999px;
+      padding: 10px 14px;
+      display:flex; align-items:center; justify-content: space-between;
+      gap: 14px;
+    }
+
+    .brand{
+      display:flex; align-items:center; gap: 10px; min-width: 210px;
+      padding: 8px 10px; border-radius: 999px;
+    }
+    .brand-mark{
+      width: 36px; height: 36px; border-radius: 14px;
+      background: linear-gradient(135deg, rgba(41,126,138,0.9), rgba(252,136,58,0.85));
+      box-shadow: 0 10px 22px rgba(41,126,138,0.18);
+      position: relative;
+      overflow: hidden;
+    }
+    .brand-mark:after{
+      content:"";
+      position:absolute; inset:-30%;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.55), transparent 55%);
+      transform: rotate(18deg);
+    }
+    .brand-name{
+      line-height: 1;
+      display:flex; flex-direction: column;
+      gap: 4px;
+    }
+    .brand-name strong{ font-size: calc(15px * var(--type-scale)); letter-spacing: .2px; }
+    .brand-name span{ font-size: calc(12px * var(--type-scale)); opacity: .75; }
+
+    nav{ display:flex; align-items:center; gap: 10px; }
+    nav a{
+      font-size: calc(14px * var(--type-scale));
+      padding: 10px 12px;
+      border-radius: 999px;
+      opacity: .86;
+      transition: background .2s ease, opacity .2s ease, transform .2s ease;
+      line-height: 1;
+    }
+    nav a:hover{ background: rgba(255,255,255,0.35); opacity: 1; transform: translateY(-1px); }
+    nav a.active{ background: rgba(255,255,255,0.45); opacity: 1; border: 1px solid rgba(41,126,138,0.18); }
+    nav a.is-disabled{ opacity: .62; cursor: not-allowed; }
+    nav a.is-disabled:hover{ background: transparent; transform: none; opacity: .62; }
+
+    .actions{ display:flex; align-items:center; gap: 10px; }
+
+    .btn{
+      display:inline-flex; align-items:center; justify-content: center;
+      padding: 11px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(41,126,138,0.22);
+      font-weight: 600;
+      font-size: calc(14px * var(--type-scale));
+      letter-spacing: .2px;
+      cursor: pointer;
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+      user-select: none;
+      white-space: nowrap;
+      line-height: 1;
+    }
+    .btn:hover{ transform: translateY(-1px); box-shadow: var(--shadow-soft); }
+    .btn.primary{
+      border: 1px solid rgba(252,136,58,0.35);
+      background: linear-gradient(135deg, rgba(252,136,58,0.95), rgba(252,136,58,0.65));
+      color: #1f1f1f;
+      font-weight: 900;
+    }
+    .btn.ghost{ background: rgba(255,255,255,0.18); }
+    .btn .dot{
+      width: 8px; height: 8px; border-radius: 999px;
+      margin-right: 10px;
+      background: var(--teal);
+      box-shadow: 0 0 0 4px rgba(41,126,138,0.16);
+    }
+
+    .mobile-toggle{
+      display:none;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(41,126,138,0.22);
+      background: rgba(255,255,255,0.18);
+      cursor:pointer;
+    }
+
+    .theme-toggle{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      border: 1px solid rgba(41,126,138,0.22);
+      background: rgba(255,255,255,0.18);
+      cursor:pointer;
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+      color: var(--ink);
+      line-height: 1;
+    }
+    .theme-toggle:hover{ transform: translateY(-1px); box-shadow: var(--shadow-soft); }
+    .theme-toggle svg{ width: 18px; height: 18px; display:block; }
+    .theme-toggle .sun{ display:none; }
+    html[data-theme="dark"] .theme-toggle .sun{ display:block; }
+    html[data-theme="dark"] .theme-toggle .moon{ display:none; }
+
+    section{ padding: 54px 0; }
+    .hero{ padding: 34px 0 18px; }
+
+    .hero-card{
+      padding: 26px;
+      border-radius: var(--radius-xl);
+      position: relative;
+      overflow:hidden;
+    }
+    .hero-card:before{
+      content:"";
+      position:absolute; inset:-40%;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(252,136,58,0.18), transparent 55%),
+        radial-gradient(circle at 80% 25%, rgba(41,126,138,0.18), transparent 58%),
+        radial-gradient(circle at 50% 80%, rgba(255,236,209,0.55), transparent 60%);
+      filter: blur(10px);
+      transform: rotate(10deg);
+      pointer-events:none;
+    }
+    .hero-card > *{ position: relative; z-index: 1; }
+
+    .crumb{
+      display:inline-flex; align-items:center; gap: 10px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(41,126,138,0.18);
+      background: rgba(255,255,255,0.18);
+      font-weight: 900;
+      font-size: calc(13px * var(--type-scale));
+      line-height: 1;
+      opacity: .92;
+    }
+
+    .kicker{ display:flex; gap: 10px; flex-wrap: wrap; align-items:center; }
+    .pill{
+      display:inline-flex; align-items:center; gap: 10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(41,126,138,0.18);
+      background: rgba(255,255,255,0.22);
+      font-size: calc(13px * var(--type-scale));
+      font-weight: 900;
+      letter-spacing: .25px;
+      line-height: 1;
+    }
+    .pill .dot{
+      width: 8px; height: 8px; border-radius: 999px;
+      background: var(--teal);
+      box-shadow: 0 0 0 4px rgba(41,126,138,0.14);
+    }
+    .pill.alt .dot{
+      background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(252,136,58,0.14);
+    }
+
+    h1{
+      margin: 16px 0 10px;
+      font-size: calc(50px * var(--type-scale));
+      line-height: 0.98;
+      letter-spacing: -1px;
+    }
+    .sub{
+      margin: 12px 0 0;
+      font-size: calc(18px * var(--type-scale-blog));
+      line-height: 1.55;
+      opacity: 0.9;
+      max-width: 75ch;
+    }
+
+    .meta-row{
+      margin-top: 14px;
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items:center;
+      font-size: calc(14px * var(--type-scale));
+      opacity: .88;
+      line-height: 1;
+    }
+    .meta-row span.sep{ opacity: .5; }
+
+    .hero-cta{
+      margin-top: 16px;
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items:center;
+    }
+
+    .cover{
+      margin-top: 18px;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      position: relative;
+    }
+    .cover img{
+      width: 100%;
+      height: min(520px, 56vh);
+      object-fit: cover;
+      display:block;
+    }
+
+    .takeaways{
+      margin-top: 16px;
+      border-radius: var(--radius-lg);
+      padding: 16px;
+    }
+    .takeaways h2{
+      margin: 0 0 8px 0;
+      font-size: calc(18px * var(--type-scale-blog));
+      letter-spacing: -0.3px;
+      line-height: 1.2;
+    }
+    .takeaways ul{
+      margin: 0;
+      padding-left: 18px;
+      line-height: 1.55;
+      font-size: calc(15px * var(--type-scale-blog));
+      opacity: .92;
+    }
+    .takeaways li{ margin: 8px 0; }
+
+    .post-grid{
+      display:grid;
+      grid-template-columns: minmax(0, 1fr) 320px;
+      gap: 18px;
+      align-items:start;
+    }
+
+    .article-card{
+      border-radius: var(--radius-xl);
+      padding: 22px;
+    }
+
+    .prose{
+      font-size: calc(16px * var(--type-scale-blog));
+      line-height: 1.75;
+      max-width: 78ch;
+    }
+    .prose p{ margin: 0 0 14px 0; opacity: .92; }
+    .prose h2{
+      margin: 22px 0 10px;
+      font-size: calc(22px * var(--type-scale-blog));
+      letter-spacing: -0.4px;
+      line-height: 1.2;
+      scroll-margin-top: 110px;
+    }
+    .prose h3{
+      margin: 18px 0 8px;
+      font-size: calc(18px * var(--type-scale-blog));
+      letter-spacing: -0.2px;
+      line-height: 1.25;
+      scroll-margin-top: 110px;
+    }
+    .prose ul, .prose ol{
+      margin: 0 0 14px 18px;
+      padding: 0;
+    }
+    .prose li{ margin: 8px 0; }
+    .prose strong{ font-weight: 900; }
+    .prose a{
+      color: rgba(41,126,138,1);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-thickness: 2px;
+    }
+
+    .divider{
+      height: 1px;
+      background: rgba(41,126,138,0.14);
+      margin: 18px 0;
+    }
+
+    .cta-inline{
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      margin: 18px 0;
+    }
+    .cta-inline h3{
+      margin: 0 0 6px 0;
+      font-size: calc(18px * var(--type-scale-blog));
+      letter-spacing: -0.2px;
+      line-height: 1.2;
+    }
+    .cta-inline p{
+      margin: 0 0 12px 0;
+      opacity: .88;
+      line-height: 1.5;
+      font-size: calc(15px * var(--type-scale-blog));
+    }
+    .cta-inline .row{ display:flex; gap:10px; flex-wrap: wrap; align-items:center; }
+
+    .rail{
+      position: sticky;
+      top: 92px;
+      display: grid;
+      gap: 12px;
+    }
+    .rail-card{
+      border-radius: var(--radius-xl);
+      padding: 14px;
+    }
+    .rail-title{
+      margin: 2px 0 10px;
+      font-size: calc(14px * var(--type-scale));
+      font-weight: 900;
+      letter-spacing: .2px;
+      opacity: .9;
+    }
+    .toc{
+      display:grid;
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .toc a{
+      display:block;
+      padding: 10px 10px;
+      border-radius: 14px;
+      border: 1px solid rgba(41,126,138,0.14);
+      background: rgba(255,255,255,0.14);
+      font-weight: 800;
+      font-size: calc(13px * var(--type-scale));
+      line-height: 1.2;
+      opacity: .86;
+    }
+    .toc a.active{
+      opacity: 1;
+      border-color: rgba(41,126,138,0.22);
+      background: rgba(255,255,255,0.24);
+    }
+    .toc small{
+      display:block;
+      opacity: .72;
+      font-weight: 700;
+      margin-top: 2px;
+    }
+
+    .toc-mobile{
+      display:none;
+      margin-top: 14px;
+      border-radius: var(--radius-lg);
+      padding: 12px;
+    }
+    .toc-mobile summary{
+      cursor:pointer;
+      font-weight: 900;
+      list-style: none;
+      display:flex; justify-content: space-between; align-items:center;
+      gap: 10px;
+      user-select: none;
+    }
+    .toc-mobile summary::-webkit-details-marker{ display:none; }
+    .toc-mobile .toc{ margin-top: 10px; }
+
+    .post-actions{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      margin-top: 18px;
+    }
+
+    .drawer{
+      position: fixed;
+      inset: 0;
+      background: rgba(57,57,57,0.28);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      display:none;
+      z-index: 70;
+    }
+    .drawer.open{ display:block; }
+    .drawer .panel{
+      width: min(520px, calc(100% - 26px));
+      margin: 86px auto 0;
+      border-radius: var(--radius-xl);
+      padding: 14px;
+    }
+    .drawer a{
+      display:flex;
+      justify-content: space-between;
+      align-items:center;
+      padding: 14px 12px;
+      border-radius: 16px;
+      font-weight: 900;
+      border: 1px solid rgba(41,126,138,0.14);
+      background: rgba(255,255,255,0.14);
+      margin: 10px 0;
+      line-height: 1;
+    }
+    .drawer a span{ font-size: calc(12px * var(--type-scale)); opacity: .75; font-weight: 700; }
+    .drawer a.is-disabled{ opacity: .62; cursor: not-allowed; }
+
+    .reveal{
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .reveal.in{ opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 980px){
+      nav{ display:none; }
+      .mobile-toggle{ display:inline-flex; }
+      header .bar{ border-radius: 22px; }
+      h1{ font-size: calc(44px * var(--type-scale)); }
+      .post-grid{ grid-template-columns: 1fr; }
+      .rail{ display:none; }
+      .toc-mobile{ display:block; }
+    }
+    @media (max-width: 520px){
+      h1{ font-size: calc(38px * var(--type-scale)); }
+      .container{ width: min(var(--max), calc(100% - 28px)); }
+      .brand{ min-width: unset; }
+      .actions{ gap: 8px; }
+      .btn{ padding: 11px 12px; }
+      .theme-toggle{ width: 42px; height: 42px; }
+      .cover img{ height: min(420px, 52vh); }
+    }
+
+    html[data-theme="dark"]{
+      color-scheme: dark;
+      --bg: #0b1012;
+      --surface: #0f171a;
+      --ink: rgba(245,246,247,0.92);
+      --glass-bg: rgba(18,26,28,0.62);
+      --glass-br: rgba(255,255,255,0.10);
+      --shadow: 0 18px 60px rgba(0,0,0,0.55);
+      --shadow-soft: 0 10px 30px rgba(0,0,0,0.45);
+      --page-bg:
+        radial-gradient(1000px 700px at 20% 10%, rgba(252,136,58,0.10), transparent 60%),
+        radial-gradient(1100px 820px at 90% 15%, rgba(41,126,138,0.18), transparent 60%),
+        linear-gradient(180deg, #06090b, var(--bg) 28%, #06090b 100%);
+    }
+    html[data-theme="dark"] nav a:hover{ background: rgba(255,255,255,0.06); }
+    html[data-theme="dark"] nav a.active{ background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.14); }
+    html[data-theme="dark"] .btn.ghost{ background: rgba(255,255,255,0.06); }
+    html[data-theme="dark"] .hero-card,
+    html[data-theme="dark"] .pill,
+    html[data-theme="dark"] .crumb,
+    html[data-theme="dark"] .article-card,
+    html[data-theme="dark"] .rail-card,
+    html[data-theme="dark"] .toc-mobile,
+    html[data-theme="dark"] .takeaways,
+    html[data-theme="dark"] .cta-inline,
+    html[data-theme="dark"] .drawer a{
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.12);
+    }
+    html[data-theme="dark"] .drawer{ background: rgba(0,0,0,0.62); }
+    html[data-theme="dark"] .toc a{ background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.12); }
+    html[data-theme="dark"] .toc a.active{ background: rgba(255,255,255,0.08); }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Respiração Transformadora em 3 minutos: estabilize energia e ruído mental",
+    "description": "Um protocolo simples para baixar ruído, organizar foco e começar o dia com mais clareza — sem misticismo e sem drama.",
+    "image": ["../assets/blog/respiracao.webp"],
+    "datePublished": "2026-01-20",
+    "dateModified": "2026-01-20",
+    "author": { "@type": "Organization", "name": "DeRose SBC" },
+    "publisher": { "@type": "Organization", "name": "DeRose SBC" }
+  }
+  </script>
+</head>
+
+<body data-landing="../lp/anti-stress/index.html" data-topic="respiracao">
+  <a class="skip" href="#content">Pular para o conteúdo</a>
+  <div class="progress" id="progress" aria-hidden="true"></div>
+
+  <div class="drawer" id="drawer" aria-hidden="true">
+    <div class="container">
+      <div class="panel glass">
+        <a href="../index.html#aulas" data-close> Aulas <span>presencial + online</span></a>
+        <a href="../index.html#cursos" data-close> Cursos <span>precisão & consistência</span></a>
+        <a href="../index.html#formacao" data-close> Formação <span>aprofundamento</span></a>
+        <a href="#" class="is-disabled" aria-disabled="true" data-close>Eventos</a>
+        <a href="#" class="is-disabled" aria-disabled="true" data-close>Bistrô</a>
+        <a href="../blog.html" data-close> Blog <span>clareza sem misticismo</span></a>
+        <a href="../index.html#contato" data-close> Contato <span>rota rápida</span></a>
+        <div style="display:flex; gap:10px; justify-content:flex-end; margin-top: 10px;">
+          <button class="btn ghost glass" id="drawerClose" type="button">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <header>
+    <div class="container">
+      <div class="bar glass">
+        <a class="brand" href="../index.html#top" aria-label="Ir para a home">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span class="brand-name">
+            <strong>DeRose SBC</strong>
+            <span>Yôga de Alto Rendimento</span>
+          </span>
+        </a>
+
+        <nav aria-label="Navegação principal">
+          <a href="../index.html#aulas">AULAS</a>
+          <a href="../index.html#cursos">CURSOS</a>
+          <a href="../index.html#formacao">FORMAÇÃO</a>
+          <a href="#" class="is-disabled" aria-disabled="true">EVENTOS</a>
+          <a href="#" class="is-disabled" aria-disabled="true">BISTRÔ</a>
+          <a href="../blog.html" class="active" aria-current="page">BLOG</a>
+        </nav>
+
+        <div class="actions">
+          <button class="mobile-toggle" id="mobileToggle" aria-label="Abrir menu">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M4 7H20" stroke="#393939" stroke-width="2.4" stroke-linecap="round"/>
+              <path d="M4 12H20" stroke="#393939" stroke-width="2.4" stroke-linecap="round" opacity="0.9"/>
+              <path d="M4 17H20" stroke="#393939" stroke-width="2.4" stroke-linecap="round" opacity="0.8"/>
+            </svg>
+          </button>
+
+          <button class="theme-toggle" id="themeToggle" type="button" aria-label="Ativar modo escuro" aria-pressed="false">
+            <svg class="moon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M21 14.5A8.5 8.5 0 1 1 9.5 3a7 7 0 0 0 11.5 11.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <svg class="sun" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12Z" stroke="currentColor" stroke-width="2"/>
+              <path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5l-1.5-1.5M20.5 20.5 19 19M5 19l-1.5 1.5M20.5 3.5 19 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+
+          <a class="btn primary" href="../index.html#contato" title="Entre em contato">
+            <span class="dot" aria-hidden="true"></span>
+            Entre em Contato
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container">
+        <div class="hero-card glass reveal">
+          <div style="display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap;">
+            <a class="crumb" href="../blog.html">← Voltar ao Blog</a>
+            <div class="kicker" aria-label="Metadados do post">
+              <span class="pill"><span class="dot" aria-hidden="true"></span><span id="postCategory">Respiração</span></span>
+              <span class="pill alt"><span class="dot" aria-hidden="true"></span><span id="postTag">Anti-stress</span></span>
+            </div>
+          </div>
+
+          <h1 id="postTitle">Respiração Transformadora em 3 minutos: estabilize energia e ruído mental</h1>
+          <p class="sub" id="postExcerpt">
+            Um protocolo simples para você baixar ruído, organizar foco e começar o dia com mais clareza — sem misticismo e sem drama.
+          </p>
+
+          <div class="meta-row">
+            <span id="postDateLabel">20 jan 2026</span>
+            <span class="sep">•</span>
+            <span><strong id="postRead">4</strong> min de leitura</span>
+            <span class="sep">•</span>
+            <span>Por <strong id="postAuthor">DeRose SBC</strong></span>
+          </div>
+
+          <div class="hero-cta">
+            <a class="btn primary" id="heroPrimary" href="#"><span class="dot" aria-hidden="true"></span>Ver o plano anti-stress</a>
+            <a class="btn ghost glass" id="heroSecondary" href="../index.html#contato">Falar com a escola</a>
+            <button class="btn ghost glass" id="copyLink" type="button">Copiar link</button>
+          </div>
+
+          <div class="cover reveal" style="margin-top:18px;">
+            <img id="postCover" src="../assets/blog/respiracao.webp" alt="Respiração Transformadora em 3 minutos" loading="eager" />
+          </div>
+
+          <div class="takeaways glass reveal">
+            <h2>Em 30 segundos:</h2>
+            <ul>
+              <li>Quando o “ruído” sobe, ajuste <strong>ritmo</strong>, <strong>amplitude</strong> e <strong>expiração</strong>.</li>
+              <li>Um ciclo simples por 3 minutos já reduz carga fisiológica e melhora foco.</li>
+              <li>Se quiser transformar em método, o próximo passo é um <strong>plano progressivo</strong> (anti-stress).</li>
+            </ul>
+
+            <details class="toc-mobile glass" id="tocMobile">
+              <summary>
+                <span>Índice do artigo</span>
+                <span style="opacity:.7; font-weight:800;">abrir</span>
+              </summary>
+              <nav class="toc" id="tocListMobile" aria-label="Tabela de conteúdos (mobile)"></nav>
+            </details>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section style="padding-top: 18px;">
+      <div class="container">
+        <div class="post-grid">
+          <article class="article-card glass reveal" id="content">
+            <div class="prose" id="postBody">
+              <p>
+                Quando a mente está “barulhenta”, o corpo normalmente já está acelerado. A forma mais rápida de trazer o sistema de volta
+                para um estado útil é ajustar <strong>ritmo</strong>, <strong>amplitude</strong> e <strong>pausas</strong> da respiração.
+              </p>
+
+              <p>
+                <strong>Se você quer foco:</strong> primeiro reduza o ruído fisiológico. Depois, direcione atenção.
+              </p>
+
+              <div class="cta-inline glass">
+                <h3>Quer usar isso como ferramenta anti-stress (sem improviso)?</h3>
+                <p>O protocolo funciona como “reset rápido”. Para virar resultado consistente, você precisa de progressão (técnica + frequência + ajuste).</p>
+                <div class="row">
+                  <a class="btn primary" id="inlinePrimary1" href="#"><span class="dot" aria-hidden="true"></span>Ver o plano anti-stress</a>
+                  <a class="btn ghost glass" href="../index.html#aulas">Ver modalidades</a>
+                </div>
+              </div>
+
+              <h2 id="protocolo-3-min">O protocolo de 3 minutos</h2>
+              <p>
+                Você vai repetir um ciclo simples por 3 minutos. A regra é: <strong>sem força</strong>, sem “segurar no sofrimento”.
+                O objetivo é <strong>estabilizar</strong>, não “provar algo”.
+              </p>
+
+              <h3 id="passo-1">Passo 1 — Ajuste de postura (20s)</h3>
+              <ul>
+                <li>Pés firmes no chão, coluna “alta” sem rigidez.</li>
+                <li>Queixo levemente recolhido (pescoço longo).</li>
+                <li>Ombros soltos, mandíbula destravada.</li>
+              </ul>
+
+              <h3 id="passo-2">Passo 2 — Ritmo básico (2 min)</h3>
+              <p>Escolha um ritmo confortável e constante:</p>
+              <ul>
+                <li><strong>Inspire</strong> pelo nariz por <strong>4</strong> tempos.</li>
+                <li><strong>Expire</strong> pelo nariz por <strong>6</strong> tempos (um pouco mais longa).</li>
+                <li>Se quiser, adicione uma <strong>pausa</strong> suave de <strong>1</strong> tempo após expirar.</li>
+              </ul>
+
+              <p>
+                <strong>Sinal de que está certo:</strong> a expiração fica mais silenciosa, a testa “solta” e a atenção começa a parar de “pular” entre coisas.
+              </p>
+
+              <h3 id="passo-3">Passo 3 — Direcionar foco (40s)</h3>
+              <p>
+                Nos últimos 40 segundos, mantenha o mesmo ritmo e escolha <strong>um</strong> foco:
+                pode ser o ar na narina, o movimento do abdômen, ou um ponto fixo no ambiente.
+              </p>
+
+              <div class="cta-inline glass">
+                <h3>Se você veio do Instagram: faça o próximo passo “do jeito certo”</h3>
+                <p>O que mais falha não é a técnica — é a consistência e o ajuste fino. Um plano anti-stress resolve isso.</p>
+                <div class="row">
+                  <a class="btn primary" id="inlinePrimary2" href="#"><span class="dot" aria-hidden="true"></span>Ir para o plano</a>
+                  <a class="btn ghost glass" href="../index.html#contato">Tirar dúvidas</a>
+                </div>
+              </div>
+
+              <div class="divider"></div>
+
+              <h2 id="erros-comuns">Erros comuns (e como corrigir)</h2>
+              <ul>
+                <li><strong>Forçar a inspiração:</strong> reduza a amplitude. Respiração “grande” demais tende a gerar tensão.</li>
+                <li><strong>Prender o ar com rigidez:</strong> se pausar, que seja sutil e confortável.</li>
+                <li><strong>Querer “zerar” pensamentos:</strong> o objetivo é diminuir intensidade, não virar pedra.</li>
+              </ul>
+
+              <h2 id="quando-usar">Quando usar no dia</h2>
+              <p>
+                Use antes de tarefas que exigem qualidade: decisão importante, reunião, estudo, treino, ou quando perceber irritação
+                e dispersão crescendo.
+              </p>
+
+              <p>
+                Se você quiser, transforme isso em ritual: <strong>3 minutos</strong> ao acordar + <strong>3 minutos</strong> antes do trabalho.
+                Consistência supera intensidade.
+              </p>
+            </div>
+
+            <div class="post-actions">
+              <a class="btn primary" id="postPrimary" href="#"><span class="dot" aria-hidden="true"></span>Ver o plano anti-stress</a>
+              <a class="btn ghost glass" href="../index.html#contato">Agendar conversa</a>
+              <a class="btn ghost glass" href="../blog.html#posts">Ver mais posts</a>
+            </div>
+          </article>
+
+          <aside class="rail reveal" aria-label="Navegação lateral">
+            <div class="rail-card glass">
+              <div class="rail-title">Índice do artigo</div>
+              <nav class="toc" id="tocList" aria-label="Tabela de conteúdos"></nav>
+            </div>
+
+            <div class="rail-card glass">
+              <div class="rail-title">Próximo passo</div>
+              <p style="margin:0 0 10px 0; opacity:.86; line-height:1.4; font-size: calc(14px * var(--type-scale-blog));">
+                Quer aplicar isso para anti-stress com progressão e consistência?
+              </p>
+              <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                <a class="btn primary" id="railPrimary" href="#"><span class="dot" aria-hidden="true"></span>Ver o plano</a>
+                <a class="btn ghost glass" href="../index.html#aulas">Ver aulas</a>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <footer style="padding: 36px 0 46px; opacity: .85;">
+      <div class="container">
+        <div style="display:flex; justify-content: space-between; align-items:center; gap: 12px; padding-top: 16px; border-top: 1px solid rgba(41,126,138,0.14); flex-wrap: wrap;">
+          <div style="display:flex; flex-direction: column; gap: 4px; line-height: 1;">
+            <div style="font-weight:800;">DeRose SBC</div>
+            <div style="font-size: calc(13px * var(--type-scale)); opacity: .8;">Blog • Yôga de Alto Rendimento</div>
+          </div>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <a class="btn ghost glass" href="#top">Topo ↑</a>
+            <a class="btn ghost glass" href="../blog.html">Blog</a>
+            <a class="btn ghost glass" href="../index.html#contato">Contato</a>
+          </div>
+        </div>
+        <div style="font-size: calc(13px * var(--type-scale)); opacity: .8; margin-top:12px;">
+          © <span id="year"></span> DeRose SBC.
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const root = document.documentElement;
+    const themeBtn = document.getElementById('themeToggle');
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const THEME_KEY = 'theme';
+
+    function systemPrefersDark(){
+      return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
+    function setTheme(theme, {persist = true} = {}){
+      if(theme === 'dark') root.dataset.theme = 'dark';
+      else delete root.dataset.theme;
+      if(persist) localStorage.setItem(THEME_KEY, theme);
+
+      if(themeBtn){
+        const isDark = theme === 'dark';
+        themeBtn.setAttribute('aria-pressed', String(isDark));
+        themeBtn.setAttribute('aria-label', isDark ? 'Desativar modo escuro' : 'Ativar modo escuro');
+      }
+      if(metaTheme){
+        metaTheme.setAttribute('content', theme === 'dark' ? '#0b1012' : '#297E8A');
+      }
+    }
+    (function initTheme(){
+      const saved = localStorage.getItem(THEME_KEY);
+      if(saved === 'light' || saved === 'dark') setTheme(saved, {persist:false});
+      else setTheme(systemPrefersDark() ? 'dark' : 'light', {persist:false});
+    })();
+
+    themeBtn?.addEventListener('click', () => {
+      const current = root.dataset.theme === 'dark' ? 'dark' : 'light';
+      setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+
+    // Mobile drawer
+    const drawer = document.getElementById('drawer');
+    const toggle = document.getElementById('mobileToggle');
+    const closeBtn = document.getElementById('drawerClose');
+    function openDrawer(){
+      drawer.classList.add('open');
+      drawer.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeDrawer(){
+      drawer.classList.remove('open');
+      drawer.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+    toggle?.addEventListener('click', openDrawer);
+    closeBtn?.addEventListener('click', closeDrawer);
+    drawer?.addEventListener('click', (e) => { if(e.target === drawer) closeDrawer(); });
+    drawer?.querySelectorAll('[data-close]')?.forEach(a => a.addEventListener('click', closeDrawer));
+
+    // Progress bar
+    const progress = document.getElementById('progress');
+    function updateProgress(){
+      const doc = document.documentElement;
+      const scrollTop = doc.scrollTop || document.body.scrollTop;
+      const scrollHeight = (doc.scrollHeight || document.body.scrollHeight) - doc.clientHeight;
+      const pct = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+      progress.style.width = Math.min(100, Math.max(0, pct)) + '%';
+    }
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress();
+
+    // Copy link
+    const copyBtn = document.getElementById('copyLink');
+    copyBtn?.addEventListener('click', async () => {
+      try{
+        await navigator.clipboard.writeText(window.location.href);
+        copyBtn.textContent = 'Link copiado ✓';
+        setTimeout(()=> (copyBtn.textContent = 'Copiar link'), 1400);
+      }catch(e){
+        const tmp = document.createElement('input');
+        tmp.value = window.location.href;
+        document.body.appendChild(tmp);
+        tmp.select();
+        document.execCommand('copy');
+        document.body.removeChild(tmp);
+        copyBtn.textContent = 'Link copiado ✓';
+        setTimeout(()=> (copyBtn.textContent = 'Copiar link'), 1400);
+      }
+    });
+
+    // Funnel plumbing: topic + UTM propagation to ONE landing page
+    const params = new URLSearchParams(window.location.search);
+    const bodyTopic = document.body.getAttribute('data-topic') || 'stress';
+    const topic = (params.get('topic') || bodyTopic || 'stress').toLowerCase();
+    const landingBase = document.body.getAttribute('data-landing') || '../index.html#contato';
+
+    const UTM_KEYS = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'];
+    function pickUtms(){
+      const utm = {};
+      UTM_KEYS.forEach(k => {
+        const v = params.get(k);
+        if(v) utm[k] = v;
+      });
+      return utm;
+    }
+    function withParams(url, extra = {}){
+      const u = new URL(url, window.location.href);
+      Object.entries(extra).forEach(([k,v]) => {
+        if(v !== undefined && v !== null && String(v).length) u.searchParams.set(k, String(v));
+      });
+      return u.pathname + (u.search ? u.search : '') + (u.hash ? u.hash : '');
+    }
+
+    const utms = pickUtms();
+    const primaryUrl = withParams(landingBase, { topic, ...utms });
+
+    ['heroPrimary','inlinePrimary1','inlinePrimary2','postPrimary','railPrimary'].forEach(id => {
+      const el = document.getElementById(id);
+      if(el) el.setAttribute('href', primaryUrl);
+    });
+
+    // Auto Table of Contents
+    const toc = document.getElementById('tocList');
+    const tocMobile = document.getElementById('tocListMobile');
+    const content = document.getElementById('postBody');
+
+    function slugify(str){
+      return String(str)
+        .toLowerCase()
+        .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-z0-9\s-]/g, '')
+        .trim()
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-');
+    }
+
+    const headings = Array.from(content.querySelectorAll('h2, h3'));
+    headings.forEach(h => { if(!h.id) h.id = slugify(h.textContent || 'sec'); });
+
+    function tocLink(h){
+      const title = h.textContent?.trim() || 'Seção';
+      const level = h.tagName.toLowerCase();
+      const prefix = level === 'h3' ? '↳ ' : '';
+      return `
+        <a href="#${h.id}" data-target="${h.id}" data-level="${level}">
+          ${prefix}${title}
+          <small>${level === 'h2' ? 'seção' : 'subseção'}</small>
+        </a>
+      `;
+    }
+
+    const tocHtml = headings.map(tocLink).join('');
+    if(toc) toc.innerHTML = tocHtml;
+    if(tocMobile) tocMobile.innerHTML = tocHtml;
+
+    const tocLinks = Array.from(document.querySelectorAll('.toc a'));
+    function setActive(id){
+      tocLinks.forEach(a => a.classList.toggle('active', a.dataset.target === id));
+    }
+
+    if('IntersectionObserver' in window){
+      const obs = new IntersectionObserver((entries) => {
+        const visible = entries.filter(e => e.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];
+        if(visible?.target?.id) setActive(visible.target.id);
+      }, { threshold: [0.18, 0.28, 0.38], rootMargin: '-20% 0px -70% 0px' });
+      headings.forEach(h => obs.observe(h));
+    }
+  </script>
+</body>
+</html>
+<!-- END COPY -->
