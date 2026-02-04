@@ -155,10 +155,15 @@
     const category = document.getElementById("category");
     const sort = document.getElementById("sort");
     const tagbar = document.getElementById("tagbar");
+    const showMoreBtn = document.getElementById("showMore");
+    const showLessBtn = document.getElementById("showLess");
+    const postScrim = document.getElementById("postScrim");
 
     if (!grid || !empty || !search || !category || !sort || !tagbar) return;
 
     let state = { q: "", category: "all", tag: "all", sort: "new" };
+    let showAll = false;
+    const INITIAL_VISIBLE = 3;
 
     function formatDateISO(iso) {
       try {
@@ -276,6 +281,17 @@
       return out;
     }
 
+    function updateOverflowControls(total) {
+      if (!showMoreBtn || !showLessBtn || !postScrim) return;
+      const hasOverflow = total > INITIAL_VISIBLE;
+
+      if (!hasOverflow) showAll = false;
+
+      showMoreBtn.style.display = hasOverflow && !showAll ? "inline-flex" : "none";
+      showLessBtn.style.display = hasOverflow && showAll ? "inline-flex" : "none";
+      postScrim.style.display = hasOverflow && !showAll ? "block" : "none";
+    }
+
     function renderPosts() {
       const filtered = sortPosts(POSTS.filter(matches));
 
@@ -283,12 +299,17 @@
         grid.innerHTML = "";
         empty.style.display = "block";
         revealElement(empty, io);
+        updateOverflowControls(0);
         return;
       }
 
+      if (filtered.length <= INITIAL_VISIBLE) showAll = false;
+
       empty.style.display = "none";
 
-      grid.innerHTML = filtered
+      const visiblePosts = showAll ? filtered : filtered.slice(0, INITIAL_VISIBLE);
+
+      grid.innerHTML = visiblePosts
         .map((p) => {
           const tagLine = (p.tags || []).slice(0, 2).join(" • ");
 
@@ -323,6 +344,7 @@
         .join("");
 
       grid.querySelectorAll(".reveal").forEach((el) => revealElement(el, io));
+      updateOverflowControls(filtered.length);
     }
 
     function setTag(tag) {
@@ -342,16 +364,19 @@
 
     search.addEventListener("input", (e) => {
       state.q = e.target.value || "";
+      showAll = false;
       renderPosts();
     });
 
     category.addEventListener("change", (e) => {
       state.category = e.target.value || "all";
+      showAll = false;
       renderPosts();
     });
 
     sort.addEventListener("change", (e) => {
       state.sort = e.target.value || "new";
+      showAll = false;
       renderPosts();
     });
 
@@ -360,6 +385,7 @@
       if (!el) return;
       const t = el.getAttribute("data-tag");
       if (!t) return;
+      showAll = false;
       setTag(t);
     });
 
@@ -370,8 +396,23 @@
       e.preventDefault();
       const t = el.getAttribute("data-tag");
       if (!t) return;
+      showAll = false;
       setTag(t);
     });
+
+    if (showMoreBtn) {
+      showMoreBtn.addEventListener("click", () => {
+        showAll = true;
+        renderPosts();
+      });
+    }
+
+    if (showLessBtn) {
+      showLessBtn.addEventListener("click", () => {
+        showAll = false;
+        renderPosts();
+      });
+    }
 
     buildTaxonomy();
     pickFeatured();

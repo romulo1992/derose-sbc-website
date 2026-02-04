@@ -115,8 +115,16 @@
           </div>
         </div>
 
-        <div class="grid" id="grid" aria-label="Lista de posts">
-          <!-- cards injected by JS -->
+        <div class="post-grid">
+          <div class="grid" id="grid" aria-label="Lista de posts">
+            <!-- cards injected by JS -->
+          </div>
+          <div class="post-scrim" id="postScrim" aria-hidden="true"></div>
+        </div>
+
+        <div class="post-actions reveal" id="postActions">
+          <button class="btn ghost glass" id="showMore" type="button">Mostrar mais</button>
+          <button class="btn ghost glass" id="showLess" type="button">Mostrar menos</button>
         </div>
 
         <div class="empty glass reveal" id="empty">

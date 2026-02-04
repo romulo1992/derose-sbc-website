@@ -1264,6 +1264,10 @@ html[data-theme="dark"] .drawer{ background: rgba(0,0,0,0.62); }
 }
 
 /* Post grid */
+.blog-page .post-grid{
+  position: relative;
+}
+
 .blog-page .grid{
   display:grid;
   grid-template-columns: repeat(3, 1fr);
@@ -1394,6 +1398,30 @@ html[data-theme="dark"] .drawer{ background: rgba(0,0,0,0.62); }
 }
 .blog-page .read:hover{ text-decoration: underline; }
 
+.blog-page .post-scrim{
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 140px;
+  background: linear-gradient(180deg, rgba(247,249,250,0), rgba(247,249,250,0.98));
+  pointer-events: none;
+  display: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+}
+
+.blog-page .post-actions{
+  margin-top: 18px;
+  display:flex;
+  justify-content:center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.blog-page .post-actions .btn{
+  display: none;
+}
+
 /* Empty state */
 .blog-page .empty{
   border-radius: var(--radius-xl);
@@ -1430,6 +1458,10 @@ html[data-theme="dark"] .blog-page .pill-link,
 html[data-theme="dark"] .blog-page .empty{
   background: rgba(255,255,255,0.06);
   border-color: rgba(255,255,255,0.12);
+}
+
+html[data-theme="dark"] .blog-page .post-scrim{
+  background: linear-gradient(180deg, rgba(12,14,18,0), rgba(12,14,18,0.95));
 }
 
 /* Make select arrow follow dark ink */
