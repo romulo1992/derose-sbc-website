@@ -80,6 +80,45 @@
       image: "../assets/blog/consistencia.webp",
       href: "./p/consistencia-ritual/index.html",
     },
+    {
+      id: "ritmo-circadiano",
+      title: "Ritmo Circadiano: ajuste simples para dormir melhor e render mais",
+      excerpt:
+        "Pequenos alinhamentos de luz, horário e respiração para regular energia ao longo do dia sem esforço heroico.",
+      category: "Recuperação",
+      tags: ["Rotina", "Recuperação"],
+      date: "2025-12-05",
+      readMin: 5,
+      featured: false,
+      image: "../assets/blog/recuperacao.webp",
+      href: "./p/ritmo-circadiano/index.html",
+    },
+    {
+      id: "alimentacao-estavel",
+      title: "Alimentação Estável: menos picos, mais clareza",
+      excerpt:
+        "O básico que mantém energia e foco constantes — sem dietas radicais e sem ficar refém de cafeína.",
+      category: "Performance",
+      tags: ["Nutrição", "Foco"],
+      date: "2025-11-22",
+      readMin: 6,
+      featured: false,
+      image: "../assets/blog/featured.webp",
+      href: "./p/alimentacao-estavel/index.html",
+    },
+    {
+      id: "respiracao-nasal",
+      title: "Respiração Nasal: por que ela muda sua recuperação",
+      excerpt:
+        "Respirar pelo nariz regula CO₂, melhora sono e reduz ansiedade. Veja como aplicar isso no dia a dia.",
+      category: "Respiração",
+      tags: ["Respiratórios", "Recuperação"],
+      date: "2025-11-08",
+      readMin: 4,
+      featured: false,
+      image: "../assets/blog/respiracao.webp",
+      href: "./p/respiracao-nasal/index.html",
+    },
   ];
 
   function setYear() {
@@ -155,10 +194,28 @@
     const category = document.getElementById("category");
     const sort = document.getElementById("sort");
     const tagbar = document.getElementById("tagbar");
+    const postScrim = document.getElementById("postScrim");
+    const postCounter = document.getElementById("postCounter");
+    const postMore = document.getElementById("postMore");
+    const postLess = document.getElementById("postLess");
 
-    if (!grid || !empty || !search || !category || !sort || !tagbar) return;
+    if (
+      !grid ||
+      !empty ||
+      !search ||
+      !category ||
+      !sort ||
+      !tagbar ||
+      !postScrim ||
+      !postCounter ||
+      !postMore ||
+      !postLess
+    )
+      return;
 
     let state = { q: "", category: "all", tag: "all", sort: "new" };
+    const PAGE_SIZE = 6;
+    let visibleCount = PAGE_SIZE;
 
     function formatDateISO(iso) {
       try {
@@ -278,17 +335,26 @@
 
     function renderPosts() {
       const filtered = sortPosts(POSTS.filter(matches));
+      const searchActive = state.q.trim().length > 0;
+      const showCount = searchActive
+        ? filtered.length
+        : Math.min(visibleCount, filtered.length);
 
       if (filtered.length === 0) {
         grid.innerHTML = "";
         empty.style.display = "block";
         revealElement(empty, io);
+        postScrim.classList.remove("is-visible");
+        postCounter.classList.remove("is-visible");
+        postMore.classList.remove("is-visible");
+        postLess.classList.remove("is-visible");
         return;
       }
 
       empty.style.display = "none";
 
       grid.innerHTML = filtered
+        .slice(0, showCount)
         .map((p) => {
           const tagLine = (p.tags || []).slice(0, 2).join(" • ");
 
@@ -323,10 +389,26 @@
         .join("");
 
       grid.querySelectorAll(".reveal").forEach((el) => revealElement(el, io));
+
+      const hasMore = !searchActive && filtered.length > showCount;
+      const showLess =
+        !searchActive && filtered.length > PAGE_SIZE && showCount >= filtered.length;
+
+      postScrim.classList.toggle("is-visible", hasMore);
+      postMore.classList.toggle("is-visible", hasMore);
+      postCounter.classList.toggle("is-visible", hasMore);
+      postLess.classList.toggle("is-visible", showLess);
+
+      if (hasMore) {
+        postCounter.textContent = `${showCount} de ${filtered.length} posts`;
+      } else {
+        postCounter.textContent = "";
+      }
     }
 
     function setTag(tag) {
       state.tag = tag === "Todas" ? "all" : tag;
+      visibleCount = PAGE_SIZE;
 
       tagbar.querySelectorAll(".chip").forEach((ch) => {
         const t = ch.getAttribute("data-tag");
@@ -342,16 +424,19 @@
 
     search.addEventListener("input", (e) => {
       state.q = e.target.value || "";
+      visibleCount = PAGE_SIZE;
       renderPosts();
     });
 
     category.addEventListener("change", (e) => {
       state.category = e.target.value || "all";
+      visibleCount = PAGE_SIZE;
       renderPosts();
     });
 
     sort.addEventListener("change", (e) => {
       state.sort = e.target.value || "new";
+      visibleCount = PAGE_SIZE;
       renderPosts();
     });
 
@@ -371,6 +456,16 @@
       const t = el.getAttribute("data-tag");
       if (!t) return;
       setTag(t);
+    });
+
+    postMore.addEventListener("click", () => {
+      visibleCount += PAGE_SIZE;
+      renderPosts();
+    });
+
+    postLess.addEventListener("click", () => {
+      visibleCount = PAGE_SIZE;
+      renderPosts();
     });
 
     buildTaxonomy();

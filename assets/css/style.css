@@ -1271,6 +1271,68 @@ html[data-theme="dark"] .drawer{ background: rgba(0,0,0,0.62); }
   margin-top: 18px;
 }
 
+.blog-page .posts-stack{
+  position: relative;
+}
+
+.blog-page .post-scrim{
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 38%;
+  background: linear-gradient(180deg, rgba(8,12,18,0) 0%, rgba(8,12,18,0.72) 100%);
+  border-radius: 24px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s ease;
+  z-index: 2;
+}
+
+.blog-page .post-counter,
+.blog-page .post-more{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s ease, transform .2s ease;
+}
+
+.blog-page .post-counter{
+  bottom: 78px;
+  font-weight: 700;
+  font-size: calc(12px * var(--type-scale));
+  letter-spacing: .2px;
+  color: rgba(255,255,255,0.82);
+  text-transform: uppercase;
+}
+
+.blog-page .post-more{
+  bottom: 34px;
+}
+
+.blog-page .post-more.is-visible,
+.blog-page .post-counter.is-visible,
+.blog-page .post-scrim.is-visible{
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.blog-page .post-more.is-visible{
+  transform: translateX(-50%) translateY(-2px);
+}
+
+.blog-page .post-less{
+  display: none;
+  margin: 20px auto 0;
+}
+
+.blog-page .post-less.is-visible{
+  display: inline-flex;
+}
+
 .blog-page .post{
   border-radius: var(--radius-lg);
   overflow:hidden;
