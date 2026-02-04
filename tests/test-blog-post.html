@@ -1,4 +1,3 @@
-<!-- START COPY -->
 <!doctype html>
 <html lang="pt-BR">
 <head>
@@ -18,8 +17,14 @@
   <meta property="article:published_time" content="2026-01-20" />
   <meta property="article:modified_time" content="2026-01-20" />
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+  <!-- Optional but recommended when you have a stable public URL -->
+  <!-- <link rel="canonical" href="https://seudominio.com/blog/respiracao-transformadora.html" /> -->
 
   <style>
+    /* =========================
+       Self-hosted Spartan (TTF)
+       Put files in: /assets/fonts/
+       ========================= */
     @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-Thin.ttf") format("truetype"); font-weight:100; font-style:normal; font-display:swap; }
     @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-ExtraLight.ttf") format("truetype"); font-weight:200; font-style:normal; font-display:swap; }
     @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-Light.ttf") format("truetype"); font-weight:300; font-style:normal; font-display:swap; }
@@ -45,8 +50,10 @@
       --radius-md: 16px;
       --radius-sm: 12px;
       --max: 1120px;
+
       --type-scale: 0.77;
       --type-scale-blog: 0.92;
+
       --page-bg:
         radial-gradient(1000px 700px at 20% 10%, rgba(252,136,58,0.12), transparent 60%),
         radial-gradient(1100px 820px at 90% 15%, rgba(41,126,138,0.14), transparent 60%),
@@ -66,6 +73,7 @@
     a{ color: inherit; text-decoration: none; }
     .container{ width:min(var(--max), calc(100% - 40px)); margin: 0 auto; }
 
+    /* Skip link (a11y) */
     .skip{
       position:absolute;
       left:-999px; top: 10px;
@@ -78,6 +86,7 @@
     }
     .skip:focus{ left: 12px; }
 
+    /* Glass */
     .glass{
       background: var(--glass-bg);
       border: 1px solid var(--glass-br);
@@ -86,6 +95,7 @@
       -webkit-backdrop-filter: blur(18px);
     }
 
+    /* Progress bar */
     .progress{
       position: fixed;
       top: 0; left: 0;
@@ -96,9 +106,11 @@
       transform-origin: left center;
     }
 
+    /* Header */
     header{
       position: sticky; top: 0; z-index: 60;
       padding: 14px 0;
+      transition: transform .2s ease, background .2s ease, border-color .2s ease;
     }
     header .bar{
       border-radius: 999px;
@@ -106,7 +118,6 @@
       display:flex; align-items:center; justify-content: space-between;
       gap: 14px;
     }
-
     .brand{
       display:flex; align-items:center; gap: 10px; min-width: 210px;
       padding: 8px 10px; border-radius: 999px;
@@ -147,7 +158,6 @@
     nav a.is-disabled:hover{ background: transparent; transform: none; opacity: .62; }
 
     .actions{ display:flex; align-items:center; gap: 10px; }
-
     .btn{
       display:inline-flex; align-items:center; justify-content: center;
       padding: 11px 14px;
@@ -185,7 +195,9 @@
       background: rgba(255,255,255,0.18);
       cursor:pointer;
     }
+    .mobile-toggle svg{ display:block; }
 
+    /* Theme toggle */
     .theme-toggle{
       display:inline-flex;
       align-items:center;
@@ -205,6 +217,7 @@
     .theme-toggle .sun{ display:none; }
     html[data-theme="dark"] .theme-toggle .sun{ display:block; }
     html[data-theme="dark"] .theme-toggle .moon{ display:none; }
+    svg [stroke="#393939"]{ stroke: var(--ink) !important; }
 
     section{ padding: 54px 0; }
     .hero{ padding: 34px 0 18px; }
@@ -228,18 +241,6 @@
     }
     .hero-card > *{ position: relative; z-index: 1; }
 
-    .crumb{
-      display:inline-flex; align-items:center; gap: 10px;
-      padding: 10px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(41,126,138,0.18);
-      background: rgba(255,255,255,0.18);
-      font-weight: 900;
-      font-size: calc(13px * var(--type-scale));
-      line-height: 1;
-      opacity: .92;
-    }
-
     .kicker{ display:flex; gap: 10px; flex-wrap: wrap; align-items:center; }
     .pill{
       display:inline-flex; align-items:center; gap: 10px;
@@ -261,6 +262,19 @@
       background: var(--accent);
       box-shadow: 0 0 0 4px rgba(252,136,58,0.14);
     }
+    .crumb{
+      display:inline-flex; align-items:center; gap: 10px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(41,126,138,0.18);
+      background: rgba(255,255,255,0.18);
+      font-weight: 900;
+      font-size: calc(13px * var(--type-scale));
+      line-height: 1;
+      opacity: .92;
+      transition: transform .2s ease, box-shadow .2s ease, opacity .2s ease;
+    }
+    .crumb:hover{ transform: translateY(-1px); box-shadow: var(--shadow-soft); opacity: 1; }
 
     h1{
       margin: 16px 0 10px;
@@ -296,6 +310,7 @@
       align-items:center;
     }
 
+    /* Cover */
     .cover{
       margin-top: 18px;
       border-radius: var(--radius-xl);
@@ -307,8 +322,18 @@
       height: min(520px, 56vh);
       object-fit: cover;
       display:block;
+      filter: saturate(1.02) contrast(1.02);
+      transform: scale(1.01);
+    }
+    .cover:after{
+      content:"";
+      position:absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.00), rgba(0,0,0,0.20) 75%, rgba(0,0,0,0.28));
+      pointer-events:none;
+      opacity: .45;
     }
 
+    /* Key takeaways */
     .takeaways{
       margin-top: 16px;
       border-radius: var(--radius-lg);
@@ -329,6 +354,7 @@
     }
     .takeaways li{ margin: 8px 0; }
 
+    /* Article layout: content + sticky rail (desktop) */
     .post-grid{
       display:grid;
       grid-template-columns: minmax(0, 1fr) 320px;
@@ -380,11 +406,25 @@
       margin: 18px 0;
     }
 
+    /* Inline CTA (inside article) */
     .cta-inline{
       border-radius: var(--radius-lg);
       padding: 16px;
       margin: 18px 0;
+      position: relative;
+      overflow: hidden;
     }
+    .cta-inline:before{
+      content:"";
+      position:absolute; inset:-30%;
+      background:
+        radial-gradient(circle at 25% 30%, rgba(41,126,138,0.16), transparent 55%),
+        radial-gradient(circle at 70% 25%, rgba(252,136,58,0.16), transparent 58%);
+      filter: blur(10px);
+      transform: rotate(-8deg);
+      pointer-events:none;
+    }
+    .cta-inline > *{ position: relative; z-index: 1; }
     .cta-inline h3{
       margin: 0 0 6px 0;
       font-size: calc(18px * var(--type-scale-blog));
@@ -399,6 +439,7 @@
     }
     .cta-inline .row{ display:flex; gap:10px; flex-wrap: wrap; align-items:center; }
 
+    /* Rail: sticky ToC + CTA */
     .rail{
       position: sticky;
       top: 92px;
@@ -431,7 +472,9 @@
       font-size: calc(13px * var(--type-scale));
       line-height: 1.2;
       opacity: .86;
+      transition: transform .15s ease, opacity .15s ease, background .15s ease;
     }
+    .toc a:hover{ transform: translateY(-1px); opacity: 1; }
     .toc a.active{
       opacity: 1;
       border-color: rgba(41,126,138,0.22);
@@ -444,6 +487,7 @@
       margin-top: 2px;
     }
 
+    /* Mobile ToC */
     .toc-mobile{
       display:none;
       margin-top: 14px;
@@ -461,6 +505,7 @@
     .toc-mobile summary::-webkit-details-marker{ display:none; }
     .toc-mobile .toc{ margin-top: 10px; }
 
+    /* Post actions */
     .post-actions{
       display:flex;
       gap: 10px;
@@ -469,6 +514,291 @@
       margin-top: 18px;
     }
 
+    /* Disclaimer */
+    .disclaimer{
+      margin-top: 14px;
+      font-size: calc(13px * var(--type-scale));
+      opacity: .78;
+      line-height: 1.4;
+    }
+
+    /* FAQ */
+    .faq{
+      margin-top: 18px;
+      display:grid;
+      gap: 10px;
+    }
+    .faq details{
+      border-radius: var(--radius-lg);
+      padding: 12px 14px;
+      border: 1px solid rgba(41,126,138,0.14);
+      background: rgba(255,255,255,0.14);
+    }
+    .faq summary{
+      cursor: pointer;
+      font-weight: 900;
+      list-style:none;
+      display:flex; justify-content: space-between; align-items:center;
+      gap: 10px;
+    }
+    .faq summary::-webkit-details-marker{ display:none; }
+    .faq p{
+      margin: 10px 0 0 0;
+      opacity: .9;
+      line-height: 1.55;
+      font-size: calc(15px * var(--type-scale-blog));
+    }
+
+    /* Related */
+    .section-head{
+      display:flex;
+      align-items:flex-end;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+      container-type: inline-size;
+    }
+    .section-head > div{ flex: 1 1 auto; min-width: 0; }
+    .section-head h2{
+      margin: 0 0 10px 0;
+      font-size: calc(30px * var(--type-scale));
+      letter-spacing: -0.6px;
+    }
+    .lead{
+      margin: 0;
+      font-size: calc(16px * var(--type-scale-blog));
+      opacity: .84;
+      line-height: 1.45;
+      max-width: 70ch;
+    }
+    .pill-link{
+      display:inline-flex; align-items:center; gap: 10px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(41,126,138,0.18);
+      background: rgba(255,255,255,0.18);
+      font-weight: 900;
+      font-size: calc(13px * var(--type-scale));
+      line-height: 1;
+    }
+
+    .related-grid{
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-top: 18px;
+    }
+    .post{
+      border-radius: var(--radius-lg);
+      overflow:hidden;
+      position: relative;
+      min-height: 300px;
+    }
+    .post:before{
+      content:"";
+      position:absolute; inset:-60%;
+      background:
+        radial-gradient(circle at 30% 25%, rgba(252,136,58,0.14), transparent 55%),
+        radial-gradient(circle at 70% 40%, rgba(41,126,138,0.16), transparent 60%);
+      filter: blur(10px);
+      transform: rotate(12deg);
+      pointer-events:none;
+    }
+    .post > *{ position: relative; z-index: 1; }
+    .post-media{
+      height: 150px;
+      overflow:hidden;
+      border-bottom: 1px solid rgba(41,126,138,0.14);
+      background: rgba(255,255,255,0.10);
+    }
+    .post-media img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display:block;
+      filter: saturate(1.02) contrast(1.02);
+      transform: scale(1.02);
+    }
+    .post-body{
+      padding: 16px;
+      display:grid;
+      gap: 10px;
+    }
+    .post-top{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .post-cat{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(41,126,138,0.18);
+      background: rgba(255,255,255,0.18);
+      font-weight: 900;
+      font-size: calc(12px * var(--type-scale));
+      opacity: .9;
+      white-space: nowrap;
+      line-height: 1;
+    }
+    .post-cat .dot{
+      width: 8px; height: 8px; border-radius: 999px;
+      background: var(--teal);
+      box-shadow: 0 0 0 4px rgba(41,126,138,0.14);
+    }
+    .post-date{
+      font-size: calc(12px * var(--type-scale));
+      opacity: .72;
+      font-weight: 800;
+      white-space: nowrap;
+      line-height: 1;
+    }
+    .post h3{
+      margin: 0;
+      font-size: calc(18px * var(--type-scale-blog));
+      letter-spacing: -0.3px;
+      line-height: 1.15;
+    }
+    .post p{
+      margin: 0;
+      font-size: calc(14px * var(--type-scale-blog));
+      opacity: .84;
+      line-height: 1.45;
+    }
+    .post-bottom{
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 2px;
+    }
+    .post-meta{
+      font-size: calc(12px * var(--type-scale));
+      opacity: .72;
+      font-weight: 900;
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items:center;
+      line-height: 1;
+    }
+    .read{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      font-weight: 900;
+      font-size: calc(14px * var(--type-scale));
+      color: rgba(41,126,138,1);
+      line-height: 1;
+    }
+    .read:hover{ text-decoration: underline; }
+
+    /* CTA band */
+    .band{
+      padding: 26px;
+      border-radius: var(--radius-xl);
+      text-align: center;
+      position: relative;
+      overflow:hidden;
+      margin-top: 38px;
+    }
+    .band:before{
+      content:"";
+      position:absolute; inset:-30%;
+      background:
+        radial-gradient(circle at 25% 30%, rgba(41,126,138,0.18), transparent 55%),
+        radial-gradient(circle at 70% 25%, rgba(252,136,58,0.18), transparent 58%),
+        radial-gradient(circle at 50% 85%, rgba(255,236,209,0.55), transparent 60%);
+      filter: blur(10px);
+      transform: rotate(-8deg);
+      pointer-events:none;
+    }
+    .band > *{ position: relative; z-index: 1; }
+    .band h2{ margin: 0 0 8px; font-size: calc(28px * var(--type-scale)); letter-spacing: -0.6px; }
+    .band p{ margin: 0 auto 16px; max-width: 80ch; opacity: .85; line-height: 1.45; font-size: calc(16px * var(--type-scale-blog)); }
+
+    /* Sticky bottom CTA bar */
+    .sticky-cta{
+      position: fixed;
+      left: 0; right: 0;
+      bottom: 12px;
+      z-index: 85;
+      display: none;
+      pointer-events: none;
+    }
+    .sticky-cta .inner{
+      width: min(var(--max), calc(100% - 24px));
+      margin: 0 auto;
+      border-radius: 999px;
+      padding: 10px;
+      display:flex;
+      gap: 10px;
+      align-items:center;
+      justify-content: space-between;
+      pointer-events: auto;
+    }
+    .sticky-cta .msg{
+      display:flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+      padding-left: 6px;
+    }
+    .sticky-cta .msg strong{
+      font-size: calc(14px * var(--type-scale));
+      letter-spacing: -0.2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .sticky-cta .msg span{
+      font-size: calc(12px * var(--type-scale));
+      opacity: .78;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .sticky-cta .right{
+      display:flex; gap: 8px; align-items:center; flex-wrap: nowrap;
+    }
+    .icon-btn{
+      width: 42px; height: 42px;
+      border-radius: 999px;
+      border: 1px solid rgba(41,126,138,0.22);
+      background: rgba(255,255,255,0.18);
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .icon-btn:hover{ box-shadow: var(--shadow-soft); transform: translateY(-1px); }
+    .icon-btn svg{ width: 18px; height: 18px; }
+
+    /* Footer */
+    footer{ padding: 36px 0 74px; opacity: .85; }
+    footer .foot{
+      display:flex; justify-content: space-between; align-items:center; gap: 12px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(41,126,138,0.14);
+      flex-wrap: wrap;
+    }
+    .foot-brand{ display:flex; flex-direction: column; gap: 4px; line-height: 1; }
+    .tiny{ font-size: calc(13px * var(--type-scale)); opacity: .8; }
+
+    /* Reveal */
+    .reveal{
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .reveal.in{ opacity: 1; transform: translateY(0); }
+
+    /* Mobile drawer */
     .drawer{
       position: fixed;
       inset: 0;
@@ -500,18 +830,13 @@
     .drawer a span{ font-size: calc(12px * var(--type-scale)); opacity: .75; font-weight: 700; }
     .drawer a.is-disabled{ opacity: .62; cursor: not-allowed; }
 
-    .reveal{
-      opacity: 0;
-      transform: translateY(10px);
-      transition: opacity .6s ease, transform .6s ease;
-    }
-    .reveal.in{ opacity: 1; transform: translateY(0); }
-
+    /* Responsive */
     @media (max-width: 980px){
       nav{ display:none; }
       .mobile-toggle{ display:inline-flex; }
       header .bar{ border-radius: 22px; }
       h1{ font-size: calc(44px * var(--type-scale)); }
+      .related-grid{ grid-template-columns: 1fr; }
       .post-grid{ grid-template-columns: 1fr; }
       .rail{ display:none; }
       .toc-mobile{ display:block; }
@@ -524,8 +849,18 @@
       .btn{ padding: 11px 12px; }
       .theme-toggle{ width: 42px; height: 42px; }
       .cover img{ height: min(420px, 52vh); }
+      .sticky-cta .inner{ border-radius: 22px; }
+      .sticky-cta .msg span{ display:none; }
     }
 
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      html{ scroll-behavior: auto; }
+      .reveal{ opacity: 1 !important; transform: none !important; transition: none !important; }
+      .btn, nav a, .crumb, .icon-btn{ transition: none !important; }
+    }
+
+    /* ========= Dark theme ========= */
     html[data-theme="dark"]{
       color-scheme: dark;
       --bg: #0b1012;
@@ -541,26 +876,34 @@
         linear-gradient(180deg, #06090b, var(--bg) 28%, #06090b 100%);
     }
     html[data-theme="dark"] nav a:hover{ background: rgba(255,255,255,0.06); }
-    html[data-theme="dark"] nav a.active{ background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.14); }
+    html[data-theme="dark"] nav a.active{
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.14);
+    }
     html[data-theme="dark"] .btn.ghost{ background: rgba(255,255,255,0.06); }
     html[data-theme="dark"] .hero-card,
     html[data-theme="dark"] .pill,
     html[data-theme="dark"] .crumb,
     html[data-theme="dark"] .article-card,
-    html[data-theme="dark"] .rail-card,
-    html[data-theme="dark"] .toc-mobile,
+    html[data-theme="dark"] .post,
+    html[data-theme="dark"] .post-cat,
+    html[data-theme="dark"] .drawer a,
     html[data-theme="dark"] .takeaways,
     html[data-theme="dark"] .cta-inline,
-    html[data-theme="dark"] .drawer a{
+    html[data-theme="dark"] .rail-card,
+    html[data-theme="dark"] .toc-mobile,
+    html[data-theme="dark"] .faq details{
       background: rgba(255,255,255,0.06);
       border-color: rgba(255,255,255,0.12);
     }
     html[data-theme="dark"] .drawer{ background: rgba(0,0,0,0.62); }
     html[data-theme="dark"] .toc a{ background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.12); }
     html[data-theme="dark"] .toc a.active{ background: rgba(255,255,255,0.08); }
+    html[data-theme="dark"] .icon-btn{ background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.12); }
   </style>
 
-  <script type="application/ld+json">
+  <!-- Article structured data (JSON-LD) -->
+  <script type="application/ld+json" id="ld-article">
   {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
@@ -575,10 +918,37 @@
   </script>
 </head>
 
+<!--
+  IMPORTANT:
+  - data-landing: set your single landing page path here (the “next step”)
+  - data-topic: set the angle for this post (yoganidra | pranayama | stress | ansiedade | sono | performance | etc.)
+-->
 <body data-landing="../lp/anti-stress/index.html" data-topic="respiracao">
   <a class="skip" href="#content">Pular para o conteúdo</a>
+
   <div class="progress" id="progress" aria-hidden="true"></div>
 
+  <!-- Sticky bottom CTA -->
+  <div class="sticky-cta" id="stickyCta" aria-hidden="true">
+    <div class="inner glass">
+      <div class="msg">
+        <strong id="stickyTitle">Quer aplicar isso para anti-stress?</strong>
+        <span id="stickySub">Veja o plano guiado e o próximo passo prático.</span>
+      </div>
+      <div class="right">
+        <button class="icon-btn" id="stickyDismiss" type="button" aria-label="Fechar">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M6 6L18 18M18 6L6 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <a class="btn primary" id="stickyPrimary" href="#" data-cta="sticky-primary">
+          <span class="dot" aria-hidden="true"></span><span id="stickyBtnText">Ver o plano</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile drawer -->
   <div class="drawer" id="drawer" aria-hidden="true">
     <div class="container">
       <div class="panel glass">
@@ -635,7 +1005,7 @@
             </svg>
           </button>
 
-          <a class="btn primary" href="../index.html#contato" title="Entre em contato">
+          <a class="btn primary" href="../index.html#contato" title="Entre em contato" data-cta="header-contact">
             <span class="dot" aria-hidden="true"></span>
             Entre em Contato
           </a>
@@ -645,11 +1015,13 @@
   </header>
 
   <main id="top">
+    <!-- POST HERO -->
     <section class="hero">
       <div class="container">
         <div class="hero-card glass reveal">
           <div style="display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap;">
             <a class="crumb" href="../blog.html">← Voltar ao Blog</a>
+
             <div class="kicker" aria-label="Metadados do post">
               <span class="pill"><span class="dot" aria-hidden="true"></span><span id="postCategory">Respiração</span></span>
               <span class="pill alt"><span class="dot" aria-hidden="true"></span><span id="postTag">Anti-stress</span></span>
@@ -657,6 +1029,7 @@
           </div>
 
           <h1 id="postTitle">Respiração Transformadora em 3 minutos: estabilize energia e ruído mental</h1>
+
           <p class="sub" id="postExcerpt">
             Um protocolo simples para você baixar ruído, organizar foco e começar o dia com mais clareza — sem misticismo e sem drama.
           </p>
@@ -669,9 +1042,12 @@
             <span>Por <strong id="postAuthor">DeRose SBC</strong></span>
           </div>
 
+          <!-- PRIMARY HERO CTAs (same next step, multiple entry points) -->
           <div class="hero-cta">
-            <a class="btn primary" id="heroPrimary" href="#"><span class="dot" aria-hidden="true"></span>Ver o plano anti-stress</a>
-            <a class="btn ghost glass" id="heroSecondary" href="../index.html#contato">Falar com a escola</a>
+            <a class="btn primary" id="heroPrimary" href="#" data-cta="hero-primary">
+              <span class="dot" aria-hidden="true"></span><span id="heroPrimaryText">Ver o plano anti-stress</span>
+            </a>
+            <a class="btn ghost glass" id="heroSecondary" href="../index.html#contato" data-cta="hero-secondary">Falar com a escola</a>
             <button class="btn ghost glass" id="copyLink" type="button">Copiar link</button>
           </div>
 
@@ -679,7 +1055,8 @@
             <img id="postCover" src="../assets/blog/respiracao.webp" alt="Respiração Transformadora em 3 minutos" loading="eager" />
           </div>
 
-          <div class="takeaways glass reveal">
+          <!-- Skimmer block -->
+          <div class="takeaways glass reveal" style="margin-top:16px;">
             <h2>Em 30 segundos:</h2>
             <ul>
               <li>Quando o “ruído” sobe, ajuste <strong>ritmo</strong>, <strong>amplitude</strong> e <strong>expiração</strong>.</li>
@@ -687,6 +1064,7 @@
               <li>Se quiser transformar em método, o próximo passo é um <strong>plano progressivo</strong> (anti-stress).</li>
             </ul>
 
+            <!-- Mobile ToC -->
             <details class="toc-mobile glass" id="tocMobile">
               <summary>
                 <span>Índice do artigo</span>
@@ -695,11 +1073,11 @@
               <nav class="toc" id="tocListMobile" aria-label="Tabela de conteúdos (mobile)"></nav>
             </details>
           </div>
-
         </div>
       </div>
     </section>
 
+    <!-- CONTENT -->
     <section style="padding-top: 18px;">
       <div class="container">
         <div class="post-grid">
@@ -714,12 +1092,17 @@
                 <strong>Se você quer foco:</strong> primeiro reduza o ruído fisiológico. Depois, direcione atenção.
               </p>
 
-              <div class="cta-inline glass">
-                <h3>Quer usar isso como ferramenta anti-stress (sem improviso)?</h3>
-                <p>O protocolo funciona como “reset rápido”. Para virar resultado consistente, você precisa de progressão (técnica + frequência + ajuste).</p>
+              <!-- Inline CTA 1 -->
+              <div class="cta-inline glass" role="region" aria-label="CTA - Próximo passo">
+                <h3 id="cta-inline-1-title">Quer usar isso como ferramenta anti-stress (sem improviso)?</h3>
+                <p id="cta-inline-1-copy">
+                  O protocolo funciona como “reset rápido”. Para virar resultado consistente, você precisa de progressão (técnica + frequência + ajuste).
+                </p>
                 <div class="row">
-                  <a class="btn primary" id="inlinePrimary1" href="#"><span class="dot" aria-hidden="true"></span>Ver o plano anti-stress</a>
-                  <a class="btn ghost glass" href="../index.html#aulas">Ver modalidades</a>
+                  <a class="btn primary" id="inlinePrimary1" href="#" data-cta="inline-1-primary">
+                    <span class="dot" aria-hidden="true"></span><span class="inlineBtnText">Ver o plano anti-stress</span>
+                  </a>
+                  <a class="btn ghost glass" href="../index.html#aulas" data-cta="inline-1-secondary">Ver modalidades</a>
                 </div>
               </div>
 
@@ -754,12 +1137,17 @@
                 pode ser o ar na narina, o movimento do abdômen, ou um ponto fixo no ambiente.
               </p>
 
-              <div class="cta-inline glass">
-                <h3>Se você veio do Instagram: faça o próximo passo “do jeito certo”</h3>
-                <p>O que mais falha não é a técnica — é a consistência e o ajuste fino. Um plano anti-stress resolve isso.</p>
+              <!-- Inline CTA 2 -->
+              <div class="cta-inline glass" role="region" aria-label="CTA - Aplicação guiada">
+                <h3 id="cta-inline-2-title">Se você veio do Instagram: faça o próximo passo “do jeito certo”</h3>
+                <p id="cta-inline-2-copy">
+                  O que mais falha não é a técnica — é a consistência e o ajuste fino. Um plano anti-stress resolve isso.
+                </p>
                 <div class="row">
-                  <a class="btn primary" id="inlinePrimary2" href="#"><span class="dot" aria-hidden="true"></span>Ir para o plano</a>
-                  <a class="btn ghost glass" href="../index.html#contato">Tirar dúvidas</a>
+                  <a class="btn primary" id="inlinePrimary2" href="#" data-cta="inline-2-primary">
+                    <span class="dot" aria-hidden="true"></span><span class="inlineBtnText">Ir para o plano</span>
+                  </a>
+                  <a class="btn ghost glass" href="../index.html#contato" data-cta="inline-2-secondary">Tirar dúvidas</a>
                 </div>
               </div>
 
@@ -782,29 +1170,56 @@
                 Se você quiser, transforme isso em ritual: <strong>3 minutos</strong> ao acordar + <strong>3 minutos</strong> antes do trabalho.
                 Consistência supera intensidade.
               </p>
+
+              <div class="divider"></div>
+
+              <h2 id="faq">Perguntas frequentes</h2>
+              <div class="faq" id="faqList">
+                <details>
+                  <summary>Isso serve para qualquer pessoa?</summary>
+                  <p>Em geral, respiração mais lenta e expiração levemente mais longa ajuda a reduzir “ruído”. Se houver condição de saúde, ajuste com orientação e pare se gerar desconforto.</p>
+                </details>
+                <details>
+                  <summary>Quantas vezes por dia vale a pena fazer?</summary>
+                  <p>Para começar: 1–2 vezes/dia por 3 minutos. O ganho vem mais da regularidade do que de “forçar” duração.</p>
+                </details>
+                <details>
+                  <summary>Qual é o próximo passo além do protocolo?</summary>
+                  <p>Transformar em método: progressão de técnicas + consistência + ajuste fino. É isso que um plano anti-stress organiza.</p>
+                </details>
+              </div>
+
+              <p class="disclaimer">
+                Nota: este conteúdo é educacional e não substitui avaliação profissional. Se você tiver sintomas importantes ou persistentes, procure orientação adequada.
+              </p>
             </div>
 
             <div class="post-actions">
-              <a class="btn primary" id="postPrimary" href="#"><span class="dot" aria-hidden="true"></span>Ver o plano anti-stress</a>
-              <a class="btn ghost glass" href="../index.html#contato">Agendar conversa</a>
-              <a class="btn ghost glass" href="../blog.html#posts">Ver mais posts</a>
+              <a class="btn primary" id="postPrimary" href="#" data-cta="post-primary">
+                <span class="dot" aria-hidden="true"></span><span class="postPrimaryText">Ver o plano anti-stress</span>
+              </a>
+              <a class="btn ghost glass" href="../index.html#contato" data-cta="post-secondary">Agendar conversa</a>
+              <a class="btn ghost glass" href="../blog.html#posts" data-cta="post-more">Ver mais posts</a>
             </div>
           </article>
 
+          <!-- Sticky rail (desktop) -->
           <aside class="rail reveal" aria-label="Navegação lateral">
             <div class="rail-card glass">
               <div class="rail-title">Índice do artigo</div>
               <nav class="toc" id="tocList" aria-label="Tabela de conteúdos"></nav>
             </div>
 
-            <div class="rail-card glass">
+            <div class="rail-card glass" role="region" aria-label="Atalho de conversão">
               <div class="rail-title">Próximo passo</div>
               <p style="margin:0 0 10px 0; opacity:.86; line-height:1.4; font-size: calc(14px * var(--type-scale-blog));">
                 Quer aplicar isso para anti-stress com progressão e consistência?
               </p>
               <div style="display:flex; gap:10px; flex-wrap:wrap;">
-                <a class="btn primary" id="railPrimary" href="#"><span class="dot" aria-hidden="true"></span>Ver o plano</a>
-                <a class="btn ghost glass" href="../index.html#aulas">Ver aulas</a>
+                <a class="btn primary" id="railPrimary" href="#" data-cta="rail-primary">
+                  <span class="dot" aria-hidden="true"></span><span class="railBtnText">Ver o plano</span>
+                </a>
+                <a class="btn ghost glass" href="../index.html#aulas" data-cta="rail-secondary">Ver aulas</a>
               </div>
             </div>
           </aside>
@@ -812,20 +1227,46 @@
       </div>
     </section>
 
-    <footer style="padding: 36px 0 46px; opacity: .85;">
+    <!-- RELATED -->
+    <section>
       <div class="container">
-        <div style="display:flex; justify-content: space-between; align-items:center; gap: 12px; padding-top: 16px; border-top: 1px solid rgba(41,126,138,0.14); flex-wrap: wrap;">
-          <div style="display:flex; flex-direction: column; gap: 4px; line-height: 1;">
-            <div style="font-weight:800;">DeRose SBC</div>
-            <div style="font-size: calc(13px * var(--type-scale)); opacity: .8;">Blog • Yôga de Alto Rendimento</div>
+        <div class="section-head reveal">
+          <div>
+            <h2>Leituras relacionadas</h2>
+            <p class="lead">Mais alguns atalhos práticos na mesma linha: foco, rotina, recuperação.</p>
           </div>
-          <div style="display:flex; gap:10px; flex-wrap:wrap;">
-            <a class="btn ghost glass" href="#top">Topo ↑</a>
-            <a class="btn ghost glass" href="../blog.html">Blog</a>
-            <a class="btn ghost glass" href="../index.html#contato">Contato</a>
+          <a class="pill-link glass" href="../blog.html">Ir para o Blog →</a>
+        </div>
+
+        <div class="related-grid" id="related"><!-- injected by JS --></div>
+
+        <div class="band glass reveal">
+          <h2>Consistência é o multiplicador.</h2>
+          <p>
+            Se você quer acelerar progresso com orientação, ajuste fino e método progressivo, o próximo passo é um plano anti-stress bem amarrado.
+          </p>
+          <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+            <a class="btn primary" id="bandPrimary" href="#" data-cta="band-primary"><span class="dot" aria-hidden="true"></span>Ver o plano</a>
+            <a class="btn ghost glass" href="../index.html#contato" data-cta="band-secondary">Agendar</a>
           </div>
         </div>
-        <div style="font-size: calc(13px * var(--type-scale)); opacity: .8; margin-top:12px;">
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <div class="foot">
+          <div class="foot-brand">
+            <div style="font-weight:800;">DeRose SBC</div>
+            <div class="tiny">Blog • Yôga de Alto Rendimento</div>
+          </div>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <a class="pill-link glass" href="#top">Topo ↑</a>
+            <a class="pill-link glass" href="../blog.html">Blog</a>
+            <a class="pill-link glass" href="../index.html#contato">Contato</a>
+          </div>
+        </div>
+        <div class="tiny" style="margin-top:12px;">
           © <span id="year"></span> DeRose SBC.
         </div>
       </div>
@@ -833,8 +1274,10 @@
   </main>
 
   <script>
+    // Year
     document.getElementById('year').textContent = new Date().getFullYear();
 
+    // Theme (light/dark) with persistence + system default
     const root = document.documentElement;
     const themeBtn = document.getElementById('themeToggle');
     const metaTheme = document.querySelector('meta[name="theme-color"]');
@@ -846,6 +1289,7 @@
     function setTheme(theme, {persist = true} = {}){
       if(theme === 'dark') root.dataset.theme = 'dark';
       else delete root.dataset.theme;
+
       if(persist) localStorage.setItem(THEME_KEY, theme);
 
       if(themeBtn){
@@ -868,6 +1312,19 @@
       setTheme(current === 'dark' ? 'light' : 'dark');
     });
 
+    const mq = window.matchMedia?.('(prefers-color-scheme: dark)');
+    mq?.addEventListener?.('change', (e) => {
+      const saved = localStorage.getItem(THEME_KEY);
+      if(saved !== 'light' && saved !== 'dark'){
+        setTheme(e.matches ? 'dark' : 'light', {persist:false});
+      }
+    });
+
+    // Prevent placeholder links from navigating
+    document.querySelectorAll('a[aria-disabled="true"]').forEach(a => {
+      a.addEventListener('click', (e) => e.preventDefault());
+    });
+
     // Mobile drawer
     const drawer = document.getElementById('drawer');
     const toggle = document.getElementById('mobileToggle');
@@ -886,6 +1343,25 @@
     closeBtn?.addEventListener('click', closeDrawer);
     drawer?.addEventListener('click', (e) => { if(e.target === drawer) closeDrawer(); });
     drawer?.querySelectorAll('[data-close]')?.forEach(a => a.addEventListener('click', closeDrawer));
+
+    // Reveal on scroll
+    (function(){
+      const els = document.querySelectorAll('.reveal');
+      if(!('IntersectionObserver' in window)){
+        els.forEach(el => el.classList.add('in'));
+        return;
+      }
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(entry=>{
+          if(entry.isIntersecting){
+            entry.target.classList.add('in');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      els.forEach(el => io.observe(el));
+      window.__revealIO = io;
+    })();
 
     // Progress bar
     const progress = document.getElementById('progress');
@@ -918,7 +1394,11 @@
       }
     });
 
-    // Funnel plumbing: topic + UTM propagation to ONE landing page
+    /* =========================
+      Funnel plumbing: topic + UTM propagation to ONE landing page
+      - Supports: ?topic=pranayama  OR <body data-topic="yoganidra">
+      - Preserves utm_source/utm_medium/utm_campaign/utm_content/utm_term
+    ========================= */
     const params = new URLSearchParams(window.location.search);
     const bodyTopic = document.body.getAttribute('data-topic') || 'stress';
     const topic = (params.get('topic') || bodyTopic || 'stress').toLowerCase();
@@ -941,15 +1421,63 @@
       return u.pathname + (u.search ? u.search : '') + (u.hash ? u.hash : '');
     }
 
+    // Message/copy per topic (you can extend freely)
+    const TOPIC_COPY = {
+      yoganidra: {
+        tag: 'Anti-stress',
+        hero: 'Ver o plano anti-stress',
+        stickyTitle: 'Quer usar Yôganidra para anti-stress?',
+        stickyBtn: 'Ver o plano',
+        inline1: 'Quer usar Yôganidra com progressão (sem improviso)?'
+      },
+      pranayama: {
+        tag: 'Anti-stress',
+        hero: 'Ver o plano anti-stress',
+        stickyTitle: 'Quer usar Pranayama para anti-stress?',
+        stickyBtn: 'Ver o plano',
+        inline1: 'Quer aplicar Pranayama com progressão e segurança?'
+      },
+      respiracao: {
+        tag: 'Anti-stress',
+        hero: 'Ver o plano anti-stress',
+        stickyTitle: 'Quer aplicar isso para anti-stress?',
+        stickyBtn: 'Ver o plano',
+        inline1: 'Quer usar isso como ferramenta anti-stress (sem improviso)?'
+      }
+    };
+    const c = TOPIC_COPY[topic] || TOPIC_COPY.respiracao;
+
+    // Update visible copy
+    document.getElementById('postTag').textContent = c.tag;
+    document.getElementById('heroPrimaryText').textContent = c.hero;
+    document.getElementById('stickyTitle').textContent = c.stickyTitle;
+    document.getElementById('stickyBtnText').textContent = c.stickyBtn;
+    const inline1title = document.getElementById('cta-inline-1-title');
+    if(inline1title) inline1title.textContent = c.inline1;
+
+    // Build the ONE primary landing URL for this post (same destination; different topic/UTMs)
     const utms = pickUtms();
     const primaryUrl = withParams(landingBase, { topic, ...utms });
 
-    ['heroPrimary','inlinePrimary1','inlinePrimary2','postPrimary','railPrimary'].forEach(id => {
-      const el = document.getElementById(id);
-      if(el) el.setAttribute('href', primaryUrl);
-    });
+    // Wire all primary CTAs to the same next step
+    const primaryCtas = [
+      'heroPrimary','inlinePrimary1','inlinePrimary2','postPrimary','railPrimary','bandPrimary','stickyPrimary'
+    ].map(id => document.getElementById(id)).filter(Boolean);
 
-    // Auto Table of Contents
+    primaryCtas.forEach(a => a.setAttribute('href', primaryUrl));
+
+    // Optional: if you want your contact CTA to also keep UTMs
+    const heroSecondary = document.getElementById('heroSecondary');
+    if(heroSecondary){
+      const href = heroSecondary.getAttribute('href');
+      if(href) heroSecondary.setAttribute('href', withParams(href, utms));
+    }
+
+    /* =========================
+      Auto Table of Contents (desktop rail + mobile)
+      - Builds from H2/H3 in #postBody
+      - Highlights current section while scrolling
+    ========================= */
     const toc = document.getElementById('tocList');
     const tocMobile = document.getElementById('tocListMobile');
     const content = document.getElementById('postBody');
@@ -965,7 +1493,11 @@
     }
 
     const headings = Array.from(content.querySelectorAll('h2, h3'));
-    headings.forEach(h => { if(!h.id) h.id = slugify(h.textContent || 'sec'); });
+    headings.forEach(h => {
+      if(!h.id){
+        h.id = slugify(h.textContent || 'sec');
+      }
+    });
 
     function tocLink(h){
       const title = h.textContent?.trim() || 'Seção';
@@ -979,10 +1511,15 @@
       `;
     }
 
-    const tocHtml = headings.map(tocLink).join('');
+    const tocHtml = headings
+      .filter(h => h.tagName.toLowerCase() !== 'h3' || (h.previousElementSibling && h.previousElementSibling.tagName))
+      .map(tocLink)
+      .join('');
+
     if(toc) toc.innerHTML = tocHtml;
     if(tocMobile) tocMobile.innerHTML = tocHtml;
 
+    // Active section highlight
     const tocLinks = Array.from(document.querySelectorAll('.toc a'));
     function setActive(id){
       tocLinks.forEach(a => a.classList.toggle('active', a.dataset.target === id));
@@ -990,12 +1527,155 @@
 
     if('IntersectionObserver' in window){
       const obs = new IntersectionObserver((entries) => {
-        const visible = entries.filter(e => e.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];
-        if(visible?.target?.id) setActive(visible.target.id);
-      }, { threshold: [0.18, 0.28, 0.38], rootMargin: '-20% 0px -70% 0px' });
+        const visible = entries
+          .filter(e => e.isIntersecting)
+          .sort((a,b) => (b.intersectionRatio - a.intersectionRatio))[0];
+        if(visible && visible.target && visible.target.id){
+          setActive(visible.target.id);
+        }
+      }, { root: null, threshold: [0.18, 0.28, 0.38], rootMargin: '-20% 0px -70% 0px' });
+
       headings.forEach(h => obs.observe(h));
     }
+
+    /* =========================
+      Sticky CTA bar behavior
+      - Shows after user scrolls past hero
+      - Can be dismissed per session
+    ========================= */
+    const sticky = document.getElementById('stickyCta');
+    const dismiss = document.getElementById('stickyDismiss');
+    const STICKY_KEY = 'stickyCtaDismissed';
+
+    function shouldShowSticky(){
+      if(sessionStorage.getItem(STICKY_KEY) === '1') return false;
+      const y = window.scrollY || document.documentElement.scrollTop || 0;
+      // show after ~500px (tweak)
+      return y > 520;
+    }
+    function updateSticky(){
+      if(!sticky) return;
+      const show = shouldShowSticky();
+      sticky.style.display = show ? 'block' : 'none';
+      sticky.setAttribute('aria-hidden', show ? 'false' : 'true');
+    }
+    window.addEventListener('scroll', updateSticky, { passive: true });
+    updateSticky();
+
+    dismiss?.addEventListener('click', () => {
+      sessionStorage.setItem(STICKY_KEY, '1');
+      updateSticky();
+    });
+
+    /* =========================
+       Related posts (edit list to match your blog.html POSTS)
+    ========================= */
+    const RELATED = [
+      {
+        title: "Foco & Concentração: volte ao centro em qualquer rotina",
+        excerpt: "Uma abordagem prática para treinar foco profundo e reduzir dispersão — útil para trabalho, estudo e decisões melhores.",
+        category: "Foco",
+        date: "2026-01-05",
+        readMin: 7,
+        image: "../assets/blog/foco.webp",
+        href: "./foco-centro.html"
+      },
+      {
+        title: "Recuperação Profunda: por que descansar não é perder tempo",
+        excerpt: "Recuperação não é pausa passiva — é assimilação ativa. Entenda como melhorar recuperação física e emocional com técnica.",
+        category: "Recuperação",
+        date: "2026-01-10",
+        readMin: 5,
+        image: "../assets/blog/recuperacao.webp",
+        href: "./recuperacao-profunda.html"
+      }
+    ];
+
+    function formatDateISO(iso){
+      try{
+        const [y,m,d] = iso.split('-').map(Number);
+        const dt = new Date(y, m-1, d);
+        return dt.toLocaleDateString('pt-BR', { day:'2-digit', month:'short', year:'numeric' });
+      }catch(e){
+        return iso;
+      }
+    }
+    function escapeHtml(str){
+      return String(str)
+        .replaceAll('&','&amp;')
+        .replaceAll('<','&lt;')
+        .replaceAll('>','&gt;')
+        .replaceAll('"','&quot;')
+        .replaceAll("'","&#039;");
+    }
+
+    const related = document.getElementById('related');
+    related.innerHTML = RELATED.map(p => `
+      <article class="post glass reveal">
+        <a href="${escapeHtml(p.href)}" aria-label="Abrir post: ${escapeHtml(p.title)}">
+          <div class="post-media" aria-hidden="true">
+            <img src="${escapeHtml(p.image)}" alt="${escapeHtml(p.title)}" loading="lazy" />
+          </div>
+          <div class="post-body">
+            <div class="post-top">
+              <div class="post-cat"><span class="dot" aria-hidden="true"></span>${escapeHtml(p.category)}</div>
+              <div class="post-date">${escapeHtml(formatDateISO(p.date))}</div>
+            </div>
+            <h3>${escapeHtml(p.title)}</h3>
+            <p>${escapeHtml(p.excerpt)}</p>
+            <div class="post-bottom">
+              <div class="post-meta">
+                <span>${escapeHtml(p.readMin)} min</span>
+                <span>•</span>
+                <span>Leitura objetiva</span>
+              </div>
+              <span class="read">Ler →</span>
+            </div>
+          </div>
+        </a>
+      </article>
+    `).join('');
+
+    // observe newly injected cards
+    const io = window.__revealIO;
+    if(io){
+      related.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    }else{
+      related.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+    }
+
+    /* =========================
+      Optional FAQ schema (informational only)
+    ========================= */
+    (function injectFaqSchema(){
+      const faq = [
+        {
+          q: "Isso serve para qualquer pessoa?",
+          a: "Em geral, expiração levemente mais longa ajuda a reduzir ruído fisiológico. Ajuste com orientação se houver condição de saúde e pare se houver desconforto."
+        },
+        {
+          q: "Quantas vezes por dia vale a pena fazer?",
+          a: "Para começar: 1–2 vezes por dia por 3 minutos. O ganho vem mais da regularidade do que da intensidade."
+        },
+        {
+          q: "Qual é o próximo passo além do protocolo?",
+          a: "Organizar progressão de técnicas, consistência e ajuste fino em um plano anti-stress."
+        }
+      ];
+      const ld = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": faq.map(x => ({
+          "@type": "Question",
+          "name": x.q,
+          "acceptedAnswer": { "@type": "Answer", "text": x.a }
+        }))
+      };
+      const s = document.createElement('script');
+      s.type = 'application/ld+json';
+      s.textContent = JSON.stringify(ld);
+      document.head.appendChild(s);
+    })();
   </script>
 </body>
 </html>
-<!-- END COPY -->
