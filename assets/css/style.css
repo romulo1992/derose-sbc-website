@@ -1309,9 +1309,21 @@ html[data-theme="dark"] .drawer{ background: rgba(0,0,0,0.62); }
   pointer-events: auto;
 }
 
+.blog-page .loadmore-footer{
+  margin-top: 20px;
+  display: grid;
+  gap: 10px;
+  justify-items: center;
+}
+
 .blog-page .loadmore-status{ opacity: .85; }
 
 .blog-page .loadmore-btn:focus-visible{
+  outline: 2px solid var(--teal);
+  outline-offset: 3px;
+}
+
+.blog-page .loadless-btn:focus-visible{
   outline: 2px solid var(--teal);
   outline-offset: 3px;
 }

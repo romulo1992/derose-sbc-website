@@ -197,7 +197,9 @@
     const sort = document.getElementById("sort");
     const tagbar = document.getElementById("tagbar");
     const loadMoreLayer = document.getElementById("loadMoreLayer");
+    const loadMoreFooter = document.getElementById("loadMoreFooter");
     const loadMoreBtn = document.getElementById("loadMoreBtn");
+    const showLessBtn = document.getElementById("showLessBtn");
     const loadMoreStatus = document.getElementById("loadMoreStatus");
 
     if (
@@ -208,7 +210,9 @@
       !sort ||
       !tagbar ||
       !loadMoreLayer ||
+      !loadMoreFooter ||
       !loadMoreBtn ||
+      !showLessBtn ||
       !loadMoreStatus
     )
       return;
@@ -337,14 +341,14 @@
         ? `Mostrando ${shown} de ${total}`
         : "";
 
-      if (total > shown) {
-        loadMoreLayer.hidden = false;
-        loadMoreBtn.disabled = false;
-        return;
-      }
+      const canLoadMore = total > shown;
+      const canShowLess = shown > PAGE_SIZE;
 
-      loadMoreLayer.hidden = true;
-      loadMoreBtn.disabled = true;
+      loadMoreLayer.hidden = !canLoadMore;
+      loadMoreBtn.disabled = !canLoadMore;
+
+      loadMoreFooter.hidden = !canShowLess || total === 0;
+      showLessBtn.disabled = !canShowLess;
     }
 
     function renderPosts() {
@@ -455,6 +459,11 @@
 
     loadMoreBtn.addEventListener("click", () => {
       visibleCount += PAGE_SIZE;
+      renderPosts();
+    });
+
+    showLessBtn.addEventListener("click", () => {
+      visibleCount = PAGE_SIZE;
       renderPosts();
     });
 
