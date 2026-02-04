@@ -80,6 +80,45 @@
       image: "../assets/blog/consistencia.webp",
       href: "./p/consistencia-ritual/index.html",
     },
+    {
+      id: "energia-matinal",
+      title: "Energia Matinal: 4 ajustes rápidos para começar com clareza",
+      excerpt:
+        "Uma rotina de poucos minutos para reduzir inércia, organizar prioridades e entrar no dia com foco real.",
+      category: "Mentalidade",
+      tags: ["Rotina", "Foco"],
+      date: "2025-12-03",
+      readMin: 4,
+      featured: false,
+      image: "../assets/blog/featured.webp",
+      href: "./p/energia-matinal/index.html",
+    },
+    {
+      id: "respiracao-anti-estresse",
+      title: "Respiração Anti-estresse: 2 ciclos para desacelerar rápido",
+      excerpt:
+        "Um protocolo breve para diminuir tensão, reequilibrar o ritmo interno e liberar clareza mental.",
+      category: "Respiração",
+      tags: ["Respiratórios", "Descontração"],
+      date: "2025-11-22",
+      readMin: 3,
+      featured: false,
+      image: "../assets/blog/featured.webp",
+      href: "./p/respiracao-anti-estresse/index.html",
+    },
+    {
+      id: "mobilidade-lombar",
+      title: "Mobilidade Lombar: 6 minutos para aliviar rigidez e proteger o eixo",
+      excerpt:
+        "Sequência simples para destravar quadris e lombar, melhorar postura e reduzir desconforto de quem passa muito tempo sentado.",
+      category: "Mobilidade",
+      tags: ["Postura", "Força & Flexibilidade"],
+      date: "2025-11-08",
+      readMin: 6,
+      featured: false,
+      image: "../assets/blog/featured.webp",
+      href: "./p/mobilidade-lombar/index.html",
+    },
   ];
 
   function setYear() {
@@ -155,10 +194,29 @@
     const category = document.getElementById("category");
     const sort = document.getElementById("sort");
     const tagbar = document.getElementById("tagbar");
+    const postsOverlay = document.getElementById("postsOverlay");
+    const postsMore = document.getElementById("postsMore");
+    const postsCount = document.getElementById("postsCount");
+    const postsLess = document.getElementById("postsLess");
 
-    if (!grid || !empty || !search || !category || !sort || !tagbar) return;
+    if (
+      !grid ||
+      !empty ||
+      !search ||
+      !category ||
+      !sort ||
+      !tagbar ||
+      !postsOverlay ||
+      !postsMore ||
+      !postsCount ||
+      !postsLess
+    )
+      return;
 
     let state = { q: "", category: "all", tag: "all", sort: "new" };
+    const pageSize = 6;
+    let visibleCount = pageSize;
+    let lastFiltered = [];
 
     function formatDateISO(iso) {
       try {
@@ -276,19 +334,53 @@
       return out;
     }
 
+    function updatePaginationControls(filtered, showingCount) {
+      const hasSearch = state.q.trim().length > 0;
+      const canPaginate = !hasSearch && filtered.length > pageSize;
+      const isShowingAll = showingCount >= filtered.length;
+
+      postsCount.textContent = `${showingCount} de ${filtered.length} posts`;
+
+      if (!canPaginate) {
+        postsOverlay.classList.add("is-hidden");
+        postsOverlay.setAttribute("aria-hidden", "true");
+        postsLess.classList.remove("is-visible");
+        return;
+      }
+
+      if (isShowingAll) {
+        postsOverlay.classList.add("is-hidden");
+        postsOverlay.setAttribute("aria-hidden", "true");
+        postsLess.classList.add("is-visible");
+      } else {
+        postsOverlay.classList.remove("is-hidden");
+        postsOverlay.setAttribute("aria-hidden", "false");
+        postsLess.classList.remove("is-visible");
+      }
+    }
+
     function renderPosts() {
       const filtered = sortPosts(POSTS.filter(matches));
+      const hasSearch = state.q.trim().length > 0;
 
       if (filtered.length === 0) {
         grid.innerHTML = "";
         empty.style.display = "block";
         revealElement(empty, io);
+        postsOverlay.classList.add("is-hidden");
+        postsOverlay.setAttribute("aria-hidden", "true");
+        postsLess.classList.remove("is-visible");
         return;
       }
 
       empty.style.display = "none";
 
-      grid.innerHTML = filtered
+      const showingCount = hasSearch
+        ? filtered.length
+        : Math.min(visibleCount, filtered.length);
+      const list = hasSearch ? filtered : filtered.slice(0, showingCount);
+
+      grid.innerHTML = list
         .map((p) => {
           const tagLine = (p.tags || []).slice(0, 2).join(" • ");
 
@@ -323,10 +415,13 @@
         .join("");
 
       grid.querySelectorAll(".reveal").forEach((el) => revealElement(el, io));
+      lastFiltered = filtered;
+      updatePaginationControls(filtered, showingCount);
     }
 
     function setTag(tag) {
       state.tag = tag === "Todas" ? "all" : tag;
+      visibleCount = pageSize;
 
       tagbar.querySelectorAll(".chip").forEach((ch) => {
         const t = ch.getAttribute("data-tag");
@@ -342,16 +437,19 @@
 
     search.addEventListener("input", (e) => {
       state.q = e.target.value || "";
+      visibleCount = pageSize;
       renderPosts();
     });
 
     category.addEventListener("change", (e) => {
       state.category = e.target.value || "all";
+      visibleCount = pageSize;
       renderPosts();
     });
 
     sort.addEventListener("change", (e) => {
       state.sort = e.target.value || "new";
+      visibleCount = pageSize;
       renderPosts();
     });
 
@@ -371,6 +469,17 @@
       const t = el.getAttribute("data-tag");
       if (!t) return;
       setTag(t);
+    });
+
+    postsMore.addEventListener("click", () => {
+      if (!lastFiltered.length) return;
+      visibleCount = Math.min(visibleCount + pageSize, lastFiltered.length);
+      renderPosts();
+    });
+
+    postsLess.addEventListener("click", () => {
+      visibleCount = pageSize;
+      renderPosts();
     });
 
     buildTaxonomy();
