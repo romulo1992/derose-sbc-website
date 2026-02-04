@@ -13,65 +13,18 @@
   <meta property="og:title" content="Respiração Transformadora em 3 minutos • DeRose SBC" />
   <meta property="og:description" content="Um protocolo simples para baixar ruído, organizar foco e começar o dia com mais clareza — sem misticismo e sem drama." />
   <meta property="og:type" content="article" />
-  <meta property="og:image" content="../assets/blog/respiracao.webp" />
+  <meta property="og:image" content="/assets/blog/respiracao.webp" />
   <meta property="article:published_time" content="2026-01-20" />
   <meta property="article:modified_time" content="2026-01-20" />
-  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/assets/css/style.css" />
   <!-- Optional but recommended when you have a stable public URL -->
   <!-- <link rel="canonical" href="https://seudominio.com/blog/respiracao-transformadora.html" /> -->
 
   <style>
-    /* =========================
-       Self-hosted Spartan (TTF)
-       Put files in: /assets/fonts/
-       ========================= */
-    @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-Thin.ttf") format("truetype"); font-weight:100; font-style:normal; font-display:swap; }
-    @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-ExtraLight.ttf") format("truetype"); font-weight:200; font-style:normal; font-display:swap; }
-    @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-Light.ttf") format("truetype"); font-weight:300; font-style:normal; font-display:swap; }
-    @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-Regular.ttf") format("truetype"); font-weight:400; font-style:normal; font-display:swap; }
-    @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-Medium.ttf") format("truetype"); font-weight:500; font-style:normal; font-display:swap; }
-    @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-SemiBold.ttf") format("truetype"); font-weight:600; font-style:normal; font-display:swap; }
-    @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-Bold.ttf") format("truetype"); font-weight:700; font-style:normal; font-display:swap; }
-    @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-ExtraBold.ttf") format("truetype"); font-weight:800; font-style:normal; font-display:swap; }
-    @font-face{ font-family:"Spartan"; src:url("../assets/fonts/Spartan-Black.ttf") format("truetype"); font-weight:900; font-style:normal; font-display:swap; }
-
     :root{
-      --bg: #FFF9EF;
-      --surface: #FFECD1;
-      --accent: #FC883A;
-      --teal: #297E8A;
-      --ink: #393939;
-      --glass-bg: rgba(255,255,255,0.26);
-      --glass-br: rgba(41,126,138,0.22);
-      --shadow: 0 18px 60px rgba(57,57,57,0.12);
-      --shadow-soft: 0 10px 30px rgba(57,57,57,0.10);
-      --radius-xl: 28px;
-      --radius-lg: 22px;
-      --radius-md: 16px;
-      --radius-sm: 12px;
-      --max: 1120px;
-
-      --type-scale: 0.77;
       --type-scale-blog: 0.92;
-
-      --page-bg:
-        radial-gradient(1000px 700px at 20% 10%, rgba(252,136,58,0.12), transparent 60%),
-        radial-gradient(1100px 820px at 90% 15%, rgba(41,126,138,0.14), transparent 60%),
-        linear-gradient(180deg, var(--bg), #fff 28%, var(--bg) 100%);
     }
-
-    *{ box-sizing: border-box; }
-    html{ scroll-behavior: smooth; }
-    body{
-      margin:0;
-      font-family: "Spartan", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      line-height: 1.25;
-      color: var(--ink);
-      background: var(--page-bg);
-      overflow-x: hidden;
-    }
-    a{ color: inherit; text-decoration: none; }
-    .container{ width:min(var(--max), calc(100% - 40px)); margin: 0 auto; }
 
     /* Skip link (a11y) */
     .skip{
@@ -106,117 +59,6 @@
       transform-origin: left center;
     }
 
-    /* Header */
-    header{
-      position: sticky; top: 0; z-index: 60;
-      padding: 14px 0;
-      transition: transform .2s ease, background .2s ease, border-color .2s ease;
-    }
-    header .bar{
-      border-radius: 999px;
-      padding: 10px 14px;
-      display:flex; align-items:center; justify-content: space-between;
-      gap: 14px;
-    }
-    .brand{
-      display:flex; align-items:center; gap: 10px; min-width: 210px;
-      padding: 8px 10px; border-radius: 999px;
-    }
-    .brand-mark{
-      width: 36px; height: 36px; border-radius: 14px;
-      background: linear-gradient(135deg, rgba(41,126,138,0.9), rgba(252,136,58,0.85));
-      box-shadow: 0 10px 22px rgba(41,126,138,0.18);
-      position: relative;
-      overflow: hidden;
-    }
-    .brand-mark:after{
-      content:"";
-      position:absolute; inset:-30%;
-      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.55), transparent 55%);
-      transform: rotate(18deg);
-    }
-    .brand-name{
-      line-height: 1;
-      display:flex; flex-direction: column;
-      gap: 4px;
-    }
-    .brand-name strong{ font-size: calc(15px * var(--type-scale)); letter-spacing: .2px; }
-    .brand-name span{ font-size: calc(12px * var(--type-scale)); opacity: .75; }
-
-    nav{ display:flex; align-items:center; gap: 10px; }
-    nav a{
-      font-size: calc(14px * var(--type-scale));
-      padding: 10px 12px;
-      border-radius: 999px;
-      opacity: .86;
-      transition: background .2s ease, opacity .2s ease, transform .2s ease;
-      line-height: 1;
-    }
-    nav a:hover{ background: rgba(255,255,255,0.35); opacity: 1; transform: translateY(-1px); }
-    nav a.active{ background: rgba(255,255,255,0.45); opacity: 1; border: 1px solid rgba(41,126,138,0.18); }
-    nav a.is-disabled{ opacity: .62; cursor: not-allowed; }
-    nav a.is-disabled:hover{ background: transparent; transform: none; opacity: .62; }
-
-    .actions{ display:flex; align-items:center; gap: 10px; }
-    .btn{
-      display:inline-flex; align-items:center; justify-content: center;
-      padding: 11px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(41,126,138,0.22);
-      font-weight: 600;
-      font-size: calc(14px * var(--type-scale));
-      letter-spacing: .2px;
-      cursor: pointer;
-      transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
-      user-select: none;
-      white-space: nowrap;
-      line-height: 1;
-    }
-    .btn:hover{ transform: translateY(-1px); box-shadow: var(--shadow-soft); }
-    .btn.primary{
-      border: 1px solid rgba(252,136,58,0.35);
-      background: linear-gradient(135deg, rgba(252,136,58,0.95), rgba(252,136,58,0.65));
-      color: #1f1f1f;
-      font-weight: 900;
-    }
-    .btn.ghost{ background: rgba(255,255,255,0.18); }
-    .btn .dot{
-      width: 8px; height: 8px; border-radius: 999px;
-      margin-right: 10px;
-      background: var(--teal);
-      box-shadow: 0 0 0 4px rgba(41,126,138,0.16);
-    }
-
-    .mobile-toggle{
-      display:none;
-      padding: 10px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(41,126,138,0.22);
-      background: rgba(255,255,255,0.18);
-      cursor:pointer;
-    }
-    .mobile-toggle svg{ display:block; }
-
-    /* Theme toggle */
-    .theme-toggle{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      width: 44px;
-      height: 44px;
-      border-radius: 999px;
-      border: 1px solid rgba(41,126,138,0.22);
-      background: rgba(255,255,255,0.18);
-      cursor:pointer;
-      transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
-      color: var(--ink);
-      line-height: 1;
-    }
-    .theme-toggle:hover{ transform: translateY(-1px); box-shadow: var(--shadow-soft); }
-    .theme-toggle svg{ width: 18px; height: 18px; display:block; }
-    .theme-toggle .sun{ display:none; }
-    html[data-theme="dark"] .theme-toggle .sun{ display:block; }
-    html[data-theme="dark"] .theme-toggle .moon{ display:none; }
     svg [stroke="#393939"]{ stroke: var(--ink) !important; }
 
     section{ padding: 54px 0; }
@@ -798,43 +640,8 @@
     }
     .reveal.in{ opacity: 1; transform: translateY(0); }
 
-    /* Mobile drawer */
-    .drawer{
-      position: fixed;
-      inset: 0;
-      background: rgba(57,57,57,0.28);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      display:none;
-      z-index: 70;
-    }
-    .drawer.open{ display:block; }
-    .drawer .panel{
-      width: min(520px, calc(100% - 26px));
-      margin: 86px auto 0;
-      border-radius: var(--radius-xl);
-      padding: 14px;
-    }
-    .drawer a{
-      display:flex;
-      justify-content: space-between;
-      align-items:center;
-      padding: 14px 12px;
-      border-radius: 16px;
-      font-weight: 900;
-      border: 1px solid rgba(41,126,138,0.14);
-      background: rgba(255,255,255,0.14);
-      margin: 10px 0;
-      line-height: 1;
-    }
-    .drawer a span{ font-size: calc(12px * var(--type-scale)); opacity: .75; font-weight: 700; }
-    .drawer a.is-disabled{ opacity: .62; cursor: not-allowed; }
-
     /* Responsive */
     @media (max-width: 980px){
-      nav{ display:none; }
-      .mobile-toggle{ display:inline-flex; }
-      header .bar{ border-radius: 22px; }
       h1{ font-size: calc(44px * var(--type-scale)); }
       .related-grid{ grid-template-columns: 1fr; }
       .post-grid{ grid-template-columns: 1fr; }
@@ -844,10 +651,6 @@
     @media (max-width: 520px){
       h1{ font-size: calc(38px * var(--type-scale)); }
       .container{ width: min(var(--max), calc(100% - 28px)); }
-      .brand{ min-width: unset; }
-      .actions{ gap: 8px; }
-      .btn{ padding: 11px 12px; }
-      .theme-toggle{ width: 42px; height: 42px; }
       .cover img{ height: min(420px, 52vh); }
       .sticky-cta .inner{ border-radius: 22px; }
       .sticky-cta .msg span{ display:none; }
@@ -896,7 +699,6 @@
       background: rgba(255,255,255,0.06);
       border-color: rgba(255,255,255,0.12);
     }
-    html[data-theme="dark"] .drawer{ background: rgba(0,0,0,0.62); }
     html[data-theme="dark"] .toc a{ background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.12); }
     html[data-theme="dark"] .toc a.active{ background: rgba(255,255,255,0.08); }
     html[data-theme="dark"] .icon-btn{ background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.12); }
@@ -909,7 +711,7 @@
     "@type": "BlogPosting",
     "headline": "Respiração Transformadora em 3 minutos: estabilize energia e ruído mental",
     "description": "Um protocolo simples para baixar ruído, organizar foco e começar o dia com mais clareza — sem misticismo e sem drama.",
-    "image": ["../assets/blog/respiracao.webp"],
+    "image": ["/assets/blog/respiracao.webp"],
     "datePublished": "2026-01-20",
     "dateModified": "2026-01-20",
     "author": { "@type": "Organization", "name": "DeRose SBC" },
@@ -923,10 +725,13 @@
   - data-landing: set your single landing page path here (the “next step”)
   - data-topic: set the angle for this post (yoganidra | pranayama | stress | ansiedade | sono | performance | etc.)
 -->
-<body data-landing="../lp/anti-stress/index.html" data-topic="respiracao">
+<body data-landing="/index.html#contato" data-topic="respiracao">
   <a class="skip" href="#content">Pular para o conteúdo</a>
 
   <div class="progress" id="progress" aria-hidden="true"></div>
+
+  <!-- NAVBAR INJETADA -->
+  <div data-navbar></div>
 
   <!-- Sticky bottom CTA -->
   <div class="sticky-cta" id="stickyCta" aria-hidden="true">
@@ -948,79 +753,13 @@
     </div>
   </div>
 
-  <!-- Mobile drawer -->
-  <div class="drawer" id="drawer" aria-hidden="true">
-    <div class="container">
-      <div class="panel glass">
-        <a href="../index.html#aulas" data-close> Aulas <span>presencial + online</span></a>
-        <a href="../index.html#cursos" data-close> Cursos <span>precisão & consistência</span></a>
-        <a href="../index.html#formacao" data-close> Formação <span>aprofundamento</span></a>
-        <a href="#" class="is-disabled" aria-disabled="true" data-close>Eventos</a>
-        <a href="#" class="is-disabled" aria-disabled="true" data-close>Bistrô</a>
-        <a href="../blog.html" data-close> Blog <span>clareza sem misticismo</span></a>
-        <a href="../index.html#contato" data-close> Contato <span>rota rápida</span></a>
-        <div style="display:flex; gap:10px; justify-content:flex-end; margin-top: 10px;">
-          <button class="btn ghost glass" id="drawerClose" type="button">Fechar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <header>
-    <div class="container">
-      <div class="bar glass">
-        <a class="brand" href="../index.html#top" aria-label="Ir para a home">
-          <span class="brand-mark" aria-hidden="true"></span>
-          <span class="brand-name">
-            <strong>DeRose SBC</strong>
-            <span>Yôga de Alto Rendimento</span>
-          </span>
-        </a>
-
-        <nav aria-label="Navegação principal">
-          <a href="../index.html#aulas">AULAS</a>
-          <a href="../index.html#cursos">CURSOS</a>
-          <a href="../index.html#formacao">FORMAÇÃO</a>
-          <a href="#" class="is-disabled" aria-disabled="true">EVENTOS</a>
-          <a href="#" class="is-disabled" aria-disabled="true">BISTRÔ</a>
-          <a href="../blog.html" class="active" aria-current="page">BLOG</a>
-        </nav>
-
-        <div class="actions">
-          <button class="mobile-toggle" id="mobileToggle" aria-label="Abrir menu">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M4 7H20" stroke="#393939" stroke-width="2.4" stroke-linecap="round"/>
-              <path d="M4 12H20" stroke="#393939" stroke-width="2.4" stroke-linecap="round" opacity="0.9"/>
-              <path d="M4 17H20" stroke="#393939" stroke-width="2.4" stroke-linecap="round" opacity="0.8"/>
-            </svg>
-          </button>
-
-          <button class="theme-toggle" id="themeToggle" type="button" aria-label="Ativar modo escuro" aria-pressed="false">
-            <svg class="moon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M21 14.5A8.5 8.5 0 1 1 9.5 3a7 7 0 0 0 11.5 11.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            <svg class="sun" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12Z" stroke="currentColor" stroke-width="2"/>
-              <path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5l-1.5-1.5M20.5 20.5 19 19M5 19l-1.5 1.5M20.5 3.5 19 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-          </button>
-
-          <a class="btn primary" href="../index.html#contato" title="Entre em contato" data-cta="header-contact">
-            <span class="dot" aria-hidden="true"></span>
-            Entre em Contato
-          </a>
-        </div>
-      </div>
-    </div>
-  </header>
-
   <main id="top">
     <!-- POST HERO -->
     <section class="hero">
       <div class="container">
         <div class="hero-card glass reveal">
           <div style="display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap;">
-            <a class="crumb" href="../blog.html">← Voltar ao Blog</a>
+            <a class="crumb" href="/blog/">← Voltar ao Blog</a>
 
             <div class="kicker" aria-label="Metadados do post">
               <span class="pill"><span class="dot" aria-hidden="true"></span><span id="postCategory">Respiração</span></span>
@@ -1047,12 +786,12 @@
             <a class="btn primary" id="heroPrimary" href="#" data-cta="hero-primary">
               <span class="dot" aria-hidden="true"></span><span id="heroPrimaryText">Ver o plano anti-stress</span>
             </a>
-            <a class="btn ghost glass" id="heroSecondary" href="../index.html#contato" data-cta="hero-secondary">Falar com a escola</a>
+            <a class="btn ghost glass" id="heroSecondary" href="/index.html#contato" data-cta="hero-secondary">Falar com a escola</a>
             <button class="btn ghost glass" id="copyLink" type="button">Copiar link</button>
           </div>
 
           <div class="cover reveal" style="margin-top:18px;">
-            <img id="postCover" src="../assets/blog/respiracao.webp" alt="Respiração Transformadora em 3 minutos" loading="eager" />
+            <img id="postCover" src="/assets/blog/respiracao.webp" alt="Respiração Transformadora em 3 minutos" loading="eager" />
           </div>
 
           <!-- Skimmer block -->
@@ -1102,7 +841,7 @@
                   <a class="btn primary" id="inlinePrimary1" href="#" data-cta="inline-1-primary">
                     <span class="dot" aria-hidden="true"></span><span class="inlineBtnText">Ver o plano anti-stress</span>
                   </a>
-                  <a class="btn ghost glass" href="../index.html#aulas" data-cta="inline-1-secondary">Ver modalidades</a>
+                  <a class="btn ghost glass" href="/aulas/presencial/index.html" data-cta="inline-1-secondary">Ver modalidades</a>
                 </div>
               </div>
 
@@ -1147,7 +886,7 @@
                   <a class="btn primary" id="inlinePrimary2" href="#" data-cta="inline-2-primary">
                     <span class="dot" aria-hidden="true"></span><span class="inlineBtnText">Ir para o plano</span>
                   </a>
-                  <a class="btn ghost glass" href="../index.html#contato" data-cta="inline-2-secondary">Tirar dúvidas</a>
+                  <a class="btn ghost glass" href="/index.html#contato" data-cta="inline-2-secondary">Tirar dúvidas</a>
                 </div>
               </div>
 
@@ -1198,8 +937,8 @@
               <a class="btn primary" id="postPrimary" href="#" data-cta="post-primary">
                 <span class="dot" aria-hidden="true"></span><span class="postPrimaryText">Ver o plano anti-stress</span>
               </a>
-              <a class="btn ghost glass" href="../index.html#contato" data-cta="post-secondary">Agendar conversa</a>
-              <a class="btn ghost glass" href="../blog.html#posts" data-cta="post-more">Ver mais posts</a>
+              <a class="btn ghost glass" href="/index.html#contato" data-cta="post-secondary">Agendar conversa</a>
+              <a class="btn ghost glass" href="/blog/#posts" data-cta="post-more">Ver mais posts</a>
             </div>
           </article>
 
@@ -1219,7 +958,7 @@
                 <a class="btn primary" id="railPrimary" href="#" data-cta="rail-primary">
                   <span class="dot" aria-hidden="true"></span><span class="railBtnText">Ver o plano</span>
                 </a>
-                <a class="btn ghost glass" href="../index.html#aulas" data-cta="rail-secondary">Ver aulas</a>
+                <a class="btn ghost glass" href="/aulas/presencial/index.html" data-cta="rail-secondary">Ver aulas</a>
               </div>
             </div>
           </aside>
@@ -1235,7 +974,7 @@
             <h2>Leituras relacionadas</h2>
             <p class="lead">Mais alguns atalhos práticos na mesma linha: foco, rotina, recuperação.</p>
           </div>
-          <a class="pill-link glass" href="../blog.html">Ir para o Blog →</a>
+          <a class="pill-link glass" href="/blog/">Ir para o Blog →</a>
         </div>
 
         <div class="related-grid" id="related"><!-- injected by JS --></div>
@@ -1247,7 +986,7 @@
           </p>
           <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
             <a class="btn primary" id="bandPrimary" href="#" data-cta="band-primary"><span class="dot" aria-hidden="true"></span>Ver o plano</a>
-            <a class="btn ghost glass" href="../index.html#contato" data-cta="band-secondary">Agendar</a>
+            <a class="btn ghost glass" href="/index.html#contato" data-cta="band-secondary">Agendar</a>
           </div>
         </div>
       </div>
@@ -1262,8 +1001,8 @@
           </div>
           <div style="display:flex; gap:10px; flex-wrap:wrap;">
             <a class="pill-link glass" href="#top">Topo ↑</a>
-            <a class="pill-link glass" href="../blog.html">Blog</a>
-            <a class="pill-link glass" href="../index.html#contato">Contato</a>
+            <a class="pill-link glass" href="/blog/">Blog</a>
+            <a class="pill-link glass" href="/index.html#contato">Contato</a>
           </div>
         </div>
         <div class="tiny" style="margin-top:12px;">
@@ -1276,73 +1015,6 @@
   <script>
     // Year
     document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Theme (light/dark) with persistence + system default
-    const root = document.documentElement;
-    const themeBtn = document.getElementById('themeToggle');
-    const metaTheme = document.querySelector('meta[name="theme-color"]');
-    const THEME_KEY = 'theme';
-
-    function systemPrefersDark(){
-      return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    }
-    function setTheme(theme, {persist = true} = {}){
-      if(theme === 'dark') root.dataset.theme = 'dark';
-      else delete root.dataset.theme;
-
-      if(persist) localStorage.setItem(THEME_KEY, theme);
-
-      if(themeBtn){
-        const isDark = theme === 'dark';
-        themeBtn.setAttribute('aria-pressed', String(isDark));
-        themeBtn.setAttribute('aria-label', isDark ? 'Desativar modo escuro' : 'Ativar modo escuro');
-      }
-      if(metaTheme){
-        metaTheme.setAttribute('content', theme === 'dark' ? '#0b1012' : '#297E8A');
-      }
-    }
-    (function initTheme(){
-      const saved = localStorage.getItem(THEME_KEY);
-      if(saved === 'light' || saved === 'dark') setTheme(saved, {persist:false});
-      else setTheme(systemPrefersDark() ? 'dark' : 'light', {persist:false});
-    })();
-
-    themeBtn?.addEventListener('click', () => {
-      const current = root.dataset.theme === 'dark' ? 'dark' : 'light';
-      setTheme(current === 'dark' ? 'light' : 'dark');
-    });
-
-    const mq = window.matchMedia?.('(prefers-color-scheme: dark)');
-    mq?.addEventListener?.('change', (e) => {
-      const saved = localStorage.getItem(THEME_KEY);
-      if(saved !== 'light' && saved !== 'dark'){
-        setTheme(e.matches ? 'dark' : 'light', {persist:false});
-      }
-    });
-
-    // Prevent placeholder links from navigating
-    document.querySelectorAll('a[aria-disabled="true"]').forEach(a => {
-      a.addEventListener('click', (e) => e.preventDefault());
-    });
-
-    // Mobile drawer
-    const drawer = document.getElementById('drawer');
-    const toggle = document.getElementById('mobileToggle');
-    const closeBtn = document.getElementById('drawerClose');
-    function openDrawer(){
-      drawer.classList.add('open');
-      drawer.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeDrawer(){
-      drawer.classList.remove('open');
-      drawer.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-    }
-    toggle?.addEventListener('click', openDrawer);
-    closeBtn?.addEventListener('click', closeDrawer);
-    drawer?.addEventListener('click', (e) => { if(e.target === drawer) closeDrawer(); });
-    drawer?.querySelectorAll('[data-close]')?.forEach(a => a.addEventListener('click', closeDrawer));
 
     // Reveal on scroll
     (function(){
@@ -1402,7 +1074,7 @@
     const params = new URLSearchParams(window.location.search);
     const bodyTopic = document.body.getAttribute('data-topic') || 'stress';
     const topic = (params.get('topic') || bodyTopic || 'stress').toLowerCase();
-    const landingBase = document.body.getAttribute('data-landing') || '../index.html#contato';
+    const landingBase = document.body.getAttribute('data-landing') || '/index.html#contato';
 
     const UTM_KEYS = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'];
     function pickUtms(){
@@ -1577,8 +1249,8 @@
         category: "Foco",
         date: "2026-01-05",
         readMin: 7,
-        image: "../assets/blog/foco.webp",
-        href: "./foco-centro.html"
+        image: "/assets/blog/foco.webp",
+        href: "/blog/"
       },
       {
         title: "Recuperação Profunda: por que descansar não é perder tempo",
@@ -1586,8 +1258,8 @@
         category: "Recuperação",
         date: "2026-01-10",
         readMin: 5,
-        image: "../assets/blog/recuperacao.webp",
-        href: "./recuperacao-profunda.html"
+        image: "/assets/blog/recuperacao.webp",
+        href: "/blog/"
       }
     ];
 
@@ -1677,5 +1349,10 @@
       document.head.appendChild(s);
     })();
   </script>
+
+  <script defer src="/assets/js/utils.js"></script>
+  <script defer src="/assets/js/theme.js"></script>
+  <script defer src="/assets/js/navbar.js"></script>
+  <script defer src="/assets/js/soft-nav.js"></script>
 </body>
 </html>
