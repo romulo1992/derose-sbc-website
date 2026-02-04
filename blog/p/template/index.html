@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#297E8A" />
+
+  <!-- =========
+    POST META (EDIT THESE)
+    ========= -->
+  <title>Título do Post • DeRose SBC</title>
+  <meta name="description" content="Resumo curto do post para SEO e compartilhamento." />
+  <meta property="og:title" content="Título do Post • DeRose SBC" />
+  <meta property="og:description" content="Resumo curto do post para SEO e compartilhamento." />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="/assets/blog/featured.webp" />
+
+  <!-- Repo map: /assets/img/favicon.svg -->
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" />
+
+  <!-- Repo map: /assets/css/style.css -->
+  <link rel="stylesheet" href="/assets/css/style.css" />
+</head>
+
+<body class="blog-post-page">
+  <div class="progress" id="progress" aria-hidden="true"></div>
+
+  <!-- NAVBAR INJETADA -->
+  <div data-navbar></div>
+
+  <main id="top">
+    <!-- POST HERO -->
+    <section class="hero">
+      <div class="container">
+        <div class="post-hero glass reveal">
+          <div class="post-hero-top">
+            <a class="crumb" href="/blog/">← Voltar ao Blog</a>
+
+            <div class="post-tags" aria-label="Metadados do post">
+              <span class="post-pill"><span class="dot" aria-hidden="true"></span>Categoria</span>
+              <span class="post-pill alt"><span class="dot" aria-hidden="true"></span>Tag</span>
+            </div>
+          </div>
+
+          <h1>Título do Post</h1>
+
+          <p class="sub">
+            Resumo direto do post. Uma frase que explique o valor da leitura.
+          </p>
+
+          <div class="meta-row">
+            <span>00 mês 2026</span>
+            <span class="sep">•</span>
+            <span><strong>0</strong> min de leitura</span>
+            <span class="sep">•</span>
+            <span>Por <strong>DeRose SBC</strong></span>
+          </div>
+
+          <div class="cover reveal">
+            <img src="/assets/blog/featured.webp" alt="Capa do post" loading="eager" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- POST CONTENT -->
+    <section class="post-section">
+      <div class="container">
+        <article class="article-card glass reveal">
+          <div class="prose">
+            <!-- Escreva o conteúdo do post aqui. -->
+            <p>Parágrafo inicial com a ideia principal.</p>
+            <h2>Intertítulo</h2>
+            <p>Conteúdo detalhado, com exemplos e passos práticos.</p>
+            <ul>
+              <li>Ponto de apoio 1.</li>
+              <li>Ponto de apoio 2.</li>
+            </ul>
+          </div>
+
+          <div class="post-actions">
+            <button class="btn ghost glass" id="copyLink" type="button">Copiar link</button>
+            <a class="btn ghost glass" href="/blog/#posts">Ver mais posts</a>
+            <a class="btn primary" href="https://wa.me/5511975123336" target="_blank" rel="noreferrer"><span class="dot" aria-hidden="true"></span>Agendar aula</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- RELATED -->
+    <section>
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <h2>Leituras relacionadas</h2>
+            <p class="lead">Adicione outros posts que complementam o tema.</p>
+          </div>
+          <a class="pill-link glass" href="/blog/">Ir para o Blog →</a>
+        </div>
+
+        <div class="related-grid">
+          <!-- Repita este bloco para cada post relacionado. -->
+          <article class="post glass reveal">
+            <a href="#" aria-label="Abrir post relacionado">
+              <div class="post-media" aria-hidden="true">
+                <img src="/assets/blog/featured.webp" alt="Post relacionado" loading="lazy" />
+              </div>
+              <div class="post-body">
+                <div class="post-top">
+                  <div class="post-cat"><span class="dot" aria-hidden="true"></span>Categoria</div>
+                  <div class="post-date">00 mês 2026</div>
+                </div>
+                <h3>Título do post relacionado</h3>
+                <p>Resumo curto para apresentar o post relacionado.</p>
+                <div class="post-bottom">
+                  <div class="post-meta">
+                    <span>0 min</span>
+                    <span>•</span>
+                    <span>Leitura objetiva</span>
+                  </div>
+                  <span class="read">Ler →</span>
+                </div>
+              </div>
+            </a>
+          </article>
+        </div>
+
+        <div class="band glass reveal">
+          <h2>Consistência é o multiplicador.</h2>
+          <p>
+            Se você quer acelerar progresso com orientação, ajuste fino e método progressivo, agende uma aula e alinhe seu plano com clareza.
+          </p>
+          <div class="cta-center">
+            <a class="btn primary" href="https://wa.me/5511975123336" target="_blank" rel="noreferrer"><span class="dot" aria-hidden="true"></span>Agendar</a>
+            <a class="btn ghost glass" href="/aulas/presencial/index.html">Ver Aulas</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <div class="foot">
+          <div class="foot-brand">
+            <div class="foot-title">DeRose SBC</div>
+            <div class="tiny">Blog • Yôga de Alto Rendimento</div>
+          </div>
+          <div class="foot-links">
+            <a class="pill-link glass" href="#top">Topo ↑</a>
+            <a class="pill-link glass" href="/blog/">Blog</a>
+            <a class="pill-link glass" href="https://wa.me/5511975123336" target="_blank" rel="noreferrer">Contato</a>
+          </div>
+        </div>
+
+        <div class="tiny mt-12">
+          © <span id="year"></span> DeRose SBC.
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script defer src="/assets/js/utils.js"></script>
+  <script defer src="/assets/js/theme.js"></script>
+  <script defer src="/assets/js/main.js"></script>
+  <script defer src="/assets/js/blog-post.js"></script>
+  <script defer src="/assets/js/navbar.js"></script>
+  <script defer src="/assets/js/soft-nav.js"></script>
+</body>
+</html>
