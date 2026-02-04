@@ -1360,6 +1360,39 @@ html[data-theme="dark"] .drawer{ background: rgba(0,0,0,0.62); }
   display: block;
 }
 
+html:not([data-theme="dark"]) .blog-page .posts-scrim{
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.45) 45%,
+    rgba(248, 250, 252, 0.78) 72%,
+    rgba(245, 247, 248, 0.96) 100%
+  );
+}
+
+html:not([data-theme="dark"]) .blog-page .posts-more{
+  border: 1px solid rgba(15, 23, 42, 0.18);
+  background: rgba(255, 255, 255, 0.82);
+  color: rgba(15, 23, 42, 0.92);
+  box-shadow: 0 12px 26px rgba(15, 23, 42, 0.12);
+}
+
+html:not([data-theme="dark"]) .blog-page .posts-more:hover{
+  background: rgba(255, 255, 255, 0.96);
+}
+
+html:not([data-theme="dark"]) .blog-page .posts-count{
+  color: rgba(15, 23, 42, 0.72);
+  text-shadow: none;
+}
+
+html:not([data-theme="dark"]) .blog-page .posts-less{
+  border: 1px solid rgba(15, 23, 42, 0.16);
+  background: rgba(255, 255, 255, 0.82);
+  color: rgba(15, 23, 42, 0.92);
+  box-shadow: 0 12px 26px rgba(15, 23, 42, 0.12);
+}
+
 .blog-page .post{
   border-radius: var(--radius-lg);
   overflow:hidden;
