@@ -115,13 +115,31 @@
           </div>
         </div>
 
-        <div class="grid" id="grid" aria-label="Lista de posts">
-          <!-- cards injected by JS -->
+        <div class="posts-stack" id="postsStack">
+          <div class="grid" id="grid" aria-label="Lista de posts">
+            <!-- cards injected by JS -->
+          </div>
+
+          <!-- Floating scrim + Load More (only when there are hidden posts) -->
+          <div class="loadmore-layer" id="loadMoreLayer" hidden>
+            <div class="loadmore-inner">
+              <button type="button" class="btn glass loadmore-btn" id="loadMoreBtn" aria-controls="grid">
+                Carregar mais
+              </button>
+              <div class="loadmore-status tiny" id="loadMoreStatus" aria-live="polite"></div>
+            </div>
+          </div>
         </div>
 
         <div class="empty glass reveal" id="empty">
           <h3>Nenhum post encontrado</h3>
           <p>Tente remover filtros, limpar a busca, ou escolher outra categoria/tag.</p>
+        </div>
+
+        <div class="showless-wrap" id="showLessWrap" hidden>
+          <button type="button" class="btn ghost glass" id="showLessBtn" aria-controls="grid">
+            Mostrar menos
+          </button>
         </div>
 
         <div class="band glass reveal">

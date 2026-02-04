@@ -80,6 +80,45 @@
       image: "../assets/blog/consistencia.webp",
       href: "./p/consistencia-ritual/index.html",
     },
+    {
+      id: "respiracao-foco-3-minutos",
+      title: "Respiração em 3 minutos para recuperar foco",
+      excerpt:
+        "Um protocolo rápido para limpar ruído mental, recuperar ritmo e voltar ao que importa em poucos ciclos.",
+      category: "Respiração",
+      tags: ["Respiratórios", "Foco", "Clareza"],
+      date: "2026-02-05",
+      readMin: 3,
+      featured: false,
+      image: "../assets/blog/featured.webp",
+      href: "./p/respiracao-foco-3-minutos/index.html",
+    },
+    {
+      id: "rotina-minima-10-minutos",
+      title: "Rotina mínima: 10 minutos que destravam o dia",
+      excerpt:
+        "Um roteiro enxuto para entrar em fluxo, reduzir procrastinação e ganhar tração mesmo quando o dia começa confuso.",
+      category: "Rotina",
+      tags: ["Rotina", "Planejamento", "Consistência"],
+      date: "2026-01-28",
+      readMin: 4,
+      featured: false,
+      image: "../assets/blog/featured.webp",
+      href: "./p/rotina-minima-10-minutos/index.html",
+    },
+    {
+      id: "mobilidade-sem-dor-5-ajustes",
+      title: "Mobilidade sem dor: 5 ajustes práticos",
+      excerpt:
+        "Cinco ajustes simples para reduzir rigidez, liberar articulações e melhorar postura sem precisar treinos longos.",
+      category: "Mobilidade",
+      tags: ["Postura", "Força & Flexibilidade", "Recuperação"],
+      date: "2026-01-22",
+      readMin: 5,
+      featured: false,
+      image: "../assets/blog/featured.webp",
+      href: "./p/mobilidade-sem-dor-5-ajustes/index.html",
+    },
   ];
 
   function setYear() {
@@ -155,9 +194,29 @@
     const category = document.getElementById("category");
     const sort = document.getElementById("sort");
     const tagbar = document.getElementById("tagbar");
+    const loadMoreLayer = document.getElementById("loadMoreLayer");
+    const loadMoreBtn = document.getElementById("loadMoreBtn");
+    const loadMoreStatus = document.getElementById("loadMoreStatus");
+    const showLessWrap = document.getElementById("showLessWrap");
+    const showLessBtn = document.getElementById("showLessBtn");
 
-    if (!grid || !empty || !search || !category || !sort || !tagbar) return;
+    if (
+      !grid ||
+      !empty ||
+      !search ||
+      !category ||
+      !sort ||
+      !tagbar ||
+      !loadMoreLayer ||
+      !loadMoreBtn ||
+      !loadMoreStatus ||
+      !showLessWrap ||
+      !showLessBtn
+    )
+      return;
 
+    const PAGE_SIZE = 6;
+    let visibleCount = PAGE_SIZE;
     let state = { q: "", category: "all", tag: "all", sort: "new" };
 
     function formatDateISO(iso) {
@@ -276,19 +335,39 @@
       return out;
     }
 
-    function renderPosts() {
-      const filtered = sortPosts(POSTS.filter(matches));
+    function updatePagination(total, shown) {
+      if (total === 0) {
+        loadMoreLayer.hidden = true;
+        showLessWrap.hidden = true;
+        loadMoreStatus.textContent = "";
+        return;
+      }
 
-      if (filtered.length === 0) {
+      loadMoreStatus.textContent = `Mostrando ${shown} de ${total}`;
+
+      if (total > shown) loadMoreLayer.hidden = false;
+      else loadMoreLayer.hidden = true;
+
+      showLessWrap.hidden = !(total > PAGE_SIZE && shown === total);
+    }
+
+    function renderPosts() {
+      const finalPosts = sortPosts(POSTS.filter(matches));
+      const total = finalPosts.length;
+      const shown = Math.min(visibleCount, total);
+
+      if (total === 0) {
         grid.innerHTML = "";
         empty.style.display = "block";
         revealElement(empty, io);
+        updatePagination(0, 0);
         return;
       }
 
       empty.style.display = "none";
 
-      grid.innerHTML = filtered
+      grid.innerHTML = finalPosts
+        .slice(0, shown)
         .map((p) => {
           const tagLine = (p.tags || []).slice(0, 2).join(" • ");
 
@@ -323,6 +402,7 @@
         .join("");
 
       grid.querySelectorAll(".reveal").forEach((el) => revealElement(el, io));
+      updatePagination(total, shown);
     }
 
     function setTag(tag) {
@@ -337,21 +417,25 @@
         ch.setAttribute("aria-pressed", String(isActive));
       });
 
+      visibleCount = PAGE_SIZE;
       renderPosts();
     }
 
     search.addEventListener("input", (e) => {
       state.q = e.target.value || "";
+      visibleCount = PAGE_SIZE;
       renderPosts();
     });
 
     category.addEventListener("change", (e) => {
       state.category = e.target.value || "all";
+      visibleCount = PAGE_SIZE;
       renderPosts();
     });
 
     sort.addEventListener("change", (e) => {
       state.sort = e.target.value || "new";
+      visibleCount = PAGE_SIZE;
       renderPosts();
     });
 
@@ -371,6 +455,16 @@
       const t = el.getAttribute("data-tag");
       if (!t) return;
       setTag(t);
+    });
+
+    loadMoreBtn.addEventListener("click", () => {
+      visibleCount += PAGE_SIZE;
+      renderPosts();
+    });
+
+    showLessBtn.addEventListener("click", () => {
+      visibleCount = PAGE_SIZE;
+      renderPosts();
     });
 
     buildTaxonomy();
