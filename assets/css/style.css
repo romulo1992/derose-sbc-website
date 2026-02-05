@@ -478,7 +478,7 @@ h1{
 .badge.alt .mini-dot{ background: var(--accent); box-shadow: 0 0 0 4px rgba(252,136,58,0.16); }
 
 /* Section base */
-section{ padding: 54px 0; }
+section{ padding: 36px 0; }
 
 /* ========= FIX GLOBAL: header das sections (título + lead) ========= */
 .section-head{
