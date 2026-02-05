@@ -1815,3 +1815,34 @@ html[data-theme="dark"] .blog-post-page .post-cat{
   background: rgba(255,255,255,0.06);
   border-color: rgba(255,255,255,0.12);
 }
+
+/* =========================================
+   Blog Post: normalize inter-section spacing
+   Source of truth: main flex gap
+   ========================================= */
+:root{
+  --post-section-gap: 32px;
+}
+
+body.blog-post-page main#top{
+  display: flex;
+  flex-direction: column;
+  gap: var(--post-section-gap);
+}
+
+/* kill stacking (padding/margins on wrappers) */
+body.blog-post-page main#top > section,
+body.blog-post-page main#top > footer{
+  margin: 0 !important;
+}
+
+/* remove vertical padding on all non-hero sections */
+body.blog-post-page main#top > section:not(.hero){
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* let the gap define spacing after hero */
+body.blog-post-page main#top > section.hero{
+  padding-bottom: 0 !important;
+}
