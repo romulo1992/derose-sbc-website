@@ -2,8 +2,8 @@
   "use strict";
 
   const SELECTOR = ".tw[data-words]";
-  const TYPE_SPEED = 55;
-  const DELETE_SPEED = 35;
+  const TYPE_SPEED = 110;
+  const DELETE_SPEED = 75;
   const HOLD_DELAY = 1200;
   const BETWEEN_DELAY = 250;
   const REDUCED_MOTION_INTERVAL = 2500;
