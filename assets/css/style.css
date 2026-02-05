@@ -1846,3 +1846,8 @@ body.blog-post-page main#top > section:not(.hero){
 body.blog-post-page main#top > section.hero{
   padding-bottom: 0 !important;
 }
+
+/* Blog post: align CTA band spacing with section gap */
+body.blog-post-page main#top > section .band{
+  margin-top: 0;
+}
