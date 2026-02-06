@@ -127,7 +127,7 @@ body.lp-page {
 }
 
 .lp-page .lp-hero h1 {
-  margin: 0 0 16px;
+  margin: 0 0 clamp(28px, 4.6vw, 56px);
   max-width: 18ch;
   font-size: clamp(2rem, 4.1vw, 3.3rem);
   line-height: 1.06;
@@ -148,12 +148,6 @@ body.lp-page {
   margin-top: 24px;
 }
 
-.lp-page .hero-link {
-  display: inline-flex;
-  align-items: center;
-  font-weight: 600;
-  opacity: 0.88;
-}
 
 .lp-page .lp-chips {
   display: flex;
@@ -166,6 +160,35 @@ body.lp-page {
 .lp-page .lp-quotes .lp-card p {
   margin: 0 0 12px;
   line-height: 1.55;
+}
+
+.lp-page .lp-quote-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.lp-page .lp-quote-profile img {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid rgba(41, 126, 138, 0.22);
+}
+
+.lp-page .lp-quote-profile span {
+  display: grid;
+  gap: 2px;
+}
+
+.lp-page .lp-quote-profile strong {
+  font-size: 0.96rem;
+  line-height: 1.1;
+}
+
+.lp-page .lp-quote-profile small {
+  font-size: 0.82rem;
 }
 
 .lp-page .lp-fit .lp-card h3,
@@ -257,20 +280,12 @@ body.lp-page {
 }
 
 .lp-page .faq-panel {
-  display: grid;
-  gap: 10px;
-  padding: 8px;
+  border-top: 1px solid rgba(41, 126, 138, 0.24);
 }
 
 .lp-page .faq-panel details {
-  padding: 16px 18px;
-  border-radius: calc(var(--radius-md) + 2px);
-  background: rgba(255, 255, 255, 0.5);
-  border: 1px solid rgba(41, 126, 138, 0.14);
-}
-
-.lp-page .faq-panel details+details {
-  border-top: none;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(41, 126, 138, 0.24);
 }
 
 .lp-page .faq-panel summary {
@@ -303,7 +318,7 @@ body.lp-page {
   line-height: 1.58;
 }
 
-.lp-page .final-band {
+.lp-page .lp-final .band {
   border-radius: var(--radius-xl);
   text-align: center;
   padding: clamp(30px, 4.2vw, 44px);
@@ -313,11 +328,11 @@ body.lp-page {
     var(--glass-bg);
 }
 
-.lp-page .final-band h2 {
+.lp-page .lp-final .band h2 {
   margin: 0 0 12px;
 }
 
-.lp-page .final-band p {
+.lp-page .lp-final .band p {
   margin: 0 auto 20px;
   max-width: 64ch;
 }
@@ -380,9 +395,12 @@ html[data-theme="dark"] .lp-page .lp-chip {
   border-color: rgba(255, 255, 255, 0.18);
 }
 
+html[data-theme="dark"] .lp-page .faq-panel {
+  border-top-color: rgba(255, 255, 255, 0.2);
+}
+
 html[data-theme="dark"] .lp-page .faq-panel details {
-  background: rgba(24, 24, 24, 0.42);
-  border-color: rgba(255, 255, 255, 0.16);
+  border-bottom-color: rgba(255, 255, 255, 0.2);
 }
 
 html[data-theme="dark"] .lp-page .lp-plan.is-featured {
