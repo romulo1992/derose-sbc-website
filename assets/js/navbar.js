@@ -5,7 +5,9 @@
   const MOUNT_SEL = "[data-navbar]";
 
   function isLpPage() {
-    return document.body.classList.contains("lp-page") || document.body.dataset.page === "lp";
+    const body = document.body;
+    if (!body) return false;
+    return body.classList.contains("lp-page") || body.dataset.page === "lp";
   }
 
   function cleanupNavbar() {
@@ -148,6 +150,11 @@
   }
 
   function init() {
+    if (isLpPage()) {
+      cleanupNavbar();
+      return;
+    }
+
     injectNavbar();
     document.addEventListener("softnav:loaded", injectNavbar);
   }
