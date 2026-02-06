@@ -1,0 +1,330 @@
+.lp-page {
+  --lp-max: 1040px;
+  --lp-section-pad: clamp(56px, 8vw, 110px);
+  --lp-surface: rgba(255, 255, 255, 0.72);
+  --lp-border: rgba(41, 126, 138, 0.16);
+  --lp-border-strong: rgba(41, 126, 138, 0.32);
+  --lp-text: #2f2f2f;
+  --lp-muted: rgba(57, 57, 57, 0.72);
+  --lp-reco-glow: 0 0 0 1px rgba(252, 136, 58, 0.4), 0 20px 44px rgba(252, 136, 58, 0.2);
+}
+
+.lp-page body {
+  color: var(--lp-text);
+}
+
+.lp-page {
+  padding-top: 0;
+}
+
+.lp-page .glass {
+  background: var(--lp-surface);
+  border: 1px solid var(--lp-border);
+  box-shadow: 0 12px 32px rgba(57, 57, 57, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.lp-page .lp-main {
+  padding-bottom: 108px;
+}
+
+.lp-page .lp-shell {
+  width: min(var(--lp-max), calc(100% - 40px));
+  margin: 0 auto;
+}
+
+.lp-page .lp-section {
+  padding: var(--lp-section-pad) 0;
+  position: relative;
+}
+
+.lp-page .lp-section + .lp-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(90%, 720px);
+  border-top: 1px solid rgba(41, 126, 138, 0.1);
+}
+
+.lp-page h1,
+.lp-page h2,
+.lp-page h3 {
+  margin: 0;
+  color: #292929;
+}
+
+.lp-page h1 {
+  font-size: clamp(2.2rem, 5vw, 4.4rem);
+  line-height: 1.03;
+  letter-spacing: -0.04em;
+  max-width: 18ch;
+}
+
+.lp-page h2 {
+  font-size: clamp(1.5rem, 2.8vw, 2.2rem);
+  margin-bottom: 28px;
+  letter-spacing: -0.02em;
+}
+
+.lp-page h3 {
+  font-size: clamp(1.15rem, 2vw, 1.4rem);
+  margin-bottom: 12px;
+}
+
+.lp-page p,
+.lp-page li,
+.lp-page summary,
+.lp-page cite {
+  font-size: clamp(0.98rem, 1.5vw, 1.08rem);
+  line-height: 1.6;
+}
+
+.lp-page .lp-eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.78rem;
+  margin: 0 0 20px;
+}
+
+.lp-page .lp-subheadline {
+  max-width: 70ch;
+  margin: 22px 0 0;
+  color: var(--lp-muted);
+}
+
+.lp-page .lp-actions {
+  margin-top: 34px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.lp-page .lp-secondary-link {
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.lp-page .lp-proof-grid,
+.lp-page .lp-quotes,
+.lp-page .lp-fit-grid,
+.lp-page .lp-steps,
+.lp-page .lp-plans {
+  display: grid;
+  gap: 16px;
+}
+
+.lp-page .lp-proof-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-bottom: 24px;
+}
+
+.lp-page .lp-chip {
+  padding: 14px 16px;
+  border-radius: 999px;
+  text-align: center;
+  border: 1px solid var(--lp-border);
+  background: rgba(255, 255, 255, 0.84);
+  font-weight: 600;
+}
+
+.lp-page .lp-quotes {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.lp-page .lp-card,
+.lp-page .lp-step,
+.lp-page .lp-plan-card,
+.lp-page .lp-faq details {
+  border-radius: 20px;
+  border: 1px solid var(--lp-border);
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.lp-page .lp-card,
+.lp-page .lp-step,
+.lp-page .lp-plan-card {
+  padding: 24px;
+}
+
+.lp-page .lp-card p {
+  margin: 0 0 12px;
+}
+
+.lp-page .lp-card cite {
+  color: var(--lp-muted);
+}
+
+.lp-page ul {
+  margin: 0;
+  padding-left: 22px;
+  display: grid;
+  gap: 8px;
+}
+
+.lp-page .lp-fit-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.lp-page .lp-card-muted {
+  background: rgba(255, 248, 240, 0.85);
+}
+
+.lp-page .lp-steps {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.lp-page .lp-step-number {
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  margin-bottom: 16px;
+  border: 1px solid var(--lp-border-strong);
+  background: rgba(252, 136, 58, 0.12);
+}
+
+.lp-page .lp-deliverables {
+  max-width: 860px;
+}
+
+.lp-page .lp-plans {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch;
+}
+
+.lp-page .lp-plan-card {
+  display: grid;
+  gap: 18px;
+}
+
+.lp-page .lp-plan-card .btn {
+  margin-top: auto;
+}
+
+.lp-page .lp-price {
+  font-size: clamp(1.55rem, 2.4vw, 2.1rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.lp-page .lp-recommended {
+  position: relative;
+  transform: translateY(-8px) scale(1.015);
+  border-color: rgba(252, 136, 58, 0.65);
+  box-shadow: var(--lp-reco-glow);
+}
+
+.lp-page .lp-badge {
+  width: max-content;
+  padding: 6px 10px;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #6b3f1f;
+  background: rgba(252, 136, 58, 0.2);
+}
+
+.lp-page .lp-faq {
+  display: grid;
+  gap: 14px;
+}
+
+.lp-page .lp-faq details {
+  padding: 0;
+  overflow: clip;
+}
+
+.lp-page .lp-faq summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 20px 24px;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.lp-page .lp-faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.lp-page .lp-faq summary::after {
+  content: "⌄";
+  font-size: 1.2rem;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+
+.lp-page .lp-faq details[open] summary::after {
+  transform: rotate(180deg);
+}
+
+.lp-page .lp-faq details p {
+  margin: 0;
+  padding: 0 24px 22px;
+  color: var(--lp-muted);
+}
+
+.lp-page .lp-final-cta .lp-shell {
+  border-radius: 28px;
+  border: 1px solid var(--lp-border-strong);
+  padding: clamp(28px, 6vw, 52px);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(255, 236, 209, 0.88));
+  text-align: center;
+}
+
+.lp-page .lp-final-cta p {
+  max-width: 62ch;
+  margin: 16px auto 28px;
+  color: var(--lp-muted);
+}
+
+.lp-page .ph {
+  opacity: 0.78;
+  font-style: italic;
+}
+
+.lp-page .lp-mobile-sticky {
+  position: fixed;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  z-index: 60;
+  justify-content: center;
+  box-shadow: 0 14px 24px rgba(41, 126, 138, 0.25);
+}
+
+@media (min-width: 901px) {
+  .lp-page .lp-mobile-sticky {
+    display: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .lp-page .lp-proof-grid,
+  .lp-page .lp-quotes,
+  .lp-page .lp-fit-grid,
+  .lp-page .lp-steps,
+  .lp-page .lp-plans {
+    grid-template-columns: 1fr;
+  }
+
+  .lp-page .lp-section {
+    padding: clamp(56px, 10vw, 72px) 0;
+  }
+
+  .lp-page .lp-recommended {
+    transform: translateY(0) scale(1);
+  }
+}

@@ -92,7 +92,16 @@
     document.addEventListener("softnav:loaded", () => setActiveLink(scope));
   }
 
+
+  function shouldSkipNavbar() {
+    const body = document.body;
+    if (!body) return false;
+    return body.classList.contains("lp-page") || body.dataset.page === "lp";
+  }
+
   function injectNavbar() {
+    if (shouldSkipNavbar()) return;
+
     const mount = document.querySelector(MOUNT_SEL);
     if (!mount) return;
 

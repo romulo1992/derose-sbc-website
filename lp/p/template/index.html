@@ -6,328 +6,194 @@
   <meta name="theme-color" content="#297E8A" />
 
   <title>Sales Page Template • DeRose SBC</title>
-  <meta name="description" content="Template de página de vendas minimalista." />
+  <meta name="description" content="Template de página de vendas com estrutura completa e design premium." />
 
   <meta property="og:title" content="Sales Page Template • DeRose SBC" />
-  <meta property="og:description" content="Template de página de vendas minimalista." />
+  <meta property="og:description" content="Template de página de vendas com estrutura completa e design premium." />
   <meta property="og:type" content="website" />
 
   <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="/assets/css/style.css" />
+  <link rel="stylesheet" href="/assets/css/lp-sales.css" />
 </head>
 
-<body class="lp-page">
-  <!-- Mantido por arquitetura, mas FORÇADO a sumir via CSS -->
-  <div data-navbar class="lp-hide-nav"></div>
-
-  <!-- Topbar minimalista (marca + 1 CTA) -->
-  <header class="lp-topbar" aria-label="Barra superior">
-    <div class="container lp-topbar-inner">
-      <a class="lp-brand" href="/" aria-label="Ir para a home">
-        <span class="lp-brand-dot" aria-hidden="true"></span>
-        <span class="lp-brand-text">DeRose SBC</span>
-      </a>
-
-      <a class="btn primary lp-topbar-cta" href="#cta">
-        <span class="dot" aria-hidden="true"></span>CTA primário
-      </a>
-    </div>
-  </header>
+<body class="lp-page" data-page="lp">
+  <div data-navbar></div>
 
   <main id="top" class="lp-main">
-    <!-- HERO -->
-    <section class="lp-hero">
-      <div class="container">
-        <div class="lp-wrap">
-          <div class="lp-kicker reveal">
-            <span class="pill">Categoria</span>
-            <span class="lp-kicker-text">Micro-promessa em 6–10 palavras</span>
-          </div>
-
-          <h1 class="lp-title reveal">Headline: resultado específico + público</h1>
-          <p class="lp-sub reveal">Subheadline: contexto + diferencial + o que acontece depois do clique</p>
-
-          <div class="lp-actions reveal">
-            <a class="btn primary" href="#cta"><span class="dot" aria-hidden="true"></span>CTA primário</a>
-            <a class="pill-link glass" href="#detalhes">Ver detalhes →</a>
-          </div>
-
-          <!-- Proof chips (sem “tabelão”) -->
-          <div class="lp-metrics reveal" aria-label="Provas rápidas">
-            <div class="lp-chip glass"><b>Prova 1</b><span class="tiny">+X / X anos</span></div>
-            <div class="lp-chip glass"><b>Prova 2</b><span class="tiny">método / credencial</span></div>
-            <div class="lp-chip glass"><b>Prova 3</b><span class="tiny">satisfação / nota</span></div>
-          </div>
-
-          <p class="lp-micro tiny reveal">Micro-reassurance: sem spam, resposta humana, etc.</p>
+    <section class="lp-section lp-hero" aria-labelledby="lp-hero-title">
+      <div class="lp-shell">
+        <p class="lp-eyebrow ph">Título da oferta</p>
+        <h1 id="lp-hero-title" class="ph">Headline principal com promessa clara e específica</h1>
+        <p class="lp-subheadline ph">Subtítulo curto explicando o benefício principal, para quem é a solução e o próximo passo de forma direta e elegante.</p>
+        <div class="lp-actions">
+          <a class="btn primary" href="#planos"><span class="dot" aria-hidden="true"></span>Quero começar agora</a>
+          <a class="lp-secondary-link ph" href="#como-funciona">Ver como funciona</a>
         </div>
       </div>
     </section>
 
-    <!-- PROVA / CREDENCIAIS -->
-    <section id="prova" class="lp-section">
-      <div class="container">
-        <div class="lp-wrap">
-          <header class="lp-head reveal">
-            <h2>Prova / credenciais</h2>
-            <p class="lead">Uma linha só que valida esta oferta.</p>
-          </header>
-
-          <div class="lp-logo-row reveal" aria-label="Logos (placeholders)">
-            <span class="lp-logo glass">Logo</span>
-            <span class="lp-logo glass">Logo</span>
-            <span class="lp-logo glass">Logo</span>
-            <span class="lp-logo glass">Logo</span>
-          </div>
-
-          <div class="lp-quotes reveal" aria-label="Depoimentos curtos">
-            <article class="lp-card glass">
-              <p class="lp-quote">“Depoimento curto, 1–2 linhas.”</p>
-              <div class="tiny">— Nome, Cargo/Contexto</div>
-            </article>
-            <article class="lp-card glass">
-              <p class="lp-quote">“Depoimento curto, 1–2 linhas.”</p>
-              <div class="tiny">— Nome, Cargo/Contexto</div>
-            </article>
-          </div>
+    <section class="lp-section lp-proof" aria-labelledby="lp-proof-title">
+      <div class="lp-shell">
+        <h2 id="lp-proof-title" class="ph">Prova social</h2>
+        <div class="lp-proof-grid" aria-label="Logos e métricas">
+          <span class="lp-chip ph">Logo parceiro</span>
+          <span class="lp-chip ph">+3.200 alunos</span>
+          <span class="lp-chip ph">4.9 de avaliação média</span>
+          <span class="lp-chip ph">12 anos de experiência</span>
+        </div>
+        <div class="lp-quotes">
+          <article class="lp-card">
+            <p class="ph">“Resultado real em poucas semanas, com método claro e acompanhamento próximo.”</p>
+            <cite class="ph">Cliente exemplo, empreendedora</cite>
+          </article>
+          <article class="lp-card">
+            <p class="ph">“A estrutura trouxe consistência e confiança para executar com qualidade.”</p>
+            <cite class="ph">Cliente exemplo, consultor</cite>
+          </article>
         </div>
       </div>
     </section>
 
-    <!-- PARA QUEM É / NÃO É -->
-    <section id="para-quem" class="lp-section">
-      <div class="container">
-        <div class="lp-wrap">
-          <header class="lp-head reveal">
-            <h2>Para quem é</h2>
-            <p class="lead">3 perfis ideais em uma frase.</p>
-          </header>
-
-          <div class="lp-grid-3 reveal">
-            <article class="lp-card glass">
-              <h3>Perfil 1</h3>
-              <ul class="lp-list">
-                <li>Situação / desejo</li>
-                <li>Situação / desejo</li>
-                <li>Situação / desejo</li>
-              </ul>
-            </article>
-
-            <article class="lp-card glass">
-              <h3>Perfil 2</h3>
-              <ul class="lp-list">
-                <li>Situação / desejo</li>
-                <li>Situação / desejo</li>
-                <li>Situação / desejo</li>
-              </ul>
-            </article>
-
-            <article class="lp-card glass lp-muted">
-              <h3>Não é para</h3>
-              <ul class="lp-list">
-                <li>Expectativa errada</li>
-                <li>Expectativa errada</li>
-                <li>Expectativa errada</li>
-              </ul>
-            </article>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- COMO FUNCIONA -->
-    <section id="detalhes" class="lp-section">
-      <div class="container">
-        <div class="lp-wrap">
-          <header class="lp-head reveal">
-            <h2>Como funciona</h2>
-            <p class="lead">Mecanismo em 1–2 linhas, sem hype.</p>
-          </header>
-
-          <div class="lp-steps reveal" aria-label="Passos">
-            <div class="lp-step glass">
-              <div class="lp-step-n">1</div>
-              <div>
-                <b>Passo 1</b>
-                <p class="tiny">O que acontece aqui, na prática.</p>
-              </div>
-            </div>
-            <div class="lp-step glass">
-              <div class="lp-step-n">2</div>
-              <div>
-                <b>Passo 2</b>
-                <p class="tiny">O que acontece aqui, na prática.</p>
-              </div>
-            </div>
-            <div class="lp-step glass">
-              <div class="lp-step-n">3</div>
-              <div>
-                <b>Passo 3</b>
-                <p class="tiny">O que acontece aqui, na prática.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- O QUE VOCÊ RECEBE -->
-    <section id="entregas" class="lp-section">
-      <div class="container">
-        <div class="lp-wrap">
-          <header class="lp-head reveal">
-            <h2>O que você recebe</h2>
-            <p class="lead">Lista concreta de inclusões.</p>
-          </header>
-
-          <div class="lp-card glass reveal">
-            <ul class="lp-check">
-              <li><span class="lp-check-dot" aria-hidden="true"></span>Inclusão 1</li>
-              <li><span class="lp-check-dot" aria-hidden="true"></span>Inclusão 2</li>
-              <li><span class="lp-check-dot" aria-hidden="true"></span>Inclusão 3</li>
-              <li><span class="lp-check-dot" aria-hidden="true"></span>Inclusão 4</li>
-              <li><span class="lp-check-dot" aria-hidden="true"></span>Inclusão 5</li>
+    <section class="lp-section" aria-labelledby="lp-fit-title">
+      <div class="lp-shell">
+        <h2 id="lp-fit-title" class="ph">Para quem é / Para quem não é</h2>
+        <div class="lp-fit-grid">
+          <article class="lp-card">
+            <h3 class="ph">Para quem é</h3>
+            <ul>
+              <li class="ph">Quem busca um processo direto e aplicável no dia a dia.</li>
+              <li class="ph">Quem quer evolução com método, não tentativa e erro.</li>
+              <li class="ph">Quem valoriza orientação prática e objetiva.</li>
             </ul>
-
-            <div class="lp-inline-cta">
-              <a class="btn primary" href="#cta"><span class="dot" aria-hidden="true"></span>CTA primário</a>
-              <span class="tiny">Risco reverso / política simples — opcional</span>
-            </div>
-          </div>
+          </article>
+          <article class="lp-card lp-card-muted">
+            <h3 class="ph">Para quem não é</h3>
+            <ul>
+              <li class="ph">Quem procura atalhos sem dedicação mínima.</li>
+              <li class="ph">Quem prefere conteúdo sem implementação guiada.</li>
+              <li class="ph">Quem não deseja aplicar os próximos passos sugeridos.</li>
+            </ul>
+          </article>
         </div>
       </div>
     </section>
 
-    <!-- PLANOS -->
-    <section id="planos" class="lp-section">
-      <div class="container">
-        <div class="lp-wrap">
-          <header class="lp-head reveal">
-            <h2>Planos</h2>
-            <p class="lead">Ajuda de escolha: “Comece por X se…”.</p>
-          </header>
-
-          <div class="lp-pricing reveal">
-            <article class="lp-plan glass">
-              <div class="lp-plan-top">
-                <h3>Essencial</h3>
-                <span class="tag">Para começar</span>
-              </div>
-              <div class="lp-price">R$ 0.000 <span class="tiny">[condição]</span></div>
-              <ul class="lp-list">
-                <li>Item-chave</li>
-                <li>Item-chave</li>
-                <li>Item-chave</li>
-              </ul>
-              <a class="btn primary lp-plan-cta" href="#cta"><span class="dot" aria-hidden="true"></span>Escolher</a>
-            </article>
-
-            <article class="lp-plan glass lp-plan-featured">
-              <div class="lp-plan-top">
-                <h3>Recomendado</h3>
-                <span class="tag">Recomendado</span>
-              </div>
-              <div class="lp-price">R$ 0.000 <span class="tiny">[condição]</span></div>
-              <ul class="lp-list">
-                <li>Item-chave</li>
-                <li>Item-chave</li>
-                <li>Bônus/benefício</li>
-              </ul>
-              <a class="btn primary lp-plan-cta" href="#cta"><span class="dot" aria-hidden="true"></span>Escolher</a>
-            </article>
-
-            <article class="lp-plan glass">
-              <div class="lp-plan-top">
-                <h3>Premium</h3>
-                <span class="tag">Máxima eficiência</span>
-              </div>
-              <div class="lp-price">R$ 0.000 <span class="tiny">[condição]</span></div>
-              <ul class="lp-list">
-                <li>Item-chave</li>
-                <li>Item-chave</li>
-                <li>Benefício premium</li>
-              </ul>
-              <a class="btn primary lp-plan-cta" href="#cta"><span class="dot" aria-hidden="true"></span>Escolher</a>
-            </article>
-          </div>
-
-          <p class="tiny reveal">Observações: vagas, agenda, reembolso, etc.</p>
+    <section id="como-funciona" class="lp-section" aria-labelledby="lp-how-title">
+      <div class="lp-shell">
+        <h2 id="lp-how-title" class="ph">Como funciona</h2>
+        <div class="lp-steps">
+          <article class="lp-step">
+            <span class="lp-step-number">1</span>
+            <h3 class="ph">Diagnóstico inicial</h3>
+            <p class="ph">Mapeamos cenário, objetivo e prioridade para um plano assertivo.</p>
+          </article>
+          <article class="lp-step">
+            <span class="lp-step-number">2</span>
+            <h3 class="ph">Implementação guiada</h3>
+            <p class="ph">Você recebe direção clara para executar com consistência.</p>
+          </article>
+          <article class="lp-step">
+            <span class="lp-step-number">3</span>
+            <h3 class="ph">Refino e avanço</h3>
+            <p class="ph">Ajustamos pontos críticos para consolidar resultados sustentáveis.</p>
+          </article>
         </div>
       </div>
     </section>
 
-    <!-- FAQ -->
-    <section id="faq" class="lp-section">
-      <div class="container">
-        <div class="lp-wrap">
-          <header class="lp-head reveal">
-            <h2>FAQ</h2>
-            <p class="lead">5–8 dúvidas que travam a decisão.</p>
-          </header>
+    <section class="lp-section" aria-labelledby="lp-deliver-title">
+      <div class="lp-shell">
+        <h2 id="lp-deliver-title" class="ph">O que você recebe</h2>
+        <article class="lp-card lp-deliverables">
+          <ul>
+            <li class="ph">Plano estratégico com próximos passos priorizados.</li>
+            <li class="ph">Materiais de apoio para facilitar execução.</li>
+            <li class="ph">Sessões de acompanhamento com foco em resultado.</li>
+            <li class="ph">Checklist de evolução e indicadores de progresso.</li>
+            <li class="ph">Suporte em pontos críticos durante a implementação.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
 
-          <div class="lp-faq reveal">
-            <details class="glass" open>
-              <summary>Pergunta 1</summary>
-              <div class="lp-faq-body"><p>Resposta objetiva.</p></div>
-            </details>
-
-            <details class="glass">
-              <summary>Pergunta 2</summary>
-              <div class="lp-faq-body"><p>Resposta objetiva.</p></div>
-            </details>
-
-            <details class="glass">
-              <summary>Pergunta 3</summary>
-              <div class="lp-faq-body"><p>Resposta objetiva.</p></div>
-            </details>
-          </div>
+    <section id="planos" class="lp-section" aria-labelledby="lp-plans-title">
+      <div class="lp-shell">
+        <h2 id="lp-plans-title" class="ph">Planos</h2>
+        <div class="lp-plans">
+          <article class="lp-plan-card">
+            <h3 class="ph">Plano Essencial</h3>
+            <p class="lp-price ph">R$ 497</p>
+            <ul>
+              <li class="ph">Fundamentos e trilha inicial.</li>
+              <li class="ph">Acesso ao conteúdo principal.</li>
+              <li class="ph">Implementação no seu ritmo.</li>
+            </ul>
+            <a class="btn primary" href="#cta"><span class="dot" aria-hidden="true"></span>Escolher Essencial</a>
+          </article>
+          <article class="lp-plan-card lp-recommended" aria-label="Plano recomendado">
+            <span class="lp-badge">recommended</span>
+            <h3 class="ph">Plano Performance</h3>
+            <p class="lp-price ph">R$ 997</p>
+            <ul>
+              <li class="ph">Tudo do Essencial + acompanhamento próximo.</li>
+              <li class="ph">Sessões extras de ajuste e direcionamento.</li>
+              <li class="ph">Prioridade de suporte e revisão estratégica.</li>
+            </ul>
+            <a class="btn primary" href="#cta"><span class="dot" aria-hidden="true"></span>Escolher Performance</a>
+          </article>
+          <article class="lp-plan-card">
+            <h3 class="ph">Plano Premium</h3>
+            <p class="lp-price ph">R$ 1.997</p>
+            <ul>
+              <li class="ph">Tudo do Performance com imersão avançada.</li>
+              <li class="ph">Estratégia personalizada em alta intensidade.</li>
+              <li class="ph">Acompanhamento dedicado de ponta a ponta.</li>
+            </ul>
+            <a class="btn primary" href="#cta"><span class="dot" aria-hidden="true"></span>Escolher Premium</a>
+          </article>
         </div>
       </div>
     </section>
 
-    <!-- CTA FINAL -->
-    <section id="cta" class="lp-section lp-final">
-      <div class="container">
-        <div class="lp-wrap">
-          <div class="lp-final-card band glass reveal">
-            <h2>Reforço do resultado + próximo passo</h2>
-            <p>1–2 linhas dizendo o que acontece depois do clique.</p>
-
-            <div class="cta-center">
-              <a class="btn primary" href="https://wa.me/5511975123336" target="_blank" rel="noreferrer">
-                <span class="dot" aria-hidden="true"></span>CTA primário
-              </a>
-              <a class="pill-link glass" href="#top">Topo ↑</a>
-            </div>
-
-            <div class="tiny mt-12">Sem spam • resposta humana • etc.</div>
-          </div>
+    <section class="lp-section" aria-labelledby="lp-faq-title">
+      <div class="lp-shell">
+        <h2 id="lp-faq-title" class="ph">Perguntas frequentes</h2>
+        <div class="lp-faq">
+          <details>
+            <summary class="ph">Quando começo após a inscrição?</summary>
+            <p class="ph">Você recebe o acesso e as orientações iniciais logo após a confirmação.</p>
+          </details>
+          <details>
+            <summary class="ph">Preciso ter experiência prévia?</summary>
+            <p class="ph">Não. A metodologia atende tanto iniciantes quanto pessoas em fase de refinamento.</p>
+          </details>
+          <details>
+            <summary class="ph">Como funciona o suporte?</summary>
+            <p class="ph">O suporte varia por plano, com canais e tempos de resposta definidos para cada opção.</p>
+          </details>
+          <details>
+            <summary class="ph">Posso mudar de plano depois?</summary>
+            <p class="ph">Sim. É possível evoluir para um plano superior conforme sua necessidade.</p>
+          </details>
         </div>
       </div>
     </section>
 
-    <footer>
-      <div class="container">
-        <div class="foot">
-          <div class="foot-brand">
-            <div class="foot-title">DeRose SBC</div>
-            <div class="tiny">Yôga de Alto Rendimento</div>
-          </div>
-          <div class="foot-links">
-            <a class="pill-link glass" href="#top">Topo ↑</a>
-            <a class="pill-link glass" href="#planos">Planos</a>
-            <a class="pill-link glass" href="#cta">Contato</a>
-          </div>
-        </div>
-        <div class="tiny mt-12">© <span id="year"></span> DeRose SBC.</div>
+    <section id="cta" class="lp-section lp-final-cta" aria-labelledby="lp-final-title">
+      <div class="lp-shell">
+        <h2 id="lp-final-title" class="ph">Pronto para dar o próximo passo com clareza?</h2>
+        <p class="ph">Escolha seu plano e comece hoje com uma estrutura simples, elegante e focada em resultado.</p>
+        <a class="btn primary" href="https://wa.me/5511975123336" target="_blank" rel="noreferrer">
+          <span class="dot" aria-hidden="true"></span>Falar com especialista
+        </a>
       </div>
-    </footer>
-
-    <!-- Sticky CTA (mobile) -->
-    <a class="lp-sticky btn primary" href="#cta" aria-label="CTA primário">
-      <span class="dot" aria-hidden="true"></span>CTA primário
-    </a>
+    </section>
   </main>
+
+  <a class="lp-mobile-sticky btn primary" href="#cta" aria-label="Ir para chamada final">
+    <span class="dot" aria-hidden="true"></span>Quero começar agora
+  </a>
 
   <script defer src="/assets/js/utils.js"></script>
   <script defer src="/assets/js/theme.js"></script>
