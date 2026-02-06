@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#297E8A" />
+
+  <title>[Nome da Oferta] • DeRose SBC</title>
+  <meta name="description" content="[Descrição curta da oferta em 140–160 caracteres]." />
+
+  <meta property="og:title" content="[Nome da Oferta] • DeRose SBC" />
+  <meta property="og:description" content="[Descrição curta da oferta]." />
+  <meta property="og:type" content="website" />
+
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/assets/css/style.css" />
+
+  <!-- Pequenos estilos só para componentes específicos desta página (FAQ/Planos).
+       Se preferir, mova este bloco para o final do /assets/css/style.css -->
+  <style>
+    .sales-page .hero-cta { display:flex; gap:12px; flex-wrap:wrap; align-items:center; }
+    .sales-page .hero-cta .pill-link { padding:10px 12px; }
+    .sales-page .bullets { margin:12px 0 0; padding-left:18px; }
+    .sales-page .bullets li { margin:8px 0; }
+    .sales-page .plan-top { display:flex; align-items:flex-start; justify-content:space-between; gap:10px; }
+    .sales-page .price { font-size: 34px; line-height: 1.1; letter-spacing: -0.02em; margin-top: 10px; }
+    .sales-page .price .tiny { display:block; margin-top: 6px; opacity: .85; }
+
+    .sales-page .faq { padding: 10px; }
+    .sales-page details { border-radius: 16px; overflow: hidden; }
+    .sales-page details + details { margin-top: 10px; }
+    .sales-page summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 14px 14px;
+      user-select: none;
+      font-weight: 700;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .sales-page summary::-webkit-details-marker { display:none; }
+    .sales-page summary::after {
+      content: "＋";
+      font-weight: 800;
+      opacity: .75;
+      transform: translateY(-1px);
+    }
+    .sales-page details[open] summary::after { content: "—"; }
+    .sales-page .faq-body { padding: 0 14px 14px; opacity: .95; }
+    .sales-page .faq-body .tiny { margin-top: 8px; opacity: .85; }
+  </style>
+</head>
+
+<body>
+  <!-- NAVBAR INJETADA -->
+  <div data-navbar></div>
+
+  <main id="top" class="sales-page">
+    <!-- HERO (USP + CTA) -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-copy glass reveal">
+            <div class="kicker">
+              <span class="pill">[Categoria]</span>
+              <span>[Micro-promessa em 6–10 palavras]</span>
+            </div>
+
+            <h1 class="hero-title">[Headline: resultado específico + público]</h1>
+
+            <p class="sub sub-hero">
+              [Subheadline: contexto + diferencial + tempo/forma (se fizer sentido).]
+            </p>
+
+            <div class="hero-cta">
+              <a class="btn primary" href="#cta">
+                <span class="dot" aria-hidden="true"></span>[CTA primário]
+              </a>
+              <a class="pill-link glass" href="#detalhes">Ver detalhes →</a>
+            </div>
+
+            <!-- 3 “benefícios de primeira ordem” (curtos, escaneáveis) -->
+            <div class="hero-points">
+              <div class="point">
+                <b>[Benefício 1]</b>
+                <span>[Uma linha: o que muda na prática]</span>
+              </div>
+              <div class="point">
+                <b>[Benefício 2]</b>
+                <span>[Uma linha: o que muda na prática]</span>
+              </div>
+              <div class="point">
+                <b>[Benefício 3]</b>
+                <span>[Uma linha: o que muda na prática]</span>
+              </div>
+            </div>
+
+            <div class="tiny mt-12">
+              [Micro-reassurance: sem compromisso / privacidade / “você decide no seu tempo”.]
+            </div>
+          </div>
+
+          <!-- VISUAL (opcional) -->
+          <div class="hero-art glass reveal" aria-label="Área de mídia do produto/serviço">
+            <!-- Placeholder visual: troque por imagem/vídeo do produto -->
+            <svg viewBox="0 0 900 600" width="100%" height="100%" role="img" aria-label="Placeholder visual minimalista">
+              <defs>
+                <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#297E8A" stop-opacity="0.25"/>
+                  <stop offset="1" stop-color="#FC883A" stop-opacity="0.18"/>
+                </linearGradient>
+              </defs>
+              <rect x="0" y="0" width="900" height="600" rx="28" fill="url(#g1)"/>
+              <circle cx="680" cy="210" r="120" fill="#297E8A" fill-opacity="0.10"/>
+              <circle cx="260" cy="360" r="160" fill="#FC883A" fill-opacity="0.10"/>
+              <path d="M140 210c110-140 510-140 620 0" fill="none" stroke="#393939" stroke-opacity="0.18" stroke-width="10" stroke-linecap="round"/>
+              <path d="M190 410c70 90 450 90 520 0" fill="none" stroke="#393939" stroke-opacity="0.14" stroke-width="10" stroke-linecap="round"/>
+            </svg>
+
+            <div class="art-badges" aria-hidden="true">
+              <div class="badge"><span class="mini-dot"></span>[Selo 1]</div>
+              <div class="badge alt"><span class="mini-dot"></span>[Selo 2]</div>
+              <div class="badge"><span class="mini-dot"></span>[Selo 3]</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROVA RÁPIDA (trust) -->
+    <section id="prova">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <h2>[Prova / credenciais em 2–4 palavras]</h2>
+            <p class="lead">[Números, marcos, credenciais, logos — bem curto.]</p>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <div class="card glass reveal">
+            <h3>[Prova 1]</h3>
+            <p>[Ex.: “+X alunos”, “X anos”, “Certificação”, “Nota média”.]</p>
+          </div>
+          <div class="card glass reveal">
+            <h3>[Prova 2]</h3>
+            <p>[Ex.: “Depoimento curto”, “Antes/depois”, “Case”.]</p>
+          </div>
+          <div class="card glass reveal">
+            <h3>[Prova 3]</h3>
+            <p>[Ex.: “Mídia/empresa”, “Método”, “Garantia”.]</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PARA QUEM (qualificação) -->
+    <section id="para-quem">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <h2>Para quem é</h2>
+            <p class="lead">[3 perfis ideais + 1 frase de contexto.]</p>
+          </div>
+          <a class="pill-link glass" href="#cta">[CTA curto] →</a>
+        </div>
+
+        <div class="grid-3">
+          <div class="card glass reveal">
+            <h3>[Perfil 1]</h3>
+            <ul class="bullets">
+              <li>[Situação / desejo]</li>
+              <li>[Situação / desejo]</li>
+              <li>[Situação / desejo]</li>
+            </ul>
+          </div>
+
+          <div class="card glass reveal">
+            <h3>[Perfil 2]</h3>
+            <ul class="bullets">
+              <li>[Situação / desejo]</li>
+              <li>[Situação / desejo]</li>
+              <li>[Situação / desejo]</li>
+            </ul>
+          </div>
+
+          <div class="card glass reveal">
+            <h3>[Não é para]</h3>
+            <ul class="bullets">
+              <li>[Expectativa errada]</li>
+              <li>[Expectativa errada]</li>
+              <li>[Expectativa errada]</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMO FUNCIONA + O QUE VOCÊ RECEBE (mecanismo + entregáveis) -->
+    <section id="detalhes">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <h2>Como funciona</h2>
+            <p class="lead">[Explique o “mecanismo” em 1–2 linhas, sem hype.]</p>
+          </div>
+        </div>
+
+        <div class="programs">
+          <div class="big glass reveal">
+            <h3>[Mecanismo / Método em 3 passos]</h3>
+            <p class="lead mt-10">[Resumo: por que isso funciona + em que ordem.]</p>
+
+            <div class="row">
+              <div class="mini">
+                <b>1) [Passo]</b>
+                <span>[O que acontece aqui]</span>
+                <span class="tag">[Tempo/ritmo]</span>
+              </div>
+              <div class="mini">
+                <b>2) [Passo]</b>
+                <span>[O que acontece aqui]</span>
+                <span class="tag">[Tempo/ritmo]</span>
+              </div>
+              <div class="mini">
+                <b>3) [Passo]</b>
+                <span>[O que acontece aqui]</span>
+                <span class="tag">[Tempo/ritmo]</span>
+              </div>
+              <div class="mini">
+                <b>[Resultado]</b>
+                <span>[Como o usuário mede sucesso]</span>
+                <span class="tag">[Indicador]</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="side glass reveal">
+            <div>
+              <h3 class="mt-0">O que você recebe</h3>
+              <p class="lead mt-10">[Lista de inclusões — bem concreta.]</p>
+
+              <div class="checklist">
+                <div class="check">
+                  <div class="tick" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none">
+                      <path d="M6 12.5l3.2 3.2L18 6.9" stroke="#297E8A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <b>[Inclusão 1]</b>
+                    <span>[Uma linha do que é e por que importa]</span>
+                  </div>
+                </div>
+
+                <div class="check">
+                  <div class="tick" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none">
+                      <path d="M6 12.5l3.2 3.2L18 6.9" stroke="#297E8A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <b>[Inclusão 2]</b>
+                    <span>[Uma linha do que é e por que importa]</span>
+                  </div>
+                </div>
+
+                <div class="check">
+                  <div class="tick" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none">
+                      <path d="M6 12.5l3.2 3.2L18 6.9" stroke="#297E8A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <b>[Inclusão 3]</b>
+                    <span>[Uma linha do que é e por que importa]</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="cta-row mt-14">
+              <a class="btn primary" href="#cta">
+                <span class="dot" aria-hidden="true"></span>[CTA primário]
+              </a>
+            </div>
+
+            <div class="tiny mt-12">
+              [Risco reverso / garantia / política simples — se aplicável.]
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PLANOS / OFERTA (1–3 opções) -->
+    <section id="planos">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <h2>Planos</h2>
+            <p class="lead">[Ajude a escolher: “Comece por X se…”.]</p>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <div class="card glass reveal">
+            <div class="plan-top">
+              <h3>[Plano Essencial]</h3>
+              <span class="tag">[Para começar]</span>
+            </div>
+            <div class="price">R$ [0.000]<span class="tiny">[por mês / à vista / em Xx]</span></div>
+            <ul class="bullets">
+              <li>[Inclusão-chave]</li>
+              <li>[Inclusão-chave]</li>
+              <li>[Inclusão-chave]</li>
+            </ul>
+            <div class="cta-row mt-16">
+              <a class="btn primary" href="#cta"><span class="dot" aria-hidden="true"></span>[Escolher]</a>
+            </div>
+          </div>
+
+          <div class="card glass reveal">
+            <div class="plan-top">
+              <h3>[Plano Recomendado]</h3>
+              <span class="tag">Recomendado</span>
+            </div>
+            <div class="price">R$ [0.000]<span class="tiny">[por mês / à vista / em Xx]</span></div>
+            <ul class="bullets">
+              <li>[Inclusão-chave]</li>
+              <li>[Inclusão-chave]</li>
+              <li>[Bônus/benefício]</li>
+            </ul>
+            <div class="cta-row mt-16">
+              <a class="btn primary" href="#cta"><span class="dot" aria-hidden="true"></span>[Escolher]</a>
+            </div>
+          </div>
+
+          <div class="card glass reveal">
+            <div class="plan-top">
+              <h3>[Plano Premium]</h3>
+              <span class="tag">[Máxima eficiência]</span>
+            </div>
+            <div class="price">R$ [0.000]<span class="tiny">[por mês / à vista / em Xx]</span></div>
+            <ul class="bullets">
+              <li>[Inclusão-chave]</li>
+              <li>[Inclusão-chave]</li>
+              <li>[Benefício premium]</li>
+            </ul>
+            <div class="cta-row mt-16">
+              <a class="btn primary" href="#cta"><span class="dot" aria-hidden="true"></span>[Escolher]</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="tiny mt-12">
+          [Observações: vagas, agenda, pré-requisitos, reembolsos, etc.]
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ (objeções) -->
+    <section id="faq">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <h2>FAQ</h2>
+            <p class="lead">[Responda as 5–8 dúvidas que mais travam a compra.]</p>
+          </div>
+        </div>
+
+        <div class="faq glass reveal">
+          <details open class="glass">
+            <summary>[Pergunta 1 (objeção principal)]</summary>
+            <div class="faq-body">
+              <p>[Resposta objetiva, sem rodeio. Diga o que acontece na prática.]</p>
+              <div class="tiny">[Detalhe opcional: política, limite, exemplo.]</div>
+            </div>
+          </details>
+
+          <details class="glass">
+            <summary>[Pergunta 2]</summary>
+            <div class="faq-body">
+              <p>[Resposta]</p>
+            </div>
+          </details>
+
+          <details class="glass">
+            <summary>[Pergunta 3]</summary>
+            <div class="faq-body">
+              <p>[Resposta]</p>
+            </div>
+          </details>
+
+          <details class="glass">
+            <summary>[Pergunta 4]</summary>
+            <div class="faq-body">
+              <p>[Resposta]</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section id="cta">
+      <div class="container">
+        <div class="band glass reveal">
+          <h2>[Reforce o resultado + o próximo passo]</h2>
+          <p>[1–2 linhas: o que vai acontecer depois do clique.]</p>
+
+          <div class="cta-center">
+            <!-- Troque por checkout, agendamento, WhatsApp, formulário, etc. -->
+            <a class="btn primary" href="https://wa.me/5511975123336" target="_blank" rel="noreferrer">
+              <span class="dot" aria-hidden="true"></span>[CTA primário]
+            </a>
+            <a class="pill-link glass" href="#top">Topo ↑</a>
+          </div>
+
+          <div class="tiny mt-12">
+            [Privacidade / sem spam / resposta em X horas / “você fala com um humano”.]
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <div class="foot">
+          <div class="foot-brand">
+            <div class="foot-title">DeRose SBC</div>
+            <div class="tiny">Yôga de Alto Rendimento</div>
+          </div>
+          <div class="foot-links">
+            <a class="pill-link glass" href="#top">Topo ↑</a>
+            <a class="pill-link glass" href="#planos">Planos</a>
+            <a class="pill-link glass" href="#cta">Contato</a>
+          </div>
+        </div>
+        <div class="tiny mt-12">
+          © <span id="year"></span> DeRose SBC.
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- JS (repo map: /assets/js/) -->
+  <script defer src="/assets/js/utils.js"></script>
+  <script defer src="/assets/js/theme.js"></script>
+  <script defer src="/assets/js/navbar.js"></script>
+  <script defer src="/assets/js/soft-nav.js"></script>
+  <script defer src="/assets/js/main.js"></script>
+</body>
+</html>
