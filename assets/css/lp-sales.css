@@ -33,12 +33,6 @@ body.lp-page {
   margin: 10px 0 0;
 }
 
-.lp-page .lp-divider {
-  width: 100%;
-  height: 1px;
-  margin-top: 16px;
-  background: rgba(41, 126, 138, 0.14);
-}
 
 .lp-page .lp-grid-2,
 .lp-page .lp-grid-3,
@@ -64,7 +58,16 @@ body.lp-page {
 
 .lp-page .lp-card {
   border-radius: var(--radius-lg);
-  padding: clamp(20px, 2.2vw, 28px);
+  padding: clamp(22px, 2.4vw, 30px);
+}
+
+.lp-page .lp-card h3 {
+  margin: 0 0 10px;
+}
+
+.lp-page .lp-card p:last-child,
+.lp-page .lp-card ul:last-child {
+  margin-bottom: 0;
 }
 
 .lp-page p,
@@ -87,12 +90,13 @@ body.lp-page {
 .lp-page .lp-hero-card::before {
   content: "";
   position: absolute;
-  inset: -20% auto auto -12%;
-  width: min(540px, 72vw);
-  height: 320px;
+  inset: -18% -10% auto -10%;
+  width: auto;
+  height: 420px;
   background:
-    radial-gradient(circle at 12% 38%, rgba(252, 136, 58, 0.2), transparent 65%),
-    radial-gradient(circle at 56% 34%, rgba(41, 126, 138, 0.2), transparent 62%);
+    radial-gradient(circle at 18% 34%, rgba(252, 136, 58, 0.2), transparent 60%),
+    radial-gradient(circle at 52% 26%, rgba(41, 126, 138, 0.2), transparent 58%),
+    radial-gradient(circle at 82% 40%, rgba(252, 136, 58, 0.16), transparent 62%);
   pointer-events: none;
 }
 
@@ -105,8 +109,10 @@ body.lp-page {
 .lp-page .lp-chip {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
+  text-align: center;
   width: fit-content;
-  padding: 7px 13px;
+  padding: 8px 14px;
   border-radius: 999px;
   font-size: 11px;
   font-weight: 700;
@@ -152,8 +158,9 @@ body.lp-page {
 .lp-page .lp-chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: clamp(16px, 2vw, 22px);
+  gap: 12px;
+  justify-content: center;
+  margin: 0 auto clamp(20px, 2vw, 26px);
 }
 
 .lp-page .lp-quotes .lp-card p {
@@ -163,7 +170,7 @@ body.lp-page {
 
 .lp-page .lp-fit .lp-card h3,
 .lp-page .lp-steps .lp-card h3 {
-  margin: 12px 0 10px;
+  margin: 10px 0 12px;
   font-size: 1.1rem;
 }
 
@@ -250,16 +257,20 @@ body.lp-page {
 }
 
 .lp-page .faq-panel {
-  padding-top: 8px;
-  padding-bottom: 8px;
+  display: grid;
+  gap: 10px;
+  padding: 8px;
 }
 
 .lp-page .faq-panel details {
-  padding: 14px 0;
+  padding: 16px 18px;
+  border-radius: calc(var(--radius-md) + 2px);
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(41, 126, 138, 0.14);
 }
 
 .lp-page .faq-panel details+details {
-  border-top: 1px solid rgba(41, 126, 138, 0.15);
+  border-top: none;
 }
 
 .lp-page .faq-panel summary {
@@ -288,15 +299,18 @@ body.lp-page {
 }
 
 .lp-page .faq-panel p {
-  margin: 10px 0 0;
-  line-height: 1.54;
+  margin: 12px 0 0;
+  line-height: 1.58;
 }
 
 .lp-page .final-band {
   border-radius: var(--radius-xl);
   text-align: center;
-  padding: clamp(28px, 4vw, 40px);
+  padding: clamp(30px, 4.2vw, 44px);
   border: 1px solid color-mix(in srgb, var(--accent) 36%, white 64%);
+  background:
+    linear-gradient(145deg, rgba(41, 126, 138, 0.2), rgba(252, 136, 58, 0.16)),
+    var(--glass-bg);
 }
 
 .lp-page .final-band h2 {
@@ -366,9 +380,8 @@ html[data-theme="dark"] .lp-page .lp-chip {
   border-color: rgba(255, 255, 255, 0.18);
 }
 
-html[data-theme="dark"] .lp-page .lp-divider,
-html[data-theme="dark"] .lp-page .faq-panel details+details {
-  background: rgba(255, 255, 255, 0.16);
+html[data-theme="dark"] .lp-page .faq-panel details {
+  background: rgba(24, 24, 24, 0.42);
   border-color: rgba(255, 255, 255, 0.16);
 }
 
