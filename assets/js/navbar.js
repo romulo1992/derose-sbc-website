@@ -4,6 +4,32 @@
   const PARTIAL_URL = "/assets/partials/navbar.html";
   const MOUNT_SEL = "[data-navbar]";
 
+  function isLpPage() {
+    return document.body.classList.contains("lp-page") || document.body.dataset.page === "lp";
+  }
+
+  function cleanupNavbar() {
+    document.querySelectorAll(MOUNT_SEL).forEach((mount) => {
+      mount.innerHTML = "";
+      if (mount.childElementCount === 0) mount.remove();
+    });
+
+    const drawers = document.querySelectorAll("#drawer");
+    drawers.forEach((drawer) => {
+      const parent = drawer.parentElement;
+      if (parent && parent.matches(MOUNT_SEL)) {
+        parent.innerHTML = "";
+        parent.remove();
+      } else {
+        drawer.remove();
+      }
+    });
+
+    document.querySelectorAll("body > header").forEach((header) => header.remove());
+    document.body.style.overflow = "";
+    window.Navbar = undefined;
+  }
+
   function disablePlaceholderLinks(scope) {
     const links = scope.querySelectorAll('a[aria-disabled="true"]');
     links.forEach((a) => a.addEventListener("click", (e) => e.preventDefault()));
@@ -93,8 +119,17 @@
   }
 
   function injectNavbar() {
+    if (isLpPage()) {
+      cleanupNavbar();
+      return;
+    }
+
     const mount = document.querySelector(MOUNT_SEL);
     if (!mount) return;
+    if (mount.querySelector("header")) {
+      setActiveLink(mount);
+      return;
+    }
 
     fetch(PARTIAL_URL, { cache: "no-cache" })
       .then((res) => {
@@ -112,6 +147,11 @@
       });
   }
 
-  if (window.Utils && window.Utils.ready) window.Utils.ready(injectNavbar);
-  else document.addEventListener("DOMContentLoaded", injectNavbar, { once: true });
+  function init() {
+    injectNavbar();
+    document.addEventListener("softnav:loaded", injectNavbar);
+  }
+
+  if (window.Utils && window.Utils.ready) window.Utils.ready(init);
+  else document.addEventListener("DOMContentLoaded", init, { once: true });
 })();
