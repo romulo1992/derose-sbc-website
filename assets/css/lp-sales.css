@@ -266,7 +266,7 @@ body.lp-page {
 }
 
 .lp-page .faq-panel {
-  padding: 4px 14px;
+  padding: clamp(28px, 4.6vw, 56px);
 }
 
 .lp-page .faq-panel details {
