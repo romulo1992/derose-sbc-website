@@ -42,10 +42,15 @@ body.lp-page {
 
 
 .lp-page .lp-grid-2,
-.lp-page .lp-grid-3,
-.lp-page .lp-pricing-grid {
+.lp-page .lp-grid-3 {
   display: grid;
   gap: clamp(14px, 2vw, 20px);
+}
+
+.lp-page .lp-pricing-grid {
+  display: grid;
+  gap: clamp(18px, 2.2vw, 26px);
+  align-items: stretch;
 }
 
 .lp-page .lp-grid-2 {
@@ -211,7 +216,6 @@ body.lp-page {
 }
 
 .lp-page .lp-fit .lp-card ul,
-.lp-page .lp-plan ul,
 .lp-page .deliverables-list {
   margin: 0;
   padding-left: 18px;
@@ -246,17 +250,39 @@ body.lp-page {
   flex-direction: column;
   min-height: 100%;
   position: relative;
+  padding: clamp(22px, 3.2vw, 34px) !important;
+  gap: clamp(12px, 1.8vw, 16px);
 }
 
 .lp-page .lp-plan h3 {
-  margin: 0 0 10px;
+  margin: 0;
   font-size: 1.2rem;
 }
 
-.lp-page .lp-plan .price {
-  margin: 0 0 14px;
+.lp-page .lp-plan .price,
+.lp-page .lp-plan .lp-price {
+  margin: 0;
+  padding-top: 2px;
   font-size: 1.88rem;
   font-weight: 700;
+}
+
+.lp-page .lp-plan ul {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 10px;
+}
+
+.lp-page .lp-plan li {
+  margin: 0;
+  line-height: 1.45;
+  opacity: 0.92;
+}
+
+.lp-page .lp-plan .price + ul,
+.lp-page .lp-plan .lp-price + ul {
+  margin-top: 6px;
 }
 
 .lp-page .lp-plan .price span {
@@ -268,10 +294,12 @@ body.lp-page {
 .lp-page .lp-plan .btn {
   margin-top: auto;
   align-self: flex-start;
+  padding: 12px 16px;
 }
 
 .lp-page .lp-plan.is-featured {
   transform: translateY(-7px);
+  padding-top: clamp(28px, 3.6vw, 40px) !important;
   border: 1px solid color-mix(in srgb, var(--accent) 54%, white 46%);
   box-shadow:
     0 26px 48px rgba(252, 136, 58, 0.13),
@@ -290,6 +318,10 @@ body.lp-page {
   text-transform: uppercase;
   border: 1px solid rgba(252, 136, 58, 0.46);
   background: rgba(252, 136, 58, 0.14);
+}
+
+.lp-page .lp-plan .lp-badge {
+  margin-bottom: 6px;
 }
 
 .lp-page .faq-panel {
