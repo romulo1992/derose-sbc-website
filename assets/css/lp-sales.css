@@ -235,6 +235,16 @@ body.lp-page {
   line-height: 1.5;
 }
 
+.lp-page .lp-steps .lp-card .lp-chip {
+  border: 1px solid color-mix(in srgb, var(--teal) 34%, white 66%);
+  background:
+    linear-gradient(145deg, rgba(41, 126, 138, 0.24), rgba(255, 255, 255, 0.5)),
+    rgba(255, 255, 255, 0.72);
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
 .lp-page .deliverables-list {
   column-count: 2;
   column-gap: clamp(18px, 3vw, 34px);
