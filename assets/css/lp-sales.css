@@ -145,14 +145,7 @@ body.lp-page {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  margin-top: 24px;
-}
-
-.lp-page .hero-link {
-  display: inline-flex;
-  align-items: center;
-  font-weight: 600;
-  opacity: 0.88;
+  margin-top: clamp(30px, 4vw, 46px);
 }
 
 .lp-page .lp-chips {
@@ -163,8 +156,24 @@ body.lp-page {
   margin: 0 auto clamp(20px, 2vw, 26px);
 }
 
+.lp-page .lp-quotes .lp-card {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+}
+
+.lp-page .testimonial-profile {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 1px solid rgba(41, 126, 138, 0.22);
+  background:
+    linear-gradient(145deg, rgba(41, 126, 138, 0.2), rgba(252, 136, 58, 0.2)),
+    rgba(255, 255, 255, 0.76);
+}
+
 .lp-page .lp-quotes .lp-card p {
-  margin: 0 0 12px;
+  margin: 0;
   line-height: 1.55;
 }
 
@@ -257,20 +266,16 @@ body.lp-page {
 }
 
 .lp-page .faq-panel {
-  display: grid;
-  gap: 10px;
-  padding: 8px;
+  padding: 4px 14px;
 }
 
 .lp-page .faq-panel details {
-  padding: 16px 18px;
-  border-radius: calc(var(--radius-md) + 2px);
-  background: rgba(255, 255, 255, 0.5);
-  border: 1px solid rgba(41, 126, 138, 0.14);
+  padding: 14px 4px;
+  border-bottom: 1px solid rgba(41, 126, 138, 0.2);
 }
 
-.lp-page .faq-panel details+details {
-  border-top: none;
+.lp-page .faq-panel details:last-child {
+  border-bottom: none;
 }
 
 .lp-page .faq-panel summary {
@@ -303,7 +308,7 @@ body.lp-page {
   line-height: 1.58;
 }
 
-.lp-page .final-band {
+.lp-page .lp-final .band {
   border-radius: var(--radius-xl);
   text-align: center;
   padding: clamp(30px, 4.2vw, 44px);
@@ -313,13 +318,20 @@ body.lp-page {
     var(--glass-bg);
 }
 
-.lp-page .final-band h2 {
+.lp-page .lp-final .band h2 {
   margin: 0 0 12px;
 }
 
-.lp-page .final-band p {
+.lp-page .lp-final .band p {
   margin: 0 auto 20px;
   max-width: 64ch;
+}
+
+.lp-page .lp-final .cta-center {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
 }
 
 .lp-page .lp-mobile-cta {
@@ -380,9 +392,15 @@ html[data-theme="dark"] .lp-page .lp-chip {
   border-color: rgba(255, 255, 255, 0.18);
 }
 
+html[data-theme="dark"] .lp-page .testimonial-profile {
+  border-color: rgba(255, 255, 255, 0.22);
+  background:
+    linear-gradient(145deg, rgba(41, 126, 138, 0.34), rgba(252, 136, 58, 0.28)),
+    rgba(24, 24, 24, 0.6);
+}
+
 html[data-theme="dark"] .lp-page .faq-panel details {
-  background: rgba(24, 24, 24, 0.42);
-  border-color: rgba(255, 255, 255, 0.16);
+  border-bottom-color: rgba(255, 255, 255, 0.2);
 }
 
 html[data-theme="dark"] .lp-page .lp-plan.is-featured {
