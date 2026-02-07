@@ -215,6 +215,12 @@ body.lp-page {
   font-size: 1.1rem;
 }
 
+.lp-page .lp-steps .lp-chip {
+  border-color: rgba(41, 126, 138, 0.55);
+  background: var(--teal);
+  color: #fff;
+}
+
 .lp-page .lp-fit .lp-card ul,
 .lp-page .deliverables-list {
   margin: 0;
