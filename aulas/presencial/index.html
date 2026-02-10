@@ -10,6 +10,30 @@
   <meta property="og:description" content="Treino com progressão clara para corpo, mente e performance sustentável." />
   <meta property="og:type" content="website" />
 
+  <script>
+    (() => {
+      const THEME_KEY = "theme";
+      const root = document.documentElement;
+      let theme = "light";
+
+      try {
+        const saved = localStorage.getItem(THEME_KEY);
+        if (saved === "light" || saved === "dark") {
+          theme = saved;
+        } else if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+          theme = "dark";
+        }
+      } catch {
+        if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+          theme = "dark";
+        }
+      }
+
+      if (theme === "dark") root.setAttribute("data-theme", "dark");
+      else root.removeAttribute("data-theme");
+    })();
+  </script>
+
   <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="/assets/css/style.css" />
   <link rel="stylesheet" href="/assets/css/lp-sales.css" />
