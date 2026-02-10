@@ -130,6 +130,30 @@
     });
   }
 
+  function isLpBody(body) {
+    if (!body) return false;
+    return body.classList.contains("lp-page") || body.dataset.page === "lp";
+  }
+
+  function hasNavbarMount(scope) {
+    return Boolean(scope && scope.querySelector('[data-navbar]'));
+  }
+
+  function canSoftNavigate(doc) {
+    const nextBody = doc.body;
+    if (!nextBody) return false;
+
+    const currentIsLp = isLpBody(document.body);
+    const nextIsLp = isLpBody(nextBody);
+    if (currentIsLp !== nextIsLp) return false;
+
+    const currentHasNavbar = hasNavbarMount(document);
+    const nextHasNavbar = hasNavbarMount(doc);
+    if (currentHasNavbar !== nextHasNavbar) return false;
+
+    return true;
+  }
+
   function finalizeNavigation(url) {
     if (url.hash) {
       const id = decodeURIComponent(url.hash.slice(1));
@@ -158,6 +182,11 @@
       })
       .then((html) => {
         const doc = new DOMParser().parseFromString(html, "text/html");
+        if (!canSoftNavigate(doc)) {
+          window.location.href = url.href;
+          return;
+        }
+
         if (!swapMain(doc)) {
           window.location.href = url.href;
           return;
