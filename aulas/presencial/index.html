@@ -4,13 +4,111 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#297E8A" />
+  <meta name="color-scheme" content="dark light" />
+
   <title>Aulas Presenciais • Método DeRose SBC</title>
   <meta name="description" content="Ambiente agradável, conexão profunda. Perfeito para quem gosta de experiências intensas." />
   <meta property="og:title" content="Aulas Presenciais • Método DeRose SBC" />
   <meta property="og:description" content="Treino com progressão clara para corpo, mente e performance sustentável." />
   <meta property="og:type" content="website" />
 
+  <!--
+    1) Theme bootstrap BEFORE CSS to avoid theme flash (supports multiple conventions):
+       - html[data-theme="dark|light"]
+       - html.theme-dark / html.theme-light
+       - html.dark / html.light
+  -->
+  <script>
+    (function () {
+      try {
+        var stored =
+          localStorage.getItem("theme") ||
+          localStorage.getItem("colorTheme") ||
+          localStorage.getItem("deroseTheme") ||
+          localStorage.getItem("siteTheme");
+
+        var prefersDark = false;
+        try { prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches; } catch (e) {}
+
+        var theme = (stored === "dark" || stored === "light") ? stored : (prefersDark ? "dark" : "light");
+
+        var root = document.documentElement;
+
+        // dataset + classes (covers most CSS implementations)
+        root.dataset.theme = theme;
+
+        root.classList.toggle("theme-dark", theme === "dark");
+        root.classList.toggle("theme-light", theme === "light");
+
+        root.classList.toggle("dark", theme === "dark");
+        root.classList.toggle("light", theme === "light");
+      } catch (e) {}
+    })();
+  </script>
+
+  <!--
+    2) Critical CSS (tiny) to prevent "broken layout" first paint if external CSS arrives late
+       or if a grid/layout class depends on late-loaded CSS.
+       This does NOT hide the page; it just ensures a stable baseline.
+  -->
+  <style>
+    :root{
+      --bg:#050607;
+      --fg:#e8eef1;
+      --muted:rgba(232,238,241,.75);
+      --card-bg:rgba(255,255,255,.06);
+      --border:rgba(255,255,255,.10);
+      --radius:18px;
+      --max:1120px;
+      --gap:18px;
+      --nav-h:80px; /* reserves space to avoid navbar push-down */
+    }
+    html{background:var(--bg);color:var(--fg);-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility;}
+    body{margin:0;min-height:100%;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;line-height:1.35;}
+    /* reserve top space so if navbar is injected/fixed, the hero won't jump */
+    .lp-wrap{max-width:var(--max);margin:0 auto;padding:calc(var(--nav-h) + 16px) 18px 64px;}
+    .lp-hero{padding:18px 0 26px;}
+    .lp-card{
+      border-radius:var(--radius);
+      border:1px solid var(--border);
+      background:var(--card-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .lp-hero-card{padding:28px;}
+    .lp-kicker{display:inline-block;margin-bottom:10px;color:var(--muted);font-weight:600;}
+    h1{font-size:clamp(28px,4.2vw,44px);letter-spacing:-.02em;margin:10px 0 10px;}
+    .lp-subhead{color:var(--muted);max-width:62ch;margin:0 0 18px;}
+    .btn{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:12px 16px;border-radius:999px;
+      border:1px solid var(--border);
+      background:transparent;color:var(--fg);
+      text-decoration:none;font-weight:650;
+    }
+    .btn.primary{background:rgba(41,126,138,.22);border-color:rgba(41,126,138,.45);}
+    .lp-head{margin:28px 0 12px;}
+    h2{font-size:clamp(20px,3vw,28px);margin:0;}
+    .lp-grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--gap);}
+    .lp-grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gap);padding-left:0;list-style:none;margin:0;}
+    .lp-chips{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0 18px;}
+    .lp-chip{display:inline-flex;padding:8px 12px;border-radius:999px;border:1px solid var(--border);background:var(--card-bg);}
+    .lp-muted{color:var(--muted);}
+    .lp-mobile-cta{position:fixed;left:18px;right:18px;bottom:16px;justify-content:center;z-index:60}
+    @media (min-width: 860px){.lp-mobile-cta{display:none}}
+    @media (max-width: 860px){
+      .lp-grid-2{grid-template-columns:1fr}
+      .lp-grid-3{grid-template-columns:1fr}
+      .lp-wrap{padding-top:calc(var(--nav-h) + 8px)}
+    }
+  </style>
+
   <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" />
+
+  <!-- Preload CSS to reduce any chance of late-arriving styles -->
+  <link rel="preload" href="/assets/css/style.css" as="style" />
+  <link rel="preload" href="/assets/css/lp-sales.css" as="style" />
+
   <link rel="stylesheet" href="/assets/css/style.css" />
   <link rel="stylesheet" href="/assets/css/lp-sales.css" />
 </head>
