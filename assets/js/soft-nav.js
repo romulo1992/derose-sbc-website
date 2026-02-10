@@ -56,6 +56,34 @@
       'meta[property="og:description"]',
       'meta[property="og:type"]',
     ].forEach((selector) => syncMeta(doc, selector));
+
+    syncStylesheets(doc);
+  }
+
+  function syncStylesheets(doc) {
+    const desiredLinks = Array.from(doc.querySelectorAll('head link[rel="stylesheet"]'));
+    const currentLinks = Array.from(document.querySelectorAll('head link[rel="stylesheet"]'));
+    const desiredHrefs = new Set(
+      desiredLinks
+        .map((link) => link.getAttribute("href"))
+        .filter(Boolean)
+    );
+
+    currentLinks.forEach((link) => {
+      const href = link.getAttribute("href");
+      if (href && !desiredHrefs.has(href)) link.remove();
+    });
+
+    desiredLinks.forEach((link) => {
+      const href = link.getAttribute("href");
+      if (!href) return;
+      if (document.querySelector(`head link[rel="stylesheet"][href="${href}"]`)) return;
+
+      const next = document.createElement("link");
+      next.rel = "stylesheet";
+      next.href = href;
+      document.head.appendChild(next);
+    });
   }
 
   function syncBody(doc) {
