@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+  <title id="title">Força e Flexibilidade</title>
+  <desc id="desc">Ilustração abstrata com pessoa em postura de força e alongamento.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#1f6f78"/>
+      <stop offset="1" stop-color="#7ed0b9"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="720" fill="url(#bg)"/>
+  <circle cx="980" cy="180" r="120" fill="#ffe7c2" opacity="0.6"/>
+  <rect x="120" y="500" width="1040" height="24" rx="12" fill="#ffffff" opacity="0.45"/>
+  <path d="M450 500c40-160 110-250 210-270 120-24 180 90 200 180" fill="none" stroke="#fff" stroke-width="28" stroke-linecap="round"/>
+  <circle cx="610" cy="260" r="34" fill="#fff"/>
+  <text x="80" y="110" fill="#fff" font-family="Arial, sans-serif" font-size="64" font-weight="700">Força &amp; Flexibilidade</text>
+</svg>
