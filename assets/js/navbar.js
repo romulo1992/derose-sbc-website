@@ -27,7 +27,6 @@
       }
     });
 
-    document.querySelectorAll("body > header").forEach((header) => header.remove());
     document.body.style.overflow = "";
     window.Navbar = undefined;
   }

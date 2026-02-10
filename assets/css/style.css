@@ -60,6 +60,9 @@ body{
   color: var(--ink);
   background: var(--page-bg);
   overflow-x: hidden;
+}
+
+body:not(.lp-page){
   padding-top: var(--nav-offset);
 }
 
