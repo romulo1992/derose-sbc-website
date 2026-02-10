@@ -57,7 +57,7 @@
       'meta[property="og:type"]',
     ].forEach((selector) => syncMeta(doc, selector));
 
-    syncStylesheets(doc);
+    return syncStylesheets(doc);
   }
 
   function syncStylesheets(doc) {
@@ -69,10 +69,7 @@
         .filter(Boolean)
     );
 
-    currentLinks.forEach((link) => {
-      const href = link.getAttribute("href");
-      if (href && !desiredHrefs.has(href)) link.remove();
-    });
+    const pendingLoads = [];
 
     desiredLinks.forEach((link) => {
       const href = link.getAttribute("href");
@@ -82,7 +79,20 @@
       const next = document.createElement("link");
       next.rel = "stylesheet";
       next.href = href;
+      pendingLoads.push(
+        new Promise((resolve) => {
+          next.addEventListener("load", resolve, { once: true });
+          next.addEventListener("error", resolve, { once: true });
+        })
+      );
       document.head.appendChild(next);
+    });
+
+    return Promise.all(pendingLoads).then(() => {
+      currentLinks.forEach((link) => {
+        const href = link.getAttribute("href");
+        if (href && !desiredHrefs.has(href)) link.remove();
+      });
     });
   }
 
@@ -158,17 +168,18 @@
       })
       .then((html) => {
         const doc = new DOMParser().parseFromString(html, "text/html");
-        if (!swapMain(doc)) {
-          window.location.href = url.href;
-          return;
-        }
+        return syncHead(doc).then(() => {
+          if (!swapMain(doc)) {
+            window.location.href = url.href;
+            return;
+          }
 
-        syncHead(doc);
-        syncBody(doc);
-        loadScripts(doc);
+          syncBody(doc);
+          loadScripts(doc);
 
-        if (push) history.pushState({ soft: true }, "", url.href);
-        finalizeNavigation(url);
+          if (push) history.pushState({ soft: true }, "", url.href);
+          finalizeNavigation(url);
+        });
       })
       .catch(() => {
         window.location.href = url.href;
