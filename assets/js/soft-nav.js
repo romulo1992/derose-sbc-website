@@ -57,7 +57,31 @@
       'meta[property="og:type"]',
     ].forEach((selector) => syncMeta(doc, selector));
 
-    syncStylesheets(doc);
+    return syncStylesheets(doc);
+  }
+
+  function findStylesheetByHref(href) {
+    return Array.from(document.querySelectorAll('head link[rel="stylesheet"]')).find(
+      (link) => link.getAttribute("href") === href
+    );
+  }
+
+  function waitForStylesheet(link) {
+    return new Promise((resolve) => {
+      if (link.sheet) {
+        resolve();
+        return;
+      }
+
+      const done = () => {
+        link.removeEventListener("load", done);
+        link.removeEventListener("error", done);
+        resolve();
+      };
+
+      link.addEventListener("load", done, { once: true });
+      link.addEventListener("error", done, { once: true });
+    });
   }
 
   function syncStylesheets(doc) {
@@ -69,20 +93,32 @@
         .filter(Boolean)
     );
 
-    currentLinks.forEach((link) => {
+    const staleLinks = currentLinks.filter((link) => {
       const href = link.getAttribute("href");
-      if (href && !desiredHrefs.has(href)) link.remove();
+      return href && !desiredHrefs.has(href);
     });
+
+    const pendingStyles = [];
 
     desiredLinks.forEach((link) => {
       const href = link.getAttribute("href");
       if (!href) return;
-      if (document.querySelector(`head link[rel="stylesheet"][href="${href}"]`)) return;
+
+      const current = findStylesheetByHref(href);
+      if (current) {
+        pendingStyles.push(waitForStylesheet(current));
+        return;
+      }
 
       const next = document.createElement("link");
       next.rel = "stylesheet";
       next.href = href;
       document.head.appendChild(next);
+      pendingStyles.push(waitForStylesheet(next));
+    });
+
+    return Promise.all(pendingStyles).then(() => {
+      staleLinks.forEach((link) => link.remove());
     });
   }
 
@@ -158,17 +194,19 @@
       })
       .then((html) => {
         const doc = new DOMParser().parseFromString(html, "text/html");
-        if (!swapMain(doc)) {
-          window.location.href = url.href;
-          return;
-        }
 
-        syncHead(doc);
-        syncBody(doc);
-        loadScripts(doc);
+        return syncHead(doc).then(() => {
+          if (!swapMain(doc)) {
+            window.location.href = url.href;
+            return;
+          }
 
-        if (push) history.pushState({ soft: true }, "", url.href);
-        finalizeNavigation(url);
+          syncBody(doc);
+          loadScripts(doc);
+
+          if (push) history.pushState({ soft: true }, "", url.href);
+          finalizeNavigation(url);
+        });
       })
       .catch(() => {
         window.location.href = url.href;
