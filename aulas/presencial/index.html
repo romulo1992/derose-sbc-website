@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="lp-loading">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -9,6 +9,31 @@
   <meta property="og:title" content="Aulas Presenciais • Método DeRose SBC" />
   <meta property="og:description" content="Treino com progressão clara para corpo, mente e performance sustentável." />
   <meta property="og:type" content="website" />
+
+  <script>
+    (() => {
+      try {
+        const savedTheme = localStorage.getItem("theme");
+        const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+        if (savedTheme === "dark" || (savedTheme !== "light" && prefersDark)) {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (_) {
+        // no-op
+      }
+
+      window.addEventListener(
+        "load",
+        () => document.documentElement.classList.remove("lp-loading"),
+        { once: true }
+      );
+    })();
+  </script>
+  <style>
+    html.lp-loading body.lp-page {
+      opacity: 0;
+    }
+  </style>
 
   <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="/assets/css/style.css" />
