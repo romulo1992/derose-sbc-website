@@ -150,11 +150,6 @@
   }
 
   function init() {
-    if (isLpPage()) {
-      cleanupNavbar();
-      return;
-    }
-
     injectNavbar();
     document.addEventListener("softnav:loaded", injectNavbar);
   }
