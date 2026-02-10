@@ -113,6 +113,31 @@
     return true;
   }
 
+  function syncNavbarMount(doc) {
+    const nextMount = doc.querySelector("[data-navbar]");
+    const currentMount = document.querySelector("[data-navbar]");
+
+    if (!nextMount) {
+      if (currentMount) currentMount.remove();
+      document.querySelectorAll("body > header, #drawer").forEach((node) => node.remove());
+      document.body.style.overflow = "";
+      return;
+    }
+
+    if (currentMount) return;
+
+    const mount = document.createElement("div");
+    mount.setAttribute("data-navbar", "");
+
+    const main = document.querySelector(MAIN_SELECTOR);
+    if (main && main.parentNode) {
+      main.parentNode.insertBefore(mount, main);
+      return;
+    }
+
+    document.body.prepend(mount);
+  }
+
   function loadScripts(doc) {
     const scripts = Array.from(doc.querySelectorAll("script[src]"));
     scripts.forEach((script) => {
@@ -165,6 +190,7 @@
 
         syncHead(doc);
         syncBody(doc);
+        syncNavbarMount(doc);
         loadScripts(doc);
 
         if (push) history.pushState({ soft: true }, "", url.href);
