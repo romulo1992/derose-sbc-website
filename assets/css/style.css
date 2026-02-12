@@ -798,6 +798,7 @@ footer .foot{
   .programs, .contact{ grid-template-columns: 1fr; }
   nav{ display:none; }
   .mobile-toggle{ display:inline-flex; }
+  .actions .btn.primary{ display:none; }
   header .bar{ border-radius: 22px; }
 }
 @media (max-width: 520px){
