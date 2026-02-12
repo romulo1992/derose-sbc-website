@@ -792,10 +792,12 @@ footer .foot{
   :root{ --nav-offset: 88px; }
   .hero-grid{ grid-template-columns: 1fr; }
   .hero-art{ min-height: 340px; }
+  .art-badges{ display: none; }
   h1{ font-size: 46px; }
   .hero-points{ grid-template-columns: 1fr; }
   .grid-3{ grid-template-columns: 1fr; }
   .programs, .contact{ grid-template-columns: 1fr; }
+  .programs .big .row{ grid-template-columns: 1fr; }
   nav{ display:none; }
   .mobile-toggle{ display:inline-flex; }
   .actions .btn.primary{ display:none; }
