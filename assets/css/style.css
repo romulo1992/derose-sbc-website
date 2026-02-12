@@ -558,13 +558,14 @@ section{ padding: 54px 0; }
 /* Programs */
 .programs{
   display:grid;
-  grid-template-columns: 1.05fr 0.95fr;
+  grid-template-columns: 1fr;
   gap: 14px;
   align-items: stretch;
 }
 .programs .big{
   padding: 22px;
   min-height: 320px;
+  border-radius: var(--radius-xl);
 }
 .programs .big h3{ font-size: 22px; margin-top: 0; }
 .programs .big .row{
@@ -597,6 +598,7 @@ section{ padding: 54px 0; }
   padding: 22px;
   min-height: 320px;
   display:flex; flex-direction: column; justify-content: space-between;
+  border-radius: var(--radius-xl);
 }
 .checklist{
   display:grid; gap: 10px;
