@@ -815,6 +815,9 @@ footer .foot{
   .home-page main#top > section:not(.hero) .cta-row{
     justify-content: center;
   }
+  .home-page main#top > section:not(.hero) .mobile-centered-title{
+    text-align: center;
+  }
 }
 @media (max-width: 520px){
   h1{ font-size: 40px; }
