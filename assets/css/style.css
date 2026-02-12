@@ -1880,7 +1880,15 @@ html[data-theme="dark"] .blog-page select.control{
 }
 
 @media (max-width: 520px){
-  .blog-post-page .cover img{ height: min(420px, 52vh); }
+  .blog-post-page .cover{
+    aspect-ratio: 16 / 9;
+  }
+
+  .blog-post-page .cover img{
+    height: 100%;
+    object-fit: contain;
+    transform: none;
+  }
 }
 
 html[data-theme="dark"] .blog-post-page .post-hero,
