@@ -164,6 +164,10 @@ body.lp-page {
   margin-bottom: 18px;
 }
 
+.lp-page .lp-kicker-mobile {
+  display: none;
+}
+
 .lp-page .lp-hero-card h1 {
   margin: 0;
   padding-bottom: clamp(10px, 1.4vw, 18px);
@@ -440,12 +444,20 @@ body.lp-page {
 
 @media (max-width: 980px) {
   .lp-page .lp-wrap {
-    width: min(1040px, calc(100% - 28px));
+    width: min(1040px, calc(100% - 40px));
   }
 
   .lp-page main#top {
     gap: clamp(64px, 10vw, 92px);
-    padding: clamp(30px, 7vw, 54px) 0 calc(142px + env(safe-area-inset-bottom, 0px)) 0;
+    padding: clamp(42px, 11vw, 72px) 0 calc(142px + env(safe-area-inset-bottom, 0px)) 0;
+  }
+
+  .lp-page .lp-kicker-desktop {
+    display: none;
+  }
+
+  .lp-page .lp-kicker-mobile {
+    display: inline;
   }
 
   .lp-page .lp-head {
