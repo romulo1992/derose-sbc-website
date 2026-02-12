@@ -802,6 +802,29 @@ footer .foot{
   .mobile-toggle{ display:inline-flex; }
   .actions .btn.primary{ display:none; }
   header .bar{ border-radius: 22px; }
+
+  /* Home (index): center section headings/subheadings and action buttons on mobile */
+  .home-page main#top > section:not(.hero) .section-head{
+    justify-content: center;
+  }
+  .home-page main#top > section:not(.hero) .section-head > div{
+    text-align: center;
+  }
+  .home-page main#top > section:not(.hero) .section-head > a{
+    margin-inline: auto;
+  }
+  .home-page main#top > section:not(.hero) h2,
+  .home-page main#top > section:not(.hero) .lead{
+    text-align: center;
+  }
+  .home-page main#top > section:not(.hero) .btn{
+    display: flex;
+    width: fit-content;
+    margin-inline: auto;
+  }
+  .home-page main#top > section:not(.hero) .cta-row{
+    justify-content: center;
+  }
 }
 @media (max-width: 520px){
   h1{ font-size: 40px; }
