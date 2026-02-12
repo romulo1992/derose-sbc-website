@@ -207,10 +207,12 @@ body.lp-page {
 }
 
 .lp-page .testimonial-profile {
+  display: block;
   width: 52px;
   height: 52px;
   border-radius: 50%;
   border: 1px solid rgba(41, 126, 138, 0.22);
+  object-fit: cover;
   background:
     linear-gradient(145deg, rgba(41, 126, 138, 0.2), rgba(252, 136, 58, 0.2)),
     rgba(255, 255, 255, 0.76);
