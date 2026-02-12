@@ -519,6 +519,7 @@ body.lp-page {
   }
 
   .lp-page .lp-plan .btn {
+    margin-top: clamp(18px, 4vw, 26px);
     align-self: center;
   }
 
