@@ -41,6 +41,9 @@
     const drawer = scope.querySelector("#drawer");
     const toggle = scope.querySelector("#mobileToggle");
     const closeBtn = scope.querySelector("#drawerClose");
+    const aulasToggle = scope.querySelector("#aulasToggle");
+    const aulasSubmenu = scope.querySelector("#aulasSubmenu");
+    const aulasItem = scope.querySelector(".drawer-item-accordion");
     const desktopQuery = window.matchMedia("(min-width: 981px)");
 
     if (!drawer) return;
@@ -49,6 +52,23 @@
       toggle.setAttribute("aria-expanded", "false");
       toggle.setAttribute("aria-controls", "drawer");
     }
+
+    function collapseAulas() {
+      if (!aulasToggle || !aulasSubmenu) return;
+      aulasToggle.setAttribute("aria-expanded", "false");
+      aulasSubmenu.hidden = true;
+      if (aulasItem) aulasItem.classList.remove("is-open");
+    }
+
+    function toggleAulas() {
+      if (!aulasToggle || !aulasSubmenu) return;
+      const willOpen = aulasToggle.getAttribute("aria-expanded") !== "true";
+      aulasToggle.setAttribute("aria-expanded", String(willOpen));
+      aulasSubmenu.hidden = !willOpen;
+      if (aulasItem) aulasItem.classList.toggle("is-open", willOpen);
+    }
+
+    collapseAulas();
 
     function openDrawer() {
       drawer.classList.add("open");
@@ -62,10 +82,12 @@
       drawer.setAttribute("aria-hidden", "true");
       document.body.style.overflow = "";
       if (toggle) toggle.setAttribute("aria-expanded", "false");
+      collapseAulas();
     }
 
     if (toggle) toggle.addEventListener("click", openDrawer);
     if (closeBtn) closeBtn.addEventListener("click", closeDrawer);
+    if (aulasToggle) aulasToggle.addEventListener("click", toggleAulas);
 
     drawer.addEventListener("click", (e) => {
       if (e.target === drawer) closeDrawer();
