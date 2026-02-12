@@ -791,6 +791,7 @@ footer .foot{
 @media (max-width: 980px){
   :root{ --nav-offset: 88px; }
   .hero-grid{ grid-template-columns: 1fr; }
+  .hero-cta{ justify-content: center; }
   .hero-art{ min-height: 340px; }
   .art-badges{ display: none; }
   h1{ font-size: 46px; }
