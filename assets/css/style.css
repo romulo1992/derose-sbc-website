@@ -315,19 +315,6 @@ nav a.is-disabled:hover{
   background: rgba(255,255,255,0.18);
   cursor:pointer;
 }
-.drawer-group{
-  display:flex;
-  flex-direction: column;
-  gap: 6px;
-  padding: 10px 0;
-}
-.drawer-label{
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: .12em;
-  opacity: .6;
-  padding: 0 6px;
-}
 .mobile-toggle svg{ display:block; }
 
 /* ========= Theme toggle button ========= */
@@ -851,20 +838,77 @@ footer .foot{
   width: min(520px, calc(100% - 26px));
   margin: 86px auto 0;
   border-radius: var(--radius-xl);
-  padding: 14px;
+  padding: 16px;
 }
-.drawer a{
-  display:flex;
+.drawer-menu{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.drawer-item > a,
+.drawer-accordion-toggle{
+  display: flex;
+  width: 100%;
+  align-items: center;
   justify-content: space-between;
-  align-items:center;
-  padding: 14px 12px;
+  text-align: left;
+  padding: 16px 14px;
   border-radius: 16px;
-  font-weight: 700;
   border: 1px solid rgba(41,126,138,0.14);
   background: rgba(255,255,255,0.14);
-  margin: 10px 0;
+  font-weight: 700;
+  line-height: 1.25;
 }
-.drawer a span{ font-size: 12px; opacity: .75; font-weight: 600; }
+
+.drawer-item > a:hover,
+.drawer-accordion-toggle:hover{
+  background: rgba(255,255,255,0.2);
+}
+
+.drawer-item > a:focus-visible,
+.drawer-accordion-toggle:focus-visible,
+.drawer-submenu a:focus-visible{
+  outline: 2px solid rgba(41,126,138,0.9);
+  outline-offset: 2px;
+}
+
+.drawer-accordion-toggle{ cursor: pointer; }
+
+.drawer-chevron{
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+  transition: transform .2s ease;
+  opacity: .85;
+  margin-right: 4px;
+}
+
+.drawer-item-accordion.is-open .drawer-chevron{ transform: rotate(225deg); }
+
+.drawer-submenu{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+  padding-left: 14px;
+}
+
+.drawer-submenu a{
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(41,126,138,0.12);
+  background: rgba(255,255,255,0.1);
+  font-weight: 600;
+}
 
 .drawer a.is-disabled{
   opacity: .62;
@@ -899,8 +943,9 @@ h1{ font-size: calc(56px * var(--type-scale)); }
 .pill-link{ font-size: calc(13px * var(--type-scale)); }
 .tiny{ font-size: calc(13px * var(--type-scale)); }
 
-.drawer a{ font-size: calc(16px * var(--type-scale)); }
-.drawer a span{ font-size: calc(12px * var(--type-scale)); }
+.drawer-item > a,
+.drawer-accordion-toggle,
+.drawer-submenu a{ font-size: calc(16px * var(--type-scale)); }
 
 /* Prevent UI height changes due to font metrics */
 .btn, nav a, .pill-link, .kicker, .badge{ line-height: 1; }

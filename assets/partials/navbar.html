@@ -2,18 +2,40 @@
 <div class="drawer" id="drawer" aria-hidden="true">
   <div class="container">
     <div class="panel glass">
-      <div class="drawer-group">
-        <div class="drawer-label">Aulas</div>
-        <a href="/aulas/presencial/index.html" data-close>Presencial</a>
-        <a href="/aulas/online/index.html" data-close>Online</a>
-        <a href="/aulas/individual/index.html" data-close>Individual</a>
-      </div>
-      <a href="/cursos/index.html" data-close> Cursos <span>precisão & consistência</span></a>
-      <a href="/formacao/index.html" data-close> Formação <span>aprofundamento</span></a>
-      <a href="/eventos/index.html" data-close>Eventos</a>
-      <a href="/bistro/index.html" data-close>Bistrô</a>
-      <a href="/blog/" data-close> Blog <span>clareza sem misticismo</span></a>
-      <a href="https://wa.me/5511975123336" target="_blank" rel="noreferrer" data-close> Contato <span>rota rápida</span></a>
+      <ul class="drawer-menu" aria-label="Navegação mobile">
+        <li class="drawer-item drawer-item-accordion">
+          <button
+            class="drawer-accordion-toggle"
+            id="aulasToggle"
+            type="button"
+            aria-expanded="false"
+            aria-controls="aulasSubmenu"
+          >
+            <span>Aulas</span>
+            <span class="drawer-chevron" aria-hidden="true"></span>
+          </button>
+          <div class="drawer-submenu" id="aulasSubmenu" hidden>
+            <a href="/aulas/presencial/index.html" data-close>Presencial</a>
+            <a href="/aulas/online/index.html" data-close>Online</a>
+            <a href="/aulas/individual/index.html" data-close>Individual</a>
+          </div>
+        </li>
+        <li class="drawer-item">
+          <a href="/cursos/index.html" data-close>Cursos</a>
+        </li>
+        <li class="drawer-item">
+          <a href="/formacao/index.html" data-close>Formação</a>
+        </li>
+        <li class="drawer-item">
+          <a href="/eventos/index.html" data-close>Eventos</a>
+        </li>
+        <li class="drawer-item">
+          <a href="/bistro/index.html" data-close>Bistrô</a>
+        </li>
+        <li class="drawer-item">
+          <a href="/blog/" data-close>Blog</a>
+        </li>
+      </ul>
 
       <div class="drawer-actions">
         <button class="btn ghost glass" id="drawerClose" type="button">Fechar</button>
