@@ -41,19 +41,27 @@
     const drawer = scope.querySelector("#drawer");
     const toggle = scope.querySelector("#mobileToggle");
     const closeBtn = scope.querySelector("#drawerClose");
+    const desktopQuery = window.matchMedia("(min-width: 981px)");
 
     if (!drawer) return;
+
+    if (toggle) {
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.setAttribute("aria-controls", "drawer");
+    }
 
     function openDrawer() {
       drawer.classList.add("open");
       drawer.setAttribute("aria-hidden", "false");
       document.body.style.overflow = "hidden";
+      if (toggle) toggle.setAttribute("aria-expanded", "true");
     }
 
     function closeDrawer() {
       drawer.classList.remove("open");
       drawer.setAttribute("aria-hidden", "true");
       document.body.style.overflow = "";
+      if (toggle) toggle.setAttribute("aria-expanded", "false");
     }
 
     if (toggle) toggle.addEventListener("click", openDrawer);
@@ -69,6 +77,10 @@
 
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape" && drawer.classList.contains("open")) closeDrawer();
+    });
+
+    desktopQuery.addEventListener("change", (event) => {
+      if (event.matches && drawer.classList.contains("open")) closeDrawer();
     });
 
     window.Navbar = { openDrawer, closeDrawer };
