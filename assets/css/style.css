@@ -889,6 +889,7 @@ footer .foot{
   transition: transform .2s ease;
   opacity: .85;
   margin-right: 4px;
+  pointer-events: none;
 }
 
 .drawer-item-accordion.is-open .drawer-chevron{ transform: rotate(225deg); }

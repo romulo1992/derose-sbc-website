@@ -68,6 +68,12 @@
       if (aulasItem) aulasItem.classList.toggle("is-open", willOpen);
     }
 
+    function handleAulasToggle(event) {
+      event.preventDefault();
+      event.stopPropagation();
+      toggleAulas();
+    }
+
     collapseAulas();
 
     function openDrawer() {
@@ -87,7 +93,7 @@
 
     if (toggle) toggle.addEventListener("click", openDrawer);
     if (closeBtn) closeBtn.addEventListener("click", closeDrawer);
-    if (aulasToggle) aulasToggle.addEventListener("click", toggleAulas);
+    if (aulasToggle) aulasToggle.addEventListener("click", handleAulasToggle);
 
     drawer.addEventListener("click", (e) => {
       if (e.target === drawer) closeDrawer();
