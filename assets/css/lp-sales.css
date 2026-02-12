@@ -460,6 +460,12 @@ body.lp-page {
     display: inline;
   }
 
+  .lp-page .lp-kicker {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
   .lp-page .lp-head {
     margin-bottom: clamp(20px, 4.6vw, 30px);
   }
@@ -506,6 +512,14 @@ body.lp-page {
 
   .lp-page .lp-plan.is-featured {
     transform: none;
+  }
+
+  .lp-page .hero-cta-row {
+    justify-content: center;
+  }
+
+  .lp-page .lp-plan .btn {
+    align-self: center;
   }
 
   .lp-page .deliverables-list {
