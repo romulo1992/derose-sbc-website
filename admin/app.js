@@ -120,10 +120,16 @@ function filterList() {
 
 async function fetchJSON(url, options) {
   const res = await fetch(url, {
+    credentials: 'same-origin',
     headers: { 'Content-Type': 'application/json' },
     ...options,
   });
   if (!res.ok) {
+    if (res.status === 403) {
+      const err = new Error('Access session missing/expired — open /api/admin/list in a new tab to login');
+      err.status = 403;
+      throw err;
+    }
     const text = await res.text();
     const err = new Error(text || `HTTP ${res.status}`);
     err.status = res.status;

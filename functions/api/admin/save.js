@@ -1,13 +1,12 @@
 import { getFile, putFile } from "../../_lib/github.js";
 import { markdownToHtml } from "../../_lib/markdown.js";
+import { isAuthorized, json } from "../../_lib/auth.js";
 import {
   computeReadMinFromMarkdown,
-  ensureAdmin,
   ensureLeadingSlashPath,
   escapeAttr,
   escapeHtml,
   formatDatePtShort,
-  jsonResponse,
   sanitizeUrl,
 } from "../../_lib/util.js";
 
@@ -63,18 +62,18 @@ function normalizeData(slug, incoming) {
 
 export async function onRequest(context) {
   const { request, env } = context;
-  if (!ensureAdmin(request, env)) {
-    return jsonResponse(403, { ok: false, message: "forbidden" });
+  if (!isAuthorized(request, env)) {
+    return json(403, { ok: false, message: "forbidden" });
   }
   if (request.method !== "POST") {
-    return jsonResponse(405, { ok: false, message: "method not allowed" });
+    return json(405, { ok: false, message: "method not allowed" });
   }
 
   try {
     const body = await request.json();
     const slug = String(body?.slug || "").trim();
     if (!/^[a-z0-9-]+$/.test(slug)) {
-      return jsonResponse(400, { ok: false, message: "invalid slug" });
+      return json(400, { ok: false, message: "invalid slug" });
     }
 
     const normalized = normalizeData(slug, body?.data);
@@ -141,8 +140,8 @@ export async function onRequest(context) {
     const outputCurrent = await getFile(env, outputPath);
     await putFile(env, outputPath, html, outputCurrent?.sha || null, `publish post ${slug}`);
 
-    return jsonResponse(200, { ok: true });
+    return json(200, { ok: true });
   } catch (error) {
-    return jsonResponse(500, { ok: false, message: String(error?.message || error) });
+    return json(500, { ok: false, message: String(error?.message || error) });
   }
 }
