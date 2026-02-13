@@ -17,6 +17,22 @@
       "featured": true,
       "image": "/assets/blog/featured.webp",
       "href": "/blog/p/yoganidra-anti-stress/index.html"
+    },
+    {
+      "id": "pranayama-reducao-tensao",
+      "title": "Exercícios Respiratórios Para Diminuir a Tensão (Prāṇāyāma) — Prático e Sem Misticismo",
+      "excerpt": "Se você está com tensão no pescoço, mandíbula travada, respiração curta, ansiedade física (coração acelerado, mão fria, “pilha ligada”) ou só aquela sensação de estar “em modo alerta”, dá pra usar exercícios respiratórios como uma ferramenta biológica: ajustar o ritmo, a profundidade e o padrão da ventilação muda sinais que o seu corpo usa para decidir se “precisa” manter o alarme ligado.",
+      "category": "Respiratório",
+      "tags": [
+        "Pranayama",
+        "Respiração",
+        "Tensão"
+      ],
+      "date": "2026-02-12",
+      "readMin": 5,
+      "featured": false,
+      "image": "/assets/blog/featured.webp",
+      "href": "/blog/p/pranayama-reducao-tensao/index.html"
     }
   ]
 }
