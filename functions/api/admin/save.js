@@ -25,6 +25,18 @@ function buildSecondaryCta(label, href) {
   return `<a class="btn ghost glass" href="${escapeAttr(safeHref)}" target="_blank" rel="noreferrer">${escapeHtml(label)}</a>`;
 }
 
+function normalizeCta(data, key) {
+  const source = data[key] && typeof data[key] === "object" ? data[key] : {};
+  return {
+    headline: String(data[`${key}_headline`] ?? source.headline ?? "").trim(),
+    subheadline: String(data[`${key}_subheadline`] ?? source.subheadline ?? "").trim(),
+    primaryLabel: String(data[`${key}_primary_label`] ?? source.primaryLabel ?? "").trim(),
+    primaryHref: String(data[`${key}_primary_href`] ?? source.primaryHref ?? "").trim(),
+    secondaryLabel: String(data[`${key}_secondary_label`] ?? source.secondaryLabel ?? "").trim(),
+    secondaryHref: String(data[`${key}_secondary_href`] ?? source.secondaryHref ?? "").trim(),
+  };
+}
+
 function normalizeData(slug, incoming) {
   const data = incoming && typeof incoming === "object" ? { ...incoming } : {};
   const date = String(data.date || "").trim();
@@ -35,8 +47,10 @@ function normalizeData(slug, incoming) {
   const image = ensureLeadingSlashPath(data.image || "");
   const coverImage = ensureLeadingSlashPath(data.coverImage || image) || image;
   const tags = Array.isArray(data.tags) ? data.tags.map((item) => String(item).trim()).filter(Boolean) : [];
-  const content1 = String(data.content1 || "");
-  const content2 = String(data.content2 || "");
+  const content1 = String(data.content1_markdown ?? data.content1 ?? "");
+  const content2 = String(data.content2_markdown ?? data.content2 ?? "");
+  const cta1 = normalizeCta(data, "cta1");
+  const cta2 = normalizeCta(data, "cta2");
 
   return {
     ...data,
@@ -52,11 +66,25 @@ function normalizeData(slug, incoming) {
     featured: Boolean(data.featured),
     image,
     coverImage,
+    content1_markdown: content1,
     content1,
+    content2_markdown: content2,
     content2,
     tag: String(data.tag || tags[0] || "—").trim() || "—",
-    cta1: data.cta1 && typeof data.cta1 === "object" ? data.cta1 : {},
-    cta2: data.cta2 && typeof data.cta2 === "object" ? data.cta2 : {},
+    cta1,
+    cta1_headline: cta1.headline,
+    cta1_subheadline: cta1.subheadline,
+    cta1_primary_label: cta1.primaryLabel,
+    cta1_primary_href: cta1.primaryHref,
+    cta1_secondary_label: cta1.secondaryLabel,
+    cta1_secondary_href: cta1.secondaryHref,
+    cta2,
+    cta2_headline: cta2.headline,
+    cta2_subheadline: cta2.subheadline,
+    cta2_primary_label: cta2.primaryLabel,
+    cta2_primary_href: cta2.primaryHref,
+    cta2_secondary_label: cta2.secondaryLabel,
+    cta2_secondary_href: cta2.secondaryHref,
   };
 }
 
