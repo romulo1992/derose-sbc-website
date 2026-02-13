@@ -1,21 +1,21 @@
 import { getFile } from "../../_lib/github.js";
-import { ensureAdmin, jsonResponse } from "../../_lib/util.js";
+import { isAuthorized, json } from "../../_lib/auth.js";
 
 export async function onRequest(context) {
   const { request, env } = context;
-  if (!ensureAdmin(request, env)) {
-    return jsonResponse(403, { ok: false, message: "forbidden" });
+  if (!isAuthorized(request, env)) {
+    return json(403, { ok: false, message: "forbidden" });
   }
 
   try {
     const file = await getFile(env, "/data/blog.json");
-    if (!file) return jsonResponse(200, { posts: [] });
+    if (!file) return json(200, { posts: [] });
 
     const parsed = JSON.parse(file.text || "{}");
     const posts = Array.isArray(parsed.posts) ? parsed.posts : [];
     posts.sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")));
-    return jsonResponse(200, { posts });
+    return json(200, { posts });
   } catch (error) {
-    return jsonResponse(500, { ok: false, message: String(error?.message || error) });
+    return json(500, { ok: false, message: String(error?.message || error) });
   }
 }
