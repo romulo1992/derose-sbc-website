@@ -220,7 +220,6 @@
     const search = document.getElementById("search");
     const category = document.getElementById("category");
     const sort = document.getElementById("sort");
-    const tagbar = document.getElementById("tagbar");
     const postsOverlay = document.getElementById("postsOverlay");
     const postsMore = document.getElementById("postsMore");
     const postsCount = document.getElementById("postsCount");
@@ -232,7 +231,6 @@
       !search ||
       !category ||
       !sort ||
-      !tagbar ||
       !postsOverlay ||
       !postsMore ||
       !postsCount ||
@@ -276,33 +274,12 @@
       const cats = unique(POSTS.map((p) => p.category)).sort((a, b) =>
         a.localeCompare(b, "pt-BR")
       );
-      const tags = unique(POSTS.flatMap((p) => p.tags)).sort((a, b) =>
-        a.localeCompare(b, "pt-BR")
-      );
-
       category.innerHTML = `
         <option value="all">Todas</option>
         ${cats
           .map((c) => `<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`)
           .join("")}
       `;
-
-      const chip = (label, { active = false, alt = false } = {}) => `
-        <div class="chip ${active ? "active" : ""} ${alt ? "alt" : ""}" role="button" tabindex="0"
-             data-tag="${escapeHtml(label)}" aria-pressed="${String(active)}">
-          <span class="dot" aria-hidden="true"></span>
-          ${escapeHtml(label)}
-        </div>
-      `;
-
-      tagbar.innerHTML = [
-        chip("Todas", { active: true }),
-        ...tags.map((t) =>
-          chip(t, {
-            alt: t.toLowerCase().includes("flex") || t.toLowerCase().includes("medit"),
-          })
-        ),
-      ].join("");
     }
 
     function pickFeatured() {
@@ -446,22 +423,6 @@
       updatePaginationControls(filtered, showingCount);
     }
 
-    function setTag(tag) {
-      state.tag = tag === "Todas" ? "all" : tag;
-      visibleCount = pageSize;
-
-      tagbar.querySelectorAll(".chip").forEach((ch) => {
-        const t = ch.getAttribute("data-tag");
-        const isAll = t === "Todas";
-        const isActive =
-          (state.tag === "all" && isAll) || (state.tag !== "all" && t === state.tag);
-        ch.classList.toggle("active", isActive);
-        ch.setAttribute("aria-pressed", String(isActive));
-      });
-
-      renderPosts();
-    }
-
     search.addEventListener("input", (e) => {
       state.q = e.target.value || "";
       visibleCount = pageSize;
@@ -478,24 +439,6 @@
       state.sort = e.target.value || "new";
       visibleCount = pageSize;
       renderPosts();
-    });
-
-    tagbar.addEventListener("click", (e) => {
-      const el = e.target.closest?.(".chip");
-      if (!el) return;
-      const t = el.getAttribute("data-tag");
-      if (!t) return;
-      setTag(t);
-    });
-
-    tagbar.addEventListener("keydown", (e) => {
-      if (e.key !== "Enter" && e.key !== " ") return;
-      const el = e.target.closest?.(".chip");
-      if (!el) return;
-      e.preventDefault();
-      const t = el.getAttribute("data-tag");
-      if (!t) return;
-      setTag(t);
     });
 
     postsMore.addEventListener("click", () => {
