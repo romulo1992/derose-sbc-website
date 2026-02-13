@@ -24,36 +24,36 @@
       <form id="postForm" class="form" autocomplete="off">
         <fieldset>
           <legend>Metadata</legend>
-          <label>id / slug* <input name="slug" required pattern="^[a-z0-9-]+$" /></label>
+          <label>Slug (Identificador Único do Link do Post) <input name="slug" required pattern="^[a-z0-9-]+$" /></label>
           <label>Título <input name="title" /></label>
           <label>Resumo <textarea name="excerpt" rows="2"></textarea></label>
           <label>Categoria <input name="category" /></label>
           <label>Tags (separadas por vírgula) <input name="tags" /></label>
           <label>Data <input name="date" type="date" /></label>
-          <label>readMin <input name="readMin" type="number" min="1" step="1" placeholder="(opcional)" /></label>
+          <label>Tempo de Leitura <input name="readMin" type="number" min="1" step="1" placeholder="(opcional)" /></label>
           <label class="checkbox"><input name="featured" type="checkbox" /> Destaque</label>
           <label>image <input name="image" placeholder="/assets/blog/featured.webp" /></label>
         </fieldset>
 
         <fieldset>
           <legend>Conteúdo da página</legend>
-          <label>coverImage <input name="coverImage" placeholder="/assets/blog/..." /></label>
+          <label>Imagem de Capa <input name="coverImage" placeholder="/assets/blog/..." /></label>
 
-          <label>content1_markdown <textarea name="content1_markdown" rows="6"></textarea></label>
-          <label>cta1_headline <input name="cta1_headline" /></label>
-          <label>cta1_subheadline <input name="cta1_subheadline" /></label>
-          <label>cta1_primary_label <input name="cta1_primary_label" /></label>
-          <label>cta1_primary_href <input name="cta1_primary_href" /></label>
-          <label>cta1_secondary_label <input name="cta1_secondary_label" /></label>
-          <label>cta1_secondary_href <input name="cta1_secondary_href" /></label>
+          <label>Conteúdo Parte 1 (Utilizar Markdown Para Formatação) <textarea name="content1_markdown" rows="6"></textarea></label>
+          <label>Título do CTA 1 <input name="cta1_headline" /></label>
+          <label>Subtítulo do CTA 1 <input name="cta1_subheadline" /></label>
+          <label>Texto do Primeiro Botão do CTA 1 <input name="cta1_primary_label" /></label>
+          <label>Link do Primeiro Botão do CTA 1 <input name="cta1_primary_href" /></label>
+          <label>Texto do Segundo Botão do CTA 1 <input name="cta1_secondary_label" /></label>
+          <label>Link do Segundo Botão do CTA 1 <input name="cta1_secondary_href" /></label>
 
-          <label>content2_markdown <textarea name="content2_markdown" rows="6"></textarea></label>
-          <label>cta2_headline <input name="cta2_headline" /></label>
-          <label>cta2_subheadline <input name="cta2_subheadline" /></label>
-          <label>cta2_primary_label <input name="cta2_primary_label" /></label>
-          <label>cta2_primary_href <input name="cta2_primary_href" /></label>
-          <label>cta2_secondary_label <input name="cta2_secondary_label" /></label>
-          <label>cta2_secondary_href <input name="cta2_secondary_href" /></label>
+          <label>Conteúdo Parte 2 (Utilizar Markdown Para Formatação) <textarea name="content2_markdown" rows="6"></textarea></label>
+          <label>Título do CTA 1 <input name="cta2_headline" /></label>
+          <label>Subtítulo do CTA 1 <input name="cta2_subheadline" /></label>
+          <label>Texto do Primeiro Botão do CTA 2 <input name="cta2_primary_label" /></label>
+          <label>Link do Primeiro Botão do CTA 2 <input name="cta2_primary_href" /></label>
+          <label>Texto do Segundo Botão do CTA 2 <input name="cta2_secondary_label" /></label>
+          <label>Link do Segundo Botão do CTA 2 <input name="cta2_secondary_href" /></label>
         </fieldset>
 
         <div class="actions">
