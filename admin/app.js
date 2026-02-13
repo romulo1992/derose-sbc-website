@@ -160,6 +160,16 @@ async function loadList() {
   setStatus(`Lista carregada (${state.posts.length} posts).`, 'ok');
 }
 
+function pickPostData(response) {
+  if (!response || typeof response !== 'object') return {};
+
+  if (response.data && typeof response.data === 'object') return response.data;
+  if (response.post && typeof response.post === 'object') return response.post;
+  if (response.item && typeof response.item === 'object') return response.item;
+
+  return response;
+}
+
 async function loadPost(slug) {
   state.currentSlug = slug;
   renderList();
@@ -168,8 +178,9 @@ async function loadPost(slug) {
 
   try {
     const response = await fetchJSON(`/api/admin/get?slug=${encodeURIComponent(slug)}`);
-    const data = response?.data && typeof response.data === 'object' ? response.data : response;
-    toForm({ ...data, slug });
+    const listSummary = state.posts.find((post) => (post.slug || post.id) === slug) || {};
+    const data = pickPostData(response);
+    toForm({ ...listSummary, ...data, slug });
     setStatus('Post carregado.', 'ok');
   } catch (err) {
     if (err.status === 404) {
