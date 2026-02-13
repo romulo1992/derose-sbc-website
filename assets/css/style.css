@@ -1637,8 +1637,10 @@ html:not([data-theme="dark"]) .blog-page .posts-less{
   .blog-page :root{ --control-h: 54px; }
   .blog-page .post-media,
   .blog-post-page .post-media{ height: 148px; }
+  .blog-page .feature-card,
+  .blog-page .feature-media{ min-height: 560px; }
   .blog-page .feature-content{ left: 24px; right: 24px; bottom: 24px; }
-  .blog-page .feature-title{ font-size: calc(28px * var(--type-scale-blog)); }
+  .blog-page .feature-title{ font-size: calc(24px * var(--type-scale-blog)); }
 }
 
 /* ========= Dark theme tweaks for blog listing ========= */
