@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Blog</title>
+  <link rel="stylesheet" href="./app.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <h1>Blog Admin</h1>
+      <input id="search" type="search" placeholder="Buscar posts..." aria-label="Buscar posts" />
+      <ul id="postList" class="post-list" aria-label="Lista de posts"></ul>
+      <button id="newPostBtn" type="button">Novo post</button>
+    </aside>
+
+    <main class="editor">
+      <header class="editor-header">
+        <h2 id="editorTitle">Selecione um post</h2>
+        <p id="status" class="status" role="status" aria-live="polite"></p>
+      </header>
+
+      <form id="postForm" class="form" autocomplete="off">
+        <fieldset>
+          <legend>Metadata</legend>
+          <label>id / slug* <input name="slug" required pattern="^[a-z0-9-]+$" /></label>
+          <label>Título <input name="title" /></label>
+          <label>Resumo <textarea name="excerpt" rows="2"></textarea></label>
+          <label>Categoria <input name="category" /></label>
+          <label>Tags (separadas por vírgula) <input name="tags" /></label>
+          <label>Data <input name="date" type="date" /></label>
+          <label>readMin <input name="readMin" type="number" min="1" step="1" placeholder="(opcional)" /></label>
+          <label class="checkbox"><input name="featured" type="checkbox" /> Destaque</label>
+          <label>image <input name="image" placeholder="/assets/blog/featured.webp" /></label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Conteúdo da página</legend>
+          <label>coverImage <input name="coverImage" placeholder="/assets/blog/..." /></label>
+
+          <label>content1_markdown <textarea name="content1_markdown" rows="6"></textarea></label>
+          <label>cta1_headline <input name="cta1_headline" /></label>
+          <label>cta1_subheadline <input name="cta1_subheadline" /></label>
+          <label>cta1_primary_label <input name="cta1_primary_label" /></label>
+          <label>cta1_primary_href <input name="cta1_primary_href" /></label>
+          <label>cta1_secondary_label <input name="cta1_secondary_label" /></label>
+          <label>cta1_secondary_href <input name="cta1_secondary_href" /></label>
+
+          <label>content2_markdown <textarea name="content2_markdown" rows="6"></textarea></label>
+          <label>cta2_headline <input name="cta2_headline" /></label>
+          <label>cta2_subheadline <input name="cta2_subheadline" /></label>
+          <label>cta2_primary_label <input name="cta2_primary_label" /></label>
+          <label>cta2_primary_href <input name="cta2_primary_href" /></label>
+          <label>cta2_secondary_label <input name="cta2_secondary_label" /></label>
+          <label>cta2_secondary_href <input name="cta2_secondary_href" /></label>
+        </fieldset>
+
+        <div class="actions">
+          <button id="saveBtn" type="submit">Salvar</button>
+          <button id="deleteBtn" type="button" class="danger">Excluir</button>
+        </div>
+      </form>
+    </main>
+  </div>
+
+  <script src="./app.js" type="module"></script>
+</body>
+</html>
