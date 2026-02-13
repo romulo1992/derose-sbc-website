@@ -1,7 +1,7 @@
 (() => {
   "use strict";
 
-  const POSTS = [
+  const FALLBACK_POSTS = [
     {
       id: "respiracao-3-minutos",
       title: "Respiração Transformadora em 3 minutos: estabilize energia e ruído mental",
@@ -12,7 +12,7 @@
       date: "2026-01-20",
       readMin: 4,
       featured: true,
-      image: "../assets/blog/respiracao.webp",
+      image: "/assets/blog/respiracao.webp",
       href: "./p/respiracao-3-minutos/index.html",
     },
     {
@@ -25,7 +25,7 @@
       date: "2026-01-14",
       readMin: 6,
       featured: false,
-      image: "../assets/blog/mobilidade.webp",
+      image: "/assets/blog/mobilidade.webp",
       href: "./p/mobilidade-postura/index.html",
     },
     {
@@ -38,7 +38,7 @@
       date: "2026-01-10",
       readMin: 5,
       featured: false,
-      image: "../assets/blog/recuperacao.webp",
+      image: "/assets/blog/recuperacao.webp",
       href: "./p/recuperacao-profunda/index.html",
     },
     {
@@ -51,7 +51,7 @@
       date: "2026-01-05",
       readMin: 7,
       featured: false,
-      image: "../assets/blog/foco.webp",
+      image: "/assets/blog/foco.webp",
       href: "./p/foco-centro/index.html",
     },
     {
@@ -64,7 +64,7 @@
       date: "2025-12-22",
       readMin: 6,
       featured: false,
-      image: "../assets/blog/discernimento.webp",
+      image: "/assets/blog/discernimento.webp",
       href: "./p/discernimento-decisoes/index.html",
     },
     {
@@ -77,7 +77,7 @@
       date: "2025-12-12",
       readMin: 5,
       featured: false,
-      image: "../assets/blog/consistencia.webp",
+      image: "/assets/blog/consistencia.webp",
       href: "./p/consistencia-ritual/index.html",
     },
     {
@@ -90,7 +90,7 @@
       date: "2025-12-03",
       readMin: 4,
       featured: false,
-      image: "../assets/blog/featured.webp",
+      image: "/assets/blog/featured.webp",
       href: "./p/energia-matinal/index.html",
     },
     {
@@ -103,7 +103,7 @@
       date: "2025-11-22",
       readMin: 3,
       featured: false,
-      image: "../assets/blog/featured.webp",
+      image: "/assets/blog/featured.webp",
       href: "./p/respiracao-anti-estresse/index.html",
     },
     {
@@ -116,10 +116,37 @@
       date: "2025-11-08",
       readMin: 6,
       featured: false,
-      image: "../assets/blog/featured.webp",
+      image: "/assets/blog/featured.webp",
       href: "./p/mobilidade-lombar/index.html",
     },
   ];
+
+  let POSTS = [];
+
+  async function loadPosts() {
+    try {
+      const res = await fetch("/data/blog.json", { cache: "no-store" });
+      if (!res.ok) throw new Error("blog.json not found");
+      const data = await res.json();
+      const posts = Array.isArray(data.posts) ? data.posts : [];
+      return posts
+        .map((p) => ({
+          id: String(p.id || p.slug || ""),
+          title: String(p.title || ""),
+          excerpt: String(p.excerpt || ""),
+          category: String(p.category || "—"),
+          tags: Array.isArray(p.tags) ? p.tags.map(String) : [],
+          date: String(p.date || "1970-01-01"),
+          readMin: Number(p.readMin || 1),
+          featured: Boolean(p.featured),
+          image: String(p.image || "/assets/blog/featured.webp"),
+          href: String(p.href || "#"),
+        }))
+        .filter((p) => p.id && p.title);
+    } catch (e) {
+      return FALLBACK_POSTS;
+    }
+  }
 
   function setYear() {
     const el = document.getElementById("year");
@@ -298,7 +325,7 @@
       if (!link || !img || !cat || !meta || !title || !excerpt || !tagPill) return;
 
       link.href = featured.href;
-      img.src = featured.image || "../assets/blog/featured.webp";
+      img.src = featured.image || "/assets/blog/featured.webp";
       img.alt = featured.title;
 
       cat.textContent = featured.category;
@@ -388,7 +415,7 @@
           <article class="post glass reveal" data-id="${escapeHtml(p.id)}">
             <a href="${escapeHtml(p.href)}" aria-label="Abrir post: ${escapeHtml(p.title)}">
               <div class="post-media" aria-hidden="true">
-                <img src="${escapeHtml(p.image || "../assets/blog/featured.webp")}" alt="${escapeHtml(p.title)}" loading="lazy" />
+                <img src="${escapeHtml(p.image || "/assets/blog/featured.webp")}" alt="${escapeHtml(p.title)}" loading="lazy" />
               </div>
               <div class="post-body">
                 <div class="post-top">
@@ -482,9 +509,12 @@
       renderPosts();
     });
 
-    buildTaxonomy();
-    pickFeatured();
-    renderPosts();
+    loadPosts().then((posts) => {
+      POSTS = posts;
+      buildTaxonomy();
+      pickFeatured();
+      renderPosts();
+    });
   }
 
   function init() {
