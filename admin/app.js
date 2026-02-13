@@ -39,13 +39,23 @@ function toForm(data = {}) {
   fields.image.value = data.image || DEFAULT_IMAGE;
   fields.coverImage.value = data.coverImage || fields.image.value || DEFAULT_IMAGE;
 
-  [
-    'content1_markdown', 'cta1_headline', 'cta1_subheadline', 'cta1_primary_label', 'cta1_primary_href',
-    'cta1_secondary_label', 'cta1_secondary_href', 'content2_markdown', 'cta2_headline', 'cta2_subheadline',
-    'cta2_primary_label', 'cta2_primary_href', 'cta2_secondary_label', 'cta2_secondary_href'
-  ].forEach((name) => {
-    fields[name].value = data[name] || '';
-  });
+  const cta1 = data.cta1 && typeof data.cta1 === 'object' ? data.cta1 : {};
+  const cta2 = data.cta2 && typeof data.cta2 === 'object' ? data.cta2 : {};
+
+  fields.content1_markdown.value = data.content1_markdown || data.content1 || '';
+  fields.cta1_headline.value = data.cta1_headline || cta1.headline || '';
+  fields.cta1_subheadline.value = data.cta1_subheadline || cta1.subheadline || '';
+  fields.cta1_primary_label.value = data.cta1_primary_label || cta1.primaryLabel || '';
+  fields.cta1_primary_href.value = data.cta1_primary_href || cta1.primaryHref || '';
+  fields.cta1_secondary_label.value = data.cta1_secondary_label || cta1.secondaryLabel || '';
+  fields.cta1_secondary_href.value = data.cta1_secondary_href || cta1.secondaryHref || '';
+  fields.content2_markdown.value = data.content2_markdown || data.content2 || '';
+  fields.cta2_headline.value = data.cta2_headline || cta2.headline || '';
+  fields.cta2_subheadline.value = data.cta2_subheadline || cta2.subheadline || '';
+  fields.cta2_primary_label.value = data.cta2_primary_label || cta2.primaryLabel || '';
+  fields.cta2_primary_href.value = data.cta2_primary_href || cta2.primaryHref || '';
+  fields.cta2_secondary_label.value = data.cta2_secondary_label || cta2.secondaryLabel || '';
+  fields.cta2_secondary_href.value = data.cta2_secondary_href || cta2.secondaryHref || '';
 }
 
 function fromForm() {
@@ -76,20 +86,24 @@ function fromForm() {
     featured: fields.featured.checked,
     image: fields.image.value.trim() || DEFAULT_IMAGE,
     coverImage: fields.coverImage.value.trim() || fields.image.value.trim() || DEFAULT_IMAGE,
-    content1_markdown: fields.content1_markdown.value,
-    cta1_headline: fields.cta1_headline.value.trim(),
-    cta1_subheadline: fields.cta1_subheadline.value.trim(),
-    cta1_primary_label: fields.cta1_primary_label.value.trim(),
-    cta1_primary_href: fields.cta1_primary_href.value.trim(),
-    cta1_secondary_label: fields.cta1_secondary_label.value.trim(),
-    cta1_secondary_href: fields.cta1_secondary_href.value.trim(),
-    content2_markdown: fields.content2_markdown.value,
-    cta2_headline: fields.cta2_headline.value.trim(),
-    cta2_subheadline: fields.cta2_subheadline.value.trim(),
-    cta2_primary_label: fields.cta2_primary_label.value.trim(),
-    cta2_primary_href: fields.cta2_primary_href.value.trim(),
-    cta2_secondary_label: fields.cta2_secondary_label.value.trim(),
-    cta2_secondary_href: fields.cta2_secondary_href.value.trim(),
+    content1: fields.content1_markdown.value,
+    cta1: {
+      headline: fields.cta1_headline.value.trim(),
+      subheadline: fields.cta1_subheadline.value.trim(),
+      primaryLabel: fields.cta1_primary_label.value.trim(),
+      primaryHref: fields.cta1_primary_href.value.trim(),
+      secondaryLabel: fields.cta1_secondary_label.value.trim(),
+      secondaryHref: fields.cta1_secondary_href.value.trim(),
+    },
+    content2: fields.content2_markdown.value,
+    cta2: {
+      headline: fields.cta2_headline.value.trim(),
+      subheadline: fields.cta2_subheadline.value.trim(),
+      primaryLabel: fields.cta2_primary_label.value.trim(),
+      primaryHref: fields.cta2_primary_href.value.trim(),
+      secondaryLabel: fields.cta2_secondary_label.value.trim(),
+      secondaryHref: fields.cta2_secondary_href.value.trim(),
+    },
   };
 }
 
@@ -153,7 +167,8 @@ async function loadPost(slug) {
   setStatus('Carregando post...');
 
   try {
-    const data = await fetchJSON(`/api/admin/get?slug=${encodeURIComponent(slug)}`);
+    const response = await fetchJSON(`/api/admin/get?slug=${encodeURIComponent(slug)}`);
+    const data = response?.data && typeof response.data === 'object' ? response.data : response;
     toForm({ ...data, slug });
     setStatus('Post carregado.', 'ok');
   } catch (err) {
