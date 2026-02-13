@@ -15,22 +15,6 @@
       "featured": false,
       "image": "/assets/blog/featured.webp",
       "href": "/blog/p/yoga-nidra-anti-stress/index.html"
-    },
-    {
-      "id": "respiracao-3-minutos",
-      "title": "Respiração Transformadora em 3 minutos: estabilize energia e ruído mental",
-      "excerpt": "Um protocolo simples para você baixar ruído, organizar foco e começar o dia com mais clareza — sem misticismo e sem drama.",
-      "category": "Respiração",
-      "tags": [
-        "Respiratórios",
-        "Foco",
-        "Rotina"
-      ],
-      "date": "2026-01-20",
-      "readMin": 4,
-      "featured": true,
-      "image": "/assets/blog/respiracao.webp",
-      "href": "/blog/p/respiracao-3-minutos/index.html"
     }
   ]
 }
