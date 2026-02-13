@@ -15,6 +15,20 @@
       "featured": false,
       "image": "/assets/blog/featured.webp",
       "href": "/blog/p/yoga-nidra-anti-stress/index.html"
+    },
+    {
+      "id": "teste",
+      "title": "Teste",
+      "excerpt": "Teste",
+      "category": "Teste",
+      "tags": [
+        "Teste"
+      ],
+      "date": "2022-01-01",
+      "readMin": 10,
+      "featured": false,
+      "image": "/assets/blog/featured.webp",
+      "href": "/blog/p/teste/index.html"
     }
   ]
 }
