@@ -1,11 +1,31 @@
 {
   "posts": [
     {
+      "id": "yoga-nidra-anti-stress",
+      "title": "Yoga Nidra: O Poderoso Aliado Anti-Stress que Você Pode Praticar Deitado",
+      "excerpt": "Você chega em casa depois de um dia exaustivo, o corpo tenso, a mente acelerada com mil pensamentos, e a única vontade é desligar tudo. Mas e se eu te dissesse que existe uma prática milenar que faz exatamente isso — e muito mais — sem exigir esforço físico, sem posturas complicadas e sem precisar sentar em posição de lótus?",
+      "category": "Descontração",
+      "tags": [
+        "Yôga",
+        "Sono",
+        "Yôganidra"
+      ],
+      "date": "2026-02-12",
+      "readMin": 5,
+      "featured": false,
+      "image": "/assets/blog/featured.webp",
+      "href": "/blog/p/yoga-nidra-anti-stress/index.html"
+    },
+    {
       "id": "respiracao-3-minutos",
       "title": "Respiração Transformadora em 3 minutos: estabilize energia e ruído mental",
       "excerpt": "Um protocolo simples para você baixar ruído, organizar foco e começar o dia com mais clareza — sem misticismo e sem drama.",
       "category": "Respiração",
-      "tags": ["Respiratórios", "Foco", "Rotina"],
+      "tags": [
+        "Respiratórios",
+        "Foco",
+        "Rotina"
+      ],
       "date": "2026-01-20",
       "readMin": 4,
       "featured": true,
@@ -17,7 +37,10 @@
       "title": "Mobilidade & Força Útil: o básico que muda postura e eficiência",
       "excerpt": "Se você treina, trabalha sentado ou sente o corpo travado, este é o mapa de prioridades para recuperar eixo e estabilidade.",
       "category": "Mobilidade",
-      "tags": ["Força & Flexibilidade", "Postura"],
+      "tags": [
+        "Força & Flexibilidade",
+        "Postura"
+      ],
       "date": "2026-01-14",
       "readMin": 6,
       "featured": false,
@@ -29,7 +52,10 @@
       "title": "Recuperação Profunda: por que descansar não é perder tempo",
       "excerpt": "Recuperação não é pausa passiva — é assimilação ativa. Entenda como melhorar recuperação física e emocional com técnica.",
       "category": "Recuperação",
-      "tags": ["Descontração", "Estabilidade"],
+      "tags": [
+        "Descontração",
+        "Estabilidade"
+      ],
       "date": "2026-01-10",
       "readMin": 5,
       "featured": false,
@@ -41,7 +67,10 @@
       "title": "Foco & Concentração: volte ao centro em qualquer rotina",
       "excerpt": "Uma abordagem prática para treinar foco profundo e reduzir dispersão — útil para trabalho, estudo e decisões melhores.",
       "category": "Foco",
-      "tags": ["Mindfulness & Meditação", "Discernimento"],
+      "tags": [
+        "Mindfulness & Meditação",
+        "Discernimento"
+      ],
       "date": "2026-01-05",
       "readMin": 7,
       "featured": false,
@@ -53,7 +82,10 @@
       "title": "Discernimento: decisões boas e repetíveis (sem depender de motivação)",
       "excerpt": "Discernimento é clareza + consistência. Aqui vai um framework simples para reduzir arrependimento e aumentar previsibilidade.",
       "category": "Mentalidade",
-      "tags": ["Discernimento", "Rotina"],
+      "tags": [
+        "Discernimento",
+        "Rotina"
+      ],
       "date": "2025-12-22",
       "readMin": 6,
       "featured": false,
@@ -65,7 +97,10 @@
       "title": "Consistência: como criar ritual sem virar prisão",
       "excerpt": "A diferença entre disciplina rígida e ritual inteligente. Um jeito adulto de manter o prumo mesmo com rotina atribulada.",
       "category": "Rotina",
-      "tags": ["Rotina", "Estabilidade"],
+      "tags": [
+        "Rotina",
+        "Estabilidade"
+      ],
       "date": "2025-12-12",
       "readMin": 5,
       "featured": false,
@@ -77,7 +112,10 @@
       "title": "Energia Matinal: 4 ajustes rápidos para começar com clareza",
       "excerpt": "Uma rotina de poucos minutos para reduzir inércia, organizar prioridades e entrar no dia com foco real.",
       "category": "Mentalidade",
-      "tags": ["Rotina", "Foco"],
+      "tags": [
+        "Rotina",
+        "Foco"
+      ],
       "date": "2025-12-03",
       "readMin": 4,
       "featured": false,
@@ -89,7 +127,10 @@
       "title": "Respiração Anti-estresse: 2 ciclos para desacelerar rápido",
       "excerpt": "Um protocolo breve para diminuir tensão, reequilibrar o ritmo interno e liberar clareza mental.",
       "category": "Respiração",
-      "tags": ["Respiratórios", "Descontração"],
+      "tags": [
+        "Respiratórios",
+        "Descontração"
+      ],
       "date": "2025-11-22",
       "readMin": 3,
       "featured": false,
@@ -101,7 +142,10 @@
       "title": "Mobilidade Lombar: 6 minutos para aliviar rigidez e proteger o eixo",
       "excerpt": "Sequência simples para destravar quadris e lombar, melhorar postura e reduzir desconforto de quem passa muito tempo sentado.",
       "category": "Mobilidade",
-      "tags": ["Postura", "Força & Flexibilidade"],
+      "tags": [
+        "Postura",
+        "Força & Flexibilidade"
+      ],
       "date": "2025-11-08",
       "readMin": 6,
       "featured": false,
