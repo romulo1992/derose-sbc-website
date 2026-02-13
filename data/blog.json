@@ -31,21 +31,6 @@
       "featured": true,
       "image": "/assets/blog/respiracao.webp",
       "href": "/blog/p/respiracao-3-minutos/index.html"
-    },
-    {
-      "id": "mobilidade-lombar",
-      "title": "Mobilidade Lombar: 6 minutos para aliviar rigidez e proteger o eixo",
-      "excerpt": "Sequência simples para destravar quadris e lombar, melhorar postura e reduzir desconforto de quem passa muito tempo sentado.",
-      "category": "Mobilidade",
-      "tags": [
-        "Postura",
-        "Força & Flexibilidade"
-      ],
-      "date": "2025-11-08",
-      "readMin": 6,
-      "featured": false,
-      "image": "/assets/blog/featured.webp",
-      "href": "/blog/p/mobilidade-lombar/index.html"
     }
   ]
 }
