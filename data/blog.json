@@ -1,6 +1,24 @@
 {
   "posts": [
     {
+      "id": "yoganidra-anti-stress",
+      "title": "Yoga Nidra: O Poderoso Aliado Anti-Stress que Você Pode Praticar Deitado",
+      "excerpt": "Você chega em casa depois de um dia exaustivo, o corpo tenso, a mente acelerada com mil pensamentos, e a única vontade é desligar tudo. Mas e se eu te dissesse que existe uma prática milenar que faz exatamente isso — e muito mais — sem exigir esforço físico, sem posturas complicadas e sem precisar sentar em posição de lótus?",
+      "category": "Descontração",
+      "tags": [
+        "Yôga",
+        "Yôganídra",
+        "Sono",
+        "Stress",
+        "Anti-stress"
+      ],
+      "date": "2026-02-13",
+      "readMin": 5,
+      "featured": true,
+      "image": "/assets/blog/featured.webp",
+      "href": "/blog/p/yoganidra-anti-stress/index.html"
+    },
+    {
       "id": "teste",
       "title": "Teste",
       "excerpt": "Teste",
