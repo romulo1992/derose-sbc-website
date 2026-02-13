@@ -11,6 +11,10 @@ function encodeBase64(text) {
   return btoa(binary);
 }
 
+function normalizeBase64Content(content) {
+  return String(content || "").replace(/\s+/g, "");
+}
+
 function decodeBase64(base64Text) {
   const binary = atob(String(base64Text || "").replace(/\n/g, ""));
   const bytes = new Uint8Array(binary.length);
@@ -75,6 +79,27 @@ export async function putFile(env, path, text, shaOrNull, message) {
   });
   if (!res.ok) {
     throw new Error(`GitHub putFile failed (${res.status})`);
+  }
+  return res.json();
+}
+
+export async function putFileBase64(env, path, base64Content, shaOrNull, message) {
+  const { owner, repo, branch } = getConfig(env);
+  const cleanPath = normalizePath(path);
+  const url = `https://api.github.com/repos/${owner}/${repo}/contents/${cleanPath}`;
+  const body = {
+    message,
+    content: normalizeBase64Content(base64Content),
+    branch,
+  };
+  if (shaOrNull) body.sha = shaOrNull;
+  const res = await githubFetch(env, url, {
+    method: "PUT",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify(body),
+  });
+  if (!res.ok) {
+    throw new Error(`GitHub putFileBase64 failed (${res.status})`);
   }
   return res.json();
 }

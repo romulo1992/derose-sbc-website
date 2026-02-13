@@ -14,6 +14,7 @@ const el = {
   editorTitle: document.getElementById('editorTitle'),
   status: document.getElementById('status'),
   deleteBtn: document.getElementById('deleteBtn'),
+  uploadButtons: Array.from(document.querySelectorAll('[data-upload-target]')),
 };
 
 const fields = Object.fromEntries(
@@ -105,6 +106,53 @@ function fromForm() {
       secondaryHref: fields.cta2_secondary_href.value.trim(),
     },
   };
+}
+
+async function uploadImage(targetFieldName) {
+  const slug = fields.slug.value.trim();
+  if (!/^[a-z0-9-]+$/.test(slug)) {
+    throw new Error('Defina um slug válido antes de fazer upload da imagem.');
+  }
+
+  const picker = document.createElement('input');
+  picker.type = 'file';
+  picker.accept = 'image/*';
+
+  const file = await new Promise((resolve) => {
+    picker.addEventListener('change', () => resolve(picker.files?.[0] || null), { once: true });
+    picker.click();
+  });
+
+  if (!file) return;
+
+  setStatus(`Enviando ${file.name}...`);
+  const formData = new FormData();
+  formData.append('image', file);
+  formData.append('slug', slug);
+  formData.append('name', file.name);
+
+  const res = await fetch('/api/admin/upload', {
+    method: 'POST',
+    credentials: 'same-origin',
+    body: formData,
+  });
+
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(text || `Erro no upload (${res.status})`);
+  }
+
+  const payload = await res.json();
+  if (!payload?.path) {
+    throw new Error('Resposta de upload inválida.');
+  }
+
+  fields[targetFieldName].value = payload.path;
+  if (targetFieldName === 'image' && !fields.coverImage.value.trim()) {
+    fields.coverImage.value = payload.path;
+  }
+
+  setStatus('Upload concluído.', 'ok');
 }
 
 function renderList() {
@@ -251,6 +299,18 @@ el.search.addEventListener('input', filterList);
 el.newPostBtn.addEventListener('click', newPost);
 el.postForm.addEventListener('submit', savePost);
 el.deleteBtn.addEventListener('click', deletePost);
+el.uploadButtons.forEach((button) => {
+  button.addEventListener('click', async () => {
+    const target = button.dataset.uploadTarget;
+    if (!target || !fields[target]) return;
+    try {
+      await uploadImage(target);
+    } catch (err) {
+      console.error(err);
+      setStatus(`Erro no upload: ${err.message}`, 'error');
+    }
+  });
+});
 
 newPost();
 loadList().catch((err) => {

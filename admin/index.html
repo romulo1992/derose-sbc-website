@@ -32,7 +32,13 @@
           <label>Data <input name="date" type="date" /></label>
           <label>Tempo de Leitura <input name="readMin" type="number" min="1" step="1" placeholder="(opcional)" /></label>
           <label class="checkbox"><input name="featured" type="checkbox" /> Destaque</label>
-          <label>image <input name="image" placeholder="/assets/blog/featured.webp" /></label>
+          <label>
+            image
+            <div class="upload-row">
+              <input name="image" placeholder="/assets/blog/featured.webp" />
+              <button type="button" class="upload-btn" data-upload-target="image">Upload</button>
+            </div>
+          </label>
         </fieldset>
 
         <fieldset>
@@ -40,7 +46,13 @@
           <div class="content-groups">
             <section class="content-group group-hero">
               <h3>Hero</h3>
-              <label>Imagem de Capa <input name="coverImage" placeholder="/assets/blog/..." /></label>
+              <label>
+                Imagem de Capa
+                <div class="upload-row">
+                  <input name="coverImage" placeholder="/assets/blog/..." />
+                  <button type="button" class="upload-btn" data-upload-target="coverImage">Upload</button>
+                </div>
+              </label>
             </section>
 
             <section class="content-group group-content-1">
