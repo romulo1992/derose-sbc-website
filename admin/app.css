@@ -183,3 +183,21 @@ label.checkbox input {
   .app { grid-template-columns: 1fr; }
   .sidebar { max-height: 40vh; }
 }
+
+.upload-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+}
+
+.upload-btn {
+  background: #334155;
+  color: #e2e8f0;
+  border: 1px solid #475569;
+  font-weight: 600;
+  padding: 8px 12px;
+}
+
+.upload-btn:hover {
+  background: #3f4f65;
+}
